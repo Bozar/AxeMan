@@ -6,7 +6,9 @@ namespace AxeMan.GameSystem
     {
         private void Start()
         {
-            Debug.Log(FindObjectOfType<GameCore>().Hello);
+            Debug.Log(GameCore.AxeManCore.GetComponent<GameCore>().Hello);
+            //Debug.Log(GetComponent<GameCore>().Hello);
+            //Debug.Log(FindObjectOfType<GameCore>().Hello);
         }
     }
 }
