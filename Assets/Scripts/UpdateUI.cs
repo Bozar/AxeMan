@@ -1,0 +1,20 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+// NOTE: This is a test to update UI content by publishing events. Delete or
+// change this component later.
+namespace AxeMan.GameSystem
+{
+    public class UpdateUI : MonoBehaviour
+    {
+        private void Start()
+        {
+            GameCore.AxeManCore.GetComponent<Wizard>().UIText += UpdateUI_UIText;
+        }
+
+        private void UpdateUI_UIText(object sender, UpdateUIEventArgs e)
+        {
+            GetComponent<Text>().text = e.UIText;
+        }
+    }
+}
