@@ -1,9 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
+    public class UpdateUIEventArgs : EventArgs
+    {
+        public string UIText;
+    }
+
     public class Wizard : MonoBehaviour
     {
+        public event EventHandler<UpdateUIEventArgs> UIText;
+
+        protected virtual void OnUIText(UpdateUIEventArgs e)
+        {
+            UIText?.Invoke(this, e);
+        }
+
         private void Start()
         {
             Debug.Log(GameCore.AxeManCore.GetComponent<GameCore>().Hello);
@@ -11,17 +24,6 @@ namespace AxeMan.GameSystem
             //Debug.Log(FindObjectOfType<GameCore>().Hello);
 
             GameObject dummy;
-            //for (float i = -6; i < -1.5f; i += 0.5f)
-            //{
-            //    for (float j = -4; j < 0.5f; j += 0.5f)
-            //    {
-            //        if ((j == 0) || (i == -2))
-            //        {
-            //            dummy = Instantiate(Resources.Load("Dummy") as GameObject);
-            //            dummy.transform.localPosition = new Vector3(i, j);
-            //        }
-            //    }
-            //}
             float minX = -5.5f;
             float maxX = -1.5f;
             float minY = -3.5f;
@@ -37,6 +39,8 @@ namespace AxeMan.GameSystem
                     }
                 }
             }
+
+            OnUIText(new UpdateUIEventArgs { UIText = "Hello" });
         }
     }
 }
