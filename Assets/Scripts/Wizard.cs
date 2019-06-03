@@ -10,11 +10,22 @@ namespace AxeMan.GameSystem
 
     public class Wizard : MonoBehaviour
     {
+        private bool UIUpdated;
+
         public event EventHandler<UpdateUIEventArgs> UIText;
 
         protected virtual void OnUIText(UpdateUIEventArgs e)
         {
             UIText?.Invoke(this, e);
+        }
+
+        private void LateUpdate()
+        {
+            if (UIUpdated)
+            {
+                return;
+            }
+            OnUIText(new UpdateUIEventArgs { UIText = "Hello" });
         }
 
         private void Start()
@@ -39,8 +50,6 @@ namespace AxeMan.GameSystem
                     }
                 }
             }
-
-            OnUIText(new UpdateUIEventArgs { UIText = "Hello" });
         }
     }
 }
