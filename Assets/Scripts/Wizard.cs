@@ -26,6 +26,7 @@ namespace AxeMan.GameSystem
                 return;
             }
             OnUIText(new UpdateUIEventArgs { UIText = "Hello" });
+            UIUpdated = true;
         }
 
         private void Start()

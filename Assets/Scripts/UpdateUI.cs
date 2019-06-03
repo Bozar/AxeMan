@@ -11,6 +11,7 @@ namespace AxeMan.GameSystem
         private void Start()
         {
             GameCore.AxeManCore.GetComponent<Wizard>().UIText += UpdateUI_UIText;
+            Debug.Log(tag);
         }
 
         private void UpdateUI_UIText(object sender, UpdateUIEventArgs e)
