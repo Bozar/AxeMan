@@ -9,6 +9,7 @@ namespace AxeMan.GameSystem
         private void Awake()
         {
             // The `gameObject` is `AxeManCore`.
+            gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<GameCore>();
             gameObject.AddComponent<Wizard>();
         }

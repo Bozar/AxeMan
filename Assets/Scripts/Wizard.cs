@@ -53,21 +53,24 @@ namespace AxeMan.GameSystem
             //Debug.Log(FindObjectOfType<GameCore>().Hello);
 
             GameObject dummy;
-            float minX = -5.5f;
-            float maxX = -1.5f;
-            float minY = -3.5f;
-            float maxY = 0.5f;
-            for (float i = minX; i <= maxX; i += 0.5f)
+            for (int i = 0; i < 9; i++)
             {
-                for (float j = minY; j <= maxY; j += 0.5f)
+                for (int j = 0; j < 9; j++)
                 {
-                    if ((j == maxY) || (i == maxX))
+                    if ((i == 8) || (j == 0))
                     {
                         dummy = Instantiate(Resources.Load("Dummy") as GameObject);
-                        dummy.transform.localPosition = new Vector3(i, j);
+                        dummy.transform.localPosition
+                            = GetComponent<ConvertCoordinate>().Convert(i, j);
                     }
                 }
             }
+            int[] pos = GetComponent<ConvertCoordinate>().Convert(new Vector3(-3, -1));
+            Debug.Log(pos[0]);
+            Debug.Log(pos[1]);
+            dummy = Instantiate(Resources.Load("Dummy") as GameObject);
+            dummy.transform.localPosition
+                = new Vector3(-3, -1);
         }
     }
 }
