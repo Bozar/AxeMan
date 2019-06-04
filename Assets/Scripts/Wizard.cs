@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
     public class UpdateUIEventArgs : EventArgs
     {
-        public string UIText;
+        public ReadOnlyDictionary<string, string> UIData;
+        public string UITag;
     }
 
     public class Wizard : MonoBehaviour
@@ -25,7 +28,21 @@ namespace AxeMan.GameSystem
             {
                 return;
             }
-            OnUIText(new UpdateUIEventArgs { UIText = "Hello" });
+            Dictionary<string, string> data
+                = new Dictionary<string, string>()
+                {
+                    {
+                        "Modeline", "[[ Examine ] p 5 [ -1, -3 ]]"
+                    },
+                    {
+                        "Text","Hello world"
+                    }
+                };
+            OnUIText(new UpdateUIEventArgs
+            {
+                UITag = "CvsWorld",
+                UIData = new ReadOnlyDictionary<string, string>(data)
+            });
             UIUpdated = true;
         }
 

@@ -1489,7 +1489,7 @@ GameObject:
   - component: {fileID: 1224432287}
   m_Layer: 5
   m_Name: Modeline
-  m_TagString: Untagged
+  m_TagString: CvsWorld
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

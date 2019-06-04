@@ -16,7 +16,11 @@ namespace AxeMan.GameSystem
 
         private void UpdateUI_UIText(object sender, UpdateUIEventArgs e)
         {
-            GetComponent<Text>().text = e.UIText;
+            if ((tag == e.UITag)
+                && (e.UIData.TryGetValue(name, out string value)))
+            {
+                GetComponent<Text>().text = value;
+            }
         }
     }
 }
