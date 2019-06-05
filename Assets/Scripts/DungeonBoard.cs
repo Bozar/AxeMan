@@ -25,7 +25,11 @@ namespace AxeMan.GameSystem
     // object's position.
     public class DungeonBoard : MonoBehaviour, IDungeonBoard
     {
-        private Dictionary<DungeonObjectTag, IDungeonObject> board;
+        private Dictionary<DungeonObjectTag, IDungeonObject>[,] board;
+
+        public int DungeonHeight { get; private set; }
+
+        public int DungeonWidth { get; private set; }
 
         public bool AddObject(int x, int y, IDungeonObject ido, bool overwrite)
         {
@@ -45,6 +49,23 @@ namespace AxeMan.GameSystem
         public IDungeonObject RemoveObject(int x, int y, DungeonObjectTag dot)
         {
             throw new System.NotImplementedException();
+        }
+
+        private void Awake()
+        {
+            DungeonWidth = 9;
+            DungeonHeight = 9;
+            board = new Dictionary<DungeonObjectTag, IDungeonObject>[
+                DungeonWidth, DungeonHeight];
+
+            for (int i = 0; i < DungeonWidth; i++)
+            {
+                for (int j = 0; j < DungeonHeight; j++)
+                {
+                    board[i, j]
+                        = new Dictionary<DungeonObjectTag, IDungeonObject>();
+                }
+            }
         }
     }
 }
