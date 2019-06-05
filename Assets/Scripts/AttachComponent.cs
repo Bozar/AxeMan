@@ -10,6 +10,7 @@ namespace AxeMan.GameSystem
         {
             // The `gameObject` is `AxeManCore`.
             gameObject.AddComponent<ConvertCoordinate>();
+            gameObject.AddComponent<DungeonBoard>();
             gameObject.AddComponent<GameCore>();
             gameObject.AddComponent<Wizard>();
         }
