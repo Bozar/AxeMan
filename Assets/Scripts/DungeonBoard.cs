@@ -3,29 +3,31 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
-    public enum DungeonObjectTag { INVALID, Building, Terrain, Actor }
+    public enum MainTag { INVALID, Building, Terrain, Actor }
+
+    public enum SubTag { INVALID, Dummy }
 
     public interface IDungeonBoard
     {
         bool AddObject(int x, int y, IDungeonObject ido, bool overwrite);
 
-        bool ExistObject(int x, int y, DungeonObjectTag dot);
+        bool ExistObject(int x, int y, MainTag mtag);
 
-        IDungeonObject GetObject(int x, int y, DungeonObjectTag dot);
+        IDungeonObject GetObject(int x, int y, MainTag mtag);
 
-        IDungeonObject RemoveObject(int x, int y, DungeonObjectTag dot);
+        IDungeonObject RemoveObject(int x, int y, MainTag mtag);
     }
 
     public interface IDungeonObject
     {
-        DungeonObjectTag DataTag { get; }
+        MainTag DataTag { get; }
     }
 
     // DungeonBoard is a data hub which records and updates every dungeon
     // object's position.
     public class DungeonBoard : MonoBehaviour, IDungeonBoard
     {
-        private Dictionary<DungeonObjectTag, IDungeonObject>[,] board;
+        private Dictionary<MainTag, IDungeonObject>[,] board;
 
         public int DungeonHeight { get; private set; }
 
@@ -45,32 +47,32 @@ namespace AxeMan.GameSystem
             return true;
         }
 
-        public bool ExistObject(int x, int y, DungeonObjectTag dot)
+        public bool ExistObject(int x, int y, MainTag mtag)
         {
             if (IndexOutOfRange(x, y))
             {
                 return false;
             }
-            return board[x, y].ContainsKey(dot);
+            return board[x, y].ContainsKey(mtag);
         }
 
-        public IDungeonObject GetObject(int x, int y, DungeonObjectTag dot)
+        public IDungeonObject GetObject(int x, int y, MainTag mtag)
         {
             if (IndexOutOfRange(x, y))
             {
                 return null;
             }
-            else if (board[x, y].TryGetValue(dot, out IDungeonObject ido))
+            else if (board[x, y].TryGetValue(mtag, out IDungeonObject ido))
             {
                 return ido;
             }
             return null;
         }
 
-        public IDungeonObject RemoveObject(int x, int y, DungeonObjectTag dot)
+        public IDungeonObject RemoveObject(int x, int y, MainTag mtag)
         {
-            IDungeonObject ido = GetObject(x, y, dot);
-            board[x, y].Remove(dot);
+            IDungeonObject ido = GetObject(x, y, mtag);
+            board[x, y].Remove(mtag);
 
             return ido;
         }
@@ -79,15 +81,14 @@ namespace AxeMan.GameSystem
         {
             DungeonWidth = 9;
             DungeonHeight = 9;
-            board = new Dictionary<DungeonObjectTag, IDungeonObject>[
+            board = new Dictionary<MainTag, IDungeonObject>[
                 DungeonWidth, DungeonHeight];
 
             for (int i = 0; i < DungeonWidth; i++)
             {
                 for (int j = 0; j < DungeonHeight; j++)
                 {
-                    board[i, j]
-                        = new Dictionary<DungeonObjectTag, IDungeonObject>();
+                    board[i, j] = new Dictionary<MainTag, IDungeonObject>();
                 }
             }
         }

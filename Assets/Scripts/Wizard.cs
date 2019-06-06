@@ -14,7 +14,7 @@ namespace AxeMan.GameSystem
 
         public GameObject Actor { get; }
 
-        public DungeonObjectTag DataTag => DungeonObjectTag.Actor;
+        public MainTag DataTag => MainTag.Actor;
     }
 
     public class UpdateUIEventArgs : EventArgs
@@ -83,14 +83,14 @@ namespace AxeMan.GameSystem
             dummy = Instantiate(Resources.Load("Dummy") as GameObject);
             dummy.transform.position = new Vector3(-3, -1);
 
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(1, 1, DungeonObjectTag.Actor));
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, DungeonObjectTag.Actor));
-            Dummy test = GetComponent<DungeonBoard>().RemoveObject(4, 0, DungeonObjectTag.Actor) as Dummy;
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(1, 1, MainTag.Actor));
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
+            Dummy test = GetComponent<DungeonBoard>().RemoveObject(4, 0, MainTag.Actor) as Dummy;
             Debug.Log(test.DataTag);
             int[] testPos = GetComponent<ConvertCoordinate>().Convert(test.Actor.transform.position);
             Debug.Log(testPos[0]);
             Debug.Log(testPos[1]);
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, DungeonObjectTag.Actor));
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
         }
     }
 }
