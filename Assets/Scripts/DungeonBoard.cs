@@ -33,22 +33,46 @@ namespace AxeMan.GameSystem
 
         public bool AddObject(int x, int y, IDungeonObject ido, bool overwrite)
         {
-            throw new System.NotImplementedException();
+            if (IndexOutOfRange(x, y))
+            {
+                return false;
+            }
+            else if (!overwrite && board[x, y].ContainsKey(ido.DataTag))
+            {
+                return false;
+            }
+            board[x, y][ido.DataTag] = ido;
+            return true;
         }
 
         public bool ExistObject(int x, int y, DungeonObjectTag dot)
         {
-            throw new System.NotImplementedException();
+            if (IndexOutOfRange(x, y))
+            {
+                return false;
+            }
+            return board[x, y].ContainsKey(dot);
         }
 
         public IDungeonObject GetObject(int x, int y, DungeonObjectTag dot)
         {
-            throw new System.NotImplementedException();
+            if (IndexOutOfRange(x, y))
+            {
+                return null;
+            }
+            else if (board[x, y].TryGetValue(dot, out IDungeonObject ido))
+            {
+                return ido;
+            }
+            return null;
         }
 
         public IDungeonObject RemoveObject(int x, int y, DungeonObjectTag dot)
         {
-            throw new System.NotImplementedException();
+            IDungeonObject ido = GetObject(x, y, dot);
+            board[x, y].Remove(dot);
+
+            return ido;
         }
 
         private void Awake()
@@ -66,6 +90,14 @@ namespace AxeMan.GameSystem
                         = new Dictionary<DungeonObjectTag, IDungeonObject>();
                 }
             }
+        }
+
+        private bool IndexOutOfRange(int x, int y)
+        {
+            return (x < 0)
+                || (x >= DungeonWidth)
+                || (y < 0)
+                || (y >= DungeonHeight);
         }
     }
 }

@@ -5,6 +5,18 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
+    public class Dummy : IDungeonObject
+    {
+        public Dummy(GameObject actor)
+        {
+            Actor = actor;
+        }
+
+        public GameObject Actor { get; }
+
+        public DungeonObjectTag DataTag => DungeonObjectTag.Actor;
+    }
+
     public class UpdateUIEventArgs : EventArgs
     {
         public ReadOnlyDictionary<string, string> UIData;
@@ -53,24 +65,32 @@ namespace AxeMan.GameSystem
             //Debug.Log(FindObjectOfType<GameCore>().Hello);
 
             GameObject dummy;
-            for (int i = 0; i < 9; i++)
+            IDungeonObject idoDummy;
+            for (int i = 0; i < GetComponent<DungeonBoard>().DungeonWidth; i++)
             {
-                for (int j = 0; j < 9; j++)
+                for (int j = 0; j < GetComponent<DungeonBoard>().DungeonHeight; j++)
                 {
-                    if ((i == 8) || (j == 0))
+                    if ((i == GetComponent<DungeonBoard>().DungeonWidth - 1) || (j == 0))
                     {
                         dummy = Instantiate(Resources.Load("Dummy") as GameObject);
-                        dummy.transform.localPosition
+                        dummy.transform.position
                             = GetComponent<ConvertCoordinate>().Convert(i, j);
+                        idoDummy = new Dummy(dummy);
+                        GetComponent<DungeonBoard>().AddObject(i, j, idoDummy, false);
                     }
                 }
             }
-            int[] pos = GetComponent<ConvertCoordinate>().Convert(new Vector3(-3, -1));
-            Debug.Log(pos[0]);
-            Debug.Log(pos[1]);
             dummy = Instantiate(Resources.Load("Dummy") as GameObject);
-            dummy.transform.localPosition
-                = new Vector3(-3, -1);
+            dummy.transform.position = new Vector3(-3, -1);
+
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(1, 1, DungeonObjectTag.Actor));
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, DungeonObjectTag.Actor));
+            Dummy test = GetComponent<DungeonBoard>().RemoveObject(4, 0, DungeonObjectTag.Actor) as Dummy;
+            Debug.Log(test.DataTag);
+            int[] testPos = GetComponent<ConvertCoordinate>().Convert(test.Actor.transform.position);
+            Debug.Log(testPos[0]);
+            Debug.Log(testPos[1]);
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, DungeonObjectTag.Actor));
         }
     }
 }
