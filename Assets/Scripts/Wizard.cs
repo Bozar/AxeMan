@@ -5,16 +5,27 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
-    public class Dummy : IDungeonObject
+    public class BuildDungeonEventArgs : EventArgs
     {
-        public Dummy(GameObject actor)
+        public IDungeonObject DungeonObject;
+
+        public BuildDungeonEventArgs(IDungeonObject dungeonObject)
         {
-            Actor = actor;
+            DungeonObject = dungeonObject;
+        }
+    }
+
+    public class DungeonObject : IDungeonObject
+    {
+        public DungeonObject(MainTag mTag, GameObject data)
+        {
+            DataTag = mTag;
+            Data = data;
         }
 
-        public GameObject Actor { get; }
+        public GameObject Data { get; private set; }
 
-        public MainTag DataTag => MainTag.Actor;
+        public MainTag DataTag { get; private set; }
     }
 
     public class UpdateUIEventArgs : EventArgs
@@ -27,11 +38,52 @@ namespace AxeMan.GameSystem
     {
         private bool UIUpdated;
 
+        public event EventHandler<BuildDungeonEventArgs> BuildDungeon;
+
         public event EventHandler<UpdateUIEventArgs> UIText;
+
+        public string NameTag { get { return "Wizard"; } }
+
+        protected virtual void OnCreateDungeon(BuildDungeonEventArgs e)
+        {
+            BuildDungeon?.Invoke(this, e);
+        }
 
         protected virtual void OnUIText(UpdateUIEventArgs e)
         {
             UIText?.Invoke(this, e);
+        }
+
+        private void CreateDummy()
+        {
+            GameObject dummy;
+            IDungeonObject idoDummy;
+            for (int i = 0; i < GetComponent<DungeonBoard>().DungeonWidth; i++)
+            {
+                for (int j = 0; j < GetComponent<DungeonBoard>().DungeonHeight; j++)
+                {
+                    if ((i == GetComponent<DungeonBoard>().DungeonWidth - 1) || (j == 0))
+                    {
+                        dummy = Instantiate(Resources.Load("Dummy") as GameObject);
+                        dummy.transform.position
+                            = GetComponent<ConvertCoordinate>().Convert(i, j);
+                        idoDummy = new DungeonObject(MainTag.Actor, dummy);
+                        OnCreateDungeon(new BuildDungeonEventArgs(idoDummy));
+                        //GetComponent<DungeonBoard>().AddObject(i, j, idoDummy, false);
+                    }
+                }
+            }
+            dummy = Instantiate(Resources.Load("Dummy") as GameObject);
+            dummy.transform.position = new Vector3(-3, -1);
+
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(1, 1, MainTag.Actor));
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
+            DungeonObject test = GetComponent<DungeonBoard>().RemoveObject(4, 0, MainTag.Actor) as DungeonObject;
+            Debug.Log(test.DataTag);
+            int[] testPos = GetComponent<ConvertCoordinate>().Convert(test.Data.transform.position);
+            Debug.Log(testPos[0]);
+            Debug.Log(testPos[1]);
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
         }
 
         private void LateUpdate()
@@ -55,6 +107,8 @@ namespace AxeMan.GameSystem
                 UITag = "CvsWorld",
                 UIData = new ReadOnlyDictionary<string, string>(data)
             });
+            CreateDummy();
+
             UIUpdated = true;
         }
 
@@ -63,34 +117,6 @@ namespace AxeMan.GameSystem
             Debug.Log(GameCore.AxeManCore.GetComponent<GameCore>().Hello);
             //Debug.Log(GetComponent<GameCore>().Hello);
             //Debug.Log(FindObjectOfType<GameCore>().Hello);
-
-            GameObject dummy;
-            IDungeonObject idoDummy;
-            for (int i = 0; i < GetComponent<DungeonBoard>().DungeonWidth; i++)
-            {
-                for (int j = 0; j < GetComponent<DungeonBoard>().DungeonHeight; j++)
-                {
-                    if ((i == GetComponent<DungeonBoard>().DungeonWidth - 1) || (j == 0))
-                    {
-                        dummy = Instantiate(Resources.Load("Dummy") as GameObject);
-                        dummy.transform.position
-                            = GetComponent<ConvertCoordinate>().Convert(i, j);
-                        idoDummy = new Dummy(dummy);
-                        GetComponent<DungeonBoard>().AddObject(i, j, idoDummy, false);
-                    }
-                }
-            }
-            dummy = Instantiate(Resources.Load("Dummy") as GameObject);
-            dummy.transform.position = new Vector3(-3, -1);
-
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(1, 1, MainTag.Actor));
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
-            Dummy test = GetComponent<DungeonBoard>().RemoveObject(4, 0, MainTag.Actor) as Dummy;
-            Debug.Log(test.DataTag);
-            int[] testPos = GetComponent<ConvertCoordinate>().Convert(test.Actor.transform.position);
-            Debug.Log(testPos[0]);
-            Debug.Log(testPos[1]);
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
         }
     }
 }

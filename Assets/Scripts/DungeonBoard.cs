@@ -20,6 +20,8 @@ namespace AxeMan.GameSystem
 
     public interface IDungeonObject
     {
+        GameObject Data { get; }
+
         MainTag DataTag { get; }
     }
 
@@ -93,12 +95,26 @@ namespace AxeMan.GameSystem
             }
         }
 
+        private void DungeonBoard_BuildDungeon(object sender, BuildDungeonEventArgs e)
+        {
+            GameObject go = (e.DungeonObject as DungeonObject).Data;
+            int[] pos = GetComponent<ConvertCoordinate>().Convert(
+                go.transform.position);
+            AddObject(pos[0], pos[1], e.DungeonObject, false);
+            Debug.Log((sender as Wizard).NameTag);
+        }
+
         private bool IndexOutOfRange(int x, int y)
         {
             return (x < 0)
                 || (x >= DungeonWidth)
                 || (y < 0)
                 || (y >= DungeonHeight);
+        }
+
+        private void Start()
+        {
+            GetComponent<Wizard>().BuildDungeon += DungeonBoard_BuildDungeon;
         }
     }
 }
