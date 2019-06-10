@@ -16,7 +16,7 @@ namespace AxeMan.GameSystem.Blueprint
         SubTag STag { get; }
     }
 
-    public class BlueprintInterface : MonoBehaviour
+    public class BlueprintCore : MonoBehaviour
     {
     }
 

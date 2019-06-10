@@ -16,7 +16,7 @@ namespace AxeMan.GameSystem.Blueprint
         private IPrototype GetHealthAltar()
         {
             MainTag mt = MainTag.Building;
-            SubTag st = SubTag.AltarHealth;
+            SubTag st = SubTag.LifeAltar;
             int[] position = new int[] { 4, 4 };
 
             return new Prototype(mt, st, position);
@@ -26,7 +26,7 @@ namespace AxeMan.GameSystem.Blueprint
         {
             MainTag mt = MainTag.Building;
             // TODO: Get shield altar type from outside.
-            SubTag st = SubTag.AltarHealth;
+            SubTag st = SubTag.LifeAltar;
             int[][] position = new int[][]
             {
                 new int[] { 2, 2 }, new int[] { 2, 6 },
