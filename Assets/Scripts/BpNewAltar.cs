@@ -25,8 +25,7 @@ namespace AxeMan.GameSystem.Blueprint
         private Stack<IPrototype> GetShieldAltar()
         {
             MainTag mt = MainTag.Building;
-            // TODO: Get shield altar type from outside.
-            SubTag st = SubTag.LifeAltar;
+            SubTag st = SubTag.ShieldAltar;
             int[][] position = new int[][]
             {
                 new int[] { 2, 2 }, new int[] { 2, 6 },
