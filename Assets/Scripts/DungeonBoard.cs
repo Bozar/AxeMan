@@ -20,9 +20,10 @@ namespace AxeMan.GameSystem
 
     public interface IDungeonObject
     {
-        GameObject Data { get; }
-
         MainTag DataTag { get; }
+
+        // The actual data could be GameObject, GameObject[], or
+        // Dictionary<MainTag, GameObject>.
     }
 
     // DungeonBoard is a data hub which records and updates every dungeon
@@ -83,9 +84,9 @@ namespace AxeMan.GameSystem
         {
             DungeonWidth = 9;
             DungeonHeight = 9;
+
             board = new Dictionary<MainTag, IDungeonObject>[
                 DungeonWidth, DungeonHeight];
-
             for (int i = 0; i < DungeonWidth; i++)
             {
                 for (int j = 0; j < DungeonHeight; j++)
@@ -95,26 +96,12 @@ namespace AxeMan.GameSystem
             }
         }
 
-        private void DungeonBoard_BuildDungeon(object sender, BuildDungeonEventArgs e)
-        {
-            GameObject go = (e.DungeonObject as DungeonObject).Data;
-            int[] pos = GetComponent<ConvertCoordinate>().Convert(
-                go.transform.position);
-            AddObject(pos[0], pos[1], e.DungeonObject, false);
-            Debug.Log((sender as Wizard).NameTag);
-        }
-
         private bool IndexOutOfRange(int x, int y)
         {
             return (x < 0)
                 || (x >= DungeonWidth)
                 || (y < 0)
                 || (y >= DungeonHeight);
-        }
-
-        private void Start()
-        {
-            GetComponent<Wizard>().BuildDungeon += DungeonBoard_BuildDungeon;
         }
     }
 }

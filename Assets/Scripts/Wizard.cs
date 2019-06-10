@@ -5,16 +5,6 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
-    public class BuildDungeonEventArgs : EventArgs
-    {
-        public IDungeonObject DungeonObject;
-
-        public BuildDungeonEventArgs(IDungeonObject dungeonObject)
-        {
-            DungeonObject = dungeonObject;
-        }
-    }
-
     public class DungeonObject : IDungeonObject
     {
         public DungeonObject(MainTag mTag, GameObject data)
@@ -38,16 +28,9 @@ namespace AxeMan.GameSystem
     {
         private bool UIUpdated;
 
-        public event EventHandler<BuildDungeonEventArgs> BuildDungeon;
-
         public event EventHandler<UpdateUIEventArgs> UIText;
 
         public string NameTag { get { return "Wizard"; } }
-
-        protected virtual void OnCreateDungeon(BuildDungeonEventArgs e)
-        {
-            BuildDungeon?.Invoke(this, e);
-        }
 
         protected virtual void OnUIText(UpdateUIEventArgs e)
         {
@@ -68,8 +51,7 @@ namespace AxeMan.GameSystem
                         dummy.transform.position
                             = GetComponent<ConvertCoordinate>().Convert(i, j);
                         idoDummy = new DungeonObject(MainTag.Actor, dummy);
-                        OnCreateDungeon(new BuildDungeonEventArgs(idoDummy));
-                        //GetComponent<DungeonBoard>().AddObject(i, j, idoDummy, false);
+                        GetComponent<DungeonBoard>().AddObject(i, j, idoDummy, false);
                     }
                 }
             }
