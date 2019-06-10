@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AxeMan.GameSystem.Blueprint;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
@@ -35,6 +36,18 @@ namespace AxeMan.GameSystem
         protected virtual void OnUIText(UpdateUIEventArgs e)
         {
             UIText?.Invoke(this, e);
+        }
+
+        private void CreateAltar()
+        {
+            IPrototype[] proto = GetComponent<BpNewAltar>().GetBlueprint();
+            GameObject building;
+            foreach (IPrototype p in proto)
+            {
+                building = Instantiate(Resources.Load(p.STag.ToString()) as GameObject);
+                building.transform.position
+                    = GetComponent<ConvertCoordinate>().Convert(p.Position[0], p.Position[1]);
+            }
         }
 
         private void CreateDummy()
@@ -90,6 +103,7 @@ namespace AxeMan.GameSystem
                 UIData = new ReadOnlyDictionary<string, string>(data)
             });
             CreateDummy();
+            CreateAltar();
 
             UIUpdated = true;
         }
