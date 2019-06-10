@@ -3,10 +3,6 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
-    public enum MainTag { INVALID, Building, Terrain, Actor }
-
-    public enum SubTag { INVALID, Dummy }
-
     public interface IDungeonBoard
     {
         bool AddObject(int x, int y, IDungeonObject ido, bool overwrite);
