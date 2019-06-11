@@ -42,11 +42,19 @@ namespace AxeMan.GameSystem
         {
             IPrototype[] proto = GetComponent<BpNewAltar>().GetBlueprint();
             GameObject building;
+            IDungeonObject idoAltar;
+            int x;
+            int y;
+
             foreach (IPrototype p in proto)
             {
+                x = p.Position[0];
+                y = p.Position[1];
                 building = Instantiate(Resources.Load(p.STag.ToString()) as GameObject);
                 building.transform.position
-                    = GetComponent<ConvertCoordinate>().Convert(p.Position[0], p.Position[1]);
+                    = GetComponent<ConvertCoordinate>().Convert(x, y);
+                idoAltar = new DungeonObject(p.MTag, building);
+                GetComponent<DungeonBoard>().AddObject(x, y, idoAltar, true);
             }
         }
 
@@ -104,6 +112,8 @@ namespace AxeMan.GameSystem
             });
             CreateDummy();
             CreateAltar();
+
+            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 4, MainTag.Building));
 
             UIUpdated = true;
         }
