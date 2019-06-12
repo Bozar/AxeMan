@@ -6,19 +6,6 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
-    public class DungeonObject : IDungeonObject
-    {
-        public DungeonObject(MainTag mTag, GameObject data)
-        {
-            DataTag = mTag;
-            Data = data;
-        }
-
-        public GameObject Data { get; private set; }
-
-        public MainTag DataTag { get; private set; }
-    }
-
     public class UpdateUIEventArgs : EventArgs
     {
         public ReadOnlyDictionary<string, string> UIData;

@@ -3,25 +3,6 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
-    public interface IDungeonBoard
-    {
-        bool AddObject(int x, int y, IDungeonObject ido, bool overwrite);
-
-        bool ExistObject(int x, int y, MainTag mtag);
-
-        IDungeonObject GetObject(int x, int y, MainTag mtag);
-
-        IDungeonObject RemoveObject(int x, int y, MainTag mtag);
-    }
-
-    public interface IDungeonObject
-    {
-        MainTag DataTag { get; }
-
-        // The actual data could be GameObject, GameObject[], or
-        // Dictionary<MainTag, GameObject>.
-    }
-
     // DungeonBoard is a data hub which records and updates every dungeon
     // object's position.
     public class DungeonBoard : MonoBehaviour, IDungeonBoard
