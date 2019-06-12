@@ -17,6 +17,7 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<GameCore>();
             gameObject.AddComponent<ObjectPoolCore>();
+            gameObject.AddComponent<OPlBuilding>();
             gameObject.AddComponent<Wizard>();
         }
     }

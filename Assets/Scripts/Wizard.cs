@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem.Blueprint;
+using AxeMan.GameSystem.ObjectPool;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,20 +29,9 @@ namespace AxeMan.GameSystem
         private void CreateAltar()
         {
             IPrototype[] proto = GetComponent<BpNewAltar>().GetBlueprint();
-            GameObject building;
-            IDungeonObject idoAltar;
-            int x;
-            int y;
-
             foreach (IPrototype p in proto)
             {
-                x = p.Position[0];
-                y = p.Position[1];
-                building = Instantiate(Resources.Load(p.STag.ToString()) as GameObject);
-                building.transform.position
-                    = GetComponent<ConvertCoordinate>().Convert(x, y);
-                idoAltar = new DungeonObject(p.MTag, building);
-                GetComponent<DungeonBoard>().AddObject(x, y, idoAltar, true);
+                GetComponent<ObjectPoolCore>().CreateObject(p);
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.ObjectPool;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
@@ -73,12 +75,30 @@ namespace AxeMan.GameSystem
             }
         }
 
+        private void DungeonBoard_CreatingObject(object sender,
+            CreatingObjectEventArgs e)
+        {
+            GameObject go = e.Data;
+            int[] pos = GetComponent<ConvertCoordinate>().Convert(
+                go.transform.position);
+            IDungeonObject ido = new DungeonObject(
+                go.GetComponent<MetaInfo>().MTag, go);
+
+            AddObject(pos[0], pos[1], ido, false);
+        }
+
         private bool IndexOutOfRange(int x, int y)
         {
             return (x < 0)
                 || (x >= DungeonWidth)
                 || (y < 0)
                 || (y >= DungeonHeight);
+        }
+
+        private void Start()
+        {
+            GetComponent<ObjectPoolCore>().CreatingObject
+                += DungeonBoard_CreatingObject;
         }
     }
 }
