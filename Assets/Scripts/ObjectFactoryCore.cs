@@ -22,7 +22,7 @@ namespace AxeMan.GameSystem.ObjectPool
         public GameObject Data { get; }
     }
 
-    public class ObjectPoolCore : MonoBehaviour, IObjectFactory
+    public class ObjectFactoryCore : MonoBehaviour, IObjectFactory
     {
         public event EventHandler<CreatingObjectEventArgs> CreatingObject;
 
@@ -33,7 +33,7 @@ namespace AxeMan.GameSystem.ObjectPool
             switch (proto.MTag)
             {
                 case MainTag.Building:
-                    go = GetComponent<OPlBuilding>().CreateObject(proto);
+                    go = GetComponent<OFBuilding>().CreateObject(proto);
                     break;
 
                 case MainTag.Terrain:

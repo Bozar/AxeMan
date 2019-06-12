@@ -97,7 +97,7 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<ObjectPoolCore>().CreatingObject
+            GetComponent<ObjectFactoryCore>().CreatingObject
                 += DungeonBoard_CreatingObject;
         }
     }
