@@ -33,5 +33,10 @@ namespace AxeMan.GameSystem
 
             return new Vector3(floatX, floatY);
         }
+
+        public Vector3 Convert(int[] position)
+        {
+            return Convert(position[0], position[1]);
+        }
     }
 }
