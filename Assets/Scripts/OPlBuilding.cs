@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem.ObjectPool
 {
-    public class OPlBuilding : MonoBehaviour, IObjectPool
+    public class OPlBuilding : MonoBehaviour, IObjectFactory
     {
         public GameObject CreateObject(IPrototype proto)
         {

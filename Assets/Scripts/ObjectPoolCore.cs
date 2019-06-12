@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem.ObjectPool
 {
-    public interface IObjectPool
+    public interface IObjectFactory
     {
         GameObject CreateObject(IPrototype proto);
 
@@ -22,7 +22,7 @@ namespace AxeMan.GameSystem.ObjectPool
         public GameObject Data { get; }
     }
 
-    public class ObjectPoolCore : MonoBehaviour, IObjectPool
+    public class ObjectPoolCore : MonoBehaviour, IObjectFactory
     {
         public event EventHandler<CreatingObjectEventArgs> CreatingObject;
 
