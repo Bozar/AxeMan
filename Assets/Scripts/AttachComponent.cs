@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem.Blueprint;
+using AxeMan.GameSystem.ObjectPool;
 using UnityEngine;
 
 // If a class is under the namespace `AxeMan.GameSystem`, it can be instanced
@@ -13,7 +14,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BpNewAltar>();
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<DungeonBoard>();
+
             gameObject.AddComponent<GameCore>();
+            gameObject.AddComponent<ObjectPoolCore>();
             gameObject.AddComponent<Wizard>();
         }
     }
