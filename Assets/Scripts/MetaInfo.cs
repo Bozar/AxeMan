@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.Blueprint;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -8,18 +9,20 @@ namespace AxeMan.DungeonObject
         MainTag MTag { get; }
 
         SubTag STag { get; }
+
+        void SetValue(IPrototype proto);
     }
 
     public class MetaInfo : MonoBehaviour, IMetaInfo
     {
-        public MetaInfo(MainTag mTag, SubTag sTag)
+        public MainTag MTag { get; private set; }
+
+        public SubTag STag { get; private set; }
+
+        public void SetValue(IPrototype proto)
         {
-            MTag = mTag;
-            STag = sTag;
+            MTag = proto.MTag;
+            STag = proto.STag;
         }
-
-        public MainTag MTag { get; }
-
-        public SubTag STag { get; }
     }
 }
