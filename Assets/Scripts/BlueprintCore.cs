@@ -18,6 +18,21 @@ namespace AxeMan.GameSystem.Blueprint
 
     public class BlueprintCore : MonoBehaviour
     {
+        public IPrototype[] GetBlueprint(BlueprintTag bTag)
+        {
+            IPrototype[] proto = null;
+
+            switch (bTag)
+            {
+                case BlueprintTag.Altar:
+                    proto = GetComponent<BpAltar>().GetBlueprint();
+                    break;
+
+                default:
+                    break;
+            }
+            return proto;
+        }
     }
 
     public class ProtoObject : IPrototype
