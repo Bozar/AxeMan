@@ -26,6 +26,14 @@ namespace AxeMan.GameSystem.ObjectFactory
     {
         public event EventHandler<CreatedObjectEventArgs> CreatedObject;
 
+        public void Create(IPrototype[] proto)
+        {
+            foreach (IPrototype p in proto)
+            {
+                Create(p);
+            }
+        }
+
         public GameObject Create(IPrototype proto)
         {
             GameObject go = null;

@@ -30,10 +30,7 @@ namespace AxeMan.GameSystem
         {
             IPrototype[] proto = GetComponent<BlueprintCore>().GetBlueprint(
                 BlueprintTag.Altar);
-            foreach (IPrototype p in proto)
-            {
-                GetComponent<ObjectFactoryCore>().Create(p);
-            }
+            GetComponent<ObjectFactoryCore>().Create(proto);
         }
 
         private void CreateDummy()
