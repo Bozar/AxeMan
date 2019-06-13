@@ -11,7 +11,7 @@ namespace AxeMan.GameSystem
         private void Awake()
         {
             // The `gameObject` is `AxeManCore`.
-            gameObject.AddComponent<BpNewAltar>();
+            gameObject.AddComponent<BpAltar>();
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<DungeonBoard>();
 

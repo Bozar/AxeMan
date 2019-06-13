@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem.Blueprint
 {
-    public class BpNewAltar : MonoBehaviour, IBlueprint
+    public class BpAltar : MonoBehaviour, IBlueprint
     {
         public IPrototype[] GetBlueprint()
         {
