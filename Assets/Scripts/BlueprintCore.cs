@@ -20,9 +20,9 @@ namespace AxeMan.GameSystem.Blueprint
     {
     }
 
-    public class Prototype : IPrototype
+    public class ProtoObject : IPrototype
     {
-        public Prototype(MainTag mTag, SubTag sTag, int[] position)
+        public ProtoObject(MainTag mTag, SubTag sTag, int[] position)
         {
             MTag = mTag;
             STag = sTag;
