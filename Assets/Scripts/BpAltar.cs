@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem.Blueprint
 {
-    public class BpNewAltar : MonoBehaviour, IBlueprint
+    public class BpAltar : MonoBehaviour, IBlueprint
     {
         public IPrototype[] GetBlueprint()
         {
@@ -19,7 +19,7 @@ namespace AxeMan.GameSystem.Blueprint
             SubTag st = SubTag.LifeAltar;
             int[] position = new int[] { 4, 4 };
 
-            return new Prototype(mt, st, position);
+            return new ProtoObject(mt, st, position);
         }
 
         private Stack<IPrototype> GetShieldAltar()
@@ -35,7 +35,7 @@ namespace AxeMan.GameSystem.Blueprint
             Stack<IPrototype> altar = new Stack<IPrototype>();
             foreach (int[] pos in position)
             {
-                altar.Push(new Prototype(mt, st, pos));
+                altar.Push(new ProtoObject(mt, st, pos));
             }
             return altar;
         }

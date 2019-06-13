@@ -28,7 +28,7 @@ namespace AxeMan.GameSystem
 
         private void CreateAltar()
         {
-            IPrototype[] proto = GetComponent<BpNewAltar>().GetBlueprint();
+            IPrototype[] proto = GetComponent<BpAltar>().GetBlueprint();
             foreach (IPrototype p in proto)
             {
                 GetComponent<ObjectFactoryCore>().CreateObject(p);
