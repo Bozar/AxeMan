@@ -7,14 +7,14 @@ namespace AxeMan.GameSystem.ObjectPool
 {
     public interface IObjectFactory
     {
-        GameObject CreateObject(IPrototype proto);
+        GameObject Create(IPrototype proto);
 
-        void RemoveObject(GameObject go);
+        void Remove(GameObject go);
     }
 
-    public class CreatingObjectEventArgs : EventArgs
+    public class CreatedObjectEventArgs : EventArgs
     {
-        public CreatingObjectEventArgs(GameObject go)
+        public CreatedObjectEventArgs(GameObject go)
         {
             Data = go;
         }
@@ -24,16 +24,16 @@ namespace AxeMan.GameSystem.ObjectPool
 
     public class ObjectFactoryCore : MonoBehaviour, IObjectFactory
     {
-        public event EventHandler<CreatingObjectEventArgs> CreatingObject;
+        public event EventHandler<CreatedObjectEventArgs> CreatedObject;
 
-        public GameObject CreateObject(IPrototype proto)
+        public GameObject Create(IPrototype proto)
         {
             GameObject go = null;
 
             switch (proto.MTag)
             {
                 case MainTag.Building:
-                    go = GetComponent<OFBuilding>().CreateObject(proto);
+                    go = GetComponent<OFBuilding>().Create(proto);
                     break;
 
                 case MainTag.Terrain:
@@ -48,12 +48,12 @@ namespace AxeMan.GameSystem.ObjectPool
 
             if (go != null)
             {
-                OnCreatingObject(new CreatingObjectEventArgs(go));
+                OnCreatedObject(new CreatedObjectEventArgs(go));
             }
             return go;
         }
 
-        public void RemoveObject(GameObject go)
+        public void Remove(GameObject go)
         {
             if (go.GetComponent<MetaInfo>() == null)
             {
@@ -76,9 +76,9 @@ namespace AxeMan.GameSystem.ObjectPool
             }
         }
 
-        protected virtual void OnCreatingObject(CreatingObjectEventArgs e)
+        protected virtual void OnCreatedObject(CreatedObjectEventArgs e)
         {
-            CreatingObject?.Invoke(this, e);
+            CreatedObject?.Invoke(this, e);
         }
     }
 }

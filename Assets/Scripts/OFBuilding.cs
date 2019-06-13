@@ -6,7 +6,7 @@ namespace AxeMan.GameSystem.ObjectPool
 {
     public class OFBuilding : MonoBehaviour, IObjectFactory
     {
-        public GameObject CreateObject(IPrototype proto)
+        public GameObject Create(IPrototype proto)
         {
             GameObject go = Instantiate(Resources.Load(proto.STag.ToString())
                 as GameObject);
@@ -17,7 +17,7 @@ namespace AxeMan.GameSystem.ObjectPool
             return go;
         }
 
-        public void RemoveObject(GameObject go)
+        public void Remove(GameObject go)
         {
             throw new System.NotImplementedException();
         }

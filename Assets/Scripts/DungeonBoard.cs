@@ -75,8 +75,8 @@ namespace AxeMan.GameSystem
             }
         }
 
-        private void DungeonBoard_CreatingObject(object sender,
-            CreatingObjectEventArgs e)
+        private void DungeonBoard_CreatedObject(object sender,
+            CreatedObjectEventArgs e)
         {
             GameObject go = e.Data;
             int[] pos = GetComponent<ConvertCoordinate>().Convert(
@@ -97,8 +97,8 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<ObjectFactoryCore>().CreatingObject
-                += DungeonBoard_CreatingObject;
+            GetComponent<ObjectFactoryCore>().CreatedObject
+                += DungeonBoard_CreatedObject;
         }
     }
 }
