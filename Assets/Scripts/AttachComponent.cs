@@ -1,5 +1,5 @@
 ﻿using AxeMan.GameSystem.Blueprint;
-using AxeMan.GameSystem.ObjectPool;
+using AxeMan.GameSystem.ObjectFactory;
 using UnityEngine;
 
 // If a class is under the namespace `AxeMan.GameSystem`, it can be instanced

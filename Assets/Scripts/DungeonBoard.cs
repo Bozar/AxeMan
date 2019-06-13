@@ -1,5 +1,5 @@
 ﻿using AxeMan.DungeonObject;
-using AxeMan.GameSystem.ObjectPool;
+using AxeMan.GameSystem.ObjectFactory;
 using System.Collections.Generic;
 using UnityEngine;
 

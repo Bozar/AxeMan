@@ -2,7 +2,7 @@
 using AxeMan.GameSystem.Blueprint;
 using UnityEngine;
 
-namespace AxeMan.GameSystem.ObjectPool
+namespace AxeMan.GameSystem.ObjectFactory
 {
     public class OFBuilding : MonoBehaviour, IObjectFactory
     {

@@ -1,5 +1,5 @@
 ﻿using AxeMan.GameSystem.Blueprint;
-using AxeMan.GameSystem.ObjectPool;
+using AxeMan.GameSystem.ObjectFactory;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

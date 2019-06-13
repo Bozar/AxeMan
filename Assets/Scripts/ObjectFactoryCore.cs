@@ -3,7 +3,7 @@ using AxeMan.GameSystem.Blueprint;
 using System;
 using UnityEngine;
 
-namespace AxeMan.GameSystem.ObjectPool
+namespace AxeMan.GameSystem.ObjectFactory
 {
     public interface IObjectFactory
     {
