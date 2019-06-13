@@ -22,9 +22,29 @@ namespace AxeMan.GameSystem.ObjectFactory
         public GameObject Data { get; }
     }
 
+    public class CreatingObjectEventArgs : EventArgs, IPrototype
+    {
+        public CreatingObjectEventArgs(IPrototype core)
+        {
+            MTag = core.MTag;
+            STag = core.STag;
+            Position = core.Position;
+        }
+
+        public GameObject Data { get; set; }
+
+        public MainTag MTag { get; }
+
+        public int[] Position { get; }
+
+        public SubTag STag { get; }
+    }
+
     public class ObjectFactoryCore : MonoBehaviour, IObjectFactory
     {
         public event EventHandler<CreatedObjectEventArgs> CreatedObject;
+
+        public event EventHandler<CreatingObjectEventArgs> CreatingObject;
 
         public void Create(IPrototype[] proto)
         {
@@ -37,11 +57,13 @@ namespace AxeMan.GameSystem.ObjectFactory
         public GameObject Create(IPrototype proto)
         {
             GameObject go = null;
+            var objFromPool = new CreatingObjectEventArgs(proto);
+            OnCreatingObject(objFromPool);
 
-            switch (proto.MTag)
+            switch (objFromPool.MTag)
             {
                 case MainTag.Building:
-                    go = GetComponent<OFBuilding>().Create(proto);
+                    go = GetComponent<OFBuilding>().Create(objFromPool);
                     break;
 
                 case MainTag.Terrain:
@@ -87,6 +109,11 @@ namespace AxeMan.GameSystem.ObjectFactory
         protected virtual void OnCreatedObject(CreatedObjectEventArgs e)
         {
             CreatedObject?.Invoke(this, e);
+        }
+
+        protected virtual void OnCreatingObject(CreatingObjectEventArgs e)
+        {
+            CreatingObject?.Invoke(this, e);
         }
     }
 }

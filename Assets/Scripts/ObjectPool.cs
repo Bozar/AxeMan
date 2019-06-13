@@ -44,5 +44,17 @@ namespace AxeMan.GameSystem.ObjectFactory
         {
             pool = new Dictionary<SubTag, Stack<GameObject>>();
         }
+
+        private void ObjectPool_CreatingObject(object sender,
+            CreatingObjectEventArgs e)
+        {
+            e.Data = LoadFromPool(e.STag);
+        }
+
+        private void Start()
+        {
+            GetComponent<ObjectFactoryCore>().CreatingObject
+                += ObjectPool_CreatingObject;
+        }
     }
 }
