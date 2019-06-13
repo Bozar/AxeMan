@@ -15,10 +15,9 @@ namespace AxeMan.GameSystem
 
     public interface IDungeonObject
     {
-        MainTag DataTag { get; }
+        GameObject Data { get; }
 
-        // The actual data could be GameObject, GameObject[], or
-        // Dictionary<MainTag, GameObject>.
+        MainTag MTag { get; }
     }
 
     public class DungeonBoardCore : MonoBehaviour
@@ -29,12 +28,12 @@ namespace AxeMan.GameSystem
     {
         public DungeonObject(MainTag mTag, GameObject data)
         {
-            DataTag = mTag;
+            MTag = mTag;
             Data = data;
         }
 
         public GameObject Data { get; }
 
-        public MainTag DataTag { get; }
+        public MainTag MTag { get; }
     }
 }

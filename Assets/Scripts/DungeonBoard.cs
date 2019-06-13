@@ -21,11 +21,11 @@ namespace AxeMan.GameSystem
             {
                 return false;
             }
-            else if (!overwrite && board[x, y].ContainsKey(ido.DataTag))
+            else if (!overwrite && board[x, y].ContainsKey(ido.MTag))
             {
                 return false;
             }
-            board[x, y][ido.DataTag] = ido;
+            board[x, y][ido.MTag] = ido;
             return true;
         }
 

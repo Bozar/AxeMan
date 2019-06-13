@@ -57,7 +57,7 @@ namespace AxeMan.GameSystem
             Debug.Log(GetComponent<DungeonBoard>().ExistObject(1, 1, MainTag.Actor));
             Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
             DungeonObject test = GetComponent<DungeonBoard>().RemoveObject(4, 0, MainTag.Actor) as DungeonObject;
-            Debug.Log(test.DataTag);
+            Debug.Log(test.MTag);
             int[] testPos = GetComponent<ConvertCoordinate>().Convert(test.Data.transform.position);
             Debug.Log(testPos[0]);
             Debug.Log(testPos[1]);
