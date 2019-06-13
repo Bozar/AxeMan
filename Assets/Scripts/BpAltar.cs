@@ -8,12 +8,12 @@ namespace AxeMan.GameSystem.Blueprint
         public IPrototype[] GetBlueprint()
         {
             Stack<IPrototype> blueprint = GetShieldAltar();
-            blueprint.Push(GetHealthAltar());
+            blueprint.Push(GetLifeAltar());
 
             return blueprint.ToArray();
         }
 
-        private IPrototype GetHealthAltar()
+        private IPrototype GetLifeAltar()
         {
             MainTag mt = MainTag.Building;
             SubTag st = SubTag.LifeAltar;
