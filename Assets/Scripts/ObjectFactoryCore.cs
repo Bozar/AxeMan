@@ -1,5 +1,4 @@
-﻿using AxeMan.DungeonObject;
-using AxeMan.GameSystem.Blueprint;
+﻿using AxeMan.GameSystem.Blueprint;
 using System;
 using UnityEngine;
 
@@ -8,8 +7,6 @@ namespace AxeMan.GameSystem.ObjectFactory
     public interface IObjectFactory
     {
         GameObject Create(IPrototype proto);
-
-        void Remove(GameObject go);
     }
 
     public class CreatedObjectEventArgs : EventArgs
@@ -81,29 +78,6 @@ namespace AxeMan.GameSystem.ObjectFactory
                 OnCreatedObject(new CreatedObjectEventArgs(go));
             }
             return go;
-        }
-
-        public void Remove(GameObject go)
-        {
-            if (go.GetComponent<MetaInfo>() == null)
-            {
-                return;
-            }
-
-            switch (go.GetComponent<MetaInfo>().MTag)
-            {
-                case MainTag.Building:
-                    break;
-
-                case MainTag.Terrain:
-                    break;
-
-                case MainTag.Actor:
-                    break;
-
-                default:
-                    break;
-            }
         }
 
         protected virtual void OnCreatedObject(CreatedObjectEventArgs e)

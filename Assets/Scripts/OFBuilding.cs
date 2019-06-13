@@ -25,10 +25,5 @@ namespace AxeMan.GameSystem.ObjectFactory
 
             return go;
         }
-
-        public void Remove(GameObject go)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
