@@ -1,4 +1,4 @@
-﻿using AxeMan.GameSystem.Blueprint;
+﻿using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.ObjectFactory;
 using UnityEngine;
 
@@ -11,15 +11,15 @@ namespace AxeMan.GameSystem
         private void Awake()
         {
             // The `gameObject` is `AxeManCore`.
-            gameObject.AddComponent<BlueprintCore>();
-            gameObject.AddComponent<BpAltar>();
+            gameObject.AddComponent<Blueprint>();
+            gameObject.AddComponent<BlueprintAltar>();
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<DungeonBoard>();
 
             gameObject.AddComponent<GameCore>();
-            gameObject.AddComponent<ObjectFactoryCore>();
+            gameObject.AddComponent<CreateObject>();
             gameObject.AddComponent<ObjectPool>();
-            gameObject.AddComponent<OFBuilding>();
+            gameObject.AddComponent<CreateBuilding>();
 
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<Wizard>();

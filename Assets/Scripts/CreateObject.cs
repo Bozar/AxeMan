@@ -1,10 +1,10 @@
-﻿using AxeMan.GameSystem.Blueprint;
+﻿using AxeMan.GameSystem.PrototypeFactory;
 using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.ObjectFactory
 {
-    public interface IObjectFactory
+    public interface ICreateObject
     {
         GameObject Create(IPrototype proto);
     }
@@ -19,25 +19,7 @@ namespace AxeMan.GameSystem.ObjectFactory
         public GameObject Data { get; }
     }
 
-    public class CreatingObjectEventArgs : EventArgs, IPrototype
-    {
-        public CreatingObjectEventArgs(IPrototype core)
-        {
-            MTag = core.MTag;
-            STag = core.STag;
-            Position = core.Position;
-        }
-
-        public GameObject Data { get; set; }
-
-        public MainTag MTag { get; }
-
-        public int[] Position { get; }
-
-        public SubTag STag { get; }
-    }
-
-    public class ObjectFactoryCore : MonoBehaviour, IObjectFactory
+    public class CreateObject : MonoBehaviour, ICreateObject
     {
         public event EventHandler<CreatedObjectEventArgs> CreatedObject;
 
@@ -60,7 +42,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             switch (objFromPool.MTag)
             {
                 case MainTag.Building:
-                    go = GetComponent<OFBuilding>().Create(objFromPool);
+                    go = GetComponent<CreateBuilding>().Create(objFromPool);
                     break;
 
                 case MainTag.Terrain:
@@ -89,5 +71,23 @@ namespace AxeMan.GameSystem.ObjectFactory
         {
             CreatingObject?.Invoke(this, e);
         }
+    }
+
+    public class CreatingObjectEventArgs : EventArgs, IPrototype
+    {
+        public CreatingObjectEventArgs(IPrototype core)
+        {
+            MTag = core.MTag;
+            STag = core.STag;
+            Position = core.Position;
+        }
+
+        public GameObject Data { get; set; }
+
+        public MainTag MTag { get; }
+
+        public int[] Position { get; }
+
+        public SubTag STag { get; }
     }
 }

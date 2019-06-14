@@ -53,7 +53,7 @@ namespace AxeMan.GameSystem.ObjectFactory
 
         private void Start()
         {
-            GetComponent<ObjectFactoryCore>().CreatingObject
+            GetComponent<CreateObject>().CreatingObject
                 += ObjectPool_CreatingObject;
         }
     }

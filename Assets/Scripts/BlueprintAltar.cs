@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace AxeMan.GameSystem.Blueprint
+namespace AxeMan.GameSystem.PrototypeFactory
 {
-    public class BpAltar : MonoBehaviour, IBlueprint
+    public class BlueprintAltar : MonoBehaviour, IBlueprint
     {
         public IPrototype[] GetBlueprint()
         {

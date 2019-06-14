@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AxeMan.GameSystem.Blueprint
+namespace AxeMan.GameSystem.PrototypeFactory
 {
     public interface IBlueprint
     {
@@ -16,7 +16,7 @@ namespace AxeMan.GameSystem.Blueprint
         SubTag STag { get; }
     }
 
-    public class BlueprintCore : MonoBehaviour
+    public class Blueprint : MonoBehaviour
     {
         public IPrototype[] GetBlueprint(BlueprintTag bTag)
         {
@@ -25,7 +25,7 @@ namespace AxeMan.GameSystem.Blueprint
             switch (bTag)
             {
                 case BlueprintTag.Altar:
-                    proto = GetComponent<BpAltar>().GetBlueprint();
+                    proto = GetComponent<BlueprintAltar>().GetBlueprint();
                     break;
 
                 default:

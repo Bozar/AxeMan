@@ -1,5 +1,5 @@
 ﻿using AxeMan.GameSystem;
-using AxeMan.GameSystem.Blueprint;
+using AxeMan.GameSystem.PrototypeFactory;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject

@@ -1,5 +1,5 @@
-﻿using AxeMan.GameSystem.Blueprint;
-using AxeMan.GameSystem.ObjectFactory;
+﻿using AxeMan.GameSystem.ObjectFactory;
+using AxeMan.GameSystem.PrototypeFactory;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,9 +28,9 @@ namespace AxeMan.GameSystem
 
         private void CreateAltar()
         {
-            IPrototype[] proto = GetComponent<BlueprintCore>().GetBlueprint(
+            IPrototype[] proto = GetComponent<Blueprint>().GetBlueprint(
                 BlueprintTag.Altar);
-            GetComponent<ObjectFactoryCore>().Create(proto);
+            GetComponent<CreateObject>().Create(proto);
         }
 
         private void CreateDummy()

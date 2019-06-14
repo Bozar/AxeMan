@@ -1,10 +1,10 @@
 ﻿using AxeMan.DungeonObject;
-using AxeMan.GameSystem.Blueprint;
+using AxeMan.GameSystem.PrototypeFactory;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.ObjectFactory
 {
-    public class OFBuilding : MonoBehaviour, IObjectFactory
+    public class CreateBuilding : MonoBehaviour, ICreateObject
     {
         public GameObject Create(IPrototype proto)
         {
