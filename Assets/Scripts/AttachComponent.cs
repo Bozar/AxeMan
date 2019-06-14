@@ -20,6 +20,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ObjectFactoryCore>();
             gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<OFBuilding>();
+
+            gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<Wizard>();
         }
     }
