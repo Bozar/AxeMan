@@ -51,10 +51,18 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data = LoadFromPool(e.STag);
         }
 
+        private void ObjectPool_RemovingObject(object sender,
+            RemovingObjectEventArgs e)
+        {
+            SaveToPool(e.Data);
+        }
+
         private void Start()
         {
             GetComponent<CreateObject>().CreatingObject
                 += ObjectPool_CreatingObject;
+            GetComponent<RemoveObject>().RemovingObject
+                += ObjectPool_RemovingObject;
         }
     }
 }
