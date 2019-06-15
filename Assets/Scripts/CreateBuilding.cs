@@ -15,6 +15,7 @@ namespace AxeMan.GameSystem.ObjectFactory
                 go = Instantiate(Resources.Load(proto.STag.ToString())
                    as GameObject);
                 go.AddComponent<MetaInfo>().SetValue(proto);
+                go.AddComponent<LocalManager>();
             }
             else
             {
