@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5758335174465539340}
   - component: {fileID: 3510567190783372250}
   m_Layer: 0
-  m_Name: AltarHealth
+  m_Name: LifeAltar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
