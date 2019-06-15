@@ -92,12 +92,5 @@ namespace AxeMan.GameSystem
 
             UIUpdated = true;
         }
-
-        private void Start()
-        {
-            Debug.Log(GameCore.AxeManCore.GetComponent<GameCore>().Hello);
-            //Debug.Log(GetComponent<GameCore>().Hello);
-            //Debug.Log(FindObjectOfType<GameCore>().Hello);
-        }
     }
 }
