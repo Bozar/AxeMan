@@ -41,11 +41,7 @@ namespace AxeMan.GameSystem
 
         public GameObject[] Search(int x, int y)
         {
-            var ea = new SearchingObjectEventArgs(
-                SearchEventTag.Position, new Stack<GameObject>())
-            {
-                Position = new int[] { x, y }
-            };
+            var ea = GetSearchEventArg(new int[] { x, y });
             OnSearchingObject(ea);
 
             return ea.Data.ToArray();
@@ -64,6 +60,36 @@ namespace AxeMan.GameSystem
         protected virtual void OnSearchingObject(SearchingObjectEventArgs e)
         {
             SearchingObject?.Invoke(this, e);
+        }
+
+        private SearchingObjectEventArgs GetSearchEventArg(int[] position)
+        {
+            var ea = new SearchingObjectEventArgs(SearchEventTag.Position,
+                new Stack<GameObject>())
+            {
+                Position = position
+            };
+            return ea;
+        }
+
+        private SearchingObjectEventArgs GetSearchEventArg(MainTag mTag)
+        {
+            var ea = new SearchingObjectEventArgs(SearchEventTag.MainTag,
+                new Stack<GameObject>())
+            {
+                MTag = mTag
+            };
+            return ea;
+        }
+
+        private SearchingObjectEventArgs GetSearchEventArg(SubTag sTag)
+        {
+            var ea = new SearchingObjectEventArgs(SearchEventTag.SubTag,
+                new Stack<GameObject>())
+            {
+                STag = sTag
+            };
+            return ea;
         }
 
         private void SearchObject_CreatedObject(object sender,
