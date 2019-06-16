@@ -49,12 +49,18 @@ namespace AxeMan.GameSystem
 
         public GameObject[] Search(MainTag mTag)
         {
-            throw new System.NotImplementedException();
+            var ea = GetSearchEventArg(mTag);
+            OnSearchingObject(ea);
+
+            return ea.Data.ToArray();
         }
 
         public GameObject[] Search(SubTag sTag)
         {
-            throw new System.NotImplementedException();
+            var ea = GetSearchEventArg(sTag);
+            OnSearchingObject(ea);
+
+            return ea.Data.ToArray();
         }
 
         protected virtual void OnSearchingObject(SearchingObjectEventArgs e)

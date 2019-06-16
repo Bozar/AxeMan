@@ -39,13 +39,15 @@ namespace AxeMan.DungeonObject
             switch (e.SearchTag)
             {
                 case SearchEventTag.Position:
-                    match = MatchPosition(e.Position);
+                    match = MatchCriteria(e.Position);
                     break;
 
                 case SearchEventTag.MainTag:
+                    match = MatchCriteria(e.MTag);
                     break;
 
                 case SearchEventTag.SubTag:
+                    match = MatchCriteria(e.STag);
                     break;
 
                 default:
@@ -58,12 +60,22 @@ namespace AxeMan.DungeonObject
             }
         }
 
-        private bool MatchPosition(int[] position)
+        private bool MatchCriteria(int[] position)
         {
             int[] localPosition = GetPosition();
 
             return (localPosition[0] == position[0])
                 && (localPosition[1] == position[1]);
+        }
+
+        private bool MatchCriteria(SubTag sTag)
+        {
+            return GetComponent<MetaInfo>().STag == sTag;
+        }
+
+        private bool MatchCriteria(MainTag mTag)
+        {
+            return GetComponent<MetaInfo>().MTag == mTag;
         }
     }
 }
