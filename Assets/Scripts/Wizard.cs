@@ -36,7 +36,6 @@ namespace AxeMan.GameSystem
         private void CreateDummy()
         {
             GameObject dummy;
-            IDungeonObject idoDummy;
             for (int i = 0; i < GetComponent<DungeonBoard>().DungeonWidth; i++)
             {
                 for (int j = 0; j < GetComponent<DungeonBoard>().DungeonHeight; j++)
@@ -46,22 +45,11 @@ namespace AxeMan.GameSystem
                         dummy = Instantiate(Resources.Load("Dummy") as GameObject);
                         dummy.transform.position
                             = GetComponent<ConvertCoordinate>().Convert(i, j);
-                        idoDummy = new DungeonObject(MainTag.Actor, dummy);
-                        GetComponent<DungeonBoard>().AddObject(i, j, idoDummy, false);
                     }
                 }
             }
             dummy = Instantiate(Resources.Load("Dummy") as GameObject);
             dummy.transform.position = new Vector3(-3, -1);
-
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(1, 1, MainTag.Actor));
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
-            DungeonObject test = GetComponent<DungeonBoard>().RemoveObject(4, 0, MainTag.Actor) as DungeonObject;
-            Debug.Log(test.MTag);
-            int[] testPos = GetComponent<ConvertCoordinate>().Convert(test.Data.transform.position);
-            Debug.Log(testPos[0]);
-            Debug.Log(testPos[1]);
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 0, MainTag.Actor));
         }
 
         private void LateUpdate()
@@ -87,8 +75,6 @@ namespace AxeMan.GameSystem
             });
             CreateDummy();
             CreateAltar();
-
-            Debug.Log(GetComponent<DungeonBoard>().ExistObject(4, 4, MainTag.Building));
 
             UIUpdated = true;
         }
