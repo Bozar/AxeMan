@@ -3,14 +3,20 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem.PrototypeFactory
 {
-    public class BlueprintAltar : MonoBehaviour, IBlueprint
+    public class BlueprintAltar : MonoBehaviour
     {
-        public IPrototype[] GetBlueprint()
+        private void BlueprintAltar_DrawingBlueprint(object sender,
+            DrawingBlueprintEventArgs e)
         {
+            if (e.BTag != BlueprintTag.Altar)
+            {
+                return;
+            }
+
             Stack<IPrototype> blueprint = GetShieldAltar();
             blueprint.Push(GetLifeAltar());
 
-            return blueprint.ToArray();
+            e.Data = blueprint.ToArray();
         }
 
         private IPrototype GetLifeAltar()
@@ -38,6 +44,12 @@ namespace AxeMan.GameSystem.PrototypeFactory
                 altar.Push(new ProtoObject(mt, st, pos));
             }
             return altar;
+        }
+
+        private void Start()
+        {
+            GetComponent<Blueprint>().DrawingBlueprint
+                += BlueprintAltar_DrawingBlueprint;
         }
     }
 }

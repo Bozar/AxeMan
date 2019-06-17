@@ -3,12 +3,17 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem.PrototypeFactory
 {
-    public class BlueprintFloor : MonoBehaviour, IBlueprint
+    public class BlueprintFloor : MonoBehaviour
     {
-        public IPrototype[] GetBlueprint()
+        private void BlueprintFloor_DrawingBlueprint(object sender,
+            DrawingBlueprintEventArgs e)
         {
-            Stack<IPrototype> blueprint = new Stack<IPrototype>();
+            if (e.BTag != BlueprintTag.Floor)
+            {
+                return;
+            }
 
+            Stack<IPrototype> blueprint = new Stack<IPrototype>();
             for (int i = 0; i < GetComponent<DungeonBoard>().DungeonWidth; i++)
             {
                 for (int j = 0; j < GetComponent<DungeonBoard>().DungeonHeight;
@@ -23,7 +28,13 @@ namespace AxeMan.GameSystem.PrototypeFactory
                         new int[] { i, j }));
                 }
             }
-            return blueprint.ToArray();
+            e.Data = blueprint.ToArray();
+        }
+
+        private void Start()
+        {
+            GetComponent<Blueprint>().DrawingBlueprint
+                += BlueprintFloor_DrawingBlueprint;
         }
     }
 }

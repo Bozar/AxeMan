@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace AxeMan.GameSystem.PrototypeFactory
 {
     public interface IBlueprint
     {
-        IPrototype[] GetBlueprint();
+        IPrototype[] GetBlueprint(BlueprintTag bTag);
     }
 
     public interface IPrototype
@@ -16,27 +17,34 @@ namespace AxeMan.GameSystem.PrototypeFactory
         SubTag STag { get; }
     }
 
-    public class Blueprint : MonoBehaviour
+    public class Blueprint : MonoBehaviour, IBlueprint
     {
+        public event EventHandler<DrawingBlueprintEventArgs> DrawingBlueprint;
+
         public IPrototype[] GetBlueprint(BlueprintTag bTag)
         {
-            IPrototype[] proto = null;
+            var ea = new DrawingBlueprintEventArgs(bTag);
+            OnDrawingBlueprint(ea);
 
-            switch (bTag)
-            {
-                case BlueprintTag.Altar:
-                    proto = GetComponent<BlueprintAltar>().GetBlueprint();
-                    break;
-
-                case BlueprintTag.Floor:
-                    proto = GetComponent<BlueprintFloor>().GetBlueprint();
-                    break;
-
-                default:
-                    break;
-            }
-            return proto;
+            return ea.Data;
         }
+
+        protected virtual void OnDrawingBlueprint(DrawingBlueprintEventArgs e)
+        {
+            DrawingBlueprint?.Invoke(this, e);
+        }
+    }
+
+    public class DrawingBlueprintEventArgs : EventArgs
+    {
+        public DrawingBlueprintEventArgs(BlueprintTag bTag)
+        {
+            BTag = bTag;
+        }
+
+        public BlueprintTag BTag { get; }
+
+        public IPrototype[] Data { get; set; }
     }
 
     public class ProtoObject : IPrototype
