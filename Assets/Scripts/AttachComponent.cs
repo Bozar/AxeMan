@@ -13,14 +13,17 @@ namespace AxeMan.GameSystem
             // The `gameObject` is `AxeManCore`.
             gameObject.AddComponent<Blueprint>();
             gameObject.AddComponent<BlueprintAltar>();
+            gameObject.AddComponent<BlueprintFloor>();
+
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<DungeonBoard>();
-
             gameObject.AddComponent<GameCore>();
-            gameObject.AddComponent<CreateObject>();
-            gameObject.AddComponent<ObjectPool>();
-            gameObject.AddComponent<CreateBuilding>();
 
+            gameObject.AddComponent<CreateObject>();
+            gameObject.AddComponent<CreateBuilding>();
+            gameObject.AddComponent<CreateFloor>();
+
+            gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<SearchObject>();
             gameObject.AddComponent<Wizard>();

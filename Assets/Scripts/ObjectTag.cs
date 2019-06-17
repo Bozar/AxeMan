@@ -2,13 +2,13 @@
 
 namespace AxeMan.GameSystem
 {
-    public enum BlueprintTag { INVALID, Altar, }
+    public enum BlueprintTag { INVALID, Altar, Floor, }
 
-    public enum MainTag { INVALID, Building, Terrain, Actor }
+    public enum MainTag { INVALID, Building, Trap, Actor, Floor, }
 
     public enum SearchEventTag { Position, MainTag, SubTag, }
 
-    public enum SubTag { INVALID, Dummy, LifeAltar, ShieldAltar, }
+    public enum SubTag { INVALID, Dummy, LifeAltar, ShieldAltar, Floor, }
 
     public class ObjectTag : MonoBehaviour
     {

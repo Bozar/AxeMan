@@ -31,6 +31,9 @@ namespace AxeMan.GameSystem
             IPrototype[] proto = GetComponent<Blueprint>().GetBlueprint(
                 BlueprintTag.Altar);
             GetComponent<CreateObject>().Create(proto);
+
+            proto = GetComponent<Blueprint>().GetBlueprint(BlueprintTag.Floor);
+            GetComponent<CreateObject>().Create(proto);
         }
 
         private void CreateDummy()
@@ -73,7 +76,7 @@ namespace AxeMan.GameSystem
                 UITag = "CvsWorld",
                 UIData = new ReadOnlyDictionary<string, string>(data)
             });
-            CreateDummy();
+            //CreateDummy();
             CreateAltar();
 
             UIUpdated = true;

@@ -28,6 +28,10 @@ namespace AxeMan.GameSystem.PrototypeFactory
                     proto = GetComponent<BlueprintAltar>().GetBlueprint();
                     break;
 
+                case BlueprintTag.Floor:
+                    proto = GetComponent<BlueprintFloor>().GetBlueprint();
+                    break;
+
                 default:
                     break;
             }

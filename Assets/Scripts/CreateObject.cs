@@ -45,7 +45,11 @@ namespace AxeMan.GameSystem.ObjectFactory
                     go = GetComponent<CreateBuilding>().Create(objFromPool);
                     break;
 
-                case MainTag.Terrain:
+                case MainTag.Floor:
+                    go = GetComponent<CreateFloor>().Create(objFromPool);
+                    break;
+
+                case MainTag.Trap:
                     break;
 
                 case MainTag.Actor:
