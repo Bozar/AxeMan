@@ -16,12 +16,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintFloor>();
 
             gameObject.AddComponent<ConvertCoordinate>();
+            gameObject.AddComponent<CreateObject>();
             gameObject.AddComponent<DungeonBoard>();
             gameObject.AddComponent<GameCore>();
-
-            gameObject.AddComponent<CreateObject>();
-            gameObject.AddComponent<CreateBuilding>();
-            gameObject.AddComponent<CreateFloor>();
 
             gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<RemoveObject>();

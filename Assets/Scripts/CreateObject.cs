@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.PrototypeFactory;
+﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.PrototypeFactory;
 using System;
 using UnityEngine;
 
@@ -35,34 +36,26 @@ namespace AxeMan.GameSystem.ObjectFactory
 
         public GameObject Create(IPrototype proto)
         {
-            GameObject go = null;
             var objFromPool = new CreatingObjectEventArgs(proto);
             OnCreatingObject(objFromPool);
 
-            switch (objFromPool.MTag)
+            GameObject go = objFromPool.Data;
+            if (go == null)
             {
-                case MainTag.Building:
-                    go = GetComponent<CreateBuilding>().Create(objFromPool);
-                    break;
-
-                case MainTag.Floor:
-                    go = GetComponent<CreateFloor>().Create(objFromPool);
-                    break;
-
-                case MainTag.Trap:
-                    break;
-
-                case MainTag.Actor:
-                    break;
-
-                default:
-                    break;
+                go = Instantiate(Resources.Load(proto.STag.ToString())
+                   as GameObject);
+                go.AddComponent<MetaInfo>().SetValue(proto);
+                go.AddComponent<LocalManager>();
+                // Puslish an event to add specific components when necessary.
             }
-
-            if (go != null)
+            else
             {
-                OnCreatedObject(new CreatedObjectEventArgs(go));
+                go.SetActive(true);
             }
+            go.transform.position = GetComponent<ConvertCoordinate>().Convert(
+                proto.Position);
+
+            OnCreatedObject(new CreatedObjectEventArgs(go));
             return go;
         }
 
