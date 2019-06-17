@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5758335174465539340}
   - component: {fileID: 3510567190783372250}
   m_Layer: 0
-  m_Name: LifeAltar
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,9 +68,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5083452483359694350, guid: ae9a0be1bc354354ca2e33aa2b1ca3f4,
+  m_Sprite: {fileID: 5233285641622491880, guid: ae9a0be1bc354354ca2e33aa2b1ca3f4,
     type: 3}
-  m_Color: {r: 0.67058825, g: 0.69803923, b: 0.7490196, a: 1}
+  m_Color: {r: 0.28627452, g: 0.31764707, b: 0.38431373, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
