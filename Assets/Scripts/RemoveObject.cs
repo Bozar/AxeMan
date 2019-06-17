@@ -14,7 +14,11 @@ namespace AxeMan.GameSystem.ObjectFactory
 
         public void Remove(GameObject go)
         {
+            int invalidCoord = -999;
+
             OnRemovingObject(new RemovingObjectEventArgs(go));
+            go.transform.position = GetComponent<ConvertCoordinate>().Convert(
+                invalidCoord, invalidCoord);
             go.SetActive(false);
         }
 
