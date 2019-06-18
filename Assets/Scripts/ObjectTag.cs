@@ -8,7 +8,11 @@ namespace AxeMan.GameSystem
 
     public enum SearchEventTag { Position, MainTag, SubTag, }
 
-    public enum SubTag { INVALID, Dummy, LifeAltar, ShieldAltar, Floor, }
+    public enum SubTag
+    {
+        INVALID, Dummy, LifeAltar, ShieldAltar, Floor,
+        FireTrap, IceTrap, LightningTrap, EarthTrap,
+    }
 
     public class ObjectTag : MonoBehaviour
     {
