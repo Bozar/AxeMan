@@ -25,6 +25,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<SearchObject>();
+            gameObject.AddComponent<TileOverlay>();
             gameObject.AddComponent<Wizard>();
         }
     }
