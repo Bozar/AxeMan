@@ -34,6 +34,9 @@ namespace AxeMan.GameSystem
 
             proto = GetComponent<Blueprint>().GetBlueprint(BlueprintTag.Floor);
             GetComponent<CreateObject>().Create(proto);
+
+            proto = GetComponent<Blueprint>().GetBlueprint(BlueprintTag.Trap);
+            GetComponent<CreateObject>().Create(proto);
         }
 
         private void CreateDummy()

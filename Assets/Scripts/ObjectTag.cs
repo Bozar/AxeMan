@@ -2,7 +2,7 @@
 
 namespace AxeMan.GameSystem
 {
-    public enum BlueprintTag { INVALID, Altar, Floor, }
+    public enum BlueprintTag { INVALID, Altar, Floor, Trap, }
 
     public enum MainTag { INVALID, Building, Trap, Actor, Floor, }
 

@@ -14,6 +14,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Blueprint>();
             gameObject.AddComponent<BlueprintAltar>();
             gameObject.AddComponent<BlueprintFloor>();
+            gameObject.AddComponent<BlueprintTrap>();
 
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<CreateObject>();
