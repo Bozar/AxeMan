@@ -12,6 +12,7 @@ namespace AxeMan.GameSystem
         {
             // The `gameObject` is `AxeManCore`.
             gameObject.AddComponent<Blueprint>();
+            gameObject.AddComponent<BlueprintActor>();
             gameObject.AddComponent<BlueprintAltar>();
             gameObject.AddComponent<BlueprintFloor>();
             gameObject.AddComponent<BlueprintTrap>();

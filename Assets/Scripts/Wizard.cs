@@ -28,34 +28,18 @@ namespace AxeMan.GameSystem
 
         private void CreateAltar()
         {
-            IPrototype[] proto = GetComponent<Blueprint>().GetBlueprint(
-                BlueprintTag.Altar);
-            GetComponent<CreateObject>().Create(proto);
-
-            proto = GetComponent<Blueprint>().GetBlueprint(BlueprintTag.Floor);
-            GetComponent<CreateObject>().Create(proto);
-
-            proto = GetComponent<Blueprint>().GetBlueprint(BlueprintTag.Trap);
-            GetComponent<CreateObject>().Create(proto);
-        }
-
-        private void CreateDummy()
-        {
-            GameObject dummy;
-            for (int i = 0; i < GetComponent<DungeonBoard>().DungeonWidth; i++)
+            BlueprintTag[] tags = new BlueprintTag[]
             {
-                for (int j = 0; j < GetComponent<DungeonBoard>().DungeonHeight; j++)
-                {
-                    if ((i == GetComponent<DungeonBoard>().DungeonWidth - 1) || (j == 0))
-                    {
-                        dummy = Instantiate(Resources.Load("Dummy") as GameObject);
-                        dummy.transform.position
-                            = GetComponent<ConvertCoordinate>().Convert(i, j);
-                    }
-                }
+                BlueprintTag.Altar, BlueprintTag.Floor,
+                BlueprintTag.Trap, BlueprintTag.Actor
+            };
+            IPrototype[] proto;
+
+            foreach (BlueprintTag t in tags)
+            {
+                proto = GetComponent<Blueprint>().GetBlueprint(t);
+                GetComponent<CreateObject>().Create(proto);
             }
-            dummy = Instantiate(Resources.Load("Dummy") as GameObject);
-            dummy.transform.position = new Vector3(-3, -1);
         }
 
         private void LateUpdate()
@@ -79,7 +63,6 @@ namespace AxeMan.GameSystem
                 UITag = "CvsWorld",
                 UIData = new ReadOnlyDictionary<string, string>(data)
             });
-            //CreateDummy();
             CreateAltar();
 
             UIUpdated = true;
