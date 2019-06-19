@@ -64,6 +64,11 @@ namespace AxeMan.GameSystem
             return ea.Data.ToArray();
         }
 
+        public GameObject[] Search(int[] position)
+        {
+            return Search(position[0], position[1]);
+        }
+
         public GameObject[] Search(MainTag mTag)
         {
             var ea = GetSearchEventArg(mTag);
