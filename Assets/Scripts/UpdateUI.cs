@@ -12,6 +12,7 @@ namespace AxeMan.GameSystem
         {
             GameCore.AxeManCore.GetComponent<Wizard>().UIText += UpdateUI_UIText;
             Debug.Log(tag);
+            Debug.Log(GetComponentInParent<Canvas>().name);
         }
 
         private void UpdateUI_UIText(object sender, UpdateUIEventArgs e)
