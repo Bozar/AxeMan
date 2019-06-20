@@ -23,6 +23,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<GameCore>();
 
             gameObject.AddComponent<ObjectPool>();
+            gameObject.AddComponent<PCComponent>();
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<SearchObject>();
             gameObject.AddComponent<TileOverlay>();

@@ -15,6 +15,7 @@ namespace AxeMan.DungeonObject.InputManager
             if (Input.GetKeyDown(KeyCode.J))
             {
                 Debug.Log("Input j");
+                Debug.Log(GetComponent<MetaInfo>().STag);
                 return CommandTag.Test;
             }
             return CommandTag.INVALID;
