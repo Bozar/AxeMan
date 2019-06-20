@@ -1,7 +1,7 @@
 ﻿using AxeMan.GameSystem;
 using UnityEngine;
 
-namespace AxeMan.DungeonObject.InputManager
+namespace AxeMan.Actor.PlayerInput
 {
     public interface IInputManager
     {

@@ -2,7 +2,7 @@
 using AxeMan.GameSystem.ObjectFactory;
 using UnityEngine;
 
-namespace AxeMan.DungeonObject
+namespace AxeMan.Actor
 {
     public interface ILocalManager
     {
