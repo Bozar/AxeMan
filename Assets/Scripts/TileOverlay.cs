@@ -26,7 +26,7 @@ namespace AxeMan.GameSystem
             foreach (GameObject s in search)
             {
                 SwitchRenderer(s, false);
-                if (GetIndex(probe) < GetIndex(s))
+                if (GetLayer(probe) < GetLayer(s))
                 {
                     probe = s;
                 }
@@ -50,13 +50,13 @@ namespace AxeMan.GameSystem
             };
         }
 
-        private int GetIndex(GameObject go)
+        private int GetLayer(GameObject go)
         {
-            int invalidIndex = 0;
+            int invalid = 0;
 
             if (go.GetComponent<MetaInfo>() == null)
             {
-                return invalidIndex;
+                return invalid;
             }
             return Array.IndexOf(layer, go.GetComponent<MetaInfo>().MTag);
         }
