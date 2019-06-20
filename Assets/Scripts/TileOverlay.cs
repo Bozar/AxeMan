@@ -7,32 +7,38 @@ namespace AxeMan.GameSystem
 {
     public interface ITileOverlay
     {
-        void TryHideTile(GameObject go);
+        void TryHideTile(int x, int y);
     }
 
     public class TileOverlay : MonoBehaviour, ITileOverlay
     {
         private MainTag[] layer;
 
-        public void TryHideTile(GameObject go)
+        public void TryHideTile(int x, int y)
         {
-            int tryHideGo = GetIndex(go);
-            int[] position = GetComponent<ConvertCoordinate>().Convert(
-                go.transform.position);
-            GameObject[] search = GetComponent<SearchObject>().Search(position);
+            if (!GetComponent<SearchObject>().Search(x, y,
+                out GameObject[] search))
+            {
+                return;
+            }
+            GameObject probe = search[0];
 
             foreach (GameObject s in search)
             {
-                SwitchRenderer(s, true);
-                if (tryHideGo < GetIndex(s))
+                SwitchRenderer(s, false);
+                if (GetIndex(probe) < GetIndex(s))
                 {
-                    SwitchRenderer(go, false);
-                }
-                else if (tryHideGo > GetIndex(s))
-                {
-                    SwitchRenderer(s, false);
+                    probe = s;
                 }
             }
+            SwitchRenderer(probe, true);
+        }
+
+        public void TryHideTile(GameObject go)
+        {
+            int[] position = GetComponent<ConvertCoordinate>().Convert(
+                go.transform.position);
+            TryHideTile(position[0], position[1]);
         }
 
         private void Awake()
@@ -46,7 +52,7 @@ namespace AxeMan.GameSystem
 
         private int GetIndex(GameObject go)
         {
-            int invalidIndex = -1;
+            int invalidIndex = 0;
 
             if (go.GetComponent<MetaInfo>() == null)
             {
