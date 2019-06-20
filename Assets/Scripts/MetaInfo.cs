@@ -9,8 +9,6 @@ namespace AxeMan.DungeonObject
         MainTag MTag { get; }
 
         SubTag STag { get; }
-
-        void SetValue(IPrototype proto);
     }
 
     public class MetaInfo : MonoBehaviour, IMetaInfo
