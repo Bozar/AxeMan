@@ -10,6 +10,16 @@ namespace AxeMan.GameSystem.ObjectFactory
         GameObject Create(IPrototype proto);
     }
 
+    public class AddingComponentEventArgs : EventArgs
+    {
+        public AddingComponentEventArgs(GameObject data)
+        {
+            Data = data;
+        }
+
+        public GameObject Data { get; set; }
+    }
+
     public class CreatedObjectEventArgs : EventArgs
     {
         public CreatedObjectEventArgs(GameObject go)
@@ -22,6 +32,8 @@ namespace AxeMan.GameSystem.ObjectFactory
 
     public class CreateObject : MonoBehaviour, ICreateObject
     {
+        public event EventHandler<AddingComponentEventArgs> AddingComponent;
+
         public event EventHandler<CreatedObjectEventArgs> CreatedObject;
 
         public event EventHandler<CreatingObjectEventArgs> CreatingObject;
@@ -46,7 +58,9 @@ namespace AxeMan.GameSystem.ObjectFactory
                    as GameObject);
                 go.AddComponent<MetaInfo>().SetValue(proto);
                 go.AddComponent<LocalManager>();
+
                 // Puslish an event to add specific components when necessary.
+                OnAddingComponent(new AddingComponentEventArgs(go));
             }
             else
             {
@@ -57,6 +71,11 @@ namespace AxeMan.GameSystem.ObjectFactory
 
             OnCreatedObject(new CreatedObjectEventArgs(go));
             return go;
+        }
+
+        protected virtual void OnAddingComponent(AddingComponentEventArgs e)
+        {
+            AddingComponent?.Invoke(this, e);
         }
 
         protected virtual void OnCreatedObject(CreatedObjectEventArgs e)
