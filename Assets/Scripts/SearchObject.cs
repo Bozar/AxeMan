@@ -39,21 +39,27 @@ namespace AxeMan.GameSystem
     {
         public event EventHandler<SearchingObjectEventArgs> SearchingObject;
 
-        public bool Search(int x, int y, MainTag mTag, out GameObject[] goArray)
+        public bool Search(int x, int y, MainTag mTag, out GameObject[] result)
         {
-            goArray = Search(x, y);
-            Stack<GameObject> goStack = new Stack<GameObject>();
+            result = Search(x, y);
+            Stack<GameObject> filter = new Stack<GameObject>();
 
-            foreach (GameObject go in goArray)
+            foreach (GameObject go in result)
             {
                 if (go.GetComponent<MetaInfo>().MTag == mTag)
                 {
-                    goStack.Push(go);
+                    filter.Push(go);
                 }
             }
 
-            goArray = goStack.ToArray();
-            return goArray.Length > 0;
+            result = filter.ToArray();
+            return result.Length > 0;
+        }
+
+        public bool Search(int x, int y, out GameObject[] result)
+        {
+            result = Search(x, y);
+            return result.Length > 0;
         }
 
         public GameObject[] Search(int x, int y)
