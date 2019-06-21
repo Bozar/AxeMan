@@ -14,6 +14,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             {
                 return;
             }
+            e.Data.AddComponent<MovementInput>();
             e.Data.AddComponent<PCInput>();
         }
 

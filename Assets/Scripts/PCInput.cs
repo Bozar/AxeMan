@@ -10,15 +10,26 @@ namespace AxeMan.Actor.PlayerInput
 
     public class PCInput : MonoBehaviour, IInputManager
     {
+        private IInputManager[] input;
+
         public CommandTag ConvertInput()
         {
-            if (Input.GetKeyDown(KeyCode.J))
+            CommandTag command;
+
+            foreach (IInputManager i in input)
             {
-                Debug.Log("Input j");
-                Debug.Log(GetComponent<MetaInfo>().STag);
-                return CommandTag.Test;
+                command = i.ConvertInput();
+                if (command != CommandTag.INVALID)
+                {
+                    return command;
+                }
             }
             return CommandTag.INVALID;
+        }
+
+        private void Start()
+        {
+            input = new IInputManager[] { GetComponent<MovementInput>(), };
         }
 
         private void Update()
