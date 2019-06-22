@@ -21,6 +21,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<CreateObject>();
             gameObject.AddComponent<DungeonBoard>();
             gameObject.AddComponent<GameCore>();
+            gameObject.AddComponent<InputManager>();
 
             gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<PCComponent>();

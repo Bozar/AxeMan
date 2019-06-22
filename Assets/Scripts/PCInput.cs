@@ -3,11 +3,6 @@ using UnityEngine;
 
 namespace AxeMan.Actor.PlayerInput
 {
-    public interface IInputManager
-    {
-        CommandTag ConvertInput();
-    }
-
     public class PCInput : MonoBehaviour, IInputManager
     {
         private IInputManager[] input;
@@ -34,7 +29,8 @@ namespace AxeMan.Actor.PlayerInput
 
         private void Update()
         {
-            ConvertInput();
+            GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(
+                gameObject, ConvertInput());
         }
     }
 }
