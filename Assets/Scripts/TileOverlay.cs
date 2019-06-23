@@ -1,5 +1,4 @@
 ﻿using AxeMan.Actor;
-using AxeMan.GameSystem.ObjectFactory;
 using System;
 using UnityEngine;
 
@@ -61,21 +60,9 @@ namespace AxeMan.GameSystem
             return Array.IndexOf(layer, go.GetComponent<MetaInfo>().MTag);
         }
 
-        private void Start()
-        {
-            GetComponent<CreateObject>().CreatedObject
-                += TileOverlay_CreatedObject;
-        }
-
         private void SwitchRenderer(GameObject go, bool switchOn)
         {
             go.GetComponent<Renderer>().enabled = switchOn;
-        }
-
-        private void TileOverlay_CreatedObject(object sender,
-            CreatedObjectEventArgs e)
-        {
-            TryHideTile(e.Data);
         }
     }
 }
