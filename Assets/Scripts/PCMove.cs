@@ -65,9 +65,8 @@ namespace AxeMan.Actor
             if (IsValidPosition(target))
             {
                 transform.position = coord.Convert(target);
-                overlay.TryHideTile(source[0], source[1]);
-                overlay.TryHideTile(target[0], target[1]);
             }
+            overlay.RefreshDungeonBoard();
         }
 
         private void Start()

@@ -13,6 +13,17 @@ namespace AxeMan.GameSystem
     {
         private MainTag[] layer;
 
+        public void RefreshDungeonBoard()
+        {
+            for (int i = 0; i < GetComponent<DungeonBoard>().Width; i++)
+            {
+                for (int j = 0; j < GetComponent<DungeonBoard>().Height; j++)
+                {
+                    TryHideTile(i, j);
+                }
+            }
+        }
+
         public void TryHideTile(int x, int y)
         {
             if (!GetComponent<SearchObject>().Search(x, y,
