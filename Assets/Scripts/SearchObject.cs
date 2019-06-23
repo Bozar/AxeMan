@@ -56,6 +56,23 @@ namespace AxeMan.GameSystem
             return result.Length > 0;
         }
 
+        public bool Search(int x, int y, SubTag sTag, out GameObject[] result)
+        {
+            result = Search(x, y);
+            Stack<GameObject> filter = new Stack<GameObject>();
+
+            foreach (GameObject go in result)
+            {
+                if (go.GetComponent<MetaInfo>().STag == sTag)
+                {
+                    filter.Push(go);
+                }
+            }
+
+            result = filter.ToArray();
+            return result.Length > 0;
+        }
+
         public bool Search(int x, int y, out GameObject[] result)
         {
             result = Search(x, y);
