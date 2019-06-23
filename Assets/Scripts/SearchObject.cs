@@ -1,5 +1,4 @@
 ﻿using AxeMan.Actor;
-using AxeMan.GameSystem.ObjectFactory;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -136,18 +135,6 @@ namespace AxeMan.GameSystem
                 STag = sTag
             };
             return ea;
-        }
-
-        private void SearchObject_CreatedObject(object sender,
-            CreatedObjectEventArgs e)
-        {
-            SearchingObject += e.Data.GetComponent<LocalManager>().Search;
-        }
-
-        private void Start()
-        {
-            GetComponent<CreateObject>().CreatedObject
-                += SearchObject_CreatedObject;
         }
     }
 }

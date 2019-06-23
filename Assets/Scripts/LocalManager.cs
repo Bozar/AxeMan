@@ -9,8 +9,6 @@ namespace AxeMan.Actor
         int[] GetPosition();
 
         void Remove();
-
-        void Search(object sender, SearchingObjectEventArgs e);
     }
 
     public class LocalManager : MonoBehaviour, ILocalManager
@@ -24,11 +22,6 @@ namespace AxeMan.Actor
         public void Remove()
         {
             GameCore.AxeManCore.GetComponent<RemoveObject>().Remove(gameObject);
-        }
-
-        public void Search(object sender, SearchingObjectEventArgs e)
-        {
-            LocalManager_SearchingObject(sender, e);
         }
 
         private void LocalManager_SearchingObject(object sender,
@@ -76,6 +69,12 @@ namespace AxeMan.Actor
         private bool MatchCriteria(MainTag mTag)
         {
             return GetComponent<MetaInfo>().MTag == mTag;
+        }
+
+        private void Start()
+        {
+            GameCore.AxeManCore.GetComponent<SearchObject>().SearchingObject
+                += LocalManager_SearchingObject;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace AxeMan.Actor
     public class PCMove : MonoBehaviour
     {
         private ConvertCoordinate coord;
+        private TileOverlay overlay;
 
         private int[] GetNewPosition(int[] source, CommandTag command)
         {
@@ -64,6 +65,8 @@ namespace AxeMan.Actor
             if (IsValidPosition(target))
             {
                 transform.position = coord.Convert(target);
+                overlay.TryHideTile(source[0], source[1]);
+                overlay.TryHideTile(target[0], target[1]);
             }
         }
 
@@ -73,6 +76,7 @@ namespace AxeMan.Actor
                 += PCMove_PlayerCommanding;
 
             coord = GameCore.AxeManCore.GetComponent<ConvertCoordinate>();
+            overlay = GameCore.AxeManCore.GetComponent<TileOverlay>();
         }
     }
 }
