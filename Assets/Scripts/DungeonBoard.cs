@@ -4,31 +4,31 @@ namespace AxeMan.GameSystem
 {
     public interface IDungeonBoard
     {
-        int DungeonHeight { get; }
+        int Height { get; }
 
-        int DungeonWidth { get; }
+        int Width { get; }
 
         bool IndexOutOfRange(int x, int y);
     }
 
     public class DungeonBoard : MonoBehaviour, IDungeonBoard
     {
-        public int DungeonHeight { get; private set; }
+        public int Height { get; private set; }
 
-        public int DungeonWidth { get; private set; }
+        public int Width { get; private set; }
 
         public bool IndexOutOfRange(int x, int y)
         {
             return (x < 0)
-                || (x >= DungeonWidth)
+                || (x >= Width)
                 || (y < 0)
-                || (y >= DungeonHeight);
+                || (y >= Height);
         }
 
         private void Awake()
         {
-            DungeonWidth = 9;
-            DungeonHeight = 9;
+            Width = 9;
+            Height = 9;
         }
     }
 }

@@ -14,9 +14,9 @@ namespace AxeMan.GameSystem.PrototypeFactory
             }
 
             Stack<IPrototype> blueprint = new Stack<IPrototype>();
-            for (int i = 0; i < GetComponent<DungeonBoard>().DungeonWidth; i++)
+            for (int i = 0; i < GetComponent<DungeonBoard>().Width; i++)
             {
-                for (int j = 0; j < GetComponent<DungeonBoard>().DungeonHeight;
+                for (int j = 0; j < GetComponent<DungeonBoard>().Height;
                     j++)
                 {
                     if (GetComponent<SearchObject>().Search(i, j,
