@@ -18,6 +18,7 @@ namespace AxeMan.GameSystem
     {
         INVALID, Dummy, LifeAltar, ShieldAltar, Floor,
         FireTrap, IceTrap, LightningTrap, EarthTrap,
+        PC,
     }
 
     public class ObjectTag : MonoBehaviour

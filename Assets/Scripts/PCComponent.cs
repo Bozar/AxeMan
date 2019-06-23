@@ -9,8 +9,7 @@ namespace AxeMan.GameSystem.ObjectFactory
         private void PCComponent_AddingComponent(object sender,
             AddingComponentEventArgs e)
         {
-            // TODO: Attach components to PC instead of Dummy.
-            if (e.Data.GetComponent<MetaInfo>()?.STag != SubTag.Dummy)
+            if (e.Data.GetComponent<MetaInfo>()?.STag != SubTag.PC)
             {
                 return;
             }

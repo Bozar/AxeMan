@@ -25,7 +25,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
             }
 
             Stack<IPrototype> blueprint = new Stack<IPrototype>();
-            blueprint.Push(new ProtoObject(MainTag.Actor, SubTag.Dummy,
+            blueprint.Push(new ProtoObject(MainTag.Actor, SubTag.PC,
              new int[] { 0, 8 }));
             e.Data = blueprint.ToArray();
         }
