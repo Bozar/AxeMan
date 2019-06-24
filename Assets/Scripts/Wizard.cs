@@ -1,5 +1,4 @@
-﻿using AxeMan.Actor;
-using AxeMan.GameSystem.ObjectFactory;
+﻿using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
 using System;
 using System.Collections.Generic;
@@ -67,19 +66,6 @@ namespace AxeMan.GameSystem
             CreateAltar();
 
             UIUpdated = true;
-        }
-
-        private void Start()
-        {
-            GetComponent<InputManager>().PlayerCommanding
-                += Wizard_PlayerCommanding;
-        }
-
-        private void Wizard_PlayerCommanding(object sender,
-            PlayerCommandingEventArgs e)
-        {
-            Debug.Log(e.Actor.GetComponent<MetaInfo>().STag);
-            Debug.Log(e.Command);
         }
     }
 }
