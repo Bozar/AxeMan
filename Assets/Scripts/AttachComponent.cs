@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
+using AxeMan.GameSystem.SchedulingSystem;
 using UnityEngine;
 
 // If a class is under the namespace `AxeMan.GameSystem`, it can be instanced
@@ -27,7 +28,10 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<PCComponent>();
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<SearchObject>();
+
+            gameObject.AddComponent<Schedule>();
             gameObject.AddComponent<TileOverlay>();
+            gameObject.AddComponent<TurnManager>();
             gameObject.AddComponent<Wizard>();
         }
     }
