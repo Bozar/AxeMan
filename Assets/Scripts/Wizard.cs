@@ -1,9 +1,11 @@
-﻿using AxeMan.GameSystem.ObjectFactory;
+﻿using AxeMan.Actor;
+using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AxeMan.GameSystem
 {
@@ -66,6 +68,31 @@ namespace AxeMan.GameSystem
             CreateAltar();
 
             UIUpdated = true;
+        }
+
+        private void Start()
+        {
+            GetComponent<InputManager>().PlayerCommanding
+                += Wizard_PlayerCommanding;
+        }
+
+        private void Wizard_PlayerCommanding(object sender,
+            PlayerCommandingEventArgs e)
+        {
+            if (e.Actor.GetComponent<MetaInfo>().STag != SubTag.PC)
+            {
+                return;
+            }
+
+            switch (e.Command)
+            {
+                case CommandTag.Reload:
+                    SceneManager.LoadSceneAsync(0);
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

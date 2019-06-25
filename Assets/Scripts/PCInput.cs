@@ -24,7 +24,11 @@ namespace AxeMan.Actor.PlayerInput
 
         private void Start()
         {
-            input = new IInputManager[] { GetComponent<MovementInput>(), };
+            input = new IInputManager[]
+            {
+                GetComponent<WizardInput>(),
+                GetComponent<MovementInput>(),
+            };
         }
 
         private void Update()
