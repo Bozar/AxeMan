@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AxeMan.Actor.PlayerInput
 {
-    public class PCInput : MonoBehaviour, IInputManager
+    public class PCInputManager : MonoBehaviour, IInputManager
     {
         private IInputManager[] input;
 
