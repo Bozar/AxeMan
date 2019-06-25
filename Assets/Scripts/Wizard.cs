@@ -1,6 +1,7 @@
 ﻿using AxeMan.Actor;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
+using AxeMan.GameSystem.SchedulingSystem;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -88,6 +89,10 @@ namespace AxeMan.GameSystem
             {
                 case CommandTag.Reload:
                     SceneManager.LoadSceneAsync(0);
+                    break;
+
+                case CommandTag.PrintSchedule:
+                    GetComponent<Schedule>().Print();
                     break;
 
                 default:

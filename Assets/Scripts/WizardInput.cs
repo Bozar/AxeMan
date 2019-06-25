@@ -8,10 +8,15 @@ namespace AxeMan.Actor.PlayerInput
         public CommandTag ConvertInput()
         {
             bool reload = Input.GetKeyDown(KeyCode.Space);
+            bool schedule = Input.GetKeyDown(KeyCode.P);
 
             if (reload)
             {
                 return CommandTag.Reload;
+            }
+            else if (schedule)
+            {
+                return CommandTag.PrintSchedule;
             }
             return CommandTag.INVALID;
         }

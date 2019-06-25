@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using AxeMan.Actor;
+using AxeMan.GameSystem.ObjectFactory;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace AxeMan.GameSystem.SchedulingSystem
 {
@@ -15,11 +18,13 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
     public class Schedule : MonoBehaviour, ISchedule
     {
+        private List<GameObject> schedule;
+
         public GameObject Current { get { return null; } }
 
         public void Add(GameObject actor)
         {
-            throw new System.NotImplementedException();
+            schedule.Add(actor);
         }
 
         public GameObject GotoNext()
@@ -27,9 +32,43 @@ namespace AxeMan.GameSystem.SchedulingSystem
             throw new System.NotImplementedException();
         }
 
+        public void Print()
+        {
+            int[] position;
+
+            foreach (GameObject s in schedule)
+            {
+                position = GetComponent<ConvertCoordinate>().Convert(
+                    s.transform.position);
+                Debug.Log(s.GetComponent<MetaInfo>().STag + ": "
+                    + position[0] + ", " + position[1]);
+            }
+        }
+
         public void Remove(GameObject actor)
         {
-            throw new System.NotImplementedException();
+            schedule.Remove(actor);
+        }
+
+        private void Awake()
+        {
+            schedule = new List<GameObject>();
+        }
+
+        private void Schedule_CreatedObject(object sender,
+            CreatedObjectEventArgs e)
+        {
+            if (e.Data.GetComponent<MetaInfo>().MTag != MainTag.Actor)
+            {
+                return;
+            }
+            Add(e.Data);
+        }
+
+        private void Start()
+        {
+            GetComponent<CreateObject>().CreatedObject
+                += Schedule_CreatedObject;
         }
     }
 }
