@@ -65,10 +65,18 @@ namespace AxeMan.GameSystem.SchedulingSystem
             Add(e.Data);
         }
 
+        private void Schedule_RemovingObject(object sender,
+            RemovingObjectEventArgs e)
+        {
+            Remove(e.Data);
+        }
+
         private void Start()
         {
             GetComponent<CreateObject>().CreatedObject
                 += Schedule_CreatedObject;
+            GetComponent<RemoveObject>().RemovingObject
+                += Schedule_RemovingObject;
         }
     }
 }

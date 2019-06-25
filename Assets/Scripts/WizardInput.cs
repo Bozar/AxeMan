@@ -9,6 +9,7 @@ namespace AxeMan.Actor.PlayerInput
         {
             bool reload = Input.GetKeyDown(KeyCode.Space);
             bool schedule = Input.GetKeyDown(KeyCode.P);
+            bool remove = Input.GetKeyDown(KeyCode.R);
 
             if (reload)
             {
@@ -17,6 +18,10 @@ namespace AxeMan.Actor.PlayerInput
             else if (schedule)
             {
                 return CommandTag.PrintSchedule;
+            }
+            else if (remove)
+            {
+                return CommandTag.RemoveFromSchedule;
             }
             return CommandTag.INVALID;
         }

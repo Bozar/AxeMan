@@ -95,6 +95,14 @@ namespace AxeMan.GameSystem
                     GetComponent<Schedule>().Print();
                     break;
 
+                case CommandTag.RemoveFromSchedule:
+                    if (GetComponent<SearchObject>().Search(1, 1, SubTag.Dummy,
+                        out GameObject[] search))
+                    {
+                        search[0].GetComponent<LocalManager>().Remove();
+                    }
+                    break;
+
                 default:
                     break;
             }
