@@ -103,6 +103,10 @@ namespace AxeMan.GameSystem
                     }
                     break;
 
+                case CommandTag.NextInSchedule:
+                    GetComponent<Schedule>().GotoNext();
+                    break;
+
                 default:
                     break;
             }

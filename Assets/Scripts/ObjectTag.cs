@@ -6,7 +6,7 @@ namespace AxeMan.GameSystem
 
     public enum CommandTag
     {
-        INVALID, Test, Reload, PrintSchedule, RemoveFromSchedule,
+        INVALID, Test, Reload, PrintSchedule, RemoveFromSchedule, NextInSchedule,
         Left, Right, Up, Down,
     }
 
