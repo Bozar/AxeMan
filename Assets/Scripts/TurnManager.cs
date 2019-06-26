@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AxeMan.Actor;
+using UnityEngine;
 
 namespace AxeMan.GameSystem.SchedulingSystem
 {
@@ -15,17 +16,26 @@ namespace AxeMan.GameSystem.SchedulingSystem
     {
         public void EndTurn(GameObject actor)
         {
-            throw new System.NotImplementedException();
+            int[] pos = GetComponent<ConvertCoordinate>().Convert(
+                actor.transform.position);
+            Debug.Log("End: " + actor.GetComponent<MetaInfo>().STag + ", "
+                + pos[0] + ", " + pos[1]);
         }
 
         public GameObject NextTurn()
         {
-            throw new System.NotImplementedException();
+            EndTurn(GetComponent<Schedule>().Current);
+            StartTurn(GetComponent<Schedule>().GotoNext());
+
+            return GetComponent<Schedule>().Current;
         }
 
         public void StartTurn(GameObject actor)
         {
-            throw new System.NotImplementedException();
+            int[] pos = GetComponent<ConvertCoordinate>().Convert(
+               actor.transform.position);
+            Debug.Log("Start: " + actor.GetComponent<MetaInfo>().STag + ", "
+                + pos[0] + ", " + pos[1]);
         }
     }
 }

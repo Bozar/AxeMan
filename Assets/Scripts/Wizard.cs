@@ -104,7 +104,7 @@ namespace AxeMan.GameSystem
                     break;
 
                 case CommandTag.NextInSchedule:
-                    GetComponent<Schedule>().GotoNext();
+                    GetComponent<TurnManager>().NextTurn();
                     break;
 
                 default:
