@@ -24,30 +24,28 @@ namespace AxeMan.Actor
             GameCore.AxeManCore.GetComponent<RemoveObject>().Remove(gameObject);
         }
 
-        private void LocalManager_SearchingObject(object sender,
-            SearchingObjectEventArgs e)
+        private void LocalManager_SearchingMainTag(object sender,
+            SearchingMainTagEventArgs e)
         {
-            bool match = false;
-
-            switch (e.SearchTag)
+            if (MatchCriteria(e.MTag))
             {
-                case SearchEventTag.Position:
-                    match = MatchCriteria(e.Position);
-                    break;
-
-                case SearchEventTag.MainTag:
-                    match = MatchCriteria(e.MTag);
-                    break;
-
-                case SearchEventTag.SubTag:
-                    match = MatchCriteria(e.STag);
-                    break;
-
-                default:
-                    break;
+                e.Data.Push(gameObject);
             }
+        }
 
-            if (match)
+        private void LocalManager_SearchingPosition(object sender,
+            SearchingPositionEventArgs e)
+        {
+            if (MatchCriteria(e.Position))
+            {
+                e.Data.Push(gameObject);
+            }
+        }
+
+        private void LocalManager_SearchingSubTag(object sender,
+            SearchingSubTagEventArgs e)
+        {
+            if (MatchCriteria(e.STag))
             {
                 e.Data.Push(gameObject);
             }
@@ -73,8 +71,12 @@ namespace AxeMan.Actor
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<SearchObject>().SearchingObject
-                += LocalManager_SearchingObject;
+            GameCore.AxeManCore.GetComponent<SearchObject>().SearchingPosition
+                += LocalManager_SearchingPosition;
+            GameCore.AxeManCore.GetComponent<SearchObject>().SearchingMainTag
+                += LocalManager_SearchingMainTag;
+            GameCore.AxeManCore.GetComponent<SearchObject>().SearchingSubTag
+                += LocalManager_SearchingSubTag;
         }
     }
 }

@@ -14,29 +14,52 @@ namespace AxeMan.GameSystem
         GameObject[] Search(SubTag sTag);
     }
 
-    public class SearchingObjectEventArgs : EventArgs
+    public class SearchingMainTagEventArgs : EventArgs
     {
-        public SearchingObjectEventArgs(SearchEventTag searchTag,
-            Stack<GameObject> data)
+        public SearchingMainTagEventArgs(MainTag mTag, Stack<GameObject> data)
         {
-            SearchTag = searchTag;
+            MTag = mTag;
             Data = data;
         }
 
         public Stack<GameObject> Data { get; }
 
-        public MainTag MTag { get; set; }
+        public MainTag MTag { get; }
+    }
 
-        public int[] Position { get; set; }
+    public class SearchingPositionEventArgs : EventArgs
+    {
+        public SearchingPositionEventArgs(int[] position, Stack<GameObject> data)
+        {
+            Position = position;
+            Data = data;
+        }
 
-        public SearchEventTag SearchTag { get; }
+        public Stack<GameObject> Data { get; }
 
-        public SubTag STag { get; set; }
+        public int[] Position { get; }
+    }
+
+    public class SearchingSubTagEventArgs : EventArgs
+    {
+        public SearchingSubTagEventArgs(SubTag sTag, Stack<GameObject> data)
+        {
+            STag = sTag;
+            Data = data;
+        }
+
+        public Stack<GameObject> Data { get; }
+
+        public SubTag STag { get; }
     }
 
     public class SearchObject : MonoBehaviour, ISearchObject
     {
-        public event EventHandler<SearchingObjectEventArgs> SearchingObject;
+        public event EventHandler<SearchingMainTagEventArgs> SearchingMainTag;
+
+        public event EventHandler<SearchingPositionEventArgs> SearchingPosition;
+
+        public event EventHandler<SearchingSubTagEventArgs> SearchingSubTag;
 
         public bool Search(int x, int y, MainTag mTag, out GameObject[] result)
         {
@@ -80,61 +103,45 @@ namespace AxeMan.GameSystem
 
         public GameObject[] Search(int x, int y)
         {
-            var ea = GetSearchEventArg(new int[] { x, y });
-            OnSearchingObject(ea);
+            int[] pos = new int[] { x, y };
+            Stack<GameObject> data = new Stack<GameObject>();
+            var ea = new SearchingPositionEventArgs(pos, data);
 
+            OnSearchingPosition(ea);
             return ea.Data.ToArray();
         }
 
         public GameObject[] Search(MainTag mTag)
         {
-            var ea = GetSearchEventArg(mTag);
-            OnSearchingObject(ea);
+            Stack<GameObject> data = new Stack<GameObject>();
+            var ea = new SearchingMainTagEventArgs(mTag, data);
 
+            OnSearchingMainTag(ea);
             return ea.Data.ToArray();
         }
 
         public GameObject[] Search(SubTag sTag)
         {
-            var ea = GetSearchEventArg(sTag);
-            OnSearchingObject(ea);
+            Stack<GameObject> data = new Stack<GameObject>();
+            var ea = new SearchingSubTagEventArgs(sTag, data);
 
+            OnSearchingSubTag(ea);
             return ea.Data.ToArray();
         }
 
-        protected virtual void OnSearchingObject(SearchingObjectEventArgs e)
+        protected virtual void OnSearchingMainTag(SearchingMainTagEventArgs e)
         {
-            SearchingObject?.Invoke(this, e);
+            SearchingMainTag?.Invoke(this, e);
         }
 
-        private SearchingObjectEventArgs GetSearchEventArg(int[] position)
+        protected virtual void OnSearchingPosition(SearchingPositionEventArgs e)
         {
-            var ea = new SearchingObjectEventArgs(SearchEventTag.Position,
-                new Stack<GameObject>())
-            {
-                Position = position
-            };
-            return ea;
+            SearchingPosition?.Invoke(this, e);
         }
 
-        private SearchingObjectEventArgs GetSearchEventArg(MainTag mTag)
+        protected virtual void OnSearchingSubTag(SearchingSubTagEventArgs e)
         {
-            var ea = new SearchingObjectEventArgs(SearchEventTag.MainTag,
-                new Stack<GameObject>())
-            {
-                MTag = mTag
-            };
-            return ea;
-        }
-
-        private SearchingObjectEventArgs GetSearchEventArg(SubTag sTag)
-        {
-            var ea = new SearchingObjectEventArgs(SearchEventTag.SubTag,
-                new Stack<GameObject>())
-            {
-                STag = sTag
-            };
-            return ea;
+            SearchingSubTag?.Invoke(this, e);
         }
     }
 }
