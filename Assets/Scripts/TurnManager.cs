@@ -5,17 +5,18 @@ namespace AxeMan.GameSystem.SchedulingSystem
 {
     public interface ITurnManager
     {
-        void EndTurn(GameObject actor);
+        void EndTurn();
 
         GameObject NextTurn();
 
-        void StartTurn(GameObject actor);
+        void StartTurn();
     }
 
     public class TurnManager : MonoBehaviour, ITurnManager
     {
-        public void EndTurn(GameObject actor)
+        public void EndTurn()
         {
+            GameObject actor = GetComponent<Schedule>().Current;
             int[] pos = GetComponent<ConvertCoordinate>().Convert(
                 actor.transform.position);
             Debug.Log("End: " + actor.GetComponent<MetaInfo>().STag + ", "
@@ -24,14 +25,16 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         public GameObject NextTurn()
         {
-            EndTurn(GetComponent<Schedule>().Current);
-            StartTurn(GetComponent<Schedule>().GotoNext());
+            EndTurn();
+            GetComponent<Schedule>().GotoNext();
+            StartTurn();
 
             return GetComponent<Schedule>().Current;
         }
 
-        public void StartTurn(GameObject actor)
+        public void StartTurn()
         {
+            GameObject actor = GetComponent<Schedule>().Current;
             int[] pos = GetComponent<ConvertCoordinate>().Convert(
                actor.transform.position);
             Debug.Log("Start: " + actor.GetComponent<MetaInfo>().STag + ", "
