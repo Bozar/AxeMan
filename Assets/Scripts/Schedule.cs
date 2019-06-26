@@ -78,8 +78,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         private int ResetPointer(int current, int length)
         {
-            if ((current > length - 1)
-                || current < 0)
+            if ((current > length - 1) || (current < 0))
             {
                 current = 0;
             }
