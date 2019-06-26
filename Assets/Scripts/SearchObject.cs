@@ -63,35 +63,13 @@ namespace AxeMan.GameSystem
 
         public bool Search(int x, int y, MainTag mTag, out GameObject[] result)
         {
-            result = Search(x, y);
-            Stack<GameObject> filter = new Stack<GameObject>();
-
-            foreach (GameObject go in result)
-            {
-                if (go.GetComponent<MetaInfo>().MTag == mTag)
-                {
-                    filter.Push(go);
-                }
-            }
-
-            result = filter.ToArray();
+            result = Filter(Search(x, y), mTag);
             return result.Length > 0;
         }
 
         public bool Search(int x, int y, SubTag sTag, out GameObject[] result)
         {
-            result = Search(x, y);
-            Stack<GameObject> filter = new Stack<GameObject>();
-
-            foreach (GameObject go in result)
-            {
-                if (go.GetComponent<MetaInfo>().STag == sTag)
-                {
-                    filter.Push(go);
-                }
-            }
-
-            result = filter.ToArray();
+            result = Filter(Search(x, y), sTag);
             return result.Length > 0;
         }
 
@@ -142,6 +120,34 @@ namespace AxeMan.GameSystem
         protected virtual void OnSearchingSubTag(SearchingSubTagEventArgs e)
         {
             SearchingSubTag?.Invoke(this, e);
+        }
+
+        private GameObject[] Filter(GameObject[] source, MainTag mTag)
+        {
+            Stack<GameObject> result = new Stack<GameObject>();
+
+            foreach (GameObject s in source)
+            {
+                if (s.GetComponent<MetaInfo>().MTag == mTag)
+                {
+                    result.Push(s);
+                }
+            }
+            return result.ToArray();
+        }
+
+        private GameObject[] Filter(GameObject[] source, SubTag sTag)
+        {
+            Stack<GameObject> result = new Stack<GameObject>();
+
+            foreach (GameObject s in source)
+            {
+                if (s.GetComponent<MetaInfo>().STag == sTag)
+                {
+                    result.Push(s);
+                }
+            }
+            return result.ToArray();
         }
     }
 }
