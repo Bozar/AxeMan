@@ -1,7 +1,7 @@
 ﻿using AxeMan.GameSystem;
 using UnityEngine;
 
-namespace AxeMan.Actor
+namespace AxeMan.DungeonObject
 {
     public class PCMove : MonoBehaviour
     {

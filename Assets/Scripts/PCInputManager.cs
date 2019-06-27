@@ -2,7 +2,7 @@
 using AxeMan.GameSystem.SchedulingSystem;
 using UnityEngine;
 
-namespace AxeMan.Actor.PlayerInput
+namespace AxeMan.DungeonObject.PlayerInput
 {
     public class PCInputManager : MonoBehaviour, IInputManager
     {

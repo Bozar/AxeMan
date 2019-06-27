@@ -2,7 +2,7 @@
 using AxeMan.GameSystem.SchedulingSystem;
 using UnityEngine;
 
-namespace AxeMan.Actor
+namespace AxeMan.DungeonObject
 {
     public class DummyAI : MonoBehaviour
     {

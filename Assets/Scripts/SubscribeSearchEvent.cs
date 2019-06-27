@@ -1,7 +1,7 @@
 ﻿using AxeMan.GameSystem;
 using UnityEngine;
 
-namespace AxeMan.Actor.SubscribeEvent
+namespace AxeMan.DungeonObject.SubscribeEvent
 {
     public class SubscribeSearchEvent : MonoBehaviour
     {

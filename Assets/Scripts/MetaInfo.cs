@@ -2,7 +2,7 @@
 using AxeMan.GameSystem.PrototypeFactory;
 using UnityEngine;
 
-namespace AxeMan.Actor
+namespace AxeMan.DungeonObject
 {
     public interface IMetaInfo
     {

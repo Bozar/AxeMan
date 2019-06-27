@@ -1,7 +1,7 @@
 ﻿using AxeMan.GameSystem;
 using UnityEngine;
 
-namespace AxeMan.Actor.PlayerInput
+namespace AxeMan.DungeonObject.PlayerInput
 {
     public class MovementInput : MonoBehaviour, IInputManager
     {

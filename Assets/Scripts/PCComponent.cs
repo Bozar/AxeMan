@@ -1,5 +1,5 @@
-﻿using AxeMan.Actor;
-using AxeMan.Actor.PlayerInput;
+﻿using AxeMan.DungeonObject;
+using AxeMan.DungeonObject.PlayerInput;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.ObjectFactory

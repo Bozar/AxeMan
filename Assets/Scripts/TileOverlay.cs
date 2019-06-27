@@ -1,4 +1,4 @@
-﻿using AxeMan.Actor;
+﻿using AxeMan.DungeonObject;
 using System;
 using UnityEngine;
 

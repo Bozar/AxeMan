@@ -1,4 +1,4 @@
-﻿using AxeMan.Actor;
+﻿using AxeMan.DungeonObject;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
