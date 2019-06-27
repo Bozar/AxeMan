@@ -1,4 +1,5 @@
 ﻿using AxeMan.Actor;
+using AxeMan.Actor.SubscribeEvent;
 using AxeMan.GameSystem.PrototypeFactory;
 using System;
 using UnityEngine;
@@ -58,6 +59,7 @@ namespace AxeMan.GameSystem.ObjectFactory
                    as GameObject);
                 go.AddComponent<MetaInfo>().SetValue(proto);
                 go.AddComponent<LocalManager>();
+                go.AddComponent<SubscribeSearchEvent>();
 
                 // Puslish an event to add specific components when necessary.
                 OnAddingComponent(new AddingComponentEventArgs(go));
