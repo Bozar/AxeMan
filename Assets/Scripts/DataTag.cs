@@ -23,7 +23,7 @@ namespace AxeMan.GameSystem
         PC,
     }
 
-    public class ObjectTag : MonoBehaviour
+    public class DataTag : MonoBehaviour
     {
     }
 }
