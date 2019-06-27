@@ -18,7 +18,9 @@ namespace AxeMan.GameSystem
 
     public class Wizard : MonoBehaviour
     {
-        private bool UIUpdated;
+        private bool turnStarted;
+
+        private bool uiUpdated;
 
         public event EventHandler<UpdateUIEventArgs> UIText;
 
@@ -47,8 +49,14 @@ namespace AxeMan.GameSystem
 
         private void LateUpdate()
         {
-            if (UIUpdated)
+            if (uiUpdated)
             {
+                if (!turnStarted)
+                {
+                    GetComponent<TurnManager>().StartTurn();
+                    GetComponent<TileOverlay>().RefreshDungeonBoard();
+                    turnStarted = true;
+                }
                 return;
             }
             Dictionary<string, string> data
@@ -68,7 +76,7 @@ namespace AxeMan.GameSystem
             });
             CreateAltar();
 
-            UIUpdated = true;
+            uiUpdated = true;
         }
 
         private void Start()

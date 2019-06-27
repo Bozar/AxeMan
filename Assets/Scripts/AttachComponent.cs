@@ -27,6 +27,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<NPCComponent>();
             gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<PCComponent>();
+            gameObject.AddComponent<PublishAction>();
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<SearchObject>();
 

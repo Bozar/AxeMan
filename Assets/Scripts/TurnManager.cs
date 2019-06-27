@@ -68,5 +68,20 @@ namespace AxeMan.GameSystem.SchedulingSystem
         {
             StartingTurn?.Invoke(this, e);
         }
+
+        private void Start()
+        {
+            GetComponent<PublishAction>().TakingAction
+                += TurnManager_TakingAction;
+        }
+
+        private void TurnManager_TakingAction(object sender,
+            TakingActionEventArgs e)
+        {
+            if (e.Action == ActionTag.Skip)
+            {
+                NextActor();
+            }
+        }
     }
 }

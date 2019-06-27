@@ -9,6 +9,8 @@ namespace AxeMan.DungeonObject
         int[] GetPosition();
 
         void Remove();
+
+        void TakingAction(TakingActionEventArgs e);
     }
 
     public class LocalManager : MonoBehaviour, ILocalManager
@@ -22,6 +24,12 @@ namespace AxeMan.DungeonObject
         public void Remove()
         {
             GameCore.AxeManCore.GetComponent<RemoveObject>().Remove(gameObject);
+        }
+
+        public void TakingAction(TakingActionEventArgs e)
+        {
+            GameCore.AxeManCore.GetComponent<PublishAction>()
+                .ActorTakingAction(e);
         }
     }
 }

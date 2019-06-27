@@ -32,6 +32,9 @@ namespace AxeMan.DungeonObject
                 .Convert(transform.position);
             Debug.Log("Start: " + GetComponent<MetaInfo>().STag + ", "
                 + pos[0] + ", " + pos[1]);
+
+            GetComponent<LocalManager>().TakingAction(
+                new TakingActionEventArgs(gameObject, ActionTag.Skip));
         }
 
         private void Start()
