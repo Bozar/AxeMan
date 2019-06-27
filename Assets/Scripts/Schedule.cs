@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.ObjectFactory;
 using System.Collections.Generic;
 using UnityEngine;

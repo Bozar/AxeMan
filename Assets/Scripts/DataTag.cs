@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AxeMan.GameSystem
+namespace AxeMan.GameSystem.GameDataTag
 {
     public enum ActionTag { INVALID, Skip, }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AxeMan.GameSystem.GameDataTag;
+using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem

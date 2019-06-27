@@ -1,4 +1,4 @@
-﻿using AxeMan.GameSystem;
+﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PrototypeFactory;
 using UnityEngine;
 

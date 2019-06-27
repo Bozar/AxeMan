@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataTag;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject.GameEvent

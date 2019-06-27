@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AxeMan.GameSystem.GameDataTag;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.PrototypeFactory

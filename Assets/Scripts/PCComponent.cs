@@ -1,5 +1,6 @@
 ﻿using AxeMan.DungeonObject;
 using AxeMan.DungeonObject.PlayerInput;
+using AxeMan.GameSystem.GameDataTag;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.ObjectFactory

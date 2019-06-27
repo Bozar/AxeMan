@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameEvent;
+﻿using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameEvent;
 using System;
 using UnityEngine;
 
