@@ -1,4 +1,4 @@
-﻿using AxeMan.Actor;
+﻿using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.SchedulingSystem
@@ -12,15 +12,36 @@ namespace AxeMan.GameSystem.SchedulingSystem
         void StartTurn();
     }
 
+    public class EndingTurnEventArgs : EventArgs
+    {
+        public EndingTurnEventArgs(GameObject data)
+        {
+            Data = data;
+        }
+
+        public GameObject Data { get; }
+    }
+
+    public class StartingTurnEventArgs : EventArgs
+    {
+        public StartingTurnEventArgs(GameObject data)
+        {
+            Data = data;
+        }
+
+        public GameObject Data { get; }
+    }
+
     public class TurnManager : MonoBehaviour, ITurnManager
     {
+        public event EventHandler<EndingTurnEventArgs> EndingTurn;
+
+        public event EventHandler<StartingTurnEventArgs> StartingTurn;
+
         public void EndTurn()
         {
             GameObject actor = GetComponent<Schedule>().Current;
-            int[] pos = GetComponent<ConvertCoordinate>().Convert(
-                actor.transform.position);
-            Debug.Log("End: " + actor.GetComponent<MetaInfo>().STag + ", "
-                + pos[0] + ", " + pos[1]);
+            OnEndingTurn(new EndingTurnEventArgs(actor));
         }
 
         public GameObject NextActor()
@@ -35,10 +56,17 @@ namespace AxeMan.GameSystem.SchedulingSystem
         public void StartTurn()
         {
             GameObject actor = GetComponent<Schedule>().Current;
-            int[] pos = GetComponent<ConvertCoordinate>().Convert(
-               actor.transform.position);
-            Debug.Log("Start: " + actor.GetComponent<MetaInfo>().STag + ", "
-                + pos[0] + ", " + pos[1]);
+            OnStartingTurn(new StartingTurnEventArgs(actor));
+        }
+
+        protected virtual void OnEndingTurn(EndingTurnEventArgs e)
+        {
+            EndingTurn?.Invoke(this, e);
+        }
+
+        protected virtual void OnStartingTurn(StartingTurnEventArgs e)
+        {
+            StartingTurn?.Invoke(this, e);
         }
     }
 }
