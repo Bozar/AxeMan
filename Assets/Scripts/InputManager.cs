@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace AxeMan.GameSystem
+namespace AxeMan.GameSystem.PlayerInput
 {
     public interface IInputManager
     {

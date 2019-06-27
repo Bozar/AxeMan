@@ -1,6 +1,7 @@
 ﻿using AxeMan.DungeonObject;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.ObjectFactory;
+using AxeMan.GameSystem.PlayerInput;
 using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
 using AxeMan.GameSystem.SearchGameObject;
