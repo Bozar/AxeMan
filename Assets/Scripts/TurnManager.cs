@@ -7,7 +7,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
     {
         void EndTurn();
 
-        GameObject NextTurn();
+        GameObject NextActor();
 
         void StartTurn();
     }
@@ -23,7 +23,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
                 + pos[0] + ", " + pos[1]);
         }
 
-        public GameObject NextTurn()
+        public GameObject NextActor()
         {
             EndTurn();
             GetComponent<Schedule>().GotoNext();
