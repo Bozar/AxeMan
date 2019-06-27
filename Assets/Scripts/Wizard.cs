@@ -3,6 +3,7 @@ using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
+using AxeMan.GameSystem.SearchGameObject;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

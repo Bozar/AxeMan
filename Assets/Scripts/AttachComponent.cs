@@ -2,6 +2,7 @@
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
+using AxeMan.GameSystem.SearchGameObject;
 using UnityEngine;
 
 // If a class is under the namespace `AxeMan.GameSystem`, it can be instanced

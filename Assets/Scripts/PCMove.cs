@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.SearchGameObject;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject

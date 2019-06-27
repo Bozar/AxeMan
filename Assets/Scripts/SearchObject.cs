@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AxeMan.GameSystem
+namespace AxeMan.GameSystem.SearchGameObject
 {
     public interface ISearchObject
     {
