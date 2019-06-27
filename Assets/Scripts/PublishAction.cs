@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace AxeMan.GameSystem
+namespace AxeMan.GameSystem.GameEvent
 {
     public class PublishAction : MonoBehaviour
     {

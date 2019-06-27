@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.ObjectFactory;
 using UnityEngine;
 

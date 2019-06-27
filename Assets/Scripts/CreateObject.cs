@@ -1,5 +1,5 @@
 ﻿using AxeMan.DungeonObject;
-using AxeMan.DungeonObject.SubscribeEvent;
+using AxeMan.DungeonObject.GameEvent;
 using AxeMan.GameSystem.PrototypeFactory;
 using System;
 using UnityEngine;
