@@ -73,13 +73,17 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         private void Start()
         {
-            GetComponent<PublishAction>().TakingAction
-                += TurnManager_TakingAction;
+            GetComponent<PublishAction>().TakenAction
+                += TurnManager_TakenAction;
         }
 
-        private void TurnManager_TakingAction(object sender,
-            TakingActionEventArgs e)
+        private void TurnManager_TakenAction(object sender,
+            TakenActionEventArgs e)
         {
+            if (GetComponent<Schedule>().Current != e.Actor)
+            {
+                return;
+            }
             if (e.Action == ActionTag.Skip)
             {
                 NextActor();

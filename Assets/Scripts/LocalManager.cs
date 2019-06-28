@@ -11,6 +11,8 @@ namespace AxeMan.DungeonObject
 
         void Remove();
 
+        void TakenAction(TakenActionEventArgs e);
+
         void TakingAction(TakingActionEventArgs e);
     }
 
@@ -25,6 +27,12 @@ namespace AxeMan.DungeonObject
         public void Remove()
         {
             GameCore.AxeManCore.GetComponent<RemoveObject>().Remove(gameObject);
+        }
+
+        public void TakenAction(TakenActionEventArgs e)
+        {
+            GameCore.AxeManCore.GetComponent<PublishAction>()
+               .ActorTakenAction(e);
         }
 
         public void TakingAction(TakingActionEventArgs e)

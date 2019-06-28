@@ -37,6 +37,8 @@ namespace AxeMan.DungeonObject
 
             GetComponent<LocalManager>().TakingAction(
                 new TakingActionEventArgs(gameObject, ActionTag.Skip));
+            GetComponent<LocalManager>().TakenAction(
+                new TakenActionEventArgs(gameObject, ActionTag.Skip));
         }
 
         private void Start()
