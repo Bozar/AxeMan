@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace AxeMan.GameSystem
 {
@@ -58,6 +59,10 @@ namespace AxeMan.GameSystem
                 {
                     GetComponent<TurnManager>().StartTurn();
                     GetComponent<TileOverlay>().RefreshDungeonBoard();
+                    GameObject[] ui = GetComponent<SearchUI>().Search(
+                        CanvasTag.Canvas_World, UITag.Modeline);
+                    ui[0].GetComponent<Text>().text = "[[ Examine ] g 4 [ 2, -3 ]]";
+
                     turnStarted = true;
                 }
                 return;

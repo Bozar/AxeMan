@@ -6,6 +6,8 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum BlueprintTag { INVALID, Altar, Floor, Trap, Actor, }
 
+    public enum CanvasTag { Canvas_World, }
+
     public enum CommandTag
     {
         INVALID, Test, Reload, PrintSchedule, RemoveFromSchedule, NextInSchedule,
@@ -22,6 +24,8 @@ namespace AxeMan.GameSystem.GameDataTag
         FireTrap, IceTrap, LightningTrap, EarthTrap,
         PC,
     }
+
+    public enum UITag { Modeline, }
 
     public class DataTag : MonoBehaviour
     {

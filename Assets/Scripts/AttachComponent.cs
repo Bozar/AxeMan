@@ -31,8 +31,10 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<PCComponent>();
             gameObject.AddComponent<PublishAction>();
+
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<SearchObject>();
+            gameObject.AddComponent<SearchUI>();
 
             gameObject.AddComponent<Schedule>();
             gameObject.AddComponent<TileOverlay>();
