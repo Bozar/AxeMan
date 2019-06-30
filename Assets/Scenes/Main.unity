@@ -1280,7 +1280,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_TagString
-      value: CvsWorld
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -2006,24 +2006,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce3f59b7e302cd648926ad779da36f25, type: 3}
---- !u!1 &999192406 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
-    type: 3}
-  m_PrefabInstance: {fileID: 554681762}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &999192407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999192406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bca761e11e52b254da09a937220bdb67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1009823366
 PrefabInstance:
   m_ObjectHideFlags: 0
