@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AxeMan.GameSystem.SearchGameObject
 {
@@ -37,6 +38,18 @@ namespace AxeMan.GameSystem.SearchGameObject
             OnSearchingUI(new SearchingUIEventArgs(
                 cTag.ToString(), uTag.ToString(), result));
 
+            return result.ToArray();
+        }
+
+        public Text[] SearchText(CanvasTag cTag, UITag uTag)
+        {
+            GameObject[] uiObject = Search(cTag, uTag);
+            Stack<Text> result = new Stack<Text>();
+
+            foreach (GameObject ui in uiObject)
+            {
+                result.Push(ui.GetComponent<Text>());
+            }
             return result.ToArray();
         }
 
