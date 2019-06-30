@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace AxeMan.DungeonObject.GameEvent
 {
-    public class SubscribeSearchUIEvent : MonoBehaviour
+    public class SubscribeSearchUI : MonoBehaviour
     {
         private void Start()
         {
             GameCore.AxeManCore.GetComponent<SearchUI>().SearchingUI
-                += SubscribeSearchUIEvent_SearchingUI;
+                += SubscribeSearchUI_SearchingUI;
         }
 
-        private void SubscribeSearchUIEvent_SearchingUI(object sender,
+        private void SubscribeSearchUI_SearchingUI(object sender,
             SearchingUIEventArgs e)
         {
             string canvas = GetComponentInParent<Canvas>().name;

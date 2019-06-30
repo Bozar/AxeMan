@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AxeMan.DungeonObject.GameEvent
 {
-    public class SubscribeSearchEvent : MonoBehaviour
+    public class SubscribeSearch : MonoBehaviour
     {
         private bool MatchCriteria(int[] position)
         {
@@ -28,14 +28,14 @@ namespace AxeMan.DungeonObject.GameEvent
         private void Start()
         {
             GameCore.AxeManCore.GetComponent<SearchObject>().SearchingPosition
-                += SubscribeSearchEvent_SearchingPosition;
+                += SubscribeSearch_SearchingPosition;
             GameCore.AxeManCore.GetComponent<SearchObject>().SearchingMainTag
-                += SubscribeSearchEvent_SearchingMainTag;
+                += SubscribeSearch_SearchingMainTag;
             GameCore.AxeManCore.GetComponent<SearchObject>().SearchingSubTag
-                += SubscribeSearchEvent_SearchingSubTag;
+                += SubscribeSearch_SearchingSubTag;
         }
 
-        private void SubscribeSearchEvent_SearchingMainTag(object sender,
+        private void SubscribeSearch_SearchingMainTag(object sender,
             SearchingMainTagEventArgs e)
         {
             if (MatchCriteria(e.MTag))
@@ -44,7 +44,7 @@ namespace AxeMan.DungeonObject.GameEvent
             }
         }
 
-        private void SubscribeSearchEvent_SearchingPosition(object sender,
+        private void SubscribeSearch_SearchingPosition(object sender,
             SearchingPositionEventArgs e)
         {
             if (MatchCriteria(e.Position))
@@ -53,7 +53,7 @@ namespace AxeMan.DungeonObject.GameEvent
             }
         }
 
-        private void SubscribeSearchEvent_SearchingSubTag(object sender,
+        private void SubscribeSearch_SearchingSubTag(object sender,
             SearchingSubTagEventArgs e)
         {
             if (MatchCriteria(e.STag))

@@ -60,7 +60,7 @@ namespace AxeMan.GameSystem.ObjectFactory
                    as GameObject);
                 go.AddComponent<MetaInfo>().SetValue(proto);
                 go.AddComponent<LocalManager>();
-                go.AddComponent<SubscribeSearchEvent>();
+                go.AddComponent<SubscribeSearch>();
 
                 // Puslish an event to add specific components when necessary.
                 OnAddingComponent(new AddingComponentEventArgs(go));
