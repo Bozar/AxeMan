@@ -15,11 +15,6 @@ namespace AxeMan.DungeonObject
             {
                 return;
             }
-
-            int[] pos = GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
-                .Convert(transform.position);
-            Debug.Log("End: " + GetComponent<MetaInfo>().STag + ", "
-                + pos[0] + ", " + pos[1]);
         }
 
         private void DummyAI_StartingTurn(object sender,
@@ -29,11 +24,6 @@ namespace AxeMan.DungeonObject
             {
                 return;
             }
-
-            int[] pos = GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
-                .Convert(transform.position);
-            Debug.Log("Start: " + GetComponent<MetaInfo>().STag + ", "
-                + pos[0] + ", " + pos[1]);
 
             GetComponent<LocalManager>().TakingAction(
                 new TakingActionEventArgs(gameObject, ActionTag.Skip));
