@@ -84,7 +84,8 @@ namespace AxeMan.GameSystem.SchedulingSystem
             {
                 return;
             }
-            if (e.Action == ActionTag.Skip)
+            if ((e.Action == ActionTag.Skip)
+                || (e.Action == ActionTag.Move))
             {
                 NextActor();
             }

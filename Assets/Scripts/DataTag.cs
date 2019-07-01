@@ -2,7 +2,7 @@
 
 namespace AxeMan.GameSystem.GameDataTag
 {
-    public enum ActionTag { INVALID, Skip, }
+    public enum ActionTag { INVALID, Skip, Move, }
 
     public enum BlueprintTag { INVALID, Altar, Floor, Trap, Actor, ProgressBar, }
 
