@@ -85,8 +85,7 @@ namespace AxeMan.GameSystem
             CreateAltar();
 
             GetComponent<CreateObject>().Create(
-                new ProtoObject(MainTag.Marker, SubTag.ProgressBar,
-                new int[] { 0, 9 }));
+                GetComponent<Blueprint>().GetBlueprint(BlueprintTag.ProgressBar));
 
             uiUpdated = true;
         }
