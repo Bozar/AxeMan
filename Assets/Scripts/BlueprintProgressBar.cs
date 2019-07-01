@@ -19,9 +19,10 @@ namespace AxeMan.GameSystem.PrototypeFactory
         private IPrototype[] GetProgressBar()
         {
             Stack<IPrototype> bar = new Stack<IPrototype>();
-            int y = 9;
+            int maxX = GetComponent<ProgressBar>().XCoordinate;
+            int y = GetComponent<ProgressBar>().YCoordinate;
 
-            for (int x = 0; x < 5; x++)
+            for (int x = 0; x < maxX; x++)
             {
                 bar.Push(new ProtoObject(MainTag.Marker, SubTag.ProgressBar,
                     new int[] { x, y }));

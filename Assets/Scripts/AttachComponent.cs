@@ -32,6 +32,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<NPCComponent>();
             gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<PCComponent>();
+            gameObject.AddComponent<ProgressBar>();
             gameObject.AddComponent<PublishAction>();
 
             gameObject.AddComponent<RemoveObject>();
