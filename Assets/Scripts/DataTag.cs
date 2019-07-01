@@ -14,13 +14,13 @@ namespace AxeMan.GameSystem.GameDataTag
         Left, Right, Up, Down,
     }
 
-    public enum MainTag { INVALID, Building, Trap, Actor, Floor, }
+    public enum MainTag { INVALID, Building, Trap, Actor, Floor, Marker, }
 
     public enum SearchEventTag { Position, MainTag, SubTag, }
 
     public enum SubTag
     {
-        INVALID, Dummy, LifeAltar, ShieldAltar, Floor,
+        INVALID, Dummy, LifeAltar, ShieldAltar, Floor, ProgressBar,
         FireTrap, IceTrap, LightningTrap, EarthTrap,
         PC,
     }
