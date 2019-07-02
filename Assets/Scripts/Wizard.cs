@@ -93,6 +93,17 @@ namespace AxeMan.GameSystem
                 += Wizard_PlayerCommanding;
         }
 
+        private void TestHP()
+        {
+            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+
+            int hp = pc.GetComponent<HP>().Subtract(5);
+            Debug.Log("Subtract: " + hp);
+
+            hp = pc.GetComponent<HP>().Add(2);
+            Debug.Log("Add: " + hp);
+        }
+
         private void Wizard_PlayerCommanding(object sender,
             PlayerCommandingEventArgs e)
         {
@@ -121,6 +132,10 @@ namespace AxeMan.GameSystem
 
                 case CommandTag.NextInSchedule:
                     GetComponent<TurnManager>().NextActor();
+                    break;
+
+                case CommandTag.ChangeHP:
+                    TestHP();
                     break;
 
                 default:

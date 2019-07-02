@@ -12,6 +12,7 @@ namespace AxeMan.DungeonObject.PlayerInput
             bool schedule = Input.GetKeyDown(KeyCode.P);
             bool remove = Input.GetKeyDown(KeyCode.R);
             bool next = Input.GetKeyDown(KeyCode.N);
+            bool changeHP = Input.GetKeyDown(KeyCode.Minus);
 
             if (reload)
             {
@@ -28,6 +29,10 @@ namespace AxeMan.DungeonObject.PlayerInput
             else if (next)
             {
                 return CommandTag.NextInSchedule;
+            }
+            else if (changeHP)
+            {
+                return CommandTag.ChangeHP;
             }
             return CommandTag.INVALID;
         }
