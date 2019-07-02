@@ -20,7 +20,7 @@ namespace AxeMan.DungeonObject.GameEvent
 
             if ((e.CanvasTag == canvas) && (e.UITag == ui))
             {
-                e.Data.Push(gameObject);
+                e.Data = gameObject;
             }
         }
     }

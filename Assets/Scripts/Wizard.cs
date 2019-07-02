@@ -59,9 +59,9 @@ namespace AxeMan.GameSystem
                 {
                     GetComponent<TurnManager>().StartTurn();
                     GetComponent<TileOverlay>().RefreshDungeonBoard();
-                    Text[] ui = GetComponent<SearchUI>().SearchText(
+                    Text ui = GetComponent<SearchUI>().SearchText(
                         CanvasTag.Canvas_World, UITag.Modeline);
-                    ui[0].text = "[[ Examine ] g 4 [ 2, -3 ]]";
+                    ui.text = "[[ Examine ] g 4 [ 2, -3 ]]";
 
                     turnStarted = true;
                 }
