@@ -105,11 +105,8 @@ namespace AxeMan.GameSystem
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
 
-            int hp = pc.GetComponent<HP>().Subtract(5);
-            Debug.Log("Subtract: " + hp);
-
-            hp = pc.GetComponent<HP>().Add(2);
-            Debug.Log("Add: " + hp);
+            pc.GetComponent<HP>().Subtract(5);
+            pc.GetComponent<HP>().Add(2);
         }
 
         private void Wizard_PlayerCommanding(object sender,
