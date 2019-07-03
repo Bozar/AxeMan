@@ -6,7 +6,7 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum BlueprintTag { INVALID, Altar, Floor, Trap, Actor, ProgressBar, }
 
-    public enum CanvasTag { Canvas_World, }
+    public enum CanvasTag { Canvas_World, Canvas_PCStatus_Left, }
 
     public enum CommandTag
     {
@@ -26,7 +26,7 @@ namespace AxeMan.GameSystem.GameDataTag
         PC,
     }
 
-    public enum UITag { Modeline, }
+    public enum UITag { Modeline, HP, }
 
     public class DataTag : MonoBehaviour
     {

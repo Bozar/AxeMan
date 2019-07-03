@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameEvent;
+using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -29,6 +31,7 @@ namespace AxeMan.DungeonObject
             Current += hp;
             Current = Math.Min(Current, Max);
 
+            PublishHP();
             return Current;
         }
 
@@ -37,6 +40,7 @@ namespace AxeMan.DungeonObject
             Current -= hp;
             Current = Math.Max(Current, Min);
 
+            PublishHP();
             return Current;
         }
 
@@ -47,6 +51,12 @@ namespace AxeMan.DungeonObject
             Min = 0;
 
             Current = Max;
+        }
+
+        private void PublishHP()
+        {
+            GameCore.AxeManCore.GetComponent<PublishHP>().PublishChangedHP(
+               new ChangedHPEventArgs(GetComponent<MetaInfo>().STag, Current));
         }
     }
 }

@@ -4,6 +4,7 @@ using AxeMan.GameSystem.PlayerInput;
 using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
 using AxeMan.GameSystem.SearchGameObject;
+using AxeMan.GameSystem.UserInterface;
 using UnityEngine;
 
 // If a class is under the namespace `AxeMan.GameSystem`, it can be instanced
@@ -24,6 +25,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintProgressBar>();
             gameObject.AddComponent<BlueprintTrap>();
 
+            gameObject.AddComponent<Canvas_PCStatus>();
+
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<CreateObject>();
             gameObject.AddComponent<DungeonBoard>();
@@ -34,7 +37,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<PCComponent>();
             gameObject.AddComponent<ProgressBar>();
+
             gameObject.AddComponent<PublishAction>();
+            gameObject.AddComponent<PublishHP>();
 
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<SearchObject>();

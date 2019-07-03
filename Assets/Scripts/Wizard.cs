@@ -26,9 +26,16 @@ namespace AxeMan.GameSystem
 
         private bool uiUpdated;
 
+        public event EventHandler CreatedWorld;
+
         public event EventHandler<UpdateUIEventArgs> UIText;
 
         public string NameTag { get { return "Wizard"; } }
+
+        protected virtual void OnCreatedWorld()
+        {
+            CreatedWorld?.Invoke(this, EventArgs.Empty);
+        }
 
         protected virtual void OnUIText(UpdateUIEventArgs e)
         {
@@ -63,6 +70,7 @@ namespace AxeMan.GameSystem
                         CanvasTag.Canvas_World, UITag.Modeline);
                     ui.text = "[[ Examine ] g 4 [ 2, -3 ]]";
 
+                    OnCreatedWorld();
                     turnStarted = true;
                 }
                 return;
