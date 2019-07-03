@@ -17,30 +17,36 @@ namespace AxeMan.GameSystem.UserInterface
             {
                 return;
             }
-            UpdateHP();
+            UpdateHPData();
         }
 
         private void Canvas_PCStatus_CreatedWorld(object sender,
             EventArgs e)
         {
-            UpdateHP();
+            UpdateHPText();
+            UpdateHPData();
         }
 
         private void Start()
         {
-            GetComponent<Wizard>().CreatedWorld
-                += Canvas_PCStatus_CreatedWorld;
-            GetComponent<PublishHP>().ChangedHP
-                += Canvas_PCStatus_ChangedHP;
+            GetComponent<Wizard>().CreatedWorld += Canvas_PCStatus_CreatedWorld;
+            GetComponent<PublishHP>().ChangedHP += Canvas_PCStatus_ChangedHP;
         }
 
-        private void UpdateHP()
+        private void UpdateHPData()
         {
             Text ui = GetComponent<SearchUI>().SearchText(
-                CanvasTag.Canvas_PCStatus_Left, UITag.HP);
+                CanvasTag.Canvas_PCStatus_Left, UITag.HPData);
             HP hp = GetComponent<SearchObject>().Search(SubTag.PC)[0]
                 .GetComponent<HP>();
-            ui.text = "HP: " + hp.Current + "/" + hp.Max;
+            ui.text = hp.Current + "/" + hp.Max;
+        }
+
+        private void UpdateHPText()
+        {
+            Text ui = GetComponent<SearchUI>().SearchText(
+                CanvasTag.Canvas_PCStatus_Left, UITag.HPText);
+            ui.text = "HP";
         }
     }
 }

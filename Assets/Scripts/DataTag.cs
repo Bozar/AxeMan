@@ -26,7 +26,7 @@ namespace AxeMan.GameSystem.GameDataTag
         PC,
     }
 
-    public enum UITag { Modeline, HP, }
+    public enum UITag { Modeline, HPText, HPData, }
 
     public class DataTag : MonoBehaviour
     {
