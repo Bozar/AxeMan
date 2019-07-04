@@ -21,8 +21,7 @@ namespace AxeMan.GameSystem.UserInterface
         {
             for (int i = 0; i < ui.Length; i++)
             {
-                GetComponent<SearchUI>().SearchText(cTag, ui[i]).text
-                    = text[i];
+                GetComponent<SearchUI>().SearchText(cTag, ui[i]).text = text[i];
             }
         }
 

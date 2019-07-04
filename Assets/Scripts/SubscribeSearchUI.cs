@@ -10,6 +10,19 @@ namespace AxeMan.DungeonObject.GameEvent
         {
             GameCore.AxeManCore.GetComponent<SearchUI>().SearchingUI
                 += SubscribeSearchUI_SearchingUI;
+            GameCore.AxeManCore.GetComponent<SearchUI>().SearchingCanvas
+                += SubscribeSearchUI_SearchingCanvas;
+        }
+
+        private void SubscribeSearchUI_SearchingCanvas(object sender,
+            SearchingCanvasEventArgs e)
+        {
+            string canvas = GetComponentInParent<Canvas>().name;
+
+            if ((e.Data == null) && (e.CanvasTag == canvas))
+            {
+                e.Data = GetComponentInParent<Canvas>().gameObject;
+            }
         }
 
         private void SubscribeSearchUI_SearchingUI(object sender,
