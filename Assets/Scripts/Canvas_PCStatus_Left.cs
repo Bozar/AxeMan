@@ -17,8 +17,17 @@ namespace AxeMan.GameSystem.UserInterface
             cTag = CanvasTag.Canvas_PCStatus_Left;
         }
 
+        private void BatchUpdate(UITag[] ui, string[] text)
+        {
+            for (int i = 0; i < ui.Length; i++)
+            {
+                GetComponent<SearchUI>().SearchText(cTag, ui[i]).text
+                    = text[i];
+            }
+        }
+
         private void Canvas_PCStatus_ChangedHP(object sender,
-                    ChangedHPEventArgs e)
+            ChangedHPEventArgs e)
         {
             if (e.STag != SubTag.PC)
             {
@@ -58,38 +67,24 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void UpdateSkillData()
         {
-            Text qUI = GetComponent<SearchUI>().SearchText(cTag, UITag.QText);
-            Text wUI = GetComponent<SearchUI>().SearchText(cTag, UITag.WText);
-            Text eUI = GetComponent<SearchUI>().SearchText(cTag, UITag.EText);
-            Text rUI = GetComponent<SearchUI>().SearchText(cTag, UITag.RText);
+            UITag[] ui = new UITag[]
+            {
+                UITag.QText, UITag.WText, UITag.EText, UITag.RText
+            };
+            string[] text = new string[] { "Q", "W", "E", "R" };
 
-            string qText = "Q";
-            string wText = "W";
-            string eText = "E";
-            string rText = "R";
-
-            qUI.text = qText;
-            wUI.text = wText;
-            eUI.text = eText;
-            rUI.text = rText;
+            BatchUpdate(ui, text);
         }
 
         private void UpdateSkillText()
         {
-            Text qUI = GetComponent<SearchUI>().SearchText(cTag, UITag.QData);
-            Text wUI = GetComponent<SearchUI>().SearchText(cTag, UITag.WData);
-            Text eUI = GetComponent<SearchUI>().SearchText(cTag, UITag.EData);
-            Text rUI = GetComponent<SearchUI>().SearchText(cTag, UITag.RData);
+            UITag[] ui = new UITag[]
+            {
+                UITag.QData, UITag.WData, UITag.EData, UITag.RData
+            };
+            string[] text = new string[] { "1", "2", "3", "4" };
 
-            string qText = "1";
-            string wText = "2";
-            string eText = "3";
-            string rText = "4";
-
-            qUI.text = qText;
-            wUI.text = wText;
-            eUI.text = eText;
-            rUI.text = rText;
+            BatchUpdate(ui, text);
         }
     }
 }
