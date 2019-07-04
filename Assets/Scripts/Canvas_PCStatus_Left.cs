@@ -31,6 +31,9 @@ namespace AxeMan.GameSystem.UserInterface
         {
             UpdateHPText();
             UpdateHPData();
+
+            UpdateSkillText();
+            UpdateSkillData();
         }
 
         private void Start()
@@ -51,6 +54,42 @@ namespace AxeMan.GameSystem.UserInterface
         {
             Text ui = GetComponent<SearchUI>().SearchText(cTag, UITag.HPText);
             ui.text = "HP";
+        }
+
+        private void UpdateSkillData()
+        {
+            Text qUI = GetComponent<SearchUI>().SearchText(cTag, UITag.QText);
+            Text wUI = GetComponent<SearchUI>().SearchText(cTag, UITag.WText);
+            Text eUI = GetComponent<SearchUI>().SearchText(cTag, UITag.EText);
+            Text rUI = GetComponent<SearchUI>().SearchText(cTag, UITag.RText);
+
+            string qText = "Q";
+            string wText = "W";
+            string eText = "E";
+            string rText = "R";
+
+            qUI.text = qText;
+            wUI.text = wText;
+            eUI.text = eText;
+            rUI.text = rText;
+        }
+
+        private void UpdateSkillText()
+        {
+            Text qUI = GetComponent<SearchUI>().SearchText(cTag, UITag.QData);
+            Text wUI = GetComponent<SearchUI>().SearchText(cTag, UITag.WData);
+            Text eUI = GetComponent<SearchUI>().SearchText(cTag, UITag.EData);
+            Text rUI = GetComponent<SearchUI>().SearchText(cTag, UITag.RData);
+
+            string qText = "1";
+            string wText = "2";
+            string eText = "3";
+            string rText = "4";
+
+            qUI.text = qText;
+            wUI.text = wText;
+            eUI.text = eText;
+            rUI.text = rText;
         }
     }
 }
