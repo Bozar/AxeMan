@@ -25,7 +25,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintProgressBar>();
             gameObject.AddComponent<BlueprintTrap>();
 
-            gameObject.AddComponent<Canvas_PCStatus>();
+            gameObject.AddComponent<Canvas_PCStatus_Left>();
 
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<CreateObject>();

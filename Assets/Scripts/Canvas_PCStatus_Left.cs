@@ -8,10 +8,17 @@ using UnityEngine.UI;
 
 namespace AxeMan.GameSystem.UserInterface
 {
-    public class Canvas_PCStatus : MonoBehaviour
+    public class Canvas_PCStatus_Left : MonoBehaviour
     {
+        private CanvasTag cTag;
+
+        private void Awake()
+        {
+            cTag = CanvasTag.Canvas_PCStatus_Left;
+        }
+
         private void Canvas_PCStatus_ChangedHP(object sender,
-            ChangedHPEventArgs e)
+                    ChangedHPEventArgs e)
         {
             if (e.STag != SubTag.PC)
             {
@@ -20,8 +27,7 @@ namespace AxeMan.GameSystem.UserInterface
             UpdateHPData();
         }
 
-        private void Canvas_PCStatus_CreatedWorld(object sender,
-            EventArgs e)
+        private void Canvas_PCStatus_CreatedWorld(object sender, EventArgs e)
         {
             UpdateHPText();
             UpdateHPData();
@@ -35,8 +41,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void UpdateHPData()
         {
-            Text ui = GetComponent<SearchUI>().SearchText(
-                CanvasTag.Canvas_PCStatus_Left, UITag.HPData);
+            Text ui = GetComponent<SearchUI>().SearchText(cTag, UITag.HPData);
             HP hp = GetComponent<SearchObject>().Search(SubTag.PC)[0]
                 .GetComponent<HP>();
             ui.text = hp.Current + "/" + hp.Max;
@@ -44,8 +49,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void UpdateHPText()
         {
-            Text ui = GetComponent<SearchUI>().SearchText(
-                CanvasTag.Canvas_PCStatus_Left, UITag.HPText);
+            Text ui = GetComponent<SearchUI>().SearchText(cTag, UITag.HPText);
             ui.text = "HP";
         }
     }
