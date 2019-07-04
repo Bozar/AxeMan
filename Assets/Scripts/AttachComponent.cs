@@ -48,6 +48,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Schedule>();
             gameObject.AddComponent<TileOverlay>();
             gameObject.AddComponent<TurnManager>();
+
+            gameObject.AddComponent<UIManager>();
             gameObject.AddComponent<Wizard>();
         }
     }

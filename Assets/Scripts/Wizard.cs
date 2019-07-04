@@ -71,9 +71,6 @@ namespace AxeMan.GameSystem
                     ui.text = "[[ Examine ] g 4 [ 2, -3 ]]";
 
                     OnCreatedWorld();
-                    //GetComponent<SearchUI>().SearchCanvas(
-                    //    CanvasTag.Canvas_PCStatus_Middle)
-                    //    .GetComponent<CanvasGroup>().alpha = 0;
                     turnStarted = true;
                 }
                 return;
