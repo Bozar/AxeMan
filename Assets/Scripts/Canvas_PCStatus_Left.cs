@@ -32,25 +32,19 @@ namespace AxeMan.GameSystem.UserInterface
             {
                 return;
             }
-            UpdateHPData();
+            HPData();
         }
 
         private void Canvas_PCStatus_CreatedWorld(object sender, EventArgs e)
         {
-            UpdateHPText();
-            UpdateHPData();
+            HPText();
+            HPData();
 
-            UpdateSkillText();
-            UpdateSkillData();
+            SkillText();
+            SkillData();
         }
 
-        private void Start()
-        {
-            GetComponent<Wizard>().CreatedWorld += Canvas_PCStatus_CreatedWorld;
-            GetComponent<PublishHP>().ChangedHP += Canvas_PCStatus_ChangedHP;
-        }
-
-        private void UpdateHPData()
+        private void HPData()
         {
             Text ui = GetComponent<SearchUI>().SearchText(cTag, UITag.HPData);
             HP hp = GetComponent<SearchObject>().Search(SubTag.PC)[0]
@@ -58,13 +52,13 @@ namespace AxeMan.GameSystem.UserInterface
             ui.text = hp.Current + "/" + hp.Max;
         }
 
-        private void UpdateHPText()
+        private void HPText()
         {
             Text ui = GetComponent<SearchUI>().SearchText(cTag, UITag.HPText);
             ui.text = "HP";
         }
 
-        private void UpdateSkillData()
+        private void SkillData()
         {
             UITag[] ui = new UITag[]
             {
@@ -75,7 +69,7 @@ namespace AxeMan.GameSystem.UserInterface
             BatchUpdate(ui, text);
         }
 
-        private void UpdateSkillText()
+        private void SkillText()
         {
             UITag[] ui = new UITag[]
             {
@@ -84,6 +78,12 @@ namespace AxeMan.GameSystem.UserInterface
             string[] text = new string[] { "1", "2", "3", "4" };
 
             BatchUpdate(ui, text);
+        }
+
+        private void Start()
+        {
+            GetComponent<Wizard>().CreatedWorld += Canvas_PCStatus_CreatedWorld;
+            GetComponent<PublishHP>().ChangedHP += Canvas_PCStatus_ChangedHP;
         }
     }
 }
