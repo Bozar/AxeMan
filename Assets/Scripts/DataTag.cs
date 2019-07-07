@@ -23,6 +23,12 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum SearchEventTag { Position, MainTag, SubTag, }
 
+    public enum SkillComponentTag { FireShield, };
+
+    public enum SkillNameTag { Q, W, E, R }
+
+    public enum SkillTypeTag { Move, Attack }
+
     public enum SubTag
     {
         INVALID, Dummy, LifeAltar, ShieldAltar, Floor, ProgressBar,
