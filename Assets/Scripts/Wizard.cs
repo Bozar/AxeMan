@@ -47,7 +47,7 @@ namespace AxeMan.GameSystem
             BlueprintTag[] tags = new BlueprintTag[]
             {
                 BlueprintTag.Altar, BlueprintTag.Floor,
-                BlueprintTag.Trap, BlueprintTag.Actor
+                BlueprintTag.Trap, BlueprintTag.Actor, BlueprintTag.Marker,
             };
             IPrototype[] proto;
 
