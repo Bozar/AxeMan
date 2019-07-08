@@ -127,36 +127,8 @@ namespace AxeMan.GameSystem
                     GetComponent<Schedule>().Print();
                     break;
 
-                case CommandTag.RemoveFromSchedule:
-                    if (GetComponent<SearchObject>().Search(1, 1, SubTag.Dummy,
-                        out GameObject[] search))
-                    {
-                        search[0].GetComponent<LocalManager>().Remove();
-                    }
-                    break;
-
-                case CommandTag.NextInSchedule:
-                    GetComponent<TurnManager>().NextActor();
-                    break;
-
                 case CommandTag.ChangeHP:
                     TestHP();
-                    break;
-
-                case CommandTag.SkillQ:
-                    Debug.Log("Skill Q");
-                    break;
-
-                case CommandTag.SkillW:
-                    Debug.Log("Skill W");
-                    break;
-
-                case CommandTag.SkillE:
-                    Debug.Log("Skill E");
-                    break;
-
-                case CommandTag.SkillR:
-                    Debug.Log("Skill R");
                     break;
 
                 default:
