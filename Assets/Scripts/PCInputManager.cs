@@ -9,8 +9,7 @@ namespace AxeMan.DungeonObject.PlayerInput
     public class PCInputManager : MonoBehaviour, IInputManager
     {
         private IInputManager[] input;
-
-        public bool ListenInput { get; private set; }
+        private bool listenInput;
 
         public CommandTag ConvertInput()
         {
@@ -30,13 +29,13 @@ namespace AxeMan.DungeonObject.PlayerInput
         private void PCInputManager_EndingTurn(object sender,
             EndingTurnEventArgs e)
         {
-            ListenInput = false;
+            listenInput = false;
         }
 
         private void PCInputManager_StartingTurn(object sender,
             StartingTurnEventArgs e)
         {
-            ListenInput = true;
+            listenInput = true;
         }
 
         private void Start()
@@ -56,7 +55,7 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         private void Update()
         {
-            if (!ListenInput)
+            if (!listenInput)
             {
                 return;
             }

@@ -6,8 +6,6 @@ namespace AxeMan.GameSystem.PlayerInput
 {
     public interface IInputManager
     {
-        bool ListenInput { get; }
-
         CommandTag ConvertInput();
     }
 
