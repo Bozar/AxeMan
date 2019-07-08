@@ -47,7 +47,7 @@ namespace AxeMan.GameSystem
             BlueprintTag[] tags = new BlueprintTag[]
             {
                 BlueprintTag.Altar, BlueprintTag.Floor,
-                BlueprintTag.Trap, BlueprintTag.Actor, BlueprintTag.Marker,
+                BlueprintTag.Trap, BlueprintTag.Actor,
             };
             IPrototype[] proto;
 
@@ -129,6 +129,15 @@ namespace AxeMan.GameSystem
 
                 case CommandTag.ChangeHP:
                     TestHP();
+                    break;
+
+                case CommandTag.SkillQ:
+                case CommandTag.SkillW:
+                case CommandTag.SkillE:
+                case CommandTag.SkillR:
+                    IPrototype[] proto = GetComponent<Blueprint>().GetBlueprint(
+                        BlueprintTag.AimMarker);
+                    GetComponent<CreateObject>().Create(proto);
                     break;
 
                 default:
