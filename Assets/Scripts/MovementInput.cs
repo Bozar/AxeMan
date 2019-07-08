@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AxeMan.DungeonObject.PlayerInput
 {
-    public class MovementInput : MonoBehaviour, IInputManager
+    public class MovementInput : MonoBehaviour, IConvertInput
     {
         public CommandTag ConvertInput()
         {

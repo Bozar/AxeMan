@@ -4,9 +4,16 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem.PlayerInput
 {
-    public interface IInputManager
+    public interface IConvertInput
     {
         CommandTag ConvertInput();
+    }
+
+    public interface IInputManager
+    {
+        IConvertInput[] InputComponent { get; }
+
+        bool ListenInput { get; }
     }
 
     public class InputManager : MonoBehaviour

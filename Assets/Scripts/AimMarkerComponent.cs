@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.DungeonObject.PlayerInput;
 using AxeMan.GameSystem.GameDataTag;
 using UnityEngine;
 
@@ -13,7 +14,9 @@ namespace AxeMan.GameSystem.ObjectFactory
             {
                 return;
             }
-            Debug.Log("Add AimMarker components;");
+            e.Data.AddComponent<AimMarkerInputManager>();
+            e.Data.AddComponent<MovementInput>();
+            e.Data.AddComponent<SkillInput>();
         }
 
         private void Start()
