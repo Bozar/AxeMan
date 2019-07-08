@@ -14,17 +14,8 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         public CommandTag ConvertInput()
         {
-            CommandTag command;
-
-            foreach (IConvertInput i in InputComponent)
-            {
-                command = i.ConvertInput();
-                if (command != CommandTag.INVALID)
-                {
-                    return command;
-                }
-            }
-            return CommandTag.INVALID;
+            return GameCore.AxeManCore.GetComponent<InputManager>()
+                .ConvertInput(InputComponent);
         }
 
         private void Start()

@@ -20,6 +20,21 @@ namespace AxeMan.GameSystem.PlayerInput
     {
         public event EventHandler<PlayerCommandingEventArgs> PlayerCommanding;
 
+        public CommandTag ConvertInput(IConvertInput[] input)
+        {
+            CommandTag command;
+
+            foreach (IConvertInput i in input)
+            {
+                command = i.ConvertInput();
+                if (command != CommandTag.INVALID)
+                {
+                    return command;
+                }
+            }
+            return CommandTag.INVALID;
+        }
+
         public void PublishCommand(GameObject actor, CommandTag command)
         {
             if (command == CommandTag.INVALID)
