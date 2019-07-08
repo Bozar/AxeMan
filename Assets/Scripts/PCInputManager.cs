@@ -42,8 +42,9 @@ namespace AxeMan.DungeonObject.PlayerInput
         {
             input = new IInputManager[]
             {
-                GetComponent<WizardInput>(),
                 GetComponent<MovementInput>(),
+                GetComponent<SkillInput>(),
+                GetComponent<WizardInput>(),
             };
 
             GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn

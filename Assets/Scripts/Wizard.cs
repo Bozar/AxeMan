@@ -143,6 +143,22 @@ namespace AxeMan.GameSystem
                     TestHP();
                     break;
 
+                case CommandTag.SkillQ:
+                    Debug.Log("Skill Q");
+                    break;
+
+                case CommandTag.SkillW:
+                    Debug.Log("Skill W");
+                    break;
+
+                case CommandTag.SkillE:
+                    Debug.Log("Skill E");
+                    break;
+
+                case CommandTag.SkillR:
+                    Debug.Log("Skill R");
+                    break;
+
                 default:
                     break;
             }
