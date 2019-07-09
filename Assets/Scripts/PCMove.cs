@@ -58,6 +58,11 @@ namespace AxeMan.DungeonObject
         private void PCMove_PlayerCommanding(object sender,
             PlayerCommandingEventArgs e)
         {
+            if (e.Actor != gameObject)
+            {
+                return;
+            }
+
             if (!IsValidCommand(e.Command))
             {
                 return;
