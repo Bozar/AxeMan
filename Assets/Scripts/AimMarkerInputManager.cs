@@ -22,6 +22,7 @@ namespace AxeMan.DungeonObject.PlayerInput
             {
                 GetComponent<MovementInput>(),
                 GetComponent<SkillInput>(),
+                GetComponent<ConfirmCancelInput>(),
             };
         }
 
