@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PlayerInput;
 using AxeMan.GameSystem.PrototypeFactory;
@@ -18,6 +19,7 @@ namespace AxeMan.GameSystem
             // The `gameObject` is `AxeManCore`.
             gameObject.AddComponent<ActorComponent>();
             gameObject.AddComponent<AimMarkerComponent>();
+            gameObject.AddComponent<AimMode>();
 
             gameObject.AddComponent<Blueprint>();
             gameObject.AddComponent<BlueprintActor>();
