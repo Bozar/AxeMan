@@ -1,5 +1,4 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.SearchGameObject;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.PrototypeFactory
@@ -14,9 +13,9 @@ namespace AxeMan.GameSystem.PrototypeFactory
                 return;
             }
 
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            int[] position = GetComponent<ConvertCoordinate>().Convert(
-                pc.transform.position);
+            //GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+            int invalid = -999;
+            int[] position = new int[] { invalid, invalid };
 
             e.Data = new IPrototype[]
             {

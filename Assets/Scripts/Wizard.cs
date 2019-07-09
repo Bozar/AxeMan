@@ -47,7 +47,7 @@ namespace AxeMan.GameSystem
             BlueprintTag[] tags = new BlueprintTag[]
             {
                 BlueprintTag.Altar, BlueprintTag.Floor,
-                BlueprintTag.Trap, BlueprintTag.Actor,
+                BlueprintTag.Trap, BlueprintTag.Actor, BlueprintTag.AimMarker,
             };
             IPrototype[] proto;
 
@@ -95,22 +95,17 @@ namespace AxeMan.GameSystem
             uiUpdated = true;
         }
 
-        private void Start()
+        private void ListenAimMarkerInput(PlayerCommandingEventArgs e)
         {
-            GetComponent<InputManager>().PlayerCommanding
-                += Wizard_PlayerCommanding;
+            if (e.Actor.GetComponent<MetaInfo>().STag != SubTag.AimMarker)
+            {
+                return;
+            }
+
+            Debug.Log("Aim: " + e.Command);
         }
 
-        private void TestHP()
-        {
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-
-            pc.GetComponent<HP>().Subtract(5);
-            pc.GetComponent<HP>().Add(2);
-        }
-
-        private void Wizard_PlayerCommanding(object sender,
-            PlayerCommandingEventArgs e)
+        private void ListenPCInput(PlayerCommandingEventArgs e)
         {
             if (e.Actor.GetComponent<MetaInfo>().STag != SubTag.PC)
             {
@@ -131,18 +126,30 @@ namespace AxeMan.GameSystem
                     TestHP();
                     break;
 
-                case CommandTag.SkillQ:
-                case CommandTag.SkillW:
-                case CommandTag.SkillE:
-                case CommandTag.SkillR:
-                    IPrototype[] proto = GetComponent<Blueprint>().GetBlueprint(
-                        BlueprintTag.AimMarker);
-                    GetComponent<CreateObject>().Create(proto);
-                    break;
-
                 default:
                     break;
             }
+        }
+
+        private void Start()
+        {
+            GetComponent<InputManager>().PlayerCommanding
+                += Wizard_PlayerCommanding;
+        }
+
+        private void TestHP()
+        {
+            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+
+            pc.GetComponent<HP>().Subtract(5);
+            pc.GetComponent<HP>().Add(2);
+        }
+
+        private void Wizard_PlayerCommanding(object sender,
+            PlayerCommandingEventArgs e)
+        {
+            ListenPCInput(e);
+            ListenAimMarkerInput(e);
         }
     }
 }
