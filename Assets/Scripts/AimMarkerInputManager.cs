@@ -10,8 +10,6 @@ namespace AxeMan.DungeonObject.PlayerInput
     {
         public IConvertInput[] InputComponent { get; private set; }
 
-        public bool ListenInput { get; private set; }
-
         public CommandTag ConvertInput()
         {
             return GameCore.AxeManCore.GetComponent<InputManager>()
@@ -29,12 +27,9 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         private void Update()
         {
-            if (!ListenInput)
-            {
-                return;
-            }
-            GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(
-                gameObject, ConvertInput());
+            return;
+            //GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(
+            //    gameObject, ConvertInput());
         }
     }
 }

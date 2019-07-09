@@ -12,8 +12,6 @@ namespace AxeMan.GameSystem.PlayerInput
     public interface IInputManager
     {
         IConvertInput[] InputComponent { get; }
-
-        bool ListenInput { get; }
     }
 
     public class InputManager : MonoBehaviour
