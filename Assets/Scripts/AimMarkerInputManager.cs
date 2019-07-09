@@ -27,9 +27,8 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         private void Update()
         {
-            return;
-            //GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(
-            //    gameObject, ConvertInput());
+            GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(
+                gameObject, ConvertInput());
         }
     }
 }

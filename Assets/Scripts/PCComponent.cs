@@ -15,7 +15,8 @@ namespace AxeMan.GameSystem.ObjectFactory
                 return;
             }
             e.Data.AddComponent<MovementInput>();
-            e.Data.AddComponent<PCInputManager>();
+            e.Data.AddComponent<PCInputManager>().enabled = false;
+            e.Data.AddComponent<PCInputSwitcher>();
 
             e.Data.AddComponent<PCMove>();
             e.Data.AddComponent<PCStartEndTurn>();
