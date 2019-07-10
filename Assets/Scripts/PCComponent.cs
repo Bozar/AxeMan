@@ -14,14 +14,11 @@ namespace AxeMan.GameSystem.ObjectFactory
             {
                 return;
             }
-            e.Data.AddComponent<MovementInput>();
             e.Data.AddComponent<PCInputManager>().enabled = false;
             e.Data.AddComponent<PCInputSwitcher>();
 
             e.Data.AddComponent<PCMove>();
             e.Data.AddComponent<PCStartEndTurn>();
-            e.Data.AddComponent<SkillInput>();
-            e.Data.AddComponent<WizardInput>();
         }
 
         private void Start()

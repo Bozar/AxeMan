@@ -1,8 +1,7 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.PlayerInput;
 using UnityEngine;
 
-namespace AxeMan.DungeonObject.PlayerInput
+namespace AxeMan.GameSystem.PlayerInput
 {
     public class MovementInput : MonoBehaviour, IConvertInput
     {

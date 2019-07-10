@@ -20,9 +20,9 @@ namespace AxeMan.DungeonObject.PlayerInput
         {
             InputComponent = new IConvertInput[]
             {
-                GetComponent<MovementInput>(),
-                GetComponent<SkillInput>(),
-                GetComponent<ConfirmCancelInput>(),
+                GameCore.AxeManCore.GetComponent<MovementInput>(),
+                GameCore.AxeManCore.GetComponent<SkillInput>(),
+                GameCore.AxeManCore.GetComponent<ConfirmCancelInput>(),
             };
         }
 

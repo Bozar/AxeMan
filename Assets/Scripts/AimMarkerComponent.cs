@@ -16,10 +16,6 @@ namespace AxeMan.GameSystem.ObjectFactory
             }
             e.Data.AddComponent<AimMarkerInputManager>().enabled = false;
             e.Data.AddComponent<AimMarkerInputSwitcher>();
-
-            e.Data.AddComponent<ConfirmCancelInput>();
-            e.Data.AddComponent<MovementInput>();
-            e.Data.AddComponent<SkillInput>();
         }
 
         private void Start()
