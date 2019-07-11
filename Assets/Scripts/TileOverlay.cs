@@ -46,13 +46,6 @@ namespace AxeMan.GameSystem
             SwitchRenderer(probe, true);
         }
 
-        public void TryHideTile(GameObject go)
-        {
-            int[] position = GetComponent<ConvertCoordinate>().Convert(
-                go.transform.position);
-            TryHideTile(position[0], position[1]);
-        }
-
         private void Awake()
         {
             layer = new MainTag[]
