@@ -9,9 +9,6 @@ namespace AxeMan.DungeonObject
 {
     public class PCMove : MonoBehaviour
     {
-        private ConvertCoordinate coord;
-        private TileOverlay overlay;
-
         private int[] GetNewPosition(int[] source, CommandTag command)
         {
             int[] target;
@@ -62,31 +59,29 @@ namespace AxeMan.DungeonObject
             {
                 return;
             }
-
             if (!IsValidCommand(e.Command))
             {
                 return;
             }
 
-            int[] source = coord.Convert(transform.position);
+            int[] source = GetComponent<LocalManager>().GetPosition();
             int[] target = GetNewPosition(source, e.Command);
 
-            if (IsValidPosition(target))
+            if (!IsValidPosition(target))
             {
-                transform.position = coord.Convert(target);
-                GetComponent<LocalManager>().TakenAction(
-                    new TakenActionEventArgs(gameObject, ActionTag.Move));
+                return;
             }
-            overlay.RefreshDungeonBoard();
+            GetComponent<LocalManager>().SetPosition(target);
+            GetComponent<LocalManager>().TakenAction(
+                new TakenActionEventArgs(gameObject, ActionTag.Move));
+            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(source);
+            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(target);
         }
 
         private void Start()
         {
             GameCore.AxeManCore.GetComponent<InputManager>().PlayerCommanding
                 += PCMove_PlayerCommanding;
-
-            coord = GameCore.AxeManCore.GetComponent<ConvertCoordinate>();
-            overlay = GameCore.AxeManCore.GetComponent<TileOverlay>();
         }
     }
 }

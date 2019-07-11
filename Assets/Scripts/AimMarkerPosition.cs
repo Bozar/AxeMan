@@ -14,27 +14,21 @@ namespace AxeMan.DungeonObject
         {
             GameObject pc = GameCore.AxeManCore.GetComponent<SearchObject>()
                 .Search(SubTag.PC)[0];
-            Vector3 v3Position = pc.transform.position;
-            int[] intPosition = pc.GetComponent<LocalManager>().GetPosition();
+            int[] position = pc.GetComponent<LocalManager>().GetPosition();
 
-            gameObject.transform.position = v3Position;
-            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(
-                intPosition);
+            GetComponent<LocalManager>().SetPosition(position);
+            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(position);
         }
 
         private void AimMarkerPosition_LeavingAimMode(object sender,
             EventArgs e)
         {
             int invalid = -999;
-            int[] position
-                = GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
-                .Convert(gameObject.transform.position);
+            int[] position = GetComponent<LocalManager>().GetPosition();
 
-            gameObject.transform.position
-                = GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
-                .Convert(new int[] { invalid, invalid });
-            GameCore.AxeManCore.GetComponent<TileOverlay>()
-                .TryHideTile(position);
+            GetComponent<LocalManager>().SetPosition(
+                new int[] { invalid, invalid });
+            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(position);
         }
 
         private void Start()

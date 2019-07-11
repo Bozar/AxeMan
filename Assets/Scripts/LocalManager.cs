@@ -11,6 +11,8 @@ namespace AxeMan.DungeonObject
 
         void Remove();
 
+        void SetPosition(int[] position);
+
         void TakenAction(TakenActionEventArgs e);
 
         void TakingAction(TakingActionEventArgs e);
@@ -27,6 +29,13 @@ namespace AxeMan.DungeonObject
         public void Remove()
         {
             GameCore.AxeManCore.GetComponent<RemoveObject>().Remove(gameObject);
+        }
+
+        public void SetPosition(int[] position)
+        {
+            transform.position
+                = GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
+                .Convert(position);
         }
 
         public void TakenAction(TakenActionEventArgs e)
