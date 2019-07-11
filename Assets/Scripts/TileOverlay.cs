@@ -46,6 +46,11 @@ namespace AxeMan.GameSystem
             SwitchRenderer(probe, true);
         }
 
+        public void TryHideTile(int[] position)
+        {
+            TryHideTile(position[0], position[1]);
+        }
+
         private void Awake()
         {
             layer = new MainTag[]
