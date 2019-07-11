@@ -57,8 +57,8 @@ namespace AxeMan.GameSystem
         {
             layer = new MainTag[]
             {
-                MainTag.INVALID,
-                MainTag.Floor, MainTag.Trap, MainTag.Building, MainTag.Actor
+                MainTag.INVALID, MainTag.Floor, MainTag.Trap, MainTag.Building,
+                MainTag.Actor, MainTag.Marker,
             };
         }
 
