@@ -47,6 +47,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ProgressBar>();
             gameObject.AddComponent<PublishAction>();
             gameObject.AddComponent<PublishHP>();
+            gameObject.AddComponent<PublishPosition>();
 
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<Schedule>();

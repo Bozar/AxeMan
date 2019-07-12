@@ -2,7 +2,6 @@
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.PlayerInput;
-using AxeMan.GameSystem.SearchGameObject;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -46,12 +45,6 @@ namespace AxeMan.DungeonObject
                 || (command == CommandTag.Down);
         }
 
-        private bool IsValidPosition(int[] position)
-        {
-            return GameCore.AxeManCore.GetComponent<SearchObject>().Search(
-                position[0], position[1], SubTag.Floor, out _);
-        }
-
         private void PCMove_PlayerCommanding(object sender,
             PlayerCommandingEventArgs e)
         {
@@ -67,7 +60,7 @@ namespace AxeMan.DungeonObject
             int[] source = GetComponent<LocalManager>().GetPosition();
             int[] target = GetNewPosition(source, e.Command);
 
-            if (!IsValidPosition(target))
+            if (!GetComponent<LocalManager>().IsPassable(target))
             {
                 return;
             }

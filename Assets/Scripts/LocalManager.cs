@@ -1,6 +1,7 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.ObjectFactory;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -8,6 +9,8 @@ namespace AxeMan.DungeonObject
     public interface ILocalManager
     {
         int[] GetPosition();
+
+        bool IsPassable(int[] position);
 
         void Remove();
 
@@ -24,6 +27,22 @@ namespace AxeMan.DungeonObject
         {
             return GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
                 .Convert(transform.position);
+        }
+
+        public bool IsPassable(int[] position)
+        {
+            CheckingTerrainEventArgs e = new CheckingTerrainEventArgs(
+               gameObject.GetInstanceID(), position, new Stack<bool>());
+            GameCore.AxeManCore.GetComponent<PublishPosition>().CheckTerrain(e);
+
+            while (e.IsPassable.Count > 0)
+            {
+                if (!e.IsPassable.Pop())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void Remove()
