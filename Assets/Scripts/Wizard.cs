@@ -95,16 +95,6 @@ namespace AxeMan.GameSystem
             uiUpdated = true;
         }
 
-        private void ListenAimMarkerInput(PlayerCommandingEventArgs e)
-        {
-            if (e.Actor.GetComponent<MetaInfo>().STag != SubTag.AimMarker)
-            {
-                return;
-            }
-
-            Debug.Log("Aim: " + e.Command);
-        }
-
         private void ListenPCInput(PlayerCommandingEventArgs e)
         {
             if (e.Actor.GetComponent<MetaInfo>().STag != SubTag.PC)
@@ -149,7 +139,6 @@ namespace AxeMan.GameSystem
             PlayerCommandingEventArgs e)
         {
             ListenPCInput(e);
-            ListenAimMarkerInput(e);
         }
     }
 }
