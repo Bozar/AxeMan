@@ -54,7 +54,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
                 marker = s == Current ? "* " : "";
                 position = GetComponent<ConvertCoordinate>().Convert(
                     s.transform.position);
-                Debug.Log(marker + s.GetComponent<MetaInfo>().STag + ": "
+                Debug.Log(marker + s.GetComponent<MetaInfo>().SubTag + ": "
                     + position[0] + ", " + position[1]);
             }
         }
@@ -89,7 +89,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
         private void Schedule_CreatedObject(object sender,
             CreatedObjectEventArgs e)
         {
-            if (e.Data.GetComponent<MetaInfo>().MTag != MainTag.Actor)
+            if (e.Data.GetComponent<MetaInfo>().MainTag != MainTag.Actor)
             {
                 return;
             }

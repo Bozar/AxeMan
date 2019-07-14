@@ -10,7 +10,7 @@ namespace AxeMan.GameSystem.ObjectFactory
         private void AimMarkerComponent_AddingComponent(object sender,
             AddingComponentEventArgs e)
         {
-            if (e.Data.GetComponent<MetaInfo>().STag != SubTag.AimMarker)
+            if (e.Data.GetComponent<MetaInfo>().SubTag != SubTag.AimMarker)
             {
                 return;
             }

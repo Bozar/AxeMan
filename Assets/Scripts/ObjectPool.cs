@@ -33,7 +33,7 @@ namespace AxeMan.GameSystem.ObjectFactory
                 throw new System.Exception("Require: MetaInfo.");
             }
 
-            SubTag tag = go.GetComponent<MetaInfo>().STag;
+            SubTag tag = go.GetComponent<MetaInfo>().SubTag;
             if (!pool.ContainsKey(tag))
             {
                 pool[tag] = new Stack<GameObject>();

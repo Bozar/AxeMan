@@ -9,7 +9,7 @@ namespace AxeMan.GameSystem.ObjectFactory
         private void ActorComponent_AddingComponent(object sender,
             AddingComponentEventArgs e)
         {
-            if (e.Data.GetComponent<MetaInfo>().MTag == MainTag.Actor)
+            if (e.Data.GetComponent<MetaInfo>().MainTag == MainTag.Actor)
             {
                 e.Data.AddComponent<HP>();
             }

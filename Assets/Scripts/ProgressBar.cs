@@ -46,7 +46,7 @@ namespace AxeMan.GameSystem
         private void ProgressBar_EndingTurn(object sender,
             EndingTurnEventArgs e)
         {
-            if (e.Data.GetComponent<MetaInfo>().STag != SubTag.PC)
+            if (e.Data.GetComponent<MetaInfo>().SubTag != SubTag.PC)
             {
                 return;
             }

@@ -10,7 +10,7 @@ namespace AxeMan.GameSystem.ObjectFactory
         private void PCComponent_AddingComponent(object sender,
             AddingComponentEventArgs e)
         {
-            if (e.Data.GetComponent<MetaInfo>()?.STag != SubTag.PC)
+            if (e.Data.GetComponent<MetaInfo>()?.SubTag != SubTag.PC)
             {
                 return;
             }

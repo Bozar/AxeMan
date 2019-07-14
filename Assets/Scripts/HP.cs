@@ -56,7 +56,7 @@ namespace AxeMan.DungeonObject
         private void PublishHP()
         {
             GameCore.AxeManCore.GetComponent<PublishHP>().PublishChangedHP(
-               new ChangedHPEventArgs(GetComponent<MetaInfo>().STag, Current));
+               new ChangedHPEventArgs(GetComponent<MetaInfo>().SubTag, Current));
         }
     }
 }

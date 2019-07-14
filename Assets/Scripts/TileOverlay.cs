@@ -68,7 +68,7 @@ namespace AxeMan.GameSystem
             {
                 return invalid;
             }
-            return Array.IndexOf(layer, go.GetComponent<MetaInfo>().MTag);
+            return Array.IndexOf(layer, go.GetComponent<MetaInfo>().MainTag);
         }
 
         private void SwitchRenderer(GameObject go, bool switchOn)

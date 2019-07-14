@@ -6,21 +6,21 @@ namespace AxeMan.DungeonObject
 {
     public interface IMetaInfo
     {
-        MainTag MTag { get; }
+        MainTag MainTag { get; }
 
-        SubTag STag { get; }
+        SubTag SubTag { get; }
     }
 
     public class MetaInfo : MonoBehaviour, IMetaInfo
     {
-        public MainTag MTag { get; private set; }
+        public MainTag MainTag { get; private set; }
 
-        public SubTag STag { get; private set; }
+        public SubTag SubTag { get; private set; }
 
         public void SetValue(IPrototype proto)
         {
-            MTag = proto.MTag;
-            STag = proto.STag;
+            MainTag = proto.MTag;
+            SubTag = proto.STag;
         }
     }
 }

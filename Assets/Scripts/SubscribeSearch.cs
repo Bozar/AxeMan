@@ -17,12 +17,12 @@ namespace AxeMan.DungeonObject.GameEvent
 
         private bool MatchCriteria(SubTag sTag)
         {
-            return GetComponent<MetaInfo>().STag == sTag;
+            return GetComponent<MetaInfo>().SubTag == sTag;
         }
 
         private bool MatchCriteria(MainTag mTag)
         {
-            return GetComponent<MetaInfo>().MTag == mTag;
+            return GetComponent<MetaInfo>().MainTag == mTag;
         }
 
         private void Start()

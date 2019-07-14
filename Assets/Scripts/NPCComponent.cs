@@ -9,7 +9,7 @@ namespace AxeMan.GameSystem.ObjectFactory
         private void NPCComponent_AddingComponent(object sender,
             AddingComponentEventArgs e)
         {
-            if (e.Data.GetComponent<MetaInfo>()?.STag != SubTag.Dummy)
+            if (e.Data.GetComponent<MetaInfo>()?.SubTag != SubTag.Dummy)
             {
                 return;
             }

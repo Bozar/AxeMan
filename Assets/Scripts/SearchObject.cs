@@ -129,7 +129,7 @@ namespace AxeMan.GameSystem.SearchGameObject
 
             foreach (GameObject s in source)
             {
-                if (s.GetComponent<MetaInfo>().MTag == mTag)
+                if (s.GetComponent<MetaInfo>().MainTag == mTag)
                 {
                     result.Push(s);
                 }
@@ -143,7 +143,7 @@ namespace AxeMan.GameSystem.SearchGameObject
 
             foreach (GameObject s in source)
             {
-                if (s.GetComponent<MetaInfo>().STag == sTag)
+                if (s.GetComponent<MetaInfo>().SubTag == sTag)
                 {
                     result.Push(s);
                 }
