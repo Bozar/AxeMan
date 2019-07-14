@@ -28,8 +28,11 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         private void Update()
         {
+            int id = gameObject.GetInstanceID();
+            SubTag tag = GetComponent<MetaInfo>().STag;
+
             GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(
-                gameObject, ConvertInput());
+                ConvertInput(), id, tag);
         }
     }
 }

@@ -97,7 +97,7 @@ namespace AxeMan.GameSystem
 
         private void ListenPCInput(PlayerCommandingEventArgs e)
         {
-            if (e.Actor.GetComponent<MetaInfo>().STag != SubTag.PC)
+            if (e.SubTag != SubTag.PC)
             {
                 return;
             }

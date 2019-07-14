@@ -1,5 +1,4 @@
-﻿using AxeMan.DungeonObject;
-using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PlayerInput;
 using System;
 using UnityEngine;
@@ -37,8 +36,7 @@ namespace AxeMan.GameSystem.GameMode
 
         private bool EnterMode(PlayerCommandingEventArgs e)
         {
-            SubTag sTag = e.Actor.GetComponent<MetaInfo>().STag;
-            if ((sTag != SubTag.PC) && (sTag != SubTag.AimMarker))
+            if ((e.SubTag != SubTag.PC) && (e.SubTag != SubTag.AimMarker))
             {
                 return false;
             }
@@ -58,12 +56,10 @@ namespace AxeMan.GameSystem.GameMode
 
         private bool LeaveMode(PlayerCommandingEventArgs e)
         {
-            SubTag sTag = e.Actor.GetComponent<MetaInfo>().STag;
-            if (sTag != SubTag.AimMarker)
+            if (e.SubTag != SubTag.AimMarker)
             {
                 return false;
             }
-
             return e.Command == CommandTag.Cancel;
         }
 

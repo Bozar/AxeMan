@@ -48,7 +48,7 @@ namespace AxeMan.DungeonObject
         private void PCMove_PlayerCommanding(object sender,
             PlayerCommandingEventArgs e)
         {
-            if (e.Actor != gameObject)
+            if (e.ObjectID != gameObject.GetInstanceID())
             {
                 return;
             }

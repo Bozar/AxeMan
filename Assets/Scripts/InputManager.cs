@@ -33,13 +33,13 @@ namespace AxeMan.GameSystem.PlayerInput
             return CommandTag.INVALID;
         }
 
-        public void PublishCommand(GameObject actor, CommandTag command)
+        public void PublishCommand(CommandTag command, int id, SubTag tag)
         {
             if (command == CommandTag.INVALID)
             {
                 return;
             }
-            OnPlayerCommanding(new PlayerCommandingEventArgs(actor, command));
+            OnPlayerCommanding(new PlayerCommandingEventArgs(command, id, tag));
         }
 
         protected virtual void OnPlayerCommanding(PlayerCommandingEventArgs e)
@@ -50,14 +50,18 @@ namespace AxeMan.GameSystem.PlayerInput
 
     public class PlayerCommandingEventArgs : EventArgs
     {
-        public PlayerCommandingEventArgs(GameObject actor, CommandTag command)
+        public PlayerCommandingEventArgs(CommandTag command,
+            int objectID, SubTag subTag)
         {
-            Actor = actor;
             Command = command;
+            ObjectID = objectID;
+            SubTag = subTag;
         }
 
-        public GameObject Actor { get; }
-
         public CommandTag Command { get; }
+
+        public int ObjectID { get; }
+
+        public SubTag SubTag { get; }
     }
 }
