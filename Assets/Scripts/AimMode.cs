@@ -7,11 +7,11 @@ namespace AxeMan.GameSystem.GameMode
 {
     public class AimMode : MonoBehaviour
     {
-        public event EventHandler<EventArgs> EnteringAimMode;
+        public event EventHandler<EnteringAimModeEventArgs> EnteringAimMode;
 
         public event EventHandler<EventArgs> LeavingAimMode;
 
-        protected virtual void OnEnteringAimMode(EventArgs e)
+        protected virtual void OnEnteringAimMode(EnteringAimModeEventArgs e)
         {
             EnteringAimMode?.Invoke(this, e);
         }
@@ -26,7 +26,7 @@ namespace AxeMan.GameSystem.GameMode
         {
             if (EnterMode(e))
             {
-                OnEnteringAimMode(EventArgs.Empty);
+                OnEnteringAimMode(new EnteringAimModeEventArgs(e.SubTag));
             }
             else if (LeaveMode(e))
             {
@@ -68,5 +68,15 @@ namespace AxeMan.GameSystem.GameMode
             GetComponent<InputManager>().PlayerCommanding
                 += AimMode_PlayerCommanding;
         }
+    }
+
+    public class EnteringAimModeEventArgs : EventArgs
+    {
+        public EnteringAimModeEventArgs(SubTag subTag)
+        {
+            SubTag = subTag;
+        }
+
+        public SubTag SubTag { get; }
     }
 }

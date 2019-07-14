@@ -10,8 +10,13 @@ namespace AxeMan.DungeonObject
     public class AimMarkerPosition : MonoBehaviour
     {
         private void AimMarkerPosition_EnteringAimMode(object sender,
-            EventArgs e)
+            EnteringAimModeEventArgs e)
         {
+            if (e.SubTag == SubTag.AimMarker)
+            {
+                return;
+            }
+
             GameObject pc = GameCore.AxeManCore.GetComponent<SearchObject>()
                 .Search(SubTag.PC)[0];
             int[] position = pc.GetComponent<LocalManager>().GetPosition();
