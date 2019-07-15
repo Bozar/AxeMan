@@ -35,8 +35,11 @@ namespace AxeMan.DungeonObject
 
         public void SetValue(IPrototype proto)
         {
-            MainTag = proto.MTag;
-            SubTag = proto.STag;
+            if ((MainTag == MainTag.INVALID) && (SubTag == SubTag.INVALID))
+            {
+                MainTag = proto.MTag;
+                SubTag = proto.STag;
+            }
         }
     }
 }
