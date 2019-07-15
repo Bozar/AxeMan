@@ -43,10 +43,11 @@ namespace AxeMan.GameSystem
             return result;
         }
 
-        private void ProgressBar_EndingTurn(object sender,
-            EndingTurnEventArgs e)
+        private void ProgressBar_EndingTurn(object sender, EndingTurnEventArgs e)
         {
-            if (e.Data.GetComponent<MetaInfo>().SubTag != SubTag.PC)
+            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+            LocalManager manager = pc.GetComponent<LocalManager>();
+            if (!manager.MatchID(e.ObjectID))
             {
                 return;
             }

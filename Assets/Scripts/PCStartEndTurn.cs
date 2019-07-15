@@ -9,7 +9,7 @@ namespace AxeMan.DungeonObject
         private void PCStartEndTurn_EndingTurn(object sender,
             EndingTurnEventArgs e)
         {
-            if (gameObject != e.Data)
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
                 return;
             }
@@ -18,7 +18,7 @@ namespace AxeMan.DungeonObject
         private void PCStartEndTurn_StartingTurn(object sender,
             StartingTurnEventArgs e)
         {
-            if (gameObject != e.Data)
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
                 return;
             }

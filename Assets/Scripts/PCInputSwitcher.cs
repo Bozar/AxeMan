@@ -16,7 +16,7 @@ namespace AxeMan.DungeonObject.PlayerInput
         private void PCInputSwitcher_EndingTurn(object sender,
             EndingTurnEventArgs e)
         {
-            if (e.Data != gameObject)
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
                 return;
             }
@@ -36,7 +36,7 @@ namespace AxeMan.DungeonObject.PlayerInput
         private void PCInputSwitcher_StartingTurn(object sender,
             StartingTurnEventArgs e)
         {
-            if (e.Data != gameObject)
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
                 return;
             }

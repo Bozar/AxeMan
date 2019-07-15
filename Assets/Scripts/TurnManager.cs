@@ -17,22 +17,22 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
     public class EndingTurnEventArgs : EventArgs
     {
-        public EndingTurnEventArgs(GameObject data)
+        public EndingTurnEventArgs(int objectID)
         {
-            Data = data;
+            ObjectID = objectID;
         }
 
-        public GameObject Data { get; }
+        public int ObjectID { get; }
     }
 
     public class StartingTurnEventArgs : EventArgs
     {
-        public StartingTurnEventArgs(GameObject data)
+        public StartingTurnEventArgs(int objectID)
         {
-            Data = data;
+            ObjectID = objectID;
         }
 
-        public GameObject Data { get; }
+        public int ObjectID { get; }
     }
 
     public class TurnManager : MonoBehaviour, ITurnManager
@@ -43,8 +43,9 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         public void EndTurn()
         {
-            GameObject actor = GetComponent<Schedule>().Current;
-            OnEndingTurn(new EndingTurnEventArgs(actor));
+            int id = GetComponent<Schedule>().Current
+                .GetComponent<MetaInfo>().ObjectID;
+            OnEndingTurn(new EndingTurnEventArgs(id));
         }
 
         public GameObject NextActor()
@@ -58,8 +59,9 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         public void StartTurn()
         {
-            GameObject actor = GetComponent<Schedule>().Current;
-            OnStartingTurn(new StartingTurnEventArgs(actor));
+            int id = GetComponent<Schedule>().Current
+                .GetComponent<MetaInfo>().ObjectID;
+            OnStartingTurn(new StartingTurnEventArgs(id));
         }
 
         protected virtual void OnEndingTurn(EndingTurnEventArgs e)
