@@ -57,7 +57,7 @@ namespace AxeMan.DungeonObject
                 return;
             }
 
-            int[] source = GetComponent<LocalManager>().GetPosition();
+            int[] source = GetComponent<LocalManager>().Position;
             int[] target = GetNewPosition(source, e.Command);
 
             if (!GetComponent<LocalManager>().IsPassable(target))

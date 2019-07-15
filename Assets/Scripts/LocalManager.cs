@@ -8,7 +8,7 @@ namespace AxeMan.DungeonObject
 {
     public interface ILocalManager
     {
-        int[] GetPosition();
+        int[] Position { get; }
 
         bool IsPassable(int[] position);
 
@@ -23,10 +23,13 @@ namespace AxeMan.DungeonObject
 
     public class LocalManager : MonoBehaviour, ILocalManager
     {
-        public int[] GetPosition()
+        public int[] Position
         {
-            return GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
-                .Convert(transform.position);
+            get
+            {
+                return GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
+                    .Convert(transform.position);
+            }
         }
 
         public bool IsPassable(int[] position)
