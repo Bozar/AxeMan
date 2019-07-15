@@ -27,7 +27,7 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         private void Update()
         {
-            int id = gameObject.GetInstanceID();
+            int id = GetComponent<MetaInfo>().ObjectID;
             SubTag tag = GetComponent<MetaInfo>().SubTag;
 
             GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(

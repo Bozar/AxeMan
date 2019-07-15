@@ -11,7 +11,7 @@ namespace AxeMan.DungeonObject
         private void PCCheckTerrain_CheckingTerrain(object sender,
             CheckingTerrainEventArgs e)
         {
-            if (e.ObjectID != gameObject.GetInstanceID())
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
                 return;
             }

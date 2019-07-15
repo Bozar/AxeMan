@@ -8,9 +8,9 @@ namespace AxeMan.DungeonObject
 {
     public interface ILocalManager
     {
-        int[] Position { get; }
-
         bool IsPassable(int[] position);
+
+        bool MatchID(int id);
 
         void Remove();
 
@@ -23,15 +23,6 @@ namespace AxeMan.DungeonObject
 
     public class LocalManager : MonoBehaviour, ILocalManager
     {
-        public int[] Position
-        {
-            get
-            {
-                return GameCore.AxeManCore.GetComponent<ConvertCoordinate>()
-                    .Convert(transform.position);
-            }
-        }
-
         public bool IsPassable(int[] position)
         {
             CheckingTerrainEventArgs e = new CheckingTerrainEventArgs(
@@ -46,6 +37,11 @@ namespace AxeMan.DungeonObject
                 }
             }
             return true;
+        }
+
+        public bool MatchID(int id)
+        {
+            return gameObject.GetInstanceID() == id;
         }
 
         public void Remove()

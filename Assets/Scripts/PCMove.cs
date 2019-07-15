@@ -48,7 +48,7 @@ namespace AxeMan.DungeonObject
         private void PCMove_PlayerCommanding(object sender,
             PlayerCommandingEventArgs e)
         {
-            if (e.ObjectID != gameObject.GetInstanceID())
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace AxeMan.DungeonObject
                 return;
             }
 
-            int[] source = GetComponent<LocalManager>().Position;
+            int[] source = GetComponent<MetaInfo>().Position;
             int[] target = GetNewPosition(source, e.Command);
 
             if (!GetComponent<LocalManager>().IsPassable(target))

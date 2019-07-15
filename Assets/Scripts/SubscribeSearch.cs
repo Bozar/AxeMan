@@ -9,7 +9,7 @@ namespace AxeMan.DungeonObject.GameEvent
     {
         private bool MatchCriteria(int[] position)
         {
-            int[] localPosition = GetComponent<LocalManager>().Position;
+            int[] localPosition = GetComponent<MetaInfo>().Position;
 
             return (localPosition[0] == position[0])
                 && (localPosition[1] == position[1]);

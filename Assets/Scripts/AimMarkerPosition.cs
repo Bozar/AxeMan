@@ -19,7 +19,7 @@ namespace AxeMan.DungeonObject
 
             GameObject pc = GameCore.AxeManCore.GetComponent<SearchObject>()
                 .Search(SubTag.PC)[0];
-            int[] position = pc.GetComponent<LocalManager>().Position;
+            int[] position = pc.GetComponent<MetaInfo>().Position;
 
             GetComponent<LocalManager>().SetPosition(position);
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(position);
@@ -29,7 +29,7 @@ namespace AxeMan.DungeonObject
             EventArgs e)
         {
             int invalid = -999;
-            int[] position = GetComponent<LocalManager>().Position;
+            int[] position = GetComponent<MetaInfo>().Position;
 
             GetComponent<LocalManager>().SetPosition(
                 new int[] { invalid, invalid });
