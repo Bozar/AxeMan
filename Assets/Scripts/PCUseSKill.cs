@@ -25,12 +25,20 @@ namespace AxeMan.DungeonObject
         private void PCUseSKill_VerifiedSkill(object sender,
             VerifiedSkillEventArgs e)
         {
+            MainTag mainTag;
+            SubTag subTag;
+            int id;
+
             if (command2action.TryGetValue(e.UseSkill, out ActionTag action))
             {
+                mainTag = GetComponent<MetaInfo>().MainTag;
+                subTag = GetComponent<MetaInfo>().SubTag;
+                id = GetComponent<MetaInfo>().ObjectID;
+
                 GetComponent<LocalManager>().TakingAction(
-                    new TakingActionEventArgs(gameObject, action));
+                    new TakingActionEventArgs(action, mainTag, subTag, id));
                 GetComponent<LocalManager>().TakenAction(
-                    new TakenActionEventArgs(gameObject, action));
+                    new TakenActionEventArgs(action, mainTag, subTag, id));
             }
         }
 

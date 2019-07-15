@@ -17,18 +17,22 @@ namespace AxeMan.DungeonObject
             }
         }
 
-        private void DummyAI_StartingTurn(object sender,
-            StartingTurnEventArgs e)
+        private void DummyAI_StartingTurn(object sender, StartingTurnEventArgs e)
         {
             if (gameObject != e.Data)
             {
                 return;
             }
 
+            ActionTag action = ActionTag.Skip;
+            MainTag mainTag = GetComponent<MetaInfo>().MainTag;
+            SubTag subTag = GetComponent<MetaInfo>().SubTag;
+            int id = GetComponent<MetaInfo>().ObjectID;
+
             GetComponent<LocalManager>().TakingAction(
-                new TakingActionEventArgs(gameObject, ActionTag.Skip));
+                new TakingActionEventArgs(action, mainTag, subTag, id));
             GetComponent<LocalManager>().TakenAction(
-                new TakenActionEventArgs(gameObject, ActionTag.Skip));
+                new TakenActionEventArgs(action, mainTag, subTag, id));
         }
 
         private void Start()

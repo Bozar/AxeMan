@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using System;
 using UnityEngine;
@@ -80,18 +81,25 @@ namespace AxeMan.GameSystem.SchedulingSystem
         private void TurnManager_TakenAction(object sender,
             TakenActionEventArgs e)
         {
-            if (GetComponent<Schedule>().Current != e.Actor)
+            if (!GetComponent<Schedule>().Current
+                .GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
                 return;
             }
-            if ((e.Action == ActionTag.Skip)
-                || (e.Action == ActionTag.Move)
-                || (e.Action == ActionTag.UseSkillQ)
-                || (e.Action == ActionTag.UseSkillW)
-                || (e.Action == ActionTag.UseSkillE)
-                || (e.Action == ActionTag.UseSkillR))
+
+            switch (e.Action)
             {
-                NextActor();
+                case ActionTag.Skip:
+                case ActionTag.Move:
+                case ActionTag.UseSkillQ:
+                case ActionTag.UseSkillW:
+                case ActionTag.UseSkillE:
+                case ActionTag.UseSkillR:
+                    NextActor();
+                    break;
+
+                default:
+                    break;
             }
         }
     }

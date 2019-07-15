@@ -33,27 +33,41 @@ namespace AxeMan.GameSystem.GameEvent
 
     public class TakenActionEventArgs : EventArgs
     {
-        public TakenActionEventArgs(GameObject actor, ActionTag action)
+        public TakenActionEventArgs(ActionTag action,
+            MainTag mainTag, SubTag subTag, int objectID)
         {
-            Actor = actor;
             Action = action;
+            MainTag = mainTag;
+            SubTag = subTag;
+            ObjectID = objectID;
         }
 
         public ActionTag Action { get; }
 
-        public GameObject Actor { get; }
+        public MainTag MainTag { get; }
+
+        public int ObjectID { get; }
+
+        public SubTag SubTag { get; }
     }
 
     public class TakingActionEventArgs : EventArgs
     {
-        public TakingActionEventArgs(GameObject actor, ActionTag action)
+        public TakingActionEventArgs(ActionTag action,
+            MainTag mainTag, SubTag subTag, int objectID)
         {
-            Actor = actor;
             Action = action;
+            MainTag = mainTag;
+            SubTag = subTag;
+            ObjectID = objectID;
         }
 
         public ActionTag Action { get; }
 
-        public GameObject Actor { get; }
+        public MainTag MainTag { get; }
+
+        public int ObjectID { get; }
+
+        public SubTag SubTag { get; }
     }
 }
