@@ -20,6 +20,7 @@ namespace AxeMan.GameSystem.ObjectFactory
 
             e.Data.AddComponent<PCMove>();
             e.Data.AddComponent<PCStartEndTurn>();
+            e.Data.AddComponent<PCUseSKill>();
         }
 
         private void Start()

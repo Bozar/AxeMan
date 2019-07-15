@@ -85,7 +85,11 @@ namespace AxeMan.GameSystem.SchedulingSystem
                 return;
             }
             if ((e.Action == ActionTag.Skip)
-                || (e.Action == ActionTag.Move))
+                || (e.Action == ActionTag.Move)
+                || (e.Action == ActionTag.UseSkillQ)
+                || (e.Action == ActionTag.UseSkillW)
+                || (e.Action == ActionTag.UseSkillE)
+                || (e.Action == ActionTag.UseSkillR))
             {
                 NextActor();
             }

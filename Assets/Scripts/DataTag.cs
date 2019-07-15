@@ -2,7 +2,10 @@
 
 namespace AxeMan.GameSystem.GameDataTag
 {
-    public enum ActionTag { INVALID, Skip, Move, }
+    public enum ActionTag
+    {
+        INVALID, Skip, Move, UseSkillQ, UseSkillW, UseSkillE, UseSkillR,
+    }
 
     public enum BlueprintTag
     {
