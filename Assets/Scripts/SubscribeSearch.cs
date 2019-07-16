@@ -3,7 +3,7 @@ using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.SearchGameObject;
 using UnityEngine;
 
-namespace AxeMan.DungeonObject.GameEvent
+namespace AxeMan.DungeonObject.SearchGameObject
 {
     public class SubscribeSearch : MonoBehaviour
     {

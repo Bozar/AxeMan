@@ -1,5 +1,5 @@
 ﻿using AxeMan.DungeonObject;
-using AxeMan.DungeonObject.GameEvent;
+using AxeMan.DungeonObject.SearchGameObject;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PrototypeFactory;
 using System;
