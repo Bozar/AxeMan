@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,9 +8,11 @@ namespace AxeMan.GameSystem.SearchGameObject
 {
     public interface ISearchUI
     {
-        GameObject Search(CanvasTag cTag, UITag uTag);
+        GameObject Search(CanvasTag canvasTag, UITag uiTag);
 
-        GameObject SearchCanvas(CanvasTag cTag);
+        GameObject[] Search(CanvasTag canvasTag);
+
+        GameObject SearchCanvas(CanvasTag canvasTag);
     }
 
     public class SearchingCanvasEventArgs : EventArgs
@@ -26,17 +29,15 @@ namespace AxeMan.GameSystem.SearchGameObject
 
     public class SearchingUIEventArgs : EventArgs
     {
-        public SearchingUIEventArgs(string canvasTag, string uiTag)
+        public SearchingUIEventArgs(string canvasTag, Stack<GameObject> data)
         {
             CanvasTag = canvasTag;
-            UITag = uiTag;
+            Data = data;
         }
 
         public string CanvasTag { get; }
 
-        public GameObject Data { get; set; }
-
-        public string UITag { get; }
+        public Stack<GameObject> Data { get; }
     }
 
     public class SearchUI : MonoBehaviour, ISearchUI
@@ -45,25 +46,41 @@ namespace AxeMan.GameSystem.SearchGameObject
 
         public event EventHandler<SearchingUIEventArgs> SearchingUI;
 
-        public GameObject Search(CanvasTag cTag, UITag uTag)
+        public GameObject Search(CanvasTag canvasTag, UITag uiTag)
         {
-            var ea = new SearchingUIEventArgs(cTag.ToString(), uTag.ToString());
-            OnSearchingUI(ea);
+            GameObject[] uiObjects = Search(canvasTag);
+            string uiName = uiTag.ToString();
 
-            return ea.Data;
+            foreach (GameObject go in uiObjects)
+            {
+                if (go.name == uiName)
+                {
+                    return go;
+                }
+            }
+            return null;
         }
 
-        public GameObject SearchCanvas(CanvasTag cTag)
+        public GameObject[] Search(CanvasTag canvasTag)
         {
-            var ea = new SearchingCanvasEventArgs(cTag.ToString());
+            var ea = new SearchingUIEventArgs(canvasTag.ToString(),
+                new Stack<GameObject>());
+            OnSearchingUI(ea);
+
+            return ea.Data.ToArray();
+        }
+
+        public GameObject SearchCanvas(CanvasTag canvasTag)
+        {
+            var ea = new SearchingCanvasEventArgs(canvasTag.ToString());
             OnSearchingCanvas(ea);
 
             return ea.Data;
         }
 
-        public Text SearchText(CanvasTag cTag, UITag uTag)
+        public Text SearchText(CanvasTag canvasTag, UITag uiTag)
         {
-            return Search(cTag, uTag).GetComponent<Text>();
+            return Search(canvasTag, uiTag).GetComponent<Text>();
         }
 
         protected virtual void OnSearchingCanvas(SearchingCanvasEventArgs e)

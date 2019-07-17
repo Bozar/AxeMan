@@ -17,14 +17,8 @@ namespace AxeMan.DungeonObject.SearchGameObject
         private void SubscribeSearchUI_SearchingCanvas(object sender,
             SearchingCanvasEventArgs e)
         {
-            if (e.Data != null)
-            {
-                return;
-            }
-
-            string canvas = GetComponentInParent<Canvas>().name;
-
-            if (e.CanvasTag == canvas)
+            if ((e.Data == null)
+                && (GetComponentInParent<Canvas>().name == e.CanvasTag))
             {
                 e.Data = GetComponentInParent<Canvas>().gameObject;
             }
@@ -33,17 +27,9 @@ namespace AxeMan.DungeonObject.SearchGameObject
         private void SubscribeSearchUI_SearchingUI(object sender,
             SearchingUIEventArgs e)
         {
-            if (e.Data != null)
+            if (GetComponentInParent<Canvas>().name == e.CanvasTag)
             {
-                return;
-            }
-
-            string canvas = GetComponentInParent<Canvas>().name;
-            string ui = name;
-
-            if ((e.CanvasTag == canvas) && (e.UITag == ui))
-            {
-                e.Data = gameObject;
+                e.Data.Push(gameObject);
             }
         }
     }
