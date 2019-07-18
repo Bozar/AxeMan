@@ -48,7 +48,11 @@ namespace AxeMan.GameSystem.SearchGameObject
 
         public GameObject Search(CanvasTag canvasTag, UITag uiTag)
         {
-            GameObject[] uiObjects = Search(canvasTag);
+            return Search(Search(canvasTag), uiTag);
+        }
+
+        public GameObject Search(GameObject[] uiObjects, UITag uiTag)
+        {
             string uiName = uiTag.ToString();
 
             foreach (GameObject go in uiObjects)
@@ -81,6 +85,11 @@ namespace AxeMan.GameSystem.SearchGameObject
         public Text SearchText(CanvasTag canvasTag, UITag uiTag)
         {
             return Search(canvasTag, uiTag).GetComponent<Text>();
+        }
+
+        public Text SearchText(GameObject[] uiObjects, UITag uiTag)
+        {
+            return Search(uiObjects, uiTag).GetComponent<Text>();
         }
 
         protected virtual void OnSearchingCanvas(SearchingCanvasEventArgs e)
