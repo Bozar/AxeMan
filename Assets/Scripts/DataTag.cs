@@ -47,6 +47,8 @@ namespace AxeMan.GameSystem.GameDataTag
     {
         Modeline,
         HPText, HPData, QText, QData, WText, WData, EText, EData, RText, RData,
+        SkillText, SkillData, FireText, FireData, WaterText, WaterData,
+        AirText, AirData, EarthText, EarthData,
     }
 
     public class DataTag : MonoBehaviour

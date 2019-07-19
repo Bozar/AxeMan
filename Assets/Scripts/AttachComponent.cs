@@ -31,6 +31,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintTrap>();
 
             gameObject.AddComponent<Canvas_PCStatus_Left>();
+            gameObject.AddComponent<Canvas_PCStatus_Middle>();
+
             gameObject.AddComponent<ConfirmCancelInput>();
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<CreateObject>();

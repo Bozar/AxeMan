@@ -43,7 +43,8 @@ namespace AxeMan.GameSystem.GameMode
         {
             if (EnterMode(e))
             {
-                OnEnteringAimMode(new EnteringAimModeEventArgs(e.SubTag));
+                OnEnteringAimMode(new EnteringAimModeEventArgs(
+                    e.SubTag, e.Command));
             }
             else if (LeaveMode(e))
             {
@@ -122,10 +123,13 @@ namespace AxeMan.GameSystem.GameMode
 
     public class EnteringAimModeEventArgs : EventArgs
     {
-        public EnteringAimModeEventArgs(SubTag subTag)
+        public EnteringAimModeEventArgs(SubTag subTag, CommandTag commandTag)
         {
             SubTag = subTag;
+            CommandTag = commandTag;
         }
+
+        public CommandTag CommandTag { get; }
 
         public SubTag SubTag { get; }
     }
