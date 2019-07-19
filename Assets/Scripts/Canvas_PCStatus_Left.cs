@@ -10,18 +10,20 @@ namespace AxeMan.GameSystem.UserInterface
 {
     public class Canvas_PCStatus_Left : MonoBehaviour
     {
-        private CanvasTag cTag;
+        private CanvasTag canvasTag;
+        private GameObject[] uiObjects;
 
         private void Awake()
         {
-            cTag = CanvasTag.Canvas_PCStatus_Left;
+            canvasTag = CanvasTag.Canvas_PCStatus_Left;
         }
 
         private void BatchUpdate(UITag[] ui, string[] text)
         {
             for (int i = 0; i < ui.Length; i++)
             {
-                GetComponent<SearchUI>().SearchText(cTag, ui[i]).text = text[i];
+                GetComponent<SearchUI>().SearchText(uiObjects, ui[i]).text
+                    = text[i];
             }
         }
 
@@ -37,6 +39,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Canvas_PCStatus_CreatedWorld(object sender, EventArgs e)
         {
+            uiObjects = GetComponent<SearchUI>().Search(canvasTag);
+
             HPText();
             HPData();
 
@@ -46,7 +50,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void HPData()
         {
-            Text ui = GetComponent<SearchUI>().SearchText(cTag, UITag.HPData);
+            Text ui = GetComponent<SearchUI>().SearchText(uiObjects, UITag.HPData);
             HP hp = GetComponent<SearchObject>().Search(SubTag.PC)[0]
                 .GetComponent<HP>();
             ui.text = hp.Current + "/" + hp.Max;
@@ -54,7 +58,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void HPText()
         {
-            Text ui = GetComponent<SearchUI>().SearchText(cTag, UITag.HPText);
+            Text ui = GetComponent<SearchUI>().SearchText(uiObjects, UITag.HPText);
             ui.text = "HP";
         }
 
@@ -62,9 +66,9 @@ namespace AxeMan.GameSystem.UserInterface
         {
             UITag[] ui = new UITag[]
             {
-                UITag.QText, UITag.WText, UITag.EText, UITag.RText
+                UITag.QData, UITag.WData, UITag.EData, UITag.RData
             };
-            string[] text = new string[] { "Q", "W", "E", "R" };
+            string[] text = new string[] { "1", "2", "3", "4" };
 
             BatchUpdate(ui, text);
         }
@@ -73,9 +77,9 @@ namespace AxeMan.GameSystem.UserInterface
         {
             UITag[] ui = new UITag[]
             {
-                UITag.QData, UITag.WData, UITag.EData, UITag.RData
+                UITag.QText, UITag.WText, UITag.EText, UITag.RText
             };
-            string[] text = new string[] { "1", "2", "3", "4" };
+            string[] text = new string[] { "Q", "W", "E", "R" };
 
             BatchUpdate(ui, text);
         }
