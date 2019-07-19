@@ -23,7 +23,7 @@ namespace AxeMan.GameSystem.UserInterface
             };
         }
 
-        private void Canvas_PCStatus_CreatedWorld(object sender, EventArgs e)
+        private void Canvas_PCStatus_Middle_CreatedWorld(object sender, EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
             UITag[] uiTags = new UITag[] { UITag.SkillText, UITag.SkillData, };
@@ -57,7 +57,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
-            GetComponent<Wizard>().CreatedWorld += Canvas_PCStatus_CreatedWorld;
+            GetComponent<Wizard>().CreatedWorld
+                += Canvas_PCStatus_Middle_CreatedWorld;
             GetComponent<AimMode>().EnteringAimMode
                 += Canvas_PCStatus_Middle_EnteringAimMode;
             GetComponent<AimMode>().LeavingAimMode

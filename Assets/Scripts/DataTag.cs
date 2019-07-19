@@ -15,7 +15,7 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum CanvasTag
     {
         Canvas_World,
-        Canvas_PCStatus_Left, Canvas_PCStatus_Middle,
+        Canvas_PCStatus_Left, Canvas_PCStatus_Middle, Canvas_PCStatus_Right,
     }
 
     public enum CommandTag
@@ -49,6 +49,8 @@ namespace AxeMan.GameSystem.GameDataTag
         HPText, HPData, QText, QData, WText, WData, EText, EData, RText, RData,
         SkillText, SkillData, FireText, FireData, WaterText, WaterData,
         AirText, AirData, EarthText, EarthData,
+        RangeText, RangeData, CooldownText, CooldownData, DamageText, DamageData,
+        Curse1Text, Curse1Data, Curse2Text, Curse2Data, Curse3Text, Curse3Data,
     }
 
     public class DataTag : MonoBehaviour

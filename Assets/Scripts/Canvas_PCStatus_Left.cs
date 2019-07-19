@@ -27,7 +27,7 @@ namespace AxeMan.GameSystem.UserInterface
             }
         }
 
-        private void Canvas_PCStatus_ChangedHP(object sender,
+        private void Canvas_PCStatus_Left_ChangedHP(object sender,
             ChangedHPEventArgs e)
         {
             if (e.STag != SubTag.PC)
@@ -37,7 +37,7 @@ namespace AxeMan.GameSystem.UserInterface
             HPData();
         }
 
-        private void Canvas_PCStatus_CreatedWorld(object sender, EventArgs e)
+        private void Canvas_PCStatus_Left_CreatedWorld(object sender, EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
 
@@ -86,8 +86,10 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
-            GetComponent<Wizard>().CreatedWorld += Canvas_PCStatus_CreatedWorld;
-            GetComponent<PublishHP>().ChangedHP += Canvas_PCStatus_ChangedHP;
+            GetComponent<Wizard>().CreatedWorld
+                += Canvas_PCStatus_Left_CreatedWorld;
+            GetComponent<PublishHP>().ChangedHP
+                += Canvas_PCStatus_Left_ChangedHP;
         }
     }
 }
