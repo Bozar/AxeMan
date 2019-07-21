@@ -9,7 +9,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
         private void BlueprintProgressBar_DrawingBlueprint(object sender,
             DrawingBlueprintEventArgs e)
         {
-            if (e.BTag != BlueprintTag.ProgressBar)
+            if (e.BlueprintTag != BlueprintTag.ProgressBar)
             {
                 return;
             }

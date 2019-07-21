@@ -49,7 +49,7 @@ namespace AxeMan.GameSystem.ObjectFactory
         private void ObjectPool_CreatingObject(object sender,
             CreatingObjectEventArgs e)
         {
-            e.Data = LoadFromPool(e.STag);
+            e.Data = LoadFromPool(e.SubTag);
         }
 
         private void ObjectPool_RemovingObject(object sender,

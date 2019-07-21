@@ -10,22 +10,22 @@ namespace AxeMan.GameSystem.SearchGameObject
     {
         GameObject[] Search(int x, int y);
 
-        GameObject[] Search(MainTag mTag);
+        GameObject[] Search(MainTag mainTag);
 
-        GameObject[] Search(SubTag sTag);
+        GameObject[] Search(SubTag subTag);
     }
 
     public class SearchingMainTagEventArgs : EventArgs
     {
-        public SearchingMainTagEventArgs(MainTag mTag, Stack<GameObject> data)
+        public SearchingMainTagEventArgs(MainTag mainTag, Stack<GameObject> data)
         {
-            MTag = mTag;
+            MainTag = mainTag;
             Data = data;
         }
 
         public Stack<GameObject> Data { get; }
 
-        public MainTag MTag { get; }
+        public MainTag MainTag { get; }
     }
 
     public class SearchingPositionEventArgs : EventArgs
@@ -43,15 +43,15 @@ namespace AxeMan.GameSystem.SearchGameObject
 
     public class SearchingSubTagEventArgs : EventArgs
     {
-        public SearchingSubTagEventArgs(SubTag sTag, Stack<GameObject> data)
+        public SearchingSubTagEventArgs(SubTag subTag, Stack<GameObject> data)
         {
-            STag = sTag;
+            SubTag = subTag;
             Data = data;
         }
 
         public Stack<GameObject> Data { get; }
 
-        public SubTag STag { get; }
+        public SubTag SubTag { get; }
     }
 
     public class SearchObject : MonoBehaviour, ISearchObject
@@ -62,15 +62,15 @@ namespace AxeMan.GameSystem.SearchGameObject
 
         public event EventHandler<SearchingSubTagEventArgs> SearchingSubTag;
 
-        public bool Search(int x, int y, MainTag mTag, out GameObject[] result)
+        public bool Search(int x, int y, MainTag mainTag, out GameObject[] result)
         {
-            result = Filter(Search(x, y), mTag);
+            result = Filter(Search(x, y), mainTag);
             return result.Length > 0;
         }
 
-        public bool Search(int x, int y, SubTag sTag, out GameObject[] result)
+        public bool Search(int x, int y, SubTag subTag, out GameObject[] result)
         {
-            result = Filter(Search(x, y), sTag);
+            result = Filter(Search(x, y), subTag);
             return result.Length > 0;
         }
 
@@ -90,19 +90,19 @@ namespace AxeMan.GameSystem.SearchGameObject
             return ea.Data.ToArray();
         }
 
-        public GameObject[] Search(MainTag mTag)
+        public GameObject[] Search(MainTag mainTag)
         {
             Stack<GameObject> data = new Stack<GameObject>();
-            var ea = new SearchingMainTagEventArgs(mTag, data);
+            var ea = new SearchingMainTagEventArgs(mainTag, data);
 
             OnSearchingMainTag(ea);
             return ea.Data.ToArray();
         }
 
-        public GameObject[] Search(SubTag sTag)
+        public GameObject[] Search(SubTag subTag)
         {
             Stack<GameObject> data = new Stack<GameObject>();
-            var ea = new SearchingSubTagEventArgs(sTag, data);
+            var ea = new SearchingSubTagEventArgs(subTag, data);
 
             OnSearchingSubTag(ea);
             return ea.Data.ToArray();
@@ -123,29 +123,29 @@ namespace AxeMan.GameSystem.SearchGameObject
             SearchingSubTag?.Invoke(this, e);
         }
 
-        private GameObject[] Filter(GameObject[] source, MainTag mTag)
+        private GameObject[] Filter(GameObject[] source, MainTag mainTag)
         {
             Stack<GameObject> result = new Stack<GameObject>();
 
-            foreach (GameObject s in source)
+            foreach (GameObject go in source)
             {
-                if (s.GetComponent<MetaInfo>().MainTag == mTag)
+                if (go.GetComponent<MetaInfo>().MainTag == mainTag)
                 {
-                    result.Push(s);
+                    result.Push(go);
                 }
             }
             return result.ToArray();
         }
 
-        private GameObject[] Filter(GameObject[] source, SubTag sTag)
+        private GameObject[] Filter(GameObject[] source, SubTag subTag)
         {
             Stack<GameObject> result = new Stack<GameObject>();
 
-            foreach (GameObject s in source)
+            foreach (GameObject go in source)
             {
-                if (s.GetComponent<MetaInfo>().SubTag == sTag)
+                if (go.GetComponent<MetaInfo>().SubTag == subTag)
                 {
-                    result.Push(s);
+                    result.Push(go);
                 }
             }
             return result.ToArray();

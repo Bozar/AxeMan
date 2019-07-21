@@ -9,7 +9,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
         private void BlueprintTrap_DrawingBlueprint(object sender,
             DrawingBlueprintEventArgs e)
         {
-            if (e.BTag != BlueprintTag.Trap)
+            if (e.BlueprintTag != BlueprintTag.Trap)
             {
                 return;
             }

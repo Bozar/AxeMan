@@ -10,7 +10,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
         private void BlueprintFloor_DrawingBlueprint(object sender,
             DrawingBlueprintEventArgs e)
         {
-            if (e.BTag != BlueprintTag.Floor)
+            if (e.BlueprintTag != BlueprintTag.Floor)
             {
                 return;
             }

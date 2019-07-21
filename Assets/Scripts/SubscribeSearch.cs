@@ -38,7 +38,7 @@ namespace AxeMan.DungeonObject.SearchGameObject
         private void SubscribeSearch_SearchingMainTag(object sender,
             SearchingMainTagEventArgs e)
         {
-            if (MatchCriteria(e.MTag))
+            if (MatchCriteria(e.MainTag))
             {
                 e.Data.Push(gameObject);
             }
@@ -56,7 +56,7 @@ namespace AxeMan.DungeonObject.SearchGameObject
         private void SubscribeSearch_SearchingSubTag(object sender,
             SearchingSubTagEventArgs e)
         {
-            if (MatchCriteria(e.STag))
+            if (MatchCriteria(e.SubTag))
             {
                 e.Data.Push(gameObject);
             }

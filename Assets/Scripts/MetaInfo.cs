@@ -37,8 +37,8 @@ namespace AxeMan.DungeonObject
         {
             if ((MainTag == MainTag.INVALID) && (SubTag == SubTag.INVALID))
             {
-                MainTag = proto.MTag;
-                SubTag = proto.STag;
+                MainTag = proto.MainTag;
+                SubTag = proto.SubTag;
             }
         }
     }

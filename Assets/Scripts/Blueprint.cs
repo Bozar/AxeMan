@@ -11,20 +11,20 @@ namespace AxeMan.GameSystem.PrototypeFactory
 
     public interface IPrototype
     {
-        MainTag MTag { get; }
+        MainTag MainTag { get; }
 
         int[] Position { get; }
 
-        SubTag STag { get; }
+        SubTag SubTag { get; }
     }
 
     public class Blueprint : MonoBehaviour, IBlueprint
     {
         public event EventHandler<DrawingBlueprintEventArgs> DrawingBlueprint;
 
-        public IPrototype[] GetBlueprint(BlueprintTag bTag)
+        public IPrototype[] GetBlueprint(BlueprintTag blueprintTag)
         {
-            var ea = new DrawingBlueprintEventArgs(bTag);
+            var ea = new DrawingBlueprintEventArgs(blueprintTag);
             OnDrawingBlueprint(ea);
 
             return ea.Data;
@@ -38,29 +38,29 @@ namespace AxeMan.GameSystem.PrototypeFactory
 
     public class DrawingBlueprintEventArgs : EventArgs
     {
-        public DrawingBlueprintEventArgs(BlueprintTag bTag)
+        public DrawingBlueprintEventArgs(BlueprintTag blueprintTag)
         {
-            BTag = bTag;
+            BlueprintTag = blueprintTag;
         }
 
-        public BlueprintTag BTag { get; }
+        public BlueprintTag BlueprintTag { get; }
 
         public IPrototype[] Data { get; set; }
     }
 
     public class ProtoObject : IPrototype
     {
-        public ProtoObject(MainTag mTag, SubTag sTag, int[] position)
+        public ProtoObject(MainTag mainTag, SubTag subTag, int[] position)
         {
-            MTag = mTag;
-            STag = sTag;
+            MainTag = mainTag;
+            SubTag = subTag;
             Position = position;
         }
 
-        public MainTag MTag { get; }
+        public MainTag MainTag { get; }
 
         public int[] Position { get; }
 
-        public SubTag STag { get; }
+        public SubTag SubTag { get; }
     }
 }
