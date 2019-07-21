@@ -87,7 +87,7 @@ namespace AxeMan.GameSystem.GameMode
             switch (e.Command)
             {
                 case CommandTag.Confirm:
-                    return VerifySkill();
+                    return VerifySkill(pcUseSkill);
 
                 case CommandTag.Cancel:
                     pcUseSkill = CommandTag.INVALID;
@@ -104,10 +104,10 @@ namespace AxeMan.GameSystem.GameMode
                 += AimMode_PlayerCommanding;
         }
 
-        private bool VerifySkill()
+        private bool VerifySkill(CommandTag skill)
         {
             Stack<bool> result = new Stack<bool>();
-            OnVerifyingSkill(new VerifyingSkillEventArgs(pcUseSkill, result));
+            OnVerifyingSkill(new VerifyingSkillEventArgs(skill, result));
 
             while (result.Count > 0)
             {
@@ -116,7 +116,7 @@ namespace AxeMan.GameSystem.GameMode
                     return false;
                 }
             }
-            OnVerifiedSkill(new VerifiedSkillEventArgs(pcUseSkill));
+            OnVerifiedSkill(new VerifiedSkillEventArgs(skill));
             return true;
         }
     }
