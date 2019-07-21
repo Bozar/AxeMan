@@ -56,7 +56,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             GameObject go = objFromPool.Data;
             if (go == null)
             {
-                go = Instantiate(Resources.Load(proto.STag.ToString())
+                go = Instantiate(Resources.Load(proto.SubTag.ToString())
                    as GameObject);
                 go.AddComponent<MetaInfo>().SetValue(proto);
                 go.AddComponent<LocalManager>();
@@ -96,17 +96,17 @@ namespace AxeMan.GameSystem.ObjectFactory
     {
         public CreatingObjectEventArgs(IPrototype core)
         {
-            MTag = core.MTag;
-            STag = core.STag;
+            MainTag = core.MainTag;
+            SubTag = core.SubTag;
             Position = core.Position;
         }
 
         public GameObject Data { get; set; }
 
-        public MainTag MTag { get; }
+        public MainTag MainTag { get; }
 
         public int[] Position { get; }
 
-        public SubTag STag { get; }
+        public SubTag SubTag { get; }
     }
 }

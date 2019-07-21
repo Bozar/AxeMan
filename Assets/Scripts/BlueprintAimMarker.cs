@@ -8,7 +8,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
         private void BlueprintMarker_DrawingBlueprint(object sender,
             DrawingBlueprintEventArgs e)
         {
-            if (e.BTag != BlueprintTag.AimMarker)
+            if (e.BlueprintTag != BlueprintTag.AimMarker)
             {
                 return;
             }

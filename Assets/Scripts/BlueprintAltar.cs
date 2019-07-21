@@ -9,7 +9,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
         private void BlueprintAltar_DrawingBlueprint(object sender,
             DrawingBlueprintEventArgs e)
         {
-            if (e.BTag != BlueprintTag.Altar)
+            if (e.BlueprintTag != BlueprintTag.Altar)
             {
                 return;
             }

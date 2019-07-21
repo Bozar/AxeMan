@@ -20,7 +20,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
 
         private void Test(DrawingBlueprintEventArgs e)
         {
-            if (e.BTag != BlueprintTag.Actor)
+            if (e.BlueprintTag != BlueprintTag.Actor)
             {
                 return;
             }
