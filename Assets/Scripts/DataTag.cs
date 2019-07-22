@@ -32,7 +32,7 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum SkillComponentTag { FireShield, };
 
-    public enum SkillNameTag { Q, W, E, R }
+    public enum SkillNameTag { INVALID, Q, W, E, R }
 
     public enum SkillTypeTag { Move, Attack }
 
@@ -46,7 +46,10 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum UITag
     {
         Modeline,
-        HPText, HPData, QText, QData, WText, WData, EText, EData, RText, RData,
+        HPText, HPData,
+        QText, WText, EText, RText,
+        QData, WData, EData, RData,
+        QType, WType, EType, RType,
         SkillText, SkillData, FireText, FireData, WaterText, WaterData,
         AirText, AirData, EarthText, EarthData,
         RangeText, RangeData, CooldownText, CooldownData, DamageText, DamageData,
