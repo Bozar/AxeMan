@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.SearchGameObject;
@@ -11,20 +12,13 @@ namespace AxeMan.GameSystem.UserInterface
     public class Canvas_PCStatus_Left : MonoBehaviour
     {
         private CanvasTag canvasTag;
+        private HP hp;
+        private PCSkillManager skillManager;
         private GameObject[] uiObjects;
 
         private void Awake()
         {
             canvasTag = CanvasTag.Canvas_PCStatus_Left;
-        }
-
-        private void BatchUpdate(UITag[] ui, string[] text)
-        {
-            for (int i = 0; i < ui.Length; i++)
-            {
-                GetComponent<SearchUI>().SearchText(uiObjects, ui[i]).text
-                    = text[i];
-            }
         }
 
         private void Canvas_PCStatus_Left_ChangedHP(object sender,
@@ -39,49 +33,76 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Canvas_PCStatus_Left_CreatedWorld(object sender, EventArgs e)
         {
+            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
+            skillManager = pc.GetComponent<PCSkillManager>();
+            hp = pc.GetComponent<HP>();
 
             HPText();
             HPData();
 
-            SkillText();
-            SkillData();
+            SkillName();
+            SkillCooldown();
+            SkillType();
         }
 
         private void HPData()
         {
-            Text ui = GetComponent<SearchUI>().SearchText(uiObjects, UITag.HPData);
-            HP hp = GetComponent<SearchObject>().Search(SubTag.PC)[0]
-                .GetComponent<HP>();
-            ui.text = hp.Current + "/" + hp.Max;
+            SearchText(UITag.HPData).text = hp.Current + "/" + hp.Max;
         }
 
         private void HPText()
         {
-            Text ui = GetComponent<SearchUI>().SearchText(uiObjects, UITag.HPText);
-            ui.text = "HP";
+            SearchText(UITag.HPText).text = "HP";
         }
 
-        private void SkillData()
+        private Text SearchText(UITag uiTag)
+        {
+            return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
+        }
+
+        private void SkillCooldown()
         {
             UITag[] ui = new UITag[]
             {
                 UITag.QData, UITag.WData, UITag.EData, UITag.RData
             };
-            string[] text = new string[] { "1", "2", "3", "4" };
 
-            BatchUpdate(ui, text);
+            // TODO: Get cooldown data from skill component.
+            for (int i = 0; i < ui.Length; i++)
+            {
+                SearchText(ui[i]).text = (i + 2).ToString();
+            }
         }
 
-        private void SkillText()
+        private void SkillName()
         {
             UITag[] ui = new UITag[]
             {
                 UITag.QText, UITag.WText, UITag.EText, UITag.RText
             };
-            string[] text = new string[] { "Q", "W", "E", "R" };
 
-            BatchUpdate(ui, text);
+            for (int i = 0; i < ui.Length; i++)
+            {
+                SearchText(ui[i]).text = skillManager.GetSkillName(
+                    skillManager.Convert(ui[i]));
+            }
+        }
+
+        private void SkillType()
+        {
+            UITag[] ui = new UITag[]
+            {
+                UITag.QType, UITag.WType, UITag.EType, UITag.RType
+            };
+
+            for (int i = 0; i < ui.Length; i++)
+            {
+                skillManager.GetSkillType(skillManager.Convert(ui[i]),
+                    out string typeName, out _);
+                SearchText(ui[i]).text = typeName;
+            }
         }
 
         private void Start()

@@ -1,32 +1,31 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AxeMan.GameSystem.UserInterface
 {
     public class Canvas_PCStatus_Middle : MonoBehaviour
     {
         private CanvasTag canvasTag;
-        private Dictionary<CommandTag, string> skillName;
+        private PCSkillManager skillManager;
         private GameObject[] uiObjects;
 
         private void Awake()
         {
             canvasTag = CanvasTag.Canvas_PCStatus_Middle;
-            skillName = new Dictionary<CommandTag, string>()
-            {
-                { CommandTag.SkillQ, "Q" }, { CommandTag.SkillW, "W" },
-                { CommandTag.SkillE, "E" }, { CommandTag.SkillR, "R" },
-            };
         }
 
         private void Canvas_PCStatus_Middle_CreatedWorld(object sender, EventArgs e)
         {
-            uiObjects = GetComponent<SearchUI>().Search(canvasTag);
+            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
             UITag[] uiTags = new UITag[] { UITag.SkillText, UITag.SkillData, };
+
+            uiObjects = GetComponent<SearchUI>().Search(canvasTag);
+            skillManager = pc.GetComponent<PCSkillManager>();
 
             ClearUIContent(uiTags);
         }
@@ -34,10 +33,9 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_PCStatus_Middle_EnteringAimMode(object sender,
             EnteringAimModeEventArgs e)
         {
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.SkillText).text
-                = "Skill";
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.SkillData).text
-                = skillName[e.CommandTag];
+            SearchText(UITag.SkillText).text = "Skill";
+            SearchText(UITag.SkillData).text = skillManager.GetSkillName(
+                skillManager.Convert(e.CommandTag));
         }
 
         private void Canvas_PCStatus_Middle_LeavingAimMode(object sender,
@@ -49,10 +47,15 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void ClearUIContent(UITag[] uiTags)
         {
-            foreach (UITag tag in uiTags)
+            foreach (UITag t in uiTags)
             {
-                GetComponent<SearchUI>().SearchText(uiObjects, tag).text = "";
+                SearchText(t).text = "";
             }
+        }
+
+        private Text SearchText(UITag uiTag)
+        {
+            return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
         }
 
         private void Start()
