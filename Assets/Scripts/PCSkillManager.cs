@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AxeMan.DungeonObject.ActorSkill
 {
-    public class PCSkillManager : MonoBehaviour, ISkillMetaInfo
+    public class PCSkillManager : MonoBehaviour, ISkillMetaInfo, ISkillRange
     {
         public string GetSkillName(SkillNameTag skillName)
         {
@@ -18,6 +18,11 @@ namespace AxeMan.DungeonObject.ActorSkill
         public SkillNameTag GetSkillNameTag(CommandTag commandTag)
         {
             return GetComponent<SkillMetaInfo>().GetSkillNameTag(commandTag);
+        }
+
+        public int GetSkillRange(SkillNameTag skillName)
+        {
+            return GetComponent<SkillRange>().GetSkillRange(skillName);
         }
 
         public SkillTypeTag GetSkillTypeTag(SkillNameTag skillName,
