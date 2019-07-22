@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace AxeMan.DungeonObject.ActorSkill
 {
-    // Only PC has SkillManager. NPCs use other components to store ability data.
-    public class SkillManager : MonoBehaviour, ISkillMetaInfo, ISkillRange
+    public class PCSkillManager : MonoBehaviour, ISkillMetaInfo, ISkillRange
     {
         public string GetSkillName(SkillNameTag skillName)
         {

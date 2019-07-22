@@ -13,7 +13,7 @@ namespace AxeMan.GameSystem.UserInterface
     {
         private CanvasTag canvasTag;
         private HP hp;
-        private SkillManager skillManager;
+        private PCSkillManager skillManager;
         private GameObject[] uiObjects;
 
         private void Awake()
@@ -36,7 +36,7 @@ namespace AxeMan.GameSystem.UserInterface
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
 
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-            skillManager = pc.GetComponent<SkillManager>();
+            skillManager = pc.GetComponent<PCSkillManager>();
             hp = pc.GetComponent<HP>();
 
             HPText();
