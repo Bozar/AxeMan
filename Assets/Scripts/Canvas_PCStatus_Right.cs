@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
@@ -10,6 +11,7 @@ namespace AxeMan.GameSystem.UserInterface
     public class Canvas_PCStatus_Right : MonoBehaviour
     {
         private CanvasTag canvasTag;
+        private PCSkillManager skillManager;
         private GameObject[] uiObjects;
 
         private void Awake()
@@ -20,13 +22,16 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_PCStatus_Right_CreatedWorld(object sender, EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
+            skillManager = GetComponent<SearchObject>().Search(SubTag.PC)[0]
+                .GetComponent<PCSkillManager>();
+
             ClearAllUIContent(uiObjects);
         }
 
         private void Canvas_PCStatus_Right_EnteringAimMode(object sender,
             EnteringAimModeEventArgs e)
         {
-            Range();
+            Range(e.CommandTag);
             Cooldown();
             Damage();
             Curse1();
@@ -49,50 +54,46 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Cooldown()
         {
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.CooldownData).text
-               = "8";
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.CooldownText).text
-               = "CD";
+            SearchText(UITag.CooldownData).text = "8";
+            SearchText(UITag.CooldownText).text = "CD";
         }
 
         private void Curse1()
         {
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.Curse1Text).text
-               = "Fire -";
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.Curse1Data).text
-              = "T x 2";
+            SearchText(UITag.Curse1Text).text = "Fire -";
+            SearchText(UITag.Curse1Data).text = "T x 2";
         }
 
         private void Curse2()
         {
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.Curse2Text).text
-               = "Water -";
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.Curse2Data).text
-              = "T x 4";
+            SearchText(UITag.Curse2Text).text = "Water -";
+            SearchText(UITag.Curse2Data).text = "T x 4";
         }
 
         private void Curse3()
         {
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.Curse3Text).text
-               = "Earth -";
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.Curse3Data).text
-              = "4 x 6";
+            SearchText(UITag.Curse3Text).text = "Earth -";
+            SearchText(UITag.Curse3Data).text = "4 x 6";
         }
 
         private void Damage()
         {
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.DamageText).text
-               = "Dmg";
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.DamageData).text
-               = "4";
+            SearchText(UITag.DamageText).text = "Dmg";
+            SearchText(UITag.DamageData).text = "4";
         }
 
-        private void Range()
+        private void Range(CommandTag commandTag)
         {
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.RangeText).text
-               = "Range";
-            GetComponent<SearchUI>().SearchText(uiObjects, UITag.RangeData).text
-              = "5";
+            SearchText(UITag.RangeText).text = "Range";
+
+            SkillNameTag skillName = skillManager.GetSkillNameTag(commandTag);
+            SearchText(UITag.RangeData).text
+                = skillManager.GetSkillRange(skillName).ToString();
+        }
+
+        private Text SearchText(UITag uiTag)
+        {
+            return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
         }
 
         private void Start()
