@@ -11,7 +11,7 @@ namespace AxeMan.GameSystem.UserInterface
     public class Canvas_PCStatus_Middle : MonoBehaviour
     {
         private CanvasTag canvasTag;
-        private PCSkillManager skillManager;
+        private SkillManager skillManager;
         private GameObject[] uiObjects;
 
         private void Awake()
@@ -25,7 +25,7 @@ namespace AxeMan.GameSystem.UserInterface
             UITag[] uiTags = new UITag[] { UITag.SkillText, UITag.SkillData, };
 
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-            skillManager = pc.GetComponent<PCSkillManager>();
+            skillManager = pc.GetComponent<SkillManager>();
 
             ClearUIContent(uiTags);
         }

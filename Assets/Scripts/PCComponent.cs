@@ -20,7 +20,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data.AddComponent<PCInputSwitcher>();
 
             e.Data.AddComponent<PCMove>();
-            e.Data.AddComponent<PCSkillManager>();
+            e.Data.AddComponent<SkillManager>();
             e.Data.AddComponent<PCStartEndTurn>();
             e.Data.AddComponent<PCUseSKill>();
 
