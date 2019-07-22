@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.DungeonObject.PlayerInput;
 using AxeMan.GameSystem.GameDataTag;
 using UnityEngine;
@@ -19,8 +20,11 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data.AddComponent<PCInputSwitcher>();
 
             e.Data.AddComponent<PCMove>();
+            e.Data.AddComponent<PCSkillManager>();
             e.Data.AddComponent<PCStartEndTurn>();
             e.Data.AddComponent<PCUseSKill>();
+
+            e.Data.AddComponent<SkillMetaInfo>();
         }
 
         private void Start()
