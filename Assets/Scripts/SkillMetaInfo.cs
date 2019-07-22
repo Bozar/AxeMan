@@ -6,13 +6,13 @@ namespace AxeMan.DungeonObject.ActorSkill
 {
     public interface ISkillMetaInfo
     {
-        SkillNameTag Convert(CommandTag commandTag);
-
-        SkillNameTag Convert(UITag uiTag);
-
         string GetSkillName(SkillNameTag skillName);
 
-        SkillTypeTag GetSkillType(SkillNameTag skillName,
+        SkillNameTag GetSkillNameTag(UITag uiTag);
+
+        SkillNameTag GetSkillNameTag(CommandTag commandTag);
+
+        SkillTypeTag GetSkillTypeTag(SkillNameTag skillName,
             out string shortTypeName, out string fullTypeName);
     }
 
@@ -23,28 +23,12 @@ namespace AxeMan.DungeonObject.ActorSkill
         private Dictionary<SkillNameTag, string> skillNameDict;
         private Dictionary<SkillNameTag, SkillTypeTag> skillTypeDict;
 
-        public SkillNameTag Convert(CommandTag commandTag)
+        public string GetSkillName(SkillNameTag skillName)
         {
-            switch (commandTag)
-            {
-                case CommandTag.SkillQ:
-                    return SkillNameTag.Q;
-
-                case CommandTag.SkillW:
-                    return SkillNameTag.W;
-
-                case CommandTag.SkillE:
-                    return SkillNameTag.E;
-
-                case CommandTag.SkillR:
-                    return SkillNameTag.R;
-
-                default:
-                    return SkillNameTag.INVALID;
-            }
+            return skillNameDict[skillName];
         }
 
-        public SkillNameTag Convert(UITag uiTag)
+        public SkillNameTag GetSkillNameTag(UITag uiTag)
         {
             switch (uiTag)
             {
@@ -73,12 +57,28 @@ namespace AxeMan.DungeonObject.ActorSkill
             }
         }
 
-        public string GetSkillName(SkillNameTag skillName)
+        public SkillNameTag GetSkillNameTag(CommandTag commandTag)
         {
-            return skillNameDict[skillName];
+            switch (commandTag)
+            {
+                case CommandTag.SkillQ:
+                    return SkillNameTag.Q;
+
+                case CommandTag.SkillW:
+                    return SkillNameTag.W;
+
+                case CommandTag.SkillE:
+                    return SkillNameTag.E;
+
+                case CommandTag.SkillR:
+                    return SkillNameTag.R;
+
+                default:
+                    return SkillNameTag.INVALID;
+            }
         }
 
-        public SkillTypeTag GetSkillType(SkillNameTag skillName,
+        public SkillTypeTag GetSkillTypeTag(SkillNameTag skillName,
             out string shortTypeName, out string fullTypeName)
         {
             SkillTypeTag skillType = skillTypeDict[skillName];

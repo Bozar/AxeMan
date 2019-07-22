@@ -86,7 +86,7 @@ namespace AxeMan.GameSystem.UserInterface
             for (int i = 0; i < ui.Length; i++)
             {
                 SearchText(ui[i]).text = skillManager.GetSkillName(
-                    skillManager.Convert(ui[i]));
+                    skillManager.GetSkillNameTag(ui[i]));
             }
         }
 
@@ -99,7 +99,7 @@ namespace AxeMan.GameSystem.UserInterface
 
             for (int i = 0; i < ui.Length; i++)
             {
-                skillManager.GetSkillType(skillManager.Convert(ui[i]),
+                skillManager.GetSkillTypeTag(skillManager.GetSkillNameTag(ui[i]),
                     out string typeName, out _);
                 SearchText(ui[i]).text = typeName;
             }
