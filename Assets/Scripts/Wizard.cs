@@ -6,11 +6,9 @@ using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace AxeMan.GameSystem
 {
@@ -28,18 +26,9 @@ namespace AxeMan.GameSystem
 
         public event EventHandler CreatedWorld;
 
-        public event EventHandler<UpdateUIEventArgs> UIText;
-
-        public string NameTag { get { return "Wizard"; } }
-
         protected virtual void OnCreatedWorld()
         {
             CreatedWorld?.Invoke(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnUIText(UpdateUIEventArgs e)
-        {
-            UIText?.Invoke(this, e);
         }
 
         private void CreateAltar()
@@ -66,30 +55,12 @@ namespace AxeMan.GameSystem
                 {
                     GetComponent<TurnManager>().StartTurn();
                     GetComponent<TileOverlay>().RefreshDungeonBoard();
-                    Text ui = GetComponent<SearchUI>().SearchText(
-                        CanvasTag.Canvas_World, UITag.Modeline);
-                    ui.text = "[[ Examine ] g 4 [ 2, -3 ]]";
 
                     OnCreatedWorld();
                     turnStarted = true;
                 }
                 return;
             }
-            Dictionary<string, string> data
-                = new Dictionary<string, string>()
-                {
-                    {
-                        "Modeline", "[[ Examine ] p 5 [ -1, -3 ]]"
-                    },
-                    {
-                        "Text","Hello world"
-                    }
-                };
-            OnUIText(new UpdateUIEventArgs
-            {
-                UITag = "CvsWorld",
-                UIData = new ReadOnlyDictionary<string, string>(data)
-            });
             CreateAltar();
 
             uiUpdated = true;

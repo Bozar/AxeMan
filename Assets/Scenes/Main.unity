@@ -2708,7 +2708,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515162, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Text
-      value: "[[ Attack Q ] g 4 [ 2, -3 ]]\r"
+      value: '[ Aim Q ] [ 2, -3 ] [ 4 / 5 ]'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce3f59b7e302cd648926ad779da36f25, type: 3}
