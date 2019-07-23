@@ -85,8 +85,7 @@ namespace AxeMan.GameSystem.UserInterface
 
             for (int i = 0; i < ui.Length; i++)
             {
-                SearchText(ui[i]).text = skillManager.GetSkillName(
-                    skillManager.GetSkillNameTag(ui[i]));
+                SearchText(ui[i]).text = skillManager.GetSkillName(ui[i]);
             }
         }
 

@@ -35,7 +35,7 @@ namespace AxeMan.GameSystem.UserInterface
         {
             SearchText(UITag.SkillText).text = "Skill";
             SearchText(UITag.SkillData).text = skillManager.GetSkillName(
-                skillManager.GetSkillNameTag(e.CommandTag));
+                e.CommandTag);
         }
 
         private void Canvas_PCStatus_Middle_LeavingAimMode(object sender,

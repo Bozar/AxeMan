@@ -8,6 +8,10 @@ namespace AxeMan.DungeonObject.ActorSkill
     {
         string GetSkillName(SkillNameTag skillName);
 
+        string GetSkillName(CommandTag commandTag);
+
+        string GetSkillName(UITag uiTag);
+
         SkillNameTag GetSkillNameTag(UITag uiTag);
 
         SkillNameTag GetSkillNameTag(CommandTag commandTag);
@@ -26,6 +30,16 @@ namespace AxeMan.DungeonObject.ActorSkill
         public string GetSkillName(SkillNameTag skillName)
         {
             return skillNameDict[skillName];
+        }
+
+        public string GetSkillName(CommandTag commandTag)
+        {
+            return GetSkillName(GetSkillNameTag(commandTag));
+        }
+
+        public string GetSkillName(UITag uiTag)
+        {
+            return GetSkillName(GetSkillNameTag(uiTag));
         }
 
         public SkillNameTag GetSkillNameTag(UITag uiTag)
