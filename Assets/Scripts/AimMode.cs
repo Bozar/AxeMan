@@ -18,6 +18,8 @@ namespace AxeMan.GameSystem.GameMode
 
         public event EventHandler<VerifiedSkillEventArgs> VerifiedSkill;
 
+        public event EventHandler<VerifyingFailedEventArgs> VerifyingFailed;
+
         public event EventHandler<VerifyingSkillEventArgs> VerifyingSkill;
 
         protected virtual void OnEnteredAimMode(EnteredAimModeEventArgs e)
@@ -38,6 +40,11 @@ namespace AxeMan.GameSystem.GameMode
         protected virtual void OnVerifiedSkill(VerifiedSkillEventArgs e)
         {
             VerifiedSkill?.Invoke(this, e);
+        }
+
+        protected virtual void OnVerifyingFailed(VerifyingFailedEventArgs e)
+        {
+            VerifyingFailed?.Invoke(this, e);
         }
 
         protected virtual void OnVerifyingSkill(VerifyingSkillEventArgs e)
@@ -122,6 +129,7 @@ namespace AxeMan.GameSystem.GameMode
             {
                 if (!result.Pop())
                 {
+                    OnVerifyingFailed(new VerifyingFailedEventArgs(skill));
                     return false;
                 }
             }
@@ -164,6 +172,16 @@ namespace AxeMan.GameSystem.GameMode
         }
 
         public CommandTag UseSkill { get; }
+    }
+
+    public class VerifyingFailedEventArgs : EventArgs
+    {
+        public VerifyingFailedEventArgs(CommandTag commandTag)
+        {
+            CommandTag = commandTag;
+        }
+
+        public CommandTag CommandTag { get; }
     }
 
     public class VerifyingSkillEventArgs : EventArgs
