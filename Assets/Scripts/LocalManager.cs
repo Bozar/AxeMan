@@ -10,6 +10,8 @@ namespace AxeMan.DungeonObject
     {
         int GetDistance(int[] target);
 
+        int[] GetRelativePosition(int[] target);
+
         bool IsPassable(int[] position);
 
         bool MatchID(int id);
@@ -29,6 +31,12 @@ namespace AxeMan.DungeonObject
         {
             return GameCore.AxeManCore.GetComponent<Distance>()
                 .GetDistance(GetComponent<MetaInfo>().Position, target);
+        }
+
+        public int[] GetRelativePosition(int[] target)
+        {
+            return GameCore.AxeManCore.GetComponent<Distance>()
+                .GetRelativePosition(GetComponent<MetaInfo>().Position, target);
         }
 
         public bool IsPassable(int[] position)
