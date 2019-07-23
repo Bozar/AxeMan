@@ -38,6 +38,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<CreateObject>();
 
+            gameObject.AddComponent<Distance>();
             gameObject.AddComponent<DungeonBoard>();
             gameObject.AddComponent<GameCore>();
             gameObject.AddComponent<InputManager>();

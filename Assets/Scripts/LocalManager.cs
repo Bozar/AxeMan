@@ -8,6 +8,8 @@ namespace AxeMan.DungeonObject
 {
     public interface ILocalManager
     {
+        int GetDistance(int[] target);
+
         bool IsPassable(int[] position);
 
         bool MatchID(int id);
@@ -23,6 +25,12 @@ namespace AxeMan.DungeonObject
 
     public class LocalManager : MonoBehaviour, ILocalManager
     {
+        public int GetDistance(int[] target)
+        {
+            return GameCore.AxeManCore.GetComponent<Distance>()
+                .GetDistance(GetComponent<MetaInfo>().Position, target);
+        }
+
         public bool IsPassable(int[] position)
         {
             CheckingTerrainEventArgs e = new CheckingTerrainEventArgs(
