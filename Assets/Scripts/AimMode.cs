@@ -10,6 +10,8 @@ namespace AxeMan.GameSystem.GameMode
     {
         private CommandTag pcUseSkill;
 
+        public event EventHandler<EnteredAimModeEventArgs> EnteredAimMode;
+
         public event EventHandler<EnteringAimModeEventArgs> EnteringAimMode;
 
         public event EventHandler<EventArgs> LeavingAimMode;
@@ -17,6 +19,11 @@ namespace AxeMan.GameSystem.GameMode
         public event EventHandler<VerifiedSkillEventArgs> VerifiedSkill;
 
         public event EventHandler<VerifyingSkillEventArgs> VerifyingSkill;
+
+        protected virtual void OnEnteredAimMode(EnteredAimModeEventArgs e)
+        {
+            EnteredAimMode?.Invoke(this, e);
+        }
 
         protected virtual void OnEnteringAimMode(EnteringAimModeEventArgs e)
         {
@@ -44,6 +51,8 @@ namespace AxeMan.GameSystem.GameMode
             if (EnterMode(e))
             {
                 OnEnteringAimMode(new EnteringAimModeEventArgs(
+                    e.SubTag, e.Command));
+                OnEnteredAimMode(new EnteredAimModeEventArgs(
                     e.SubTag, e.Command));
             }
             else if (LeaveMode(e))
@@ -119,6 +128,19 @@ namespace AxeMan.GameSystem.GameMode
             OnVerifiedSkill(new VerifiedSkillEventArgs(skill));
             return true;
         }
+    }
+
+    public class EnteredAimModeEventArgs : EventArgs
+    {
+        public EnteredAimModeEventArgs(SubTag subTag, CommandTag commandTag)
+        {
+            SubTag = subTag;
+            CommandTag = commandTag;
+        }
+
+        public CommandTag CommandTag { get; }
+
+        public SubTag SubTag { get; }
     }
 
     public class EnteringAimModeEventArgs : EventArgs
