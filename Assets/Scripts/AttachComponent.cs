@@ -33,6 +33,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Canvas_PCStatus_Left>();
             gameObject.AddComponent<Canvas_PCStatus_Middle>();
             gameObject.AddComponent<Canvas_PCStatus_Right>();
+            gameObject.AddComponent<Canvas_World>();
 
             gameObject.AddComponent<ConfirmCancelInput>();
             gameObject.AddComponent<ConvertCoordinate>();
