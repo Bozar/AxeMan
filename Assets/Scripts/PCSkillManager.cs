@@ -1,33 +1,52 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataTag;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject.ActorSkill
 {
-    public class PCSkillManager : MonoBehaviour, ISkillMetaInfo, ISkillRange
+    public class PCSkillManager : MonoBehaviour, ISkillMetaInfo, ISkillRange,
+        IConvertSkillMetaInfo
     {
-        public string GetSkillName(SkillNameTag skillName)
+        public string GetLongSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            return GetComponent<SkillMetaInfo>().GetSkillName(skillName);
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetLongSkillTypeName(skillTypeTag);
+        }
+
+        public string GetShortSkillTypeName(SkillTypeTag skillTypeTag)
+        {
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetShortSkillTypeName(skillTypeTag);
+        }
+
+        public string GetSkillName(SkillNameTag skillNameTag)
+        {
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillName(skillNameTag);
         }
 
         public string GetSkillName(CommandTag commandTag)
         {
-            return GetComponent<SkillMetaInfo>().GetSkillName(commandTag);
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+               .GetSkillName(commandTag);
         }
 
         public string GetSkillName(UITag uiTag)
         {
-            return GetComponent<SkillMetaInfo>().GetSkillName(uiTag);
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+               .GetSkillName(uiTag);
         }
 
         public SkillNameTag GetSkillNameTag(UITag uiTag)
         {
-            return GetComponent<SkillMetaInfo>().GetSkillNameTag(uiTag);
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillNameTag(uiTag);
         }
 
         public SkillNameTag GetSkillNameTag(CommandTag commandTag)
         {
-            return GetComponent<SkillMetaInfo>().GetSkillNameTag(commandTag);
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillNameTag(commandTag);
         }
 
         public int GetSkillRange(SkillNameTag skillName)
@@ -35,11 +54,9 @@ namespace AxeMan.DungeonObject.ActorSkill
             return GetComponent<SkillRange>().GetSkillRange(skillName);
         }
 
-        public SkillTypeTag GetSkillTypeTag(SkillNameTag skillName,
-            out string shortTypeName, out string longTypeName)
+        public SkillTypeTag GetSkillTypeTag(SkillNameTag skillNameTag)
         {
-            return GetComponent<SkillMetaInfo>().GetSkillTypeTag(skillName,
-                out shortTypeName, out longTypeName);
+            return GetComponent<SkillMetaInfo>().GetSkillTypeTag(skillNameTag);
         }
     }
 }

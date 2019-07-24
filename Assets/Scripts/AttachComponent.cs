@@ -37,6 +37,7 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<ConfirmCancelInput>();
             gameObject.AddComponent<ConvertCoordinate>();
+            gameObject.AddComponent<ConvertSkillMetaInfo>();
             gameObject.AddComponent<CreateObject>();
 
             gameObject.AddComponent<Distance>();

@@ -95,11 +95,14 @@ namespace AxeMan.GameSystem.UserInterface
             {
                 UITag.QType, UITag.WType, UITag.EType, UITag.RType
             };
+            string typeName;
 
             for (int i = 0; i < ui.Length; i++)
             {
-                skillManager.GetSkillTypeTag(skillManager.GetSkillNameTag(ui[i]),
-                    out string typeName, out _);
+                typeName
+                    = skillManager.GetShortSkillTypeName(
+                        skillManager.GetSkillTypeTag(
+                            skillManager.GetSkillNameTag(ui[i])));
                 SearchText(ui[i]).text = typeName;
             }
         }
