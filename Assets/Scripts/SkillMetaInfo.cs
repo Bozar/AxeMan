@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataTag;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ namespace AxeMan.DungeonObject.ActorSkill
     public interface ISkillMetaInfo
     {
         SkillTypeTag GetSkillTypeTag(SkillNameTag skillNameTag);
+
+        SkillTypeTag GetSkillTypeTag(CommandTag commandTag);
+
+        SkillTypeTag GetSkillTypeTag(UITag uiTag);
     }
 
     public class SkillMetaInfo : MonoBehaviour, ISkillMetaInfo
@@ -21,6 +26,20 @@ namespace AxeMan.DungeonObject.ActorSkill
                 return skillTypeTag;
             }
             return SkillTypeTag.INVALID;
+        }
+
+        public SkillTypeTag GetSkillTypeTag(CommandTag commandTag)
+        {
+            return GetSkillTypeTag(
+                GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillNameTag(commandTag));
+        }
+
+        public SkillTypeTag GetSkillTypeTag(UITag uiTag)
+        {
+            return GetSkillTypeTag(
+                GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillNameTag(uiTag));
         }
 
         private void Awake()

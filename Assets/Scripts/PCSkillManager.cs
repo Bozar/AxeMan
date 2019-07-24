@@ -58,5 +58,15 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             return GetComponent<SkillMetaInfo>().GetSkillTypeTag(skillNameTag);
         }
+
+        public SkillTypeTag GetSkillTypeTag(CommandTag commandTag)
+        {
+            return GetComponent<SkillMetaInfo>().GetSkillTypeTag(commandTag);
+        }
+
+        public SkillTypeTag GetSkillTypeTag(UITag uiTag)
+        {
+            return GetComponent<SkillMetaInfo>().GetSkillTypeTag(uiTag);
+        }
     }
 }
