@@ -31,6 +31,12 @@ namespace AxeMan.GameSystem.UserInterface
             HPData();
         }
 
+        private void Canvas_PCStatus_Left_ChangedSkillCooldown(object sender,
+            ChangedSkillCooldownEventArgs e)
+        {
+            SkillCooldown();
+        }
+
         private void Canvas_PCStatus_Left_CreatedWorld(object sender, EventArgs e)
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
@@ -113,6 +119,8 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_PCStatus_Left_CreatedWorld;
             GetComponent<PublishHP>().ChangedHP
                 += Canvas_PCStatus_Left_ChangedHP;
+            GetComponent<PublishSkill>().ChangedSkillCooldown
+                += Canvas_PCStatus_Left_ChangedSkillCooldown;
         }
     }
 }

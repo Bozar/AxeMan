@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameEvent;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -90,8 +91,49 @@ namespace AxeMan.DungeonObject.ActorSkill
             };
         }
 
+        private bool IsValidAction(ActionTag actionTag)
+        {
+            switch (actionTag)
+            {
+                case ActionTag.UseSkillQ:
+                case ActionTag.UseSkillW:
+                case ActionTag.UseSkillE:
+                case ActionTag.UseSkillR:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
+        private void SetCooldown(SkillNameTag skill, int cooldown)
+        {
+            if (currentCooldownDict.ContainsKey(skill))
+            {
+                currentCooldownDict[skill] = cooldown;
+                GetComponent<LocalManager>().ChangedSkillCooldown(
+                    new ChangedSkillCooldownEventArgs(skill));
+            }
+        }
+
+        private void SkillCooldown_TakenAction(object sender,
+            TakenActionEventArgs e)
+        {
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID)
+                || !IsValidAction(e.Action))
+            {
+                return;
+            }
+
+            SkillNameTag skill = GetComponent<PCSkillManager>()
+                .GetSkillNameTag(e.Action);
+            SetCooldown(skill, GetMaxCooldown(skill));
+        }
+
         private void Start()
         {
+            GameCore.AxeManCore.GetComponent<PublishAction>().TakenAction
+                += SkillCooldown_TakenAction;
         }
     }
 }
