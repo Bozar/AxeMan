@@ -65,6 +65,14 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Modeline).text = AimModeText();
         }
 
+        private void Canvas_World_FailedVerifying(object sender,
+            FailedVerifyingEventArgs e)
+        {
+            string skillName = skillManager.GetSkillName(e.UseSkill);
+
+            SearchText(UITag.Modeline).text = $"Cannot use Skill {skillName}.";
+        }
+
         private void Canvas_World_LeavingAimMode(object sender, EventArgs e)
         {
             skillNameTag = SkillNameTag.INVALID;
@@ -79,14 +87,6 @@ namespace AxeMan.GameSystem.UserInterface
                 return;
             }
             SearchText(UITag.Modeline).text = AimModeText();
-        }
-
-        private void Canvas_World_VerifyingFailed(object sender,
-            VerifyingFailedEventArgs e)
-        {
-            string skillName = skillManager.GetSkillName(e.CommandTag);
-
-            SearchText(UITag.Modeline).text = $"Cannot use Skill {skillName}.";
         }
 
         private void ClearModeline()
@@ -106,8 +106,8 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_World_EnteredAimMode;
             GetComponent<AimMode>().LeavingAimMode
                 += Canvas_World_LeavingAimMode;
-            GetComponent<AimMode>().VerifyingFailed
-                += Canvas_World_VerifyingFailed;
+            GetComponent<AimMode>().FailedVerifying
+                += Canvas_World_FailedVerifying;
             GetComponent<PublishAction>().TakenAction
                 += Canvas_World_TakenAction;
         }
