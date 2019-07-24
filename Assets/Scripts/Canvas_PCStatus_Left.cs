@@ -72,7 +72,8 @@ namespace AxeMan.GameSystem.UserInterface
             // TODO: Get cooldown data from skill component.
             for (int i = 0; i < ui.Length; i++)
             {
-                SearchText(ui[i]).text = (i + 2).ToString();
+                SearchText(ui[i]).text
+                    = skillManager.GetCurrentCooldown(ui[i]).ToString();
             }
         }
 

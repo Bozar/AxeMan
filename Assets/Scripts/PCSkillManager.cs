@@ -5,12 +5,42 @@ using UnityEngine;
 namespace AxeMan.DungeonObject.ActorSkill
 {
     public class PCSkillManager : MonoBehaviour, ISkillMetaInfo, ISkillRange,
-        IConvertSkillMetaInfo
+        ISkillCooldown, IConvertSkillMetaInfo
     {
+        public int GetCurrentCooldown(SkillNameTag skillNameTag)
+        {
+            return GetComponent<SkillCooldown>().GetCurrentCooldown(skillNameTag);
+        }
+
+        public int GetCurrentCooldown(CommandTag commandTag)
+        {
+            return GetComponent<SkillCooldown>().GetCurrentCooldown(commandTag);
+        }
+
+        public int GetCurrentCooldown(UITag uiTag)
+        {
+            return GetComponent<SkillCooldown>().GetCurrentCooldown(uiTag);
+        }
+
         public string GetLongSkillTypeName(SkillTypeTag skillTypeTag)
         {
             return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
                 .GetLongSkillTypeName(skillTypeTag);
+        }
+
+        public int GetMaxCooldown(SkillNameTag skillNameTag)
+        {
+            return GetComponent<SkillCooldown>().GetMaxCooldown(skillNameTag);
+        }
+
+        public int GetMaxCooldown(CommandTag commandTag)
+        {
+            return GetComponent<SkillCooldown>().GetMaxCooldown(commandTag);
+        }
+
+        public int GetMaxCooldown(UITag uiTag)
+        {
+            return GetComponent<SkillCooldown>().GetMaxCooldown(uiTag);
         }
 
         public string GetShortSkillTypeName(SkillTypeTag skillTypeTag)

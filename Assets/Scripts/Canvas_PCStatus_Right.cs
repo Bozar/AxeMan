@@ -32,7 +32,7 @@ namespace AxeMan.GameSystem.UserInterface
             EnteringAimModeEventArgs e)
         {
             Range(e.CommandTag);
-            Cooldown();
+            Cooldown(e.CommandTag);
             Damage();
             Curse1();
             Curse2();
@@ -52,10 +52,11 @@ namespace AxeMan.GameSystem.UserInterface
             }
         }
 
-        private void Cooldown()
+        private void Cooldown(CommandTag commandTag)
         {
-            SearchText(UITag.CooldownData).text = "8";
             SearchText(UITag.CooldownText).text = "CD";
+            SearchText(UITag.CooldownData).text
+                = skillManager.GetMaxCooldown(commandTag).ToString();
         }
 
         private void Curse1()

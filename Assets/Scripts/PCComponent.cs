@@ -24,6 +24,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data.AddComponent<PCStartEndTurn>();
             e.Data.AddComponent<PCUseSKill>();
 
+            e.Data.AddComponent<SkillCooldown>();
             e.Data.AddComponent<SkillMetaInfo>();
             e.Data.AddComponent<SkillRange>();
         }
