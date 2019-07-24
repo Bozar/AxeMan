@@ -18,6 +18,8 @@ namespace AxeMan.GameSystem
 
         SkillNameTag GetSkillNameTag(UITag uiTag);
 
+        SkillNameTag GetSkillNameTag(ActionTag actionTag);
+
         SkillNameTag GetSkillNameTag(CommandTag commandTag);
     }
 
@@ -108,6 +110,27 @@ namespace AxeMan.GameSystem
                     return SkillNameTag.E;
 
                 case CommandTag.SkillR:
+                    return SkillNameTag.R;
+
+                default:
+                    return SkillNameTag.INVALID;
+            }
+        }
+
+        public SkillNameTag GetSkillNameTag(ActionTag actionTag)
+        {
+            switch (actionTag)
+            {
+                case ActionTag.UseSkillQ:
+                    return SkillNameTag.Q;
+
+                case ActionTag.UseSkillW:
+                    return SkillNameTag.W;
+
+                case ActionTag.UseSkillE:
+                    return SkillNameTag.E;
+
+                case ActionTag.UseSkillR:
                     return SkillNameTag.R;
 
                 default:

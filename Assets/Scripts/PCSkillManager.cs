@@ -79,6 +79,12 @@ namespace AxeMan.DungeonObject.ActorSkill
                 .GetSkillNameTag(commandTag);
         }
 
+        public SkillNameTag GetSkillNameTag(ActionTag actionTag)
+        {
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillNameTag(actionTag);
+        }
+
         public int GetSkillRange(SkillNameTag skillName)
         {
             return GetComponent<SkillRange>().GetSkillRange(skillName);
