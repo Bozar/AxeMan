@@ -1,7 +1,9 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.SchedulingSystem;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject.ActorSkill
@@ -116,6 +118,23 @@ namespace AxeMan.DungeonObject.ActorSkill
             }
         }
 
+        private void SkillCooldown_StartingTurn(object sender,
+            StartingTurnEventArgs e)
+        {
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
+            {
+                return;
+            }
+
+            foreach (SkillNameTag snt in currentCooldownDict.Keys.ToArray())
+            {
+                if (currentCooldownDict[snt] > minCooldown)
+                {
+                    SetCooldown(snt, --currentCooldownDict[snt]);
+                }
+            }
+        }
+
         private void SkillCooldown_TakenAction(object sender,
             TakenActionEventArgs e)
         {
@@ -134,6 +153,8 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             GameCore.AxeManCore.GetComponent<PublishAction>().TakenAction
                 += SkillCooldown_TakenAction;
+            GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn
+                += SkillCooldown_StartingTurn;
         }
     }
 }
