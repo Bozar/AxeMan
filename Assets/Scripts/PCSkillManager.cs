@@ -5,7 +5,7 @@ using UnityEngine;
 namespace AxeMan.DungeonObject.ActorSkill
 {
     public class PCSkillManager : MonoBehaviour, ISkillMetaInfo, ISkillRange,
-        ISkillCooldown, IConvertSkillMetaInfo
+        ISkillCooldown, ISkillDamage, IConvertSkillMetaInfo
     {
         public int GetCurrentCooldown(SkillNameTag skillNameTag)
         {
@@ -47,6 +47,16 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
                 .GetShortSkillTypeName(skillTypeTag);
+        }
+
+        public int GetSkillDamage(SkillNameTag skillNameTag)
+        {
+            return GetComponent<SkillDamage>().GetSkillDamage(skillNameTag);
+        }
+
+        public int GetSkillDamage(CommandTag commandTag)
+        {
+            return GetComponent<SkillDamage>().GetSkillDamage(commandTag);
         }
 
         public string GetSkillName(SkillNameTag skillNameTag)

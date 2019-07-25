@@ -25,6 +25,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data.AddComponent<PCUseSKill>();
 
             e.Data.AddComponent<SkillCooldown>();
+            e.Data.AddComponent<SkillDamage>();
             e.Data.AddComponent<SkillMetaInfo>();
             e.Data.AddComponent<SkillRange>();
         }

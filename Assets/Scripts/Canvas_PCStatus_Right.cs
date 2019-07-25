@@ -33,7 +33,7 @@ namespace AxeMan.GameSystem.UserInterface
         {
             Range(e.CommandTag);
             Cooldown(e.CommandTag);
-            Damage();
+            Damage(e.CommandTag);
             Curse1();
             Curse2();
             Curse3();
@@ -77,10 +77,11 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Curse3Data).text = "4 x 6";
         }
 
-        private void Damage()
+        private void Damage(CommandTag commandTag)
         {
             SearchText(UITag.DamageText).text = "Dmg";
-            SearchText(UITag.DamageData).text = "4";
+            SearchText(UITag.DamageData).text
+                = skillManager.GetSkillDamage(commandTag).ToString();
         }
 
         private void Range(CommandTag commandTag)
