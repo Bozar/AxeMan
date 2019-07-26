@@ -34,6 +34,8 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum SkillNameTag { INVALID, Q, W, E, R }
 
+    public enum SkillSlotTag { Merit1, Merit2, Merit3, Flaw1, Flaw2, Flaw3, }
+
     public enum SkillTypeTag { INVALID, Move, Attack }
 
     public enum SubTag

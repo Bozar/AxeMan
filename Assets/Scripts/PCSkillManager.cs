@@ -1,11 +1,12 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject.ActorSkill
 {
     public class PCSkillManager : MonoBehaviour, ISkillMetaInfo, ISkillRange,
-        ISkillCooldown, ISkillDamage, IConvertSkillMetaInfo
+        ISkillCooldown, ISkillDamage, ISkillSlot, IConvertSkillMetaInfo
     {
         public int GetCurrentCooldown(SkillNameTag skillNameTag)
         {
@@ -100,6 +101,12 @@ namespace AxeMan.DungeonObject.ActorSkill
             return GetComponent<SkillRange>().GetSkillRange(skillName);
         }
 
+        public Dictionary<SkillSlotTag, SkillComponentTag> GetSkillSlot(
+            SkillNameTag skillNameTag)
+        {
+            return GetComponent<SkillSlot>().GetSkillSlot(skillNameTag);
+        }
+
         public SkillTypeTag GetSkillTypeTag(SkillNameTag skillNameTag)
         {
             return GetComponent<SkillMetaInfo>().GetSkillTypeTag(skillNameTag);
@@ -113,6 +120,13 @@ namespace AxeMan.DungeonObject.ActorSkill
         public SkillTypeTag GetSkillTypeTag(UITag uiTag)
         {
             return GetComponent<SkillMetaInfo>().GetSkillTypeTag(uiTag);
+        }
+
+        public bool TrySetSkillSlot(SkillNameTag skillNameTag,
+            SkillSlotTag skillSlotTag, SkillComponentTag skillComponentTag)
+        {
+            return GetComponent<SkillSlot>().TrySetSkillSlot(skillNameTag,
+                skillSlotTag, skillComponentTag);
         }
     }
 }
