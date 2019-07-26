@@ -30,13 +30,17 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum SearchEventTag { Position, MainTag, SubTag, }
 
-    public enum SkillComponentTag { FireShield, };
+    public enum SkillComponentTag
+    {
+        FireMerit, WaterMerit, AirMerit, EarthMerit,
+        FireFlaw, WaterFlaw, AirFlaw, EarthFlaw,
+    };
 
     public enum SkillNameTag { INVALID, Q, W, E, R }
 
     public enum SkillSlotTag { Merit1, Merit2, Merit3, Flaw1, Flaw2, Flaw3, }
 
-    public enum SkillTypeTag { INVALID, Move, Attack }
+    public enum SkillTypeTag { INVALID, Move, Attack, Enhance, Curse, }
 
     public enum SubTag
     {
