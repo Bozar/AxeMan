@@ -51,9 +51,9 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             // NOTE: Subscribe events to fill the dictionary.
             skillTypeDict[SkillNameTag.Q] = SkillTypeTag.Attack;
-            skillTypeDict[SkillNameTag.W] = SkillTypeTag.Attack;
-            skillTypeDict[SkillNameTag.E] = SkillTypeTag.Move;
-            skillTypeDict[SkillNameTag.R] = SkillTypeTag.Move;
+            skillTypeDict[SkillNameTag.W] = SkillTypeTag.Move;
+            skillTypeDict[SkillNameTag.E] = SkillTypeTag.Enhance;
+            skillTypeDict[SkillNameTag.R] = SkillTypeTag.Curse;
         }
     }
 }

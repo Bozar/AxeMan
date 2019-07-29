@@ -153,9 +153,13 @@ namespace AxeMan.GameSystem
 
             shortTypeNameDict[SkillTypeTag.Attack] = "Atk";
             shortTypeNameDict[SkillTypeTag.Move] = "Mov";
+            shortTypeNameDict[SkillTypeTag.Enhance] = "Enh";
+            shortTypeNameDict[SkillTypeTag.Curse] = "Cur";
 
             longTypeNameDict[SkillTypeTag.Attack] = "Attack";
             longTypeNameDict[SkillTypeTag.Move] = "Move";
+            longTypeNameDict[SkillTypeTag.Enhance] = "Enhance";
+            longTypeNameDict[SkillTypeTag.Curse] = "Curse";
         }
     }
 }
