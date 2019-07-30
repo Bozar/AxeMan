@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PlayerInput;
@@ -87,8 +88,25 @@ namespace AxeMan.GameSystem
                     TestHP();
                     break;
 
+                case CommandTag.PrintSkill:
+                    PrintSkill();
+                    break;
+
                 default:
                     break;
+            }
+        }
+
+        private void PrintSkill()
+        {
+            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+            PCSkillManager skillManager = pc.GetComponent<PCSkillManager>();
+            var effectDict = skillManager.GetSkillEffect(SkillNameTag.Q);
+
+            foreach (var comp in effectDict.Keys)
+            {
+                Debug.Log(comp + ": "
+                    + effectDict[comp][0] + ", " + effectDict[comp][1]);
             }
         }
 

@@ -21,7 +21,8 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum CommandTag
     {
         INVALID, Confirm, Cancel,
-        Test, Reload, PrintSchedule, RemoveFromSchedule, NextInSchedule, ChangeHP,
+        Test, Reload, PrintSchedule, RemoveFromSchedule, NextInSchedule,
+        ChangeHP, PrintSkill,
         Left, Right, Up, Down,
         SkillQ, SkillW, SkillE, SkillR,
     }

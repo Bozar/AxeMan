@@ -10,6 +10,7 @@ namespace AxeMan.GameSystem.PlayerInput
             bool reload = Input.GetKeyDown(KeyCode.Space);
             bool schedule = Input.GetKeyDown(KeyCode.P);
             bool changeHP = Input.GetKeyDown(KeyCode.Minus);
+            bool printSkill = Input.GetKeyDown(KeyCode.S);
 
             if (reload)
             {
@@ -22,6 +23,10 @@ namespace AxeMan.GameSystem.PlayerInput
             else if (changeHP)
             {
                 return CommandTag.ChangeHP;
+            }
+            else if (printSkill)
+            {
+                return CommandTag.PrintSkill;
             }
             return CommandTag.INVALID;
         }
