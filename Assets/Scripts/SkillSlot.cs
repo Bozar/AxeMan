@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataTag;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -120,8 +121,40 @@ namespace AxeMan.DungeonObject.ActorSkill
                 };
         }
 
+        private void SkillSlot_CreatedWorld(object sender, EventArgs e)
+        {
+            TestSkillSlot();
+        }
+
         private void Start()
         {
+            GameCore.AxeManCore.GetComponent<Wizard>().CreatedWorld
+                += SkillSlot_CreatedWorld;
+        }
+
+        private void TestSkillSlot()
+        {
+            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Merit1,
+                SkillComponentTag.AirMerit);
+            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Merit2,
+                SkillComponentTag.AirFlaw);
+            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Flaw1,
+                SkillComponentTag.AirFlaw);
+
+            TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Merit1,
+                SkillComponentTag.AirMerit);
+            TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Merit2,
+                SkillComponentTag.AirMerit);
+            TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Merit3,
+                SkillComponentTag.AirMerit);
+            TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Flaw1,
+                SkillComponentTag.WaterFlaw);
+
+            TrySetSkillSlot(SkillNameTag.E, SkillSlotTag.Merit3,
+                SkillComponentTag.EarthMerit);
+
+            TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Flaw2,
+                SkillComponentTag.AirFlaw);
         }
 
         private bool VerifyFlawSlot(SkillComponentTag skillComponentTag)

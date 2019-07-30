@@ -25,7 +25,10 @@ namespace AxeMan.DungeonObject.ActorSkill
             // NOTE: Set skill effect by subscribing an event. The event is
             // published when player finished creating the character.
 
-            //SetSkillEffect(SkillNameTag.Q);
+            SetSkillEffect(SkillNameTag.Q);
+            SetSkillEffect(SkillNameTag.W);
+            SetSkillEffect(SkillNameTag.E);
+            SetSkillEffect(SkillNameTag.R);
 
             if (skillEffectDict.TryGetValue(skillNameTag, out var comp))
             {
