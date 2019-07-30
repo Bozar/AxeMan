@@ -95,7 +95,7 @@ namespace AxeMan.DungeonObject.ActorSkill
                         new SkillComponentTag[]
                         {
                             SkillComponentTag.AirMerit,
-                            SkillComponentTag.AirFlaw,
+                            SkillComponentTag.AirCurse,
                         }
                     },
                     { SkillTypeTag.Enhance,
@@ -112,10 +112,10 @@ namespace AxeMan.DungeonObject.ActorSkill
                         {
                             SkillComponentTag.AirMerit,
 
-                            SkillComponentTag.FireFlaw,
-                            SkillComponentTag.WaterFlaw,
-                            SkillComponentTag.AirFlaw,
-                            SkillComponentTag.EarthFlaw,
+                            SkillComponentTag.FireCurse,
+                            SkillComponentTag.WaterCurse,
+                            SkillComponentTag.AirCurse,
+                            SkillComponentTag.EarthCurse,
                         }
                     },
                 };
@@ -137,7 +137,7 @@ namespace AxeMan.DungeonObject.ActorSkill
             TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Merit1,
                 SkillComponentTag.AirMerit);
             TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Merit2,
-                SkillComponentTag.AirFlaw);
+                SkillComponentTag.AirCurse);
             TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Flaw1,
                 SkillComponentTag.AirFlaw);
 

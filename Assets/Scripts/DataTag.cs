@@ -35,6 +35,7 @@ namespace AxeMan.GameSystem.GameDataTag
     {
         FireMerit, WaterMerit, AirMerit, EarthMerit,
         FireFlaw, WaterFlaw, AirFlaw, EarthFlaw,
+        FireCurse, WaterCurse, AirCurse, EarthCurse,
     };
 
     public enum SkillNameTag { INVALID, Q, W, E, R }
