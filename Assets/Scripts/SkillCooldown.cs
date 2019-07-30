@@ -26,18 +26,19 @@ namespace AxeMan.DungeonObject.ActorSkill
 
     public class SkillCooldown : MonoBehaviour, ISkillCooldown
     {
-        private Dictionary<SkillNameTag, int> currentCooldownDict;
-        private int invalidCooldown;
-        private Dictionary<SkillNameTag, int> maxCooldownDict;
-        private int minCooldown;
+        private int baseCD;
+        private Dictionary<SkillNameTag, int> currentCDDict;
+        private int invalidCD;
+        private Dictionary<SkillNameTag, int> maxCDDict;
+        private int minCD;
 
         public int GetCurrentCooldown(SkillNameTag skillNameTag)
         {
-            if (currentCooldownDict.TryGetValue(skillNameTag, out int cooldown))
+            if (currentCDDict.TryGetValue(skillNameTag, out int cooldown))
             {
                 return cooldown;
             }
-            return invalidCooldown;
+            return invalidCD;
         }
 
         public int GetCurrentCooldown(CommandTag commandTag)
@@ -56,11 +57,16 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         public int GetMaxCooldown(SkillNameTag skillNameTag)
         {
-            if (maxCooldownDict.TryGetValue(skillNameTag, out int cooldown))
+            if (!maxCDDict.ContainsKey(skillNameTag))
             {
-                return cooldown;
+                return invalidCD;
             }
-            return invalidCooldown;
+
+            if (maxCDDict[skillNameTag] == invalidCD)
+            {
+                SetMaxCooldown(skillNameTag);
+            }
+            return maxCDDict[skillNameTag];
         }
 
         public int GetMaxCooldown(CommandTag commandTag)
@@ -79,18 +85,19 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         private void Awake()
         {
-            minCooldown = 0;
-            invalidCooldown = 99;
+            minCD = 0;
+            baseCD = 5;
+            invalidCD = 99;
 
-            maxCooldownDict = new Dictionary<SkillNameTag, int>()
+            maxCDDict = new Dictionary<SkillNameTag, int>()
             {
-                { SkillNameTag.Q, 3 }, { SkillNameTag.W, 5 },
-                { SkillNameTag.E, 2 }, { SkillNameTag.R, 9 }
+                { SkillNameTag.Q, invalidCD }, { SkillNameTag.W, invalidCD },
+                { SkillNameTag.E, invalidCD }, { SkillNameTag.R, invalidCD }
             };
-            currentCooldownDict = new Dictionary<SkillNameTag, int>()
+            currentCDDict = new Dictionary<SkillNameTag, int>()
             {
-                { SkillNameTag.Q, minCooldown }, { SkillNameTag.W, minCooldown },
-                { SkillNameTag.E, minCooldown }, { SkillNameTag.R, minCooldown }
+                { SkillNameTag.Q, minCD }, { SkillNameTag.W, minCD },
+                { SkillNameTag.E, minCD }, { SkillNameTag.R, minCD }
             };
         }
 
@@ -109,14 +116,43 @@ namespace AxeMan.DungeonObject.ActorSkill
             }
         }
 
-        private void SetCooldown(SkillNameTag skill, int cooldown)
+        private void SetCurrentCooldown(SkillNameTag skillNameTag, int cooldown)
         {
-            if (currentCooldownDict.ContainsKey(skill))
+            if (currentCDDict.ContainsKey(skillNameTag))
             {
-                currentCooldownDict[skill] = cooldown;
+                currentCDDict[skillNameTag] = cooldown;
                 GetComponent<LocalManager>().ChangedSkillCooldown(
-                    new ChangedSkillCooldownEventArgs(skill));
+                    new ChangedSkillCooldownEventArgs(skillNameTag));
             }
+        }
+
+        private void SetMaxCooldown(SkillNameTag skillNameTag)
+        {
+            Dictionary<SkillSlotTag, SkillComponentTag> slotComp
+                = GetComponent<PCSkillManager>().GetSkillSlot(skillNameTag);
+            int cd = baseCD;
+
+            foreach (SkillSlotTag sst in slotComp.Keys)
+            {
+                switch (sst)
+                {
+                    case SkillSlotTag.Merit1:
+                    case SkillSlotTag.Merit2:
+                    case SkillSlotTag.Merit3:
+                        cd++;
+                        break;
+
+                    case SkillSlotTag.Flaw1:
+                    case SkillSlotTag.Flaw2:
+                    case SkillSlotTag.Flaw3:
+                        cd--;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            maxCDDict[skillNameTag] = cd;
         }
 
         private void SkillCooldown_StartingTurn(object sender,
@@ -127,11 +163,12 @@ namespace AxeMan.DungeonObject.ActorSkill
                 return;
             }
 
-            foreach (SkillNameTag snt in currentCooldownDict.Keys.ToArray())
+            // TODO: Freeze counting down if PC has Water- curse.
+            foreach (SkillNameTag snt in currentCDDict.Keys.ToArray())
             {
-                if (currentCooldownDict[snt] > minCooldown)
+                if (currentCDDict[snt] > minCD)
                 {
-                    SetCooldown(snt, --currentCooldownDict[snt]);
+                    SetCurrentCooldown(snt, --currentCDDict[snt]);
                 }
             }
         }
@@ -147,13 +184,13 @@ namespace AxeMan.DungeonObject.ActorSkill
 
             SkillNameTag skill = GetComponent<PCSkillManager>()
                 .GetSkillNameTag(e.Action);
-            SetCooldown(skill, GetMaxCooldown(skill));
+            SetCurrentCooldown(skill, GetMaxCooldown(skill));
         }
 
         private void SkillCooldown_VerifyingSkill(object sender,
             VerifyingSkillEventArgs e)
         {
-            e.CanUseSkill.Push(GetCurrentCooldown(e.UseSkill) <= minCooldown);
+            e.CanUseSkill.Push(GetCurrentCooldown(e.UseSkill) <= minCD);
         }
 
         private void Start()
