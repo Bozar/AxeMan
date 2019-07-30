@@ -11,25 +11,37 @@ namespace AxeMan.DungeonObject.ActorSkill
         Dictionary<SkillSlotTag, SkillComponentTag> GetSkillSlot(
             SkillNameTag skillNameTag);
 
-        bool TrySetSkillSlot(SkillNameTag skillNameTag, SkillSlotTag skillSlotTag,
-            SkillComponentTag skillComponentTag);
+        void RemoveSkillComponent(SkillNameTag skillNameTag,
+            SkillSlotTag skillSlotTag);
+
+        bool TrySetSkillSlot(SkillNameTag skillNameTag,
+            SkillSlotTag skillSlotTag, SkillComponentTag skillComponentTag);
     }
 
     public class SkillSlot : MonoBehaviour, ISkillSlot
     {
         private Dictionary<SkillNameTag,
-            Dictionary<SkillSlotTag, SkillComponentTag>> componentDict;
+            Dictionary<SkillSlotTag, SkillComponentTag>> slotCompDict;
 
         private Dictionary<SkillTypeTag, SkillComponentTag[]> validMeritSlot;
 
         public Dictionary<SkillSlotTag, SkillComponentTag> GetSkillSlot(
             SkillNameTag skillNameTag)
         {
-            if (componentDict.TryGetValue(skillNameTag, out var slotComp))
+            if (slotCompDict.TryGetValue(skillNameTag, out var slotComp))
             {
                 return new Dictionary<SkillSlotTag, SkillComponentTag>(slotComp);
             }
             return null;
+        }
+
+        public void RemoveSkillComponent(SkillNameTag skillNameTag,
+            SkillSlotTag skillSlotTag)
+        {
+            if (slotCompDict.TryGetValue(skillNameTag, out var slotComp))
+            {
+                slotComp.Remove(skillSlotTag);
+            }
         }
 
         public bool TrySetSkillSlot(SkillNameTag skillNameTag,
@@ -59,7 +71,7 @@ namespace AxeMan.DungeonObject.ActorSkill
             }
 
             if (canSetSlot
-                && componentDict.TryGetValue(skillNameTag, out var slotComp))
+                && slotCompDict.TryGetValue(skillNameTag, out var slotComp))
             {
                 slotComp[skillSlotTag] = skillComponentTag;
                 return true;
@@ -69,7 +81,7 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         private void Awake()
         {
-            componentDict = new Dictionary<SkillNameTag,
+            slotCompDict = new Dictionary<SkillNameTag,
                 Dictionary<SkillSlotTag, SkillComponentTag>>();
             SkillNameTag[] skillNameTags = new SkillNameTag[]
             {
@@ -78,7 +90,7 @@ namespace AxeMan.DungeonObject.ActorSkill
 
             foreach (SkillNameTag snt in skillNameTags)
             {
-                componentDict[snt]
+                slotCompDict[snt]
                     = new Dictionary<SkillSlotTag, SkillComponentTag>();
             }
 

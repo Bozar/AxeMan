@@ -129,6 +129,13 @@ namespace AxeMan.DungeonObject.ActorSkill
             return GetComponent<SkillMetaInfo>().GetSkillTypeTag(uiTag);
         }
 
+        public void RemoveSkillComponent(SkillNameTag skillNameTag,
+            SkillSlotTag skillSlotTag)
+        {
+            GetComponent<SkillSlot>().RemoveSkillComponent(skillNameTag,
+                skillSlotTag);
+        }
+
         public bool TrySetSkillSlot(SkillNameTag skillNameTag,
             SkillSlotTag skillSlotTag, SkillComponentTag skillComponentTag)
         {
