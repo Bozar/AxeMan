@@ -14,17 +14,27 @@ namespace AxeMan.DungeonObject.ActorSkill
 
     public class SkillDamage : MonoBehaviour, ISkillDamage
     {
-        private Dictionary<SkillNameTag, int> damageDict;
+        private int baseDamage;
+        private int invalidDamage;
+        private Dictionary<SkillNameTag, int> nameDamage;
+        private int noDamage;
 
         public int GetSkillDamage(SkillNameTag skillNameTag)
         {
-            int invalidDamage = -99;
-
-            if (damageDict.TryGetValue(skillNameTag, out int damage))
+            if (!nameDamage.ContainsKey(skillNameTag))
             {
-                return damage;
+                return invalidDamage;
             }
-            return invalidDamage;
+
+            int damage = nameDamage[skillNameTag];
+            if (damage == invalidDamage)
+            {
+                damage = SetBaseDamage(skillNameTag);
+            }
+
+            // TODO: Change damage based on PC status.
+
+            return damage;
         }
 
         public int GetSkillDamage(CommandTag commandTag)
@@ -36,11 +46,44 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         private void Awake()
         {
-            damageDict = new Dictionary<SkillNameTag, int>
+            invalidDamage = -99;
+            noDamage = 0;
+            baseDamage = 1;
+
+            nameDamage = new Dictionary<SkillNameTag, int>
             {
-                { SkillNameTag.Q, 3 }, { SkillNameTag.W, 2 },
-                { SkillNameTag.E, 0 }, { SkillNameTag.R, 1 }
+                { SkillNameTag.Q, invalidDamage },
+                { SkillNameTag.W, invalidDamage },
+                { SkillNameTag.E, invalidDamage },
+                { SkillNameTag.R, invalidDamage },
             };
+        }
+
+        private int SetBaseDamage(SkillNameTag skillNameTag)
+        {
+            SkillTypeTag skillType = GetComponent<PCSkillManager>()
+                .GetSkillTypeTag(skillNameTag);
+            int damage = noDamage;
+            Dictionary<SkillComponentTag, int[]> compEffect;
+
+            if (skillType == SkillTypeTag.Attack)
+            {
+                damage = baseDamage;
+                compEffect = GetComponent<PCSkillManager>()
+                    .GetSkillEffect(skillNameTag);
+
+                foreach (SkillComponentTag sct in compEffect.Keys)
+                {
+                    if (sct == SkillComponentTag.AirCurse)
+                    {
+                        damage += compEffect[sct][1];
+                        break;
+                    }
+                }
+            }
+
+            nameDamage[skillNameTag] = damage;
+            return damage;
         }
 
         private void Start()
