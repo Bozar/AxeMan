@@ -17,7 +17,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         private int baseDamage;
         private int invalidDamage;
         private Dictionary<SkillNameTag, int> nameDamage;
-        private int noDamage;
+        private int zeroDamage;
 
         public int GetSkillDamage(SkillNameTag skillNameTag)
         {
@@ -47,7 +47,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         private void Awake()
         {
             invalidDamage = -99;
-            noDamage = 0;
+            zeroDamage = 0;
             baseDamage = 1;
 
             nameDamage = new Dictionary<SkillNameTag, int>
@@ -63,7 +63,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             SkillTypeTag skillType = GetComponent<PCSkillManager>()
                 .GetSkillTypeTag(skillNameTag);
-            int damage = noDamage;
+            int damage = zeroDamage;
             Dictionary<SkillComponentTag, int[]> compEffect;
 
             if (skillType == SkillTypeTag.Attack)
@@ -72,13 +72,10 @@ namespace AxeMan.DungeonObject.ActorSkill
                 compEffect = GetComponent<PCSkillManager>()
                     .GetSkillEffect(skillNameTag);
 
-                foreach (SkillComponentTag sct in compEffect.Keys)
+                if (compEffect.TryGetValue(SkillComponentTag.AirCurse,
+                    out int[] powerDuration))
                 {
-                    if (sct == SkillComponentTag.AirCurse)
-                    {
-                        damage += compEffect[sct][1];
-                        break;
-                    }
+                    damage += powerDuration[0];
                 }
             }
 
