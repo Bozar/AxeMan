@@ -64,16 +64,18 @@ namespace AxeMan.DungeonObject.ActorSkill
             SkillTypeTag skillType = GetComponent<PCSkillManager>()
                 .GetSkillTypeTag(skillNameTag);
             int damage = zeroDamage;
+
             Dictionary<SkillComponentTag, int[]> compEffect;
+            SkillComponentTag checkComp;
 
             if (skillType == SkillTypeTag.Attack)
             {
                 damage = baseDamage;
                 compEffect = GetComponent<PCSkillManager>()
                     .GetSkillEffect(skillNameTag);
+                checkComp = SkillComponentTag.AirCurse;
 
-                if (compEffect.TryGetValue(SkillComponentTag.AirCurse,
-                    out int[] powerDuration))
+                if (compEffect.TryGetValue(checkComp, out int[] powerDuration))
                 {
                     damage += powerDuration[0];
                 }

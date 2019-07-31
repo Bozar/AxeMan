@@ -14,22 +14,68 @@ namespace AxeMan.DungeonObject.ActorSkill
 
     public class SkillRange : MonoBehaviour, ISkillRange
     {
-        private Dictionary<SkillNameTag, int> skillRangeDict;
+        private int baseRange;
+        private int invalidRange;
+        private Dictionary<SkillNameTag, int> nameRange;
+        private int zeroRange;
 
-        public int GetSkillRange(SkillNameTag skillName)
+        public int GetSkillRange(SkillNameTag skillNameTag)
         {
-            int invalid = -1;
-
-            if (skillRangeDict.TryGetValue(skillName, out int range))
+            if (!nameRange.ContainsKey(skillNameTag))
             {
-                return range;
+                return invalidRange;
             }
-            return invalid;
+
+            int range = nameRange[skillNameTag];
+            if (range == invalidRange)
+            {
+                range = SetBaseRange(skillNameTag);
+            }
+
+            // TODO: Change range based on PC status.
+
+            return range;
         }
 
         private void Awake()
         {
-            skillRangeDict = new Dictionary<SkillNameTag, int>();
+            invalidRange = -1;
+            zeroRange = 0;
+            baseRange = 1;
+
+            nameRange = new Dictionary<SkillNameTag, int>
+            {
+                [SkillNameTag.Q] = invalidRange,
+                [SkillNameTag.W] = invalidRange,
+                [SkillNameTag.E] = invalidRange,
+                [SkillNameTag.R] = invalidRange,
+            };
+        }
+
+        private int SetBaseRange(SkillNameTag skillNameTag)
+        {
+            SkillTypeTag skillType = GetComponent<PCSkillManager>()
+               .GetSkillTypeTag(skillNameTag);
+            int range = zeroRange;
+
+            Dictionary<SkillComponentTag, int[]> compEffect;
+            SkillComponentTag checkComp;
+
+            if (skillType != SkillTypeTag.Enhance)
+            {
+                range = baseRange;
+                compEffect = GetComponent<PCSkillManager>()
+                  .GetSkillEffect(skillNameTag);
+                checkComp = SkillComponentTag.AirMerit;
+
+                if (compEffect.TryGetValue(checkComp, out int[] powerDuration))
+                {
+                    range += powerDuration[0];
+                }
+            }
+
+            nameRange[skillNameTag] = range;
+            return range;
         }
 
         private void SkillRange_VerifyingSkill(object sender,
@@ -50,12 +96,6 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             GameCore.AxeManCore.GetComponent<AimMode>().VerifyingSkill
                 += SkillRange_VerifyingSkill;
-
-            // TODO: Fill the dictionary by events.
-            skillRangeDict[SkillNameTag.Q] = 3;
-            skillRangeDict[SkillNameTag.W] = 4;
-            skillRangeDict[SkillNameTag.E] = 6;
-            skillRangeDict[SkillNameTag.R] = 1;
         }
     }
 }
