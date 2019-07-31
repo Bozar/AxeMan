@@ -17,24 +17,22 @@ namespace AxeMan.DungeonObject.ActorSkill
         private int basePower;
 
         private Dictionary<SkillNameTag, Dictionary<SkillComponentTag, int[]>>
-            skillEffectDict;
+            nameComp;
 
         public Dictionary<SkillComponentTag, int[]> GetSkillEffect(
             SkillNameTag skillNameTag)
         {
-            // NOTE: Set skill effect by subscribing an event. The event is
-            // published when player finished creating the character.
-
-            SetSkillEffect(SkillNameTag.Q);
-            SetSkillEffect(SkillNameTag.W);
-            SetSkillEffect(SkillNameTag.E);
-            SetSkillEffect(SkillNameTag.R);
-
-            if (skillEffectDict.TryGetValue(skillNameTag, out var comp))
+            if (!nameComp.ContainsKey(skillNameTag))
             {
-                return comp;
+                return null;
             }
-            return null;
+
+            Dictionary<SkillComponentTag, int[]> compInt = nameComp[skillNameTag];
+            if (compInt == null)
+            {
+                compInt = SetSkillEffect(skillNameTag);
+            }
+            return new Dictionary<SkillComponentTag, int[]>(compInt);
         }
 
         private void Awake()
@@ -42,40 +40,37 @@ namespace AxeMan.DungeonObject.ActorSkill
             basePower = 2;
             baseDuration = 2;
 
-            SkillNameTag[] skillNames = new SkillNameTag[]
+            nameComp = new Dictionary<SkillNameTag,
+                Dictionary<SkillComponentTag, int[]>>()
             {
-                SkillNameTag.Q, SkillNameTag.W, SkillNameTag.E, SkillNameTag.R,
+                { SkillNameTag.Q, null },
+                { SkillNameTag.W, null },
+                { SkillNameTag.E, null },
+                { SkillNameTag.R, null },
             };
-            skillEffectDict = new Dictionary<SkillNameTag,
-                Dictionary<SkillComponentTag, int[]>>();
-            foreach (SkillNameTag snt in skillNames)
-            {
-                skillEffectDict[snt] = new Dictionary<SkillComponentTag, int[]>();
-            }
         }
 
-        private void SetSkillEffect(SkillNameTag skillNameTag)
+        private Dictionary<SkillComponentTag, int[]> SetSkillEffect(
+            SkillNameTag skillNameTag)
         {
-            if (!skillEffectDict.TryGetValue(skillNameTag, out var compDict))
-            {
-                return;
-            }
-
             Dictionary<SkillSlotTag, SkillComponentTag> slotComp
                 = GetComponent<PCSkillManager>().GetSkillSlot(skillNameTag);
+            Dictionary<SkillComponentTag, int[]> compInt
+                = new Dictionary<SkillComponentTag, int[]>();
 
-            foreach (SkillComponentTag comp in slotComp.Values)
+            foreach (SkillComponentTag sct in slotComp.Values)
             {
-                if (compDict.TryGetValue(comp, out int[] powerDuration))
+                if (compInt.TryGetValue(sct, out int[] powerDuration))
                 {
                     powerDuration[0] += basePower;
                     powerDuration[1] += baseDuration;
                 }
                 else
                 {
-                    compDict[comp] = new int[] { basePower, baseDuration };
+                    compInt[sct] = new int[] { basePower, baseDuration };
                 }
             }
+            return compInt;
         }
 
         private void Start()
