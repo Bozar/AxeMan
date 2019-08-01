@@ -101,12 +101,17 @@ namespace AxeMan.GameSystem
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
             PCSkillManager skillManager = pc.GetComponent<PCSkillManager>();
-            var effectDict = skillManager.GetSkillEffect(SkillNameTag.Q);
+            var effectDict = skillManager.GetSkillEffect(SkillNameTag.E);
+            string compName;
+            string effect;
 
             foreach (var comp in effectDict.Keys)
             {
-                Debug.Log(comp + ": "
-                    + effectDict[comp][0] + ", " + effectDict[comp][1]);
+                compName = GetComponent<ConvertSkillMetaInfo>()
+                    .GetSkillComponentName(comp);
+                effect = GetComponent<ConvertSkillMetaInfo>()
+                    .GetSkillEffectName(comp, effectDict[comp]);
+                Debug.Log(compName + ": " + effect);
             }
         }
 

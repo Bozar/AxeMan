@@ -10,6 +10,11 @@ namespace AxeMan.GameSystem
 
         string GetShortSkillTypeName(SkillTypeTag skillTypeTag);
 
+        string GetSkillComponentName(SkillComponentTag skillComponentTag);
+
+        string GetSkillEffectName(SkillComponentTag skillComponentTag,
+            int[] powerDuration);
+
         string GetSkillName(SkillNameTag skillNameTag);
 
         string GetSkillName(CommandTag commandTag);
@@ -25,14 +30,15 @@ namespace AxeMan.GameSystem
 
     public class ConvertSkillMetaInfo : MonoBehaviour, IConvertSkillMetaInfo
     {
+        private Dictionary<SkillComponentTag, string> compString;
         private string invalidName;
-        private Dictionary<SkillTypeTag, string> longTypeNameDict;
-        private Dictionary<SkillTypeTag, string> shortTypeNameDict;
-        private Dictionary<SkillNameTag, string> skillNameDict;
+        private Dictionary<SkillNameTag, string> nameString;
+        private Dictionary<SkillTypeTag, string> typeLongName;
+        private Dictionary<SkillTypeTag, string> typeShortName;
 
         public string GetLongSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            if (longTypeNameDict.TryGetValue(skillTypeTag, out string longType))
+            if (typeLongName.TryGetValue(skillTypeTag, out string longType))
             {
                 return longType;
             }
@@ -41,16 +47,38 @@ namespace AxeMan.GameSystem
 
         public string GetShortSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            if (shortTypeNameDict.TryGetValue(skillTypeTag, out string shortType))
+            if (typeShortName.TryGetValue(skillTypeTag, out string shortType))
             {
                 return shortType;
             }
             return invalidName;
         }
 
+        public string GetSkillComponentName(SkillComponentTag skillComponentTag)
+        {
+            if (compString.TryGetValue(skillComponentTag, out string compName))
+            {
+                return compName;
+            }
+            return invalidName;
+        }
+
+        public string GetSkillEffectName(SkillComponentTag skillComponentTag,
+            int[] powerDuration)
+        {
+            int power = powerDuration[0];
+            int duration = powerDuration[1];
+
+            if (HideSkillPower(skillComponentTag))
+            {
+                return "T X " + duration;
+            }
+            return power + " X " + duration;
+        }
+
         public string GetSkillName(SkillNameTag skillNameTag)
         {
-            if (skillNameDict.TryGetValue(skillNameTag, out string skillName))
+            if (nameString.TryGetValue(skillNameTag, out string skillName))
             {
                 return skillName;
             }
@@ -140,26 +168,75 @@ namespace AxeMan.GameSystem
 
         private void Awake()
         {
-            skillNameDict = new Dictionary<SkillNameTag, string>();
-            shortTypeNameDict = new Dictionary<SkillTypeTag, string>();
-            longTypeNameDict = new Dictionary<SkillTypeTag, string>();
-
             invalidName = "INVALID_NAME";
 
-            skillNameDict[SkillNameTag.Q] = "Q";
-            skillNameDict[SkillNameTag.W] = "W";
-            skillNameDict[SkillNameTag.E] = "E";
-            skillNameDict[SkillNameTag.R] = "R";
+            nameString = new Dictionary<SkillNameTag, string>
+            {
+                [SkillNameTag.Q] = "Q",
+                [SkillNameTag.W] = "W",
+                [SkillNameTag.E] = "E",
+                [SkillNameTag.R] = "R"
+            };
 
-            shortTypeNameDict[SkillTypeTag.Attack] = "Atk";
-            shortTypeNameDict[SkillTypeTag.Move] = "Mov";
-            shortTypeNameDict[SkillTypeTag.Enhance] = "Enh";
-            shortTypeNameDict[SkillTypeTag.Curse] = "Cur";
+            typeShortName = new Dictionary<SkillTypeTag, string>
+            {
+                [SkillTypeTag.Attack] = "Atk",
+                [SkillTypeTag.Move] = "Mov",
+                [SkillTypeTag.Enhance] = "Enh",
+                [SkillTypeTag.Curse] = "Cur"
+            };
 
-            longTypeNameDict[SkillTypeTag.Attack] = "Attack";
-            longTypeNameDict[SkillTypeTag.Move] = "Move";
-            longTypeNameDict[SkillTypeTag.Enhance] = "Enhance";
-            longTypeNameDict[SkillTypeTag.Curse] = "Curse";
+            typeLongName = new Dictionary<SkillTypeTag, string>
+            {
+                [SkillTypeTag.Attack] = "Attack",
+                [SkillTypeTag.Move] = "Move",
+                [SkillTypeTag.Enhance] = "Enhance",
+                [SkillTypeTag.Curse] = "Curse"
+            };
+
+            compString = new Dictionary<SkillComponentTag, string>
+            {
+                [SkillComponentTag.FireMerit] = "Fire+",
+                [SkillComponentTag.FireFlaw] = "Fire-",
+                [SkillComponentTag.FireCurse] = "Fire?",
+
+                [SkillComponentTag.WaterMerit] = "Water+",
+                [SkillComponentTag.WaterFlaw] = "Water-",
+                [SkillComponentTag.WaterCurse] = "Water?",
+
+                [SkillComponentTag.AirMerit] = "Air+",
+                [SkillComponentTag.AirFlaw] = "Air-",
+                [SkillComponentTag.AirCurse] = "Air?",
+
+                [SkillComponentTag.EarthMerit] = "Earth+",
+                [SkillComponentTag.EarthFlaw] = "Earth-",
+                [SkillComponentTag.EarthCurse] = "Earth?",
+            };
+        }
+
+        private bool HideSkillPower(SkillComponentTag skillComponentTag)
+        {
+            switch (skillComponentTag)
+            {
+                case SkillComponentTag.FireMerit:
+                case SkillComponentTag.FireFlaw:
+                case SkillComponentTag.FireCurse:
+                case SkillComponentTag.WaterMerit:
+                case SkillComponentTag.WaterFlaw:
+                case SkillComponentTag.WaterCurse:
+                    return true;
+
+                case SkillComponentTag.AirMerit:
+                case SkillComponentTag.AirFlaw:
+                case SkillComponentTag.AirCurse:
+                case SkillComponentTag.EarthMerit:
+                case SkillComponentTag.EarthFlaw:
+                case SkillComponentTag.EarthCurse:
+                    return false;
+
+                default:
+                    return false;
+            }
         }
     }
 }

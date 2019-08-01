@@ -51,6 +51,12 @@ namespace AxeMan.DungeonObject.ActorSkill
                 .GetShortSkillTypeName(skillTypeTag);
         }
 
+        public string GetSkillComponentName(SkillComponentTag skillComponentTag)
+        {
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillComponentName(skillComponentTag);
+        }
+
         public int GetSkillDamage(SkillNameTag skillNameTag)
         {
             return GetComponent<SkillDamage>().GetSkillDamage(skillNameTag);
@@ -65,6 +71,13 @@ namespace AxeMan.DungeonObject.ActorSkill
             SkillNameTag skillNameTag)
         {
             return GetComponent<SkillEffect>().GetSkillEffect(skillNameTag);
+        }
+
+        public string GetSkillEffectName(SkillComponentTag skillComponentTag,
+            int[] powerDuration)
+        {
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillEffectName(skillComponentTag, powerDuration);
         }
 
         public string GetSkillName(SkillNameTag skillNameTag)
