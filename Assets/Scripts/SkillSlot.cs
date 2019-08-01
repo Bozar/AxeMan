@@ -167,6 +167,10 @@ namespace AxeMan.DungeonObject.ActorSkill
             TrySetSkillSlot(SkillNameTag.E, SkillSlotTag.Merit3,
                SkillComponentTag.FireMerit);
 
+            TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Merit1,
+                SkillComponentTag.AirCurse);
+            TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Merit2,
+                SkillComponentTag.WaterCurse);
             TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Flaw2,
                 SkillComponentTag.AirFlaw);
         }
