@@ -64,13 +64,13 @@ namespace AxeMan.GameSystem.UserInterface
             skillManager = GetComponent<SearchObject>().Search(SubTag.PC)[0]
                 .GetComponent<PCSkillManager>();
 
-            ClearAllUIContent(uiObjects);
+            ClearUIText(uiObjects);
         }
 
         private void Canvas_PCStatus_Right_EnteringAimMode(object sender,
             EnteringAimModeEventArgs e)
         {
-            ClearAllUIContent(uiObjects);
+            ClearUIText(uiObjects);
 
             Range(e.CommandTag);
             Cooldown(e.CommandTag);
@@ -81,10 +81,10 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_PCStatus_Right_LeavingAimMode(object sender,
             EventArgs e)
         {
-            ClearAllUIContent(uiObjects);
+            ClearUIText(uiObjects);
         }
 
-        private void ClearAllUIContent(GameObject[] uiObjects)
+        private void ClearUIText(GameObject[] uiObjects)
         {
             foreach (GameObject go in uiObjects)
             {

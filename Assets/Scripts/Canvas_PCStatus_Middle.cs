@@ -19,37 +19,49 @@ namespace AxeMan.GameSystem.UserInterface
             canvasTag = CanvasTag.Canvas_PCStatus_Middle;
         }
 
-        private void Canvas_PCStatus_Middle_CreatedWorld(object sender, EventArgs e)
+        private void Canvas_PCStatus_Middle_CreatedWorld(object sender,
+            EventArgs e)
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            UITag[] uiTags = new UITag[] { UITag.SkillText, UITag.SkillData, };
-
-            uiObjects = GetComponent<SearchUI>().Search(canvasTag);
             skillManager = pc.GetComponent<PCSkillManager>();
+            uiObjects = GetComponent<SearchUI>().Search(canvasTag);
 
-            ClearUIContent(uiTags);
+            ClearUIText(uiObjects);
         }
 
         private void Canvas_PCStatus_Middle_EnteringAimMode(object sender,
             EnteringAimModeEventArgs e)
         {
-            SearchText(UITag.SkillText).text = "Skill";
-            SearchText(UITag.SkillData).text = skillManager.GetSkillName(
-                e.CommandTag);
+            SkillNameTag skillName = skillManager.GetSkillNameTag(e.CommandTag);
+            SkillTypeTag skillType = skillManager.GetSkillTypeTag(skillName);
+
+            string name = skillManager.GetSkillName(e.CommandTag);
+            string type = skillManager.GetLongSkillTypeName(skillType);
+
+            SearchText(UITag.SkillText).text = type;
+            SearchText(UITag.SkillData).text = name;
         }
 
         private void Canvas_PCStatus_Middle_LeavingAimMode(object sender,
             EventArgs e)
         {
             UITag[] uiTags = new UITag[] { UITag.SkillText, UITag.SkillData, };
-            ClearUIContent(uiTags);
+            ClearUIText(uiTags);
         }
 
-        private void ClearUIContent(UITag[] uiTags)
+        private void ClearUIText(UITag[] uiTags)
         {
-            foreach (UITag t in uiTags)
+            foreach (UITag uit in uiTags)
             {
-                SearchText(t).text = "";
+                SearchText(uit).text = "";
+            }
+        }
+
+        private void ClearUIText(GameObject[] uiObjects)
+        {
+            foreach (GameObject go in uiObjects)
+            {
+                go.GetComponent<Text>().text = "";
             }
         }
 
