@@ -182,7 +182,7 @@ namespace AxeMan.GameSystem
             {
                 [SkillTypeTag.Attack] = "Atk",
                 [SkillTypeTag.Move] = "Mov",
-                [SkillTypeTag.Enhance] = "Enh",
+                [SkillTypeTag.Buff] = "Buf",
                 [SkillTypeTag.Curse] = "Cur"
             };
 
@@ -190,7 +190,7 @@ namespace AxeMan.GameSystem
             {
                 [SkillTypeTag.Attack] = "Attack",
                 [SkillTypeTag.Move] = "Move",
-                [SkillTypeTag.Enhance] = "Enhance",
+                [SkillTypeTag.Buff] = "Buff",
                 [SkillTypeTag.Curse] = "Curse"
             };
 

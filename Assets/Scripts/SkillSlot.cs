@@ -110,7 +110,7 @@ namespace AxeMan.DungeonObject.ActorSkill
                             SkillComponentTag.AirCurse,
                         }
                     },
-                    { SkillTypeTag.Enhance,
+                    { SkillTypeTag.Buff,
                         new SkillComponentTag[]
                         {
                             SkillComponentTag.FireMerit,

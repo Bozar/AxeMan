@@ -37,7 +37,7 @@ namespace AxeMan.GameSystem.UserInterface
 
             printEffect = new SkillTypeTag[]
             {
-                SkillTypeTag.Curse, SkillTypeTag.Enhance,
+                SkillTypeTag.Curse, SkillTypeTag.Buff,
             };
 
             sortedCurse = new SkillComponentTag[]
@@ -163,7 +163,7 @@ namespace AxeMan.GameSystem.UserInterface
 
             switch (skillTypeTag)
             {
-                case SkillTypeTag.Enhance:
+                case SkillTypeTag.Buff:
                     checkList = sortedEnhance;
                     break;
 

@@ -61,7 +61,7 @@ namespace AxeMan.DungeonObject.ActorSkill
             Dictionary<SkillComponentTag, int[]> compEffect;
             SkillComponentTag checkComp;
 
-            if (skillType != SkillTypeTag.Enhance)
+            if (skillType != SkillTypeTag.Buff)
             {
                 range = baseRange;
                 compEffect = GetComponent<PCSkillManager>()
