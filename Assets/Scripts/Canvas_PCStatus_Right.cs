@@ -108,6 +108,12 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Damage(CommandTag commandTag)
         {
+            SkillTypeTag skillType = skillManager.GetSkillTypeTag(commandTag);
+            if (skillType != SkillTypeTag.Attack)
+            {
+                return;
+            }
+
             SearchText(UITag.DamageText).text = "Dmg";
             SearchText(UITag.DamageData).text
                 = skillManager.GetSkillDamage(commandTag).ToString();
