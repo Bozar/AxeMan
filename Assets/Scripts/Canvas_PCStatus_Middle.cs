@@ -1,8 +1,10 @@
-﻿using AxeMan.DungeonObject.ActorSkill;
+﻿using AxeMan.DungeonObject;
+using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +12,37 @@ namespace AxeMan.GameSystem.UserInterface
 {
     public class Canvas_PCStatus_Middle : MonoBehaviour
     {
+        private ActorStatus actorStatus;
         private CanvasTag canvasTag;
+        private SkillComponentTag[] orderedComponents;
+        private UITag[] orderedUIStatusData;
+        private UITag[] orderedUIStatusName;
         private PCSkillManager skillManager;
         private GameObject[] uiObjects;
 
         private void Awake()
         {
             canvasTag = CanvasTag.Canvas_PCStatus_Middle;
+
+            orderedComponents = new SkillComponentTag[]
+            {
+                SkillComponentTag.FireMerit, SkillComponentTag.FireFlaw,
+                SkillComponentTag.WaterMerit, SkillComponentTag.WaterFlaw,
+                SkillComponentTag.AirMerit, SkillComponentTag.AirFlaw,
+                SkillComponentTag.EarthMerit, SkillComponentTag.EarthFlaw,
+            };
+
+            orderedUIStatusName = new UITag[]
+            {
+                UITag.Status1Text, UITag.Status2Text,
+                UITag.Status3Text, UITag.Status4Text,
+            };
+
+            orderedUIStatusData = new UITag[]
+            {
+                UITag.Status1Data, UITag.Status2Data,
+                UITag.Status3Data, UITag.Status4Data,
+            };
         }
 
         private void Canvas_PCStatus_Middle_CreatedWorld(object sender,
@@ -24,9 +50,11 @@ namespace AxeMan.GameSystem.UserInterface
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
             skillManager = pc.GetComponent<PCSkillManager>();
+            actorStatus = pc.GetComponent<ActorStatus>();
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
 
             ClearUIText(uiObjects);
+            PCStatus();
         }
 
         private void Canvas_PCStatus_Middle_EnteringAimMode(object sender,
@@ -62,6 +90,40 @@ namespace AxeMan.GameSystem.UserInterface
             foreach (GameObject go in uiObjects)
             {
                 go.GetComponent<Text>().text = "";
+            }
+        }
+
+        private SkillComponentTag[] GetOrderedComponents(
+            Dictionary<SkillComponentTag, int[]> compInt)
+        {
+            Queue<SkillComponentTag> ordered = new Queue<SkillComponentTag>();
+
+            foreach (SkillComponentTag sct in orderedComponents)
+            {
+                if (compInt.ContainsKey(sct))
+                {
+                    ordered.Enqueue(sct);
+                }
+            }
+            return ordered.ToArray();
+        }
+
+        private void PCStatus()
+        {
+            Dictionary<SkillComponentTag, int[]> compInt
+                = actorStatus.CurrentStatus;
+            SkillComponentTag[] orderedComp = GetOrderedComponents(compInt);
+            string statusName;
+            string statusData;
+
+            for (int i = 0; i < orderedComp.Length; i++)
+            {
+                statusName = skillManager.GetSkillComponentName(orderedComp[i]);
+                statusData = skillManager.GetSkillEffectName(
+                    orderedComp[i], compInt[orderedComp[i]]);
+
+                SearchText(orderedUIStatusName[i]).text = statusName;
+                SearchText(orderedUIStatusData[i]).text = statusData;
             }
         }
 
