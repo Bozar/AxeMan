@@ -544,7 +544,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Name
-      value: AirData
+      value: Status3Data
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -1953,7 +1953,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Name
-      value: FireData
+      value: Status1Data
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -3061,7 +3061,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Name
-      value: FireText
+      value: Status1Text
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -3873,7 +3873,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Name
-      value: EarthText
+      value: Status4Text
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -4409,7 +4409,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Name
-      value: WaterText
+      value: Status2Text
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -5182,7 +5182,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Name
-      value: AirText
+      value: Status3Text
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -5442,7 +5442,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Name
-      value: EarthData
+      value: Status4Data
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -6818,7 +6818,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515160, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Name
-      value: WaterData
+      value: Status2Data
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}

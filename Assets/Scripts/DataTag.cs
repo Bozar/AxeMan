@@ -58,8 +58,9 @@ namespace AxeMan.GameSystem.GameDataTag
         QText, WText, EText, RText,
         QData, WData, EData, RData,
         QType, WType, EType, RType,
-        SkillText, SkillData, FireText, FireData, WaterText, WaterData,
-        AirText, AirData, EarthText, EarthData,
+        SkillText, SkillData,
+        Status1Text, Status1Data, Status2Text, Status2Data,
+        Status3Text, Status3Data, Status4Text, Status4Data,
         RangeText, RangeData, CooldownText, CooldownData, DamageText, DamageData,
         Curse1Text, Curse1Data, Curse2Text, Curse2Data, Curse3Text, Curse3Data,
     }
