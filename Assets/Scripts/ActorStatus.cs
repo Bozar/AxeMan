@@ -76,6 +76,24 @@ namespace AxeMan.DungeonObject
 
         private void Start()
         {
+            Test();
+        }
+
+        private void Test()
+        {
+            if (GetComponent<MetaInfo>().SubTag != SubTag.PC)
+            {
+                return;
+            }
+
+            AddStatus(SkillComponentTag.AirFlaw, new int[] { 2, 3 });
+            AddStatus(SkillComponentTag.AirMerit, new int[] { 2, 3 });
+
+            AddStatus(SkillComponentTag.EarthMerit, new int[] { 2, 3 });
+
+            AddStatus(SkillComponentTag.FireMerit, new int[] { 4, 1 });
+            AddStatus(SkillComponentTag.FireMerit, new int[] { 4, 2 });
+            AddStatus(SkillComponentTag.FireFlaw, new int[] { 4, 2 });
         }
 
         private void TryMergeStatus(SkillComponentTag skillComponentTag,
