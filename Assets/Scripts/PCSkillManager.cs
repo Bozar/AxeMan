@@ -67,17 +67,17 @@ namespace AxeMan.DungeonObject.ActorSkill
             return GetComponent<SkillDamage>().GetSkillDamage(commandTag);
         }
 
-        public Dictionary<SkillComponentTag, int[]> GetSkillEffect(
+        public Dictionary<SkillComponentTag, EffectData> GetSkillEffect(
             SkillNameTag skillNameTag)
         {
             return GetComponent<SkillEffect>().GetSkillEffect(skillNameTag);
         }
 
         public string GetSkillEffectName(SkillComponentTag skillComponentTag,
-            int[] powerDuration)
+            EffectData effectData)
         {
             return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
-                .GetSkillEffectName(skillComponentTag, powerDuration);
+                .GetSkillEffectName(skillComponentTag, effectData);
         }
 
         public string GetSkillName(SkillNameTag skillNameTag)

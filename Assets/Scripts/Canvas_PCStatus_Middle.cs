@@ -94,7 +94,7 @@ namespace AxeMan.GameSystem.UserInterface
         }
 
         private SkillComponentTag[] GetOrderedComponents(
-            Dictionary<SkillComponentTag, int[]> compInt)
+            Dictionary<SkillComponentTag, EffectData> compInt)
         {
             Queue<SkillComponentTag> ordered = new Queue<SkillComponentTag>();
 
@@ -110,7 +110,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PCStatus()
         {
-            Dictionary<SkillComponentTag, int[]> compInt
+            Dictionary<SkillComponentTag, EffectData> compInt
                 = actorStatus.CurrentStatus;
             SkillComponentTag[] orderedComp = GetOrderedComponents(compInt);
             string statusName;

@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem.GameDataTag;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace AxeMan.GameSystem
         string GetSkillComponentName(SkillComponentTag skillComponentTag);
 
         string GetSkillEffectName(SkillComponentTag skillComponentTag,
-            int[] powerDuration);
+            EffectData effectData);
 
         string GetSkillName(SkillNameTag skillNameTag);
 
@@ -64,10 +65,10 @@ namespace AxeMan.GameSystem
         }
 
         public string GetSkillEffectName(SkillComponentTag skillComponentTag,
-            int[] powerDuration)
+           EffectData effectData)
         {
-            int power = powerDuration[0];
-            int duration = powerDuration[1];
+            int power = effectData.Power;
+            int duration = effectData.Duration;
 
             if (HideSkillPower(skillComponentTag))
             {

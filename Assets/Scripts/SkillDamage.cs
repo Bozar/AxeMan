@@ -65,7 +65,7 @@ namespace AxeMan.DungeonObject.ActorSkill
                 .GetSkillTypeTag(skillNameTag);
             int damage = zeroDamage;
 
-            Dictionary<SkillComponentTag, int[]> compEffect;
+            Dictionary<SkillComponentTag, EffectData> compEffect;
             SkillComponentTag checkComp;
 
             if (skillType == SkillTypeTag.Attack)
@@ -75,9 +75,9 @@ namespace AxeMan.DungeonObject.ActorSkill
                     .GetSkillEffect(skillNameTag);
                 checkComp = SkillComponentTag.AirCurse;
 
-                if (compEffect.TryGetValue(checkComp, out int[] powerDuration))
+                if (compEffect.TryGetValue(checkComp, out EffectData effectData))
                 {
-                    damage += powerDuration[0];
+                    damage += effectData.Power;
                 }
             }
 

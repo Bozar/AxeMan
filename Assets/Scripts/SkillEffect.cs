@@ -6,9 +6,21 @@ namespace AxeMan.DungeonObject.ActorSkill
 {
     public interface ISkillEffect
     {
-        // int[] { power, duration }
-        Dictionary<SkillComponentTag, int[]> GetSkillEffect(
+        Dictionary<SkillComponentTag, EffectData> GetSkillEffect(
             SkillNameTag skillNameTag);
+    }
+
+    public class EffectData
+    {
+        public EffectData(int power, int duration)
+        {
+            Power = power;
+            Duration = duration;
+        }
+
+        public int Duration { get; set; }
+
+        public int Power { get; set; }
     }
 
     public class SkillEffect : MonoBehaviour, ISkillEffect
@@ -16,10 +28,10 @@ namespace AxeMan.DungeonObject.ActorSkill
         private int baseDuration;
         private int basePower;
 
-        private Dictionary<SkillNameTag, Dictionary<SkillComponentTag, int[]>>
-            nameComp;
+        private Dictionary<SkillNameTag,
+            Dictionary<SkillComponentTag, EffectData>> nameComp;
 
-        public Dictionary<SkillComponentTag, int[]> GetSkillEffect(
+        public Dictionary<SkillComponentTag, EffectData> GetSkillEffect(
             SkillNameTag skillNameTag)
         {
             if (!nameComp.ContainsKey(skillNameTag))
@@ -27,12 +39,13 @@ namespace AxeMan.DungeonObject.ActorSkill
                 return null;
             }
 
-            Dictionary<SkillComponentTag, int[]> compInt = nameComp[skillNameTag];
+            Dictionary<SkillComponentTag, EffectData> compInt
+                = nameComp[skillNameTag];
             if (compInt == null)
             {
                 compInt = SetSkillEffect(skillNameTag);
             }
-            return new Dictionary<SkillComponentTag, int[]>(compInt);
+            return new Dictionary<SkillComponentTag, EffectData>(compInt);
         }
 
         private void Awake()
@@ -41,7 +54,7 @@ namespace AxeMan.DungeonObject.ActorSkill
             baseDuration = 2;
 
             nameComp = new Dictionary<SkillNameTag,
-                Dictionary<SkillComponentTag, int[]>>()
+                Dictionary<SkillComponentTag, EffectData>>()
             {
                 { SkillNameTag.Q, null },
                 { SkillNameTag.W, null },
@@ -50,24 +63,24 @@ namespace AxeMan.DungeonObject.ActorSkill
             };
         }
 
-        private Dictionary<SkillComponentTag, int[]> SetSkillEffect(
+        private Dictionary<SkillComponentTag, EffectData> SetSkillEffect(
             SkillNameTag skillNameTag)
         {
             Dictionary<SkillSlotTag, SkillComponentTag> slotComp
                 = GetComponent<PCSkillManager>().GetSkillSlot(skillNameTag);
-            Dictionary<SkillComponentTag, int[]> compInt
-                = new Dictionary<SkillComponentTag, int[]>();
+            Dictionary<SkillComponentTag, EffectData> compInt
+                = new Dictionary<SkillComponentTag, EffectData>();
 
             foreach (SkillComponentTag sct in slotComp.Values)
             {
-                if (compInt.TryGetValue(sct, out int[] powerDuration))
+                if (compInt.TryGetValue(sct, out EffectData effectData))
                 {
-                    powerDuration[0] += basePower;
-                    powerDuration[1] += baseDuration;
+                    effectData.Power += basePower;
+                    effectData.Duration += baseDuration;
                 }
                 else
                 {
-                    compInt[sct] = new int[] { basePower, baseDuration };
+                    compInt[sct] = new EffectData(basePower, baseDuration);
                 }
             }
             return compInt;

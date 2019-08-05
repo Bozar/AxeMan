@@ -121,7 +121,7 @@ namespace AxeMan.GameSystem.UserInterface
             }
 
             SkillNameTag skillName = skillManager.GetSkillNameTag(commandTag);
-            Dictionary<SkillComponentTag, int[]> compInt
+            Dictionary<SkillComponentTag, EffectData> compInt
                 = skillManager.GetSkillEffect(skillName);
             SkillComponentTag[] sortedComp = SortComponents(skillType, compInt);
 
@@ -156,7 +156,7 @@ namespace AxeMan.GameSystem.UserInterface
         }
 
         private SkillComponentTag[] SortComponents(SkillTypeTag skillTypeTag,
-            Dictionary<SkillComponentTag, int[]> compInt)
+            Dictionary<SkillComponentTag, EffectData> compInt)
         {
             Queue<SkillComponentTag> sortedComp = new Queue<SkillComponentTag>();
             SkillComponentTag[] checkList;

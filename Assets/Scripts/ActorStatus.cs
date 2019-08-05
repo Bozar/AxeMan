@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem.GameDataTag;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,45 +7,47 @@ namespace AxeMan.DungeonObject
 {
     public interface IActorStatus
     {
-        Dictionary<SkillComponentTag, int[]> CurrentStatus { get; }
+        Dictionary<SkillComponentTag, EffectData> CurrentStatus { get; }
 
-        void AddStatus(SkillComponentTag skillComponentTag, int[] powerDuration);
+        void AddStatus(SkillComponentTag skillComponentTag,
+            EffectData effectData);
 
         bool HasStatus(SkillComponentTag skillComponentTag,
-            out int[] powerDuration);
+            out EffectData effectData);
 
         void RemoveStatus(SkillComponentTag skillComponentTag);
     }
 
     public class ActorStatus : MonoBehaviour, IActorStatus
     {
-        private Dictionary<SkillComponentTag, int[]> compIntStatus;
+        private Dictionary<SkillComponentTag, EffectData> compIntStatus;
         private SkillComponentTag[] negativeStatus;
         private SkillComponentTag[] positiveStatus;
 
-        public Dictionary<SkillComponentTag, int[]> CurrentStatus
+        public Dictionary<SkillComponentTag, EffectData> CurrentStatus
         {
             get
             {
-                return new Dictionary<SkillComponentTag, int[]>(compIntStatus);
+                return new Dictionary<SkillComponentTag, EffectData>(
+                    compIntStatus);
             }
         }
 
         public void AddStatus(SkillComponentTag skillComponentTag,
-            int[] powerDuration)
+            EffectData effectData)
         {
-            TryMergeStatus(skillComponentTag, powerDuration);
+            TryMergeStatus(skillComponentTag, effectData);
             TryNegateStatus();
         }
 
         public bool HasStatus(SkillComponentTag skillComponentTag,
-            out int[] powerDuration)
+            out EffectData effectData)
         {
-            if (compIntStatus.TryGetValue(skillComponentTag, out powerDuration))
+            if (compIntStatus.TryGetValue(skillComponentTag, out effectData))
             {
                 return true;
             }
-            powerDuration = null;
+            effectData = null;
             return false;
         }
 
@@ -55,7 +58,7 @@ namespace AxeMan.DungeonObject
 
         private void Awake()
         {
-            compIntStatus = new Dictionary<SkillComponentTag, int[]>();
+            compIntStatus = new Dictionary<SkillComponentTag, EffectData>();
 
             positiveStatus = new SkillComponentTag[]
             {
@@ -86,27 +89,27 @@ namespace AxeMan.DungeonObject
                 return;
             }
 
-            AddStatus(SkillComponentTag.AirFlaw, new int[] { 2, 3 });
-            AddStatus(SkillComponentTag.AirMerit, new int[] { 2, 3 });
+            AddStatus(SkillComponentTag.AirFlaw, new EffectData(2, 3));
+            AddStatus(SkillComponentTag.AirMerit, new EffectData(2, 3));
 
-            AddStatus(SkillComponentTag.EarthMerit, new int[] { 2, 3 });
+            AddStatus(SkillComponentTag.EarthMerit, new EffectData(2, 3));
 
-            AddStatus(SkillComponentTag.FireMerit, new int[] { 4, 1 });
-            AddStatus(SkillComponentTag.FireMerit, new int[] { 4, 2 });
-            AddStatus(SkillComponentTag.FireFlaw, new int[] { 4, 2 });
+            AddStatus(SkillComponentTag.FireMerit, new EffectData(4, 1));
+            AddStatus(SkillComponentTag.FireMerit, new EffectData(4, 2));
+            AddStatus(SkillComponentTag.FireFlaw, new EffectData(4, 2));
         }
 
         private void TryMergeStatus(SkillComponentTag skillComponentTag,
-            int[] powerDuration)
+            EffectData effectData)
         {
             if (compIntStatus.ContainsKey(skillComponentTag))
             {
-                compIntStatus[skillComponentTag][0] += powerDuration[0];
-                compIntStatus[skillComponentTag][1] += powerDuration[1];
+                compIntStatus[skillComponentTag].Power += effectData.Power;
+                compIntStatus[skillComponentTag].Duration += effectData.Duration;
             }
             else
             {
-                compIntStatus[skillComponentTag] = powerDuration;
+                compIntStatus[skillComponentTag] = effectData;
             }
         }
 
@@ -122,8 +125,8 @@ namespace AxeMan.DungeonObject
                     && compIntStatus.ContainsKey(negativeStatus[i]))
                 {
                     positiveMinusNegative
-                        = compIntStatus[positiveStatus[i]][1]
-                        - compIntStatus[negativeStatus[i]][1];
+                        = compIntStatus[positiveStatus[i]].Duration
+                        - compIntStatus[negativeStatus[i]].Duration;
 
                     if (positiveMinusNegative > 0)
                     {
@@ -142,7 +145,8 @@ namespace AxeMan.DungeonObject
                         continue;
                     }
 
-                    compIntStatus[keepComp][1] -= compIntStatus[removeComp][1];
+                    compIntStatus[keepComp].Duration
+                        -= compIntStatus[removeComp].Duration;
                     RemoveStatus(removeComp);
                 }
             }

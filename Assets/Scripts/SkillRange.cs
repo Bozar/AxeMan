@@ -58,7 +58,7 @@ namespace AxeMan.DungeonObject.ActorSkill
                .GetSkillTypeTag(skillNameTag);
             int range = zeroRange;
 
-            Dictionary<SkillComponentTag, int[]> compEffect;
+            Dictionary<SkillComponentTag, EffectData> compEffect;
             SkillComponentTag checkComp;
 
             if (skillType != SkillTypeTag.Buff)
@@ -68,9 +68,9 @@ namespace AxeMan.DungeonObject.ActorSkill
                   .GetSkillEffect(skillNameTag);
                 checkComp = SkillComponentTag.AirMerit;
 
-                if (compEffect.TryGetValue(checkComp, out int[] powerDuration))
+                if (compEffect.TryGetValue(checkComp, out EffectData effectData))
                 {
-                    range += powerDuration[0];
+                    range += effectData.Power;
                 }
             }
 
