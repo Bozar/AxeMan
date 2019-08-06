@@ -1,5 +1,8 @@
 ﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameEvent;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,6 +41,9 @@ namespace AxeMan.DungeonObject
         {
             TryMergeStatus(skillComponentTag, effectData);
             TryNegateStatus();
+
+            GameCore.AxeManCore.GetComponent<PublishActorStatus>()
+                .PublishChangedActorStatus(EventArgs.Empty);
         }
 
         public bool HasStatus(SkillComponentTag skillComponentTag,
@@ -54,6 +60,9 @@ namespace AxeMan.DungeonObject
         public void RemoveStatus(SkillComponentTag skillComponentTag)
         {
             compIntStatus.Remove(skillComponentTag);
+
+            GameCore.AxeManCore.GetComponent<PublishActorStatus>()
+               .PublishChangedActorStatus(EventArgs.Empty);
         }
 
         private void Awake()
@@ -75,28 +84,6 @@ namespace AxeMan.DungeonObject
                 SkillComponentTag.AirFlaw,
                 SkillComponentTag.EarthFlaw,
             };
-        }
-
-        private void Start()
-        {
-            Test();
-        }
-
-        private void Test()
-        {
-            if (GetComponent<MetaInfo>().SubTag != SubTag.PC)
-            {
-                return;
-            }
-
-            AddStatus(SkillComponentTag.AirFlaw, new EffectData(2, 3));
-            AddStatus(SkillComponentTag.AirMerit, new EffectData(2, 3));
-
-            AddStatus(SkillComponentTag.EarthMerit, new EffectData(2, 3));
-
-            AddStatus(SkillComponentTag.FireMerit, new EffectData(4, 1));
-            AddStatus(SkillComponentTag.FireMerit, new EffectData(4, 2));
-            AddStatus(SkillComponentTag.FireFlaw, new EffectData(4, 2));
         }
 
         private void TryMergeStatus(SkillComponentTag skillComponentTag,
@@ -140,14 +127,16 @@ namespace AxeMan.DungeonObject
                     }
                     else
                     {
-                        RemoveStatus(positiveStatus[i]);
-                        RemoveStatus(negativeStatus[i]);
+                        // Avoid using RemoveStatus() so as not to trigger
+                        // ChangedActorStatus event.
+                        compIntStatus.Remove(positiveStatus[i]);
+                        compIntStatus.Remove(negativeStatus[i]);
                         continue;
                     }
 
                     compIntStatus[keepComp].Duration
                         -= compIntStatus[removeComp].Duration;
-                    RemoveStatus(removeComp);
+                    compIntStatus.Remove(removeComp);
                 }
             }
         }

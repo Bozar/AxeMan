@@ -32,6 +32,22 @@ namespace AxeMan.GameSystem
             CreatedWorld?.Invoke(this, EventArgs.Empty);
         }
 
+        private void AddStatus()
+        {
+            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+            ActorStatus actorStatus = pc.GetComponent<ActorStatus>();
+
+            actorStatus.AddStatus(SkillComponentTag.AirFlaw, new EffectData(2, 3));
+            actorStatus.AddStatus(SkillComponentTag.AirMerit, new EffectData(2, 3));
+
+            actorStatus.AddStatus(SkillComponentTag.EarthMerit, new EffectData(2, 3));
+            actorStatus.AddStatus(SkillComponentTag.EarthMerit, new EffectData(2, 2));
+
+            actorStatus.AddStatus(SkillComponentTag.FireMerit, new EffectData(4, 1));
+            actorStatus.AddStatus(SkillComponentTag.FireMerit, new EffectData(4, 2));
+            actorStatus.AddStatus(SkillComponentTag.FireFlaw, new EffectData(4, 2));
+        }
+
         private void CreateAltar()
         {
             BlueprintTag[] tags = new BlueprintTag[]
@@ -89,7 +105,8 @@ namespace AxeMan.GameSystem
                     break;
 
                 case CommandTag.PrintSkill:
-                    PrintSkill();
+                    //PrintSkill();
+                    AddStatus();
                     break;
 
                 default:

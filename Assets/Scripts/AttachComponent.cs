@@ -53,6 +53,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ProgressBar>();
 
             gameObject.AddComponent<PublishAction>();
+            gameObject.AddComponent<PublishActorStatus>();
             gameObject.AddComponent<PublishHP>();
             gameObject.AddComponent<PublishPosition>();
             gameObject.AddComponent<PublishSkill>();

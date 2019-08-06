@@ -1,6 +1,7 @@
 ﻿using AxeMan.DungeonObject;
 using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
@@ -43,6 +44,14 @@ namespace AxeMan.GameSystem.UserInterface
                 UITag.Status1Data, UITag.Status2Data,
                 UITag.Status3Data, UITag.Status4Data,
             };
+        }
+
+        private void Canvas_PCStatus_Middle_ChangedActorStatus(object sender,
+            EventArgs e)
+        {
+            ClearUIText(orderedUIStatusName);
+            ClearUIText(orderedUIStatusData);
+            PCStatus();
         }
 
         private void Canvas_PCStatus_Middle_CreatedWorld(object sender,
@@ -140,6 +149,8 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_PCStatus_Middle_EnteringAimMode;
             GetComponent<AimMode>().LeavingAimMode
                 += Canvas_PCStatus_Middle_LeavingAimMode;
+            GetComponent<PublishActorStatus>().ChangedActorStatus
+                += Canvas_PCStatus_Middle_ChangedActorStatus;
         }
     }
 }
