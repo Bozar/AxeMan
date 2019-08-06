@@ -2,8 +2,10 @@
 using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.SchedulingSystem;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -26,6 +28,7 @@ namespace AxeMan.DungeonObject
         private Dictionary<SkillComponentTag, EffectData> compIntStatus;
         private SkillComponentTag[] negativeStatus;
         private SkillComponentTag[] positiveStatus;
+        private int reduceDuration;
 
         public Dictionary<SkillComponentTag, EffectData> CurrentStatus
         {
@@ -42,8 +45,7 @@ namespace AxeMan.DungeonObject
             TryMergeStatus(skillComponentTag, effectData);
             TryNegateStatus();
 
-            GameCore.AxeManCore.GetComponent<PublishActorStatus>()
-                .PublishChangedActorStatus(EventArgs.Empty);
+            PublishPCStatus();
         }
 
         public bool HasStatus(SkillComponentTag skillComponentTag,
@@ -61,13 +63,38 @@ namespace AxeMan.DungeonObject
         {
             compIntStatus.Remove(skillComponentTag);
 
-            GameCore.AxeManCore.GetComponent<PublishActorStatus>()
-               .PublishChangedActorStatus(EventArgs.Empty);
+            PublishPCStatus();
+        }
+
+        private void ActorStatus_EndingTurn(object sender, EndingTurnEventArgs e)
+        {
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
+            {
+                return;
+            }
+
+            if (HasStatus(SkillComponentTag.FireFlaw, out _))
+            {
+                compIntStatus[SkillComponentTag.FireFlaw].Duration
+                    -= reduceDuration;
+                TryRemoveStatus(SkillComponentTag.FireFlaw);
+            }
+            else
+            {
+                foreach (SkillComponentTag sct in compIntStatus.Keys.ToArray())
+                {
+                    compIntStatus[sct].Duration -= reduceDuration;
+                    TryRemoveStatus(sct);
+                }
+            }
+
+            PublishPCStatus();
         }
 
         private void Awake()
         {
             compIntStatus = new Dictionary<SkillComponentTag, EffectData>();
+            reduceDuration = 1;
 
             positiveStatus = new SkillComponentTag[]
             {
@@ -84,6 +111,22 @@ namespace AxeMan.DungeonObject
                 SkillComponentTag.AirFlaw,
                 SkillComponentTag.EarthFlaw,
             };
+        }
+
+        private void PublishPCStatus()
+        {
+            if (GetComponent<MetaInfo>().SubTag != SubTag.PC)
+            {
+                return;
+            }
+            GameCore.AxeManCore.GetComponent<PublishActorStatus>()
+                .PublishChangedActorStatus(EventArgs.Empty);
+        }
+
+        private void Start()
+        {
+            GameCore.AxeManCore.GetComponent<TurnManager>().EndingTurn
+                += ActorStatus_EndingTurn;
         }
 
         private void TryMergeStatus(SkillComponentTag skillComponentTag,
@@ -138,6 +181,14 @@ namespace AxeMan.DungeonObject
                         -= compIntStatus[removeComp].Duration;
                     compIntStatus.Remove(removeComp);
                 }
+            }
+        }
+
+        private void TryRemoveStatus(SkillComponentTag skillComponentTag)
+        {
+            if (compIntStatus[skillComponentTag].Duration < 1)
+            {
+                compIntStatus.Remove(skillComponentTag);
             }
         }
     }
