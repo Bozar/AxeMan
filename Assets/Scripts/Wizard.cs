@@ -70,10 +70,10 @@ namespace AxeMan.GameSystem
             {
                 if (!turnStarted)
                 {
+                    OnCreatedWorld();
                     GetComponent<TurnManager>().StartTurn();
                     GetComponent<TileOverlay>().RefreshDungeonBoard();
 
-                    OnCreatedWorld();
                     turnStarted = true;
                 }
                 return;
