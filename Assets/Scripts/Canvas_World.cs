@@ -80,7 +80,7 @@ namespace AxeMan.GameSystem.UserInterface
         }
 
         private void Canvas_World_TakenAction(object sender,
-            TakenActionEventArgs e)
+            PublishActionEventArgs e)
         {
             if ((e.SubTag != SubTag.AimMarker) || (e.Action != ActionTag.Move))
             {

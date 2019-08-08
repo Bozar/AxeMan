@@ -174,7 +174,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         }
 
         private void SkillCooldown_TakenAction(object sender,
-            TakenActionEventArgs e)
+            PublishActionEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID)
                 || !IsValidAction(e.Action))

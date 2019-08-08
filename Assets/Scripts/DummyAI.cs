@@ -27,11 +27,11 @@ namespace AxeMan.DungeonObject
             MainTag mainTag = GetComponent<MetaInfo>().MainTag;
             SubTag subTag = GetComponent<MetaInfo>().SubTag;
             int id = GetComponent<MetaInfo>().ObjectID;
+            var ea = new PublishActionEventArgs(action, mainTag, subTag, id);
 
-            GetComponent<LocalManager>().TakingAction(
-                new TakingActionEventArgs(action, mainTag, subTag, id));
-            GetComponent<LocalManager>().TakenAction(
-                new TakenActionEventArgs(action, mainTag, subTag, id));
+            GetComponent<LocalManager>().TakingAction(ea);
+            GetComponent<LocalManager>().TakenAction(ea);
+            GetComponent<LocalManager>().CheckingSchedule(ea);
         }
 
         private void Start()

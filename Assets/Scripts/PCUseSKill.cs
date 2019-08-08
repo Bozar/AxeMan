@@ -28,17 +28,18 @@ namespace AxeMan.DungeonObject
             MainTag mainTag;
             SubTag subTag;
             int id;
+            PublishActionEventArgs ea;
 
             if (command2action.TryGetValue(e.UseSkill, out ActionTag action))
             {
                 mainTag = GetComponent<MetaInfo>().MainTag;
                 subTag = GetComponent<MetaInfo>().SubTag;
                 id = GetComponent<MetaInfo>().ObjectID;
+                ea = new PublishActionEventArgs(action, mainTag, subTag, id);
 
-                GetComponent<LocalManager>().TakingAction(
-                    new TakingActionEventArgs(action, mainTag, subTag, id));
-                GetComponent<LocalManager>().TakenAction(
-                    new TakenActionEventArgs(action, mainTag, subTag, id));
+                GetComponent<LocalManager>().TakingAction(ea);
+                GetComponent<LocalManager>().TakenAction(ea);
+                GetComponent<LocalManager>().CheckingSchedule(ea);
             }
         }
 

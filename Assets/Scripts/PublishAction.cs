@@ -6,54 +6,48 @@ namespace AxeMan.GameSystem.GameEvent
 {
     public class PublishAction : MonoBehaviour
     {
-        public event EventHandler<TakenActionEventArgs> TakenAction;
+        // Publish this event after TakenAction. We need to make sure that
+        // everything is done before trying to end current actor's turn.
+        public event EventHandler<PublishActionEventArgs> CheckingSchedule;
 
-        public event EventHandler<TakingActionEventArgs> TakingAction;
+        public event EventHandler<PublishActionEventArgs> TakenAction;
 
-        public void ActorTakenAction(TakenActionEventArgs e)
+        public event EventHandler<PublishActionEventArgs> TakingAction;
+
+        public void ActorCheckingSchedule(PublishActionEventArgs e)
+        {
+            OnCheckingSchedule(e);
+        }
+
+        public void ActorTakenAction(PublishActionEventArgs e)
         {
             OnTakenAction(e);
         }
 
-        public void ActorTakingAction(TakingActionEventArgs e)
+        public void ActorTakingAction(PublishActionEventArgs e)
         {
             OnTakingAction(e);
         }
 
-        protected virtual void OnTakenAction(TakenActionEventArgs e)
+        protected virtual void OnCheckingSchedule(PublishActionEventArgs e)
+        {
+            CheckingSchedule?.Invoke(this, e);
+        }
+
+        protected virtual void OnTakenAction(PublishActionEventArgs e)
         {
             TakenAction?.Invoke(this, e);
         }
 
-        protected virtual void OnTakingAction(TakingActionEventArgs e)
+        protected virtual void OnTakingAction(PublishActionEventArgs e)
         {
             TakingAction?.Invoke(this, e);
         }
     }
 
-    public class TakenActionEventArgs : EventArgs
+    public class PublishActionEventArgs : EventArgs
     {
-        public TakenActionEventArgs(ActionTag action,
-            MainTag mainTag, SubTag subTag, int objectID)
-        {
-            Action = action;
-            MainTag = mainTag;
-            SubTag = subTag;
-            ObjectID = objectID;
-        }
-
-        public ActionTag Action { get; }
-
-        public MainTag MainTag { get; }
-
-        public int ObjectID { get; }
-
-        public SubTag SubTag { get; }
-    }
-
-    public class TakingActionEventArgs : EventArgs
-    {
-        public TakingActionEventArgs(ActionTag action,
+        public PublishActionEventArgs(ActionTag action,
             MainTag mainTag, SubTag subTag, int objectID)
         {
             Action = action;

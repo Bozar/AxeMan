@@ -10,6 +10,8 @@ namespace AxeMan.DungeonObject
     {
         void ChangedSkillCooldown(ChangedSkillCooldownEventArgs e);
 
+        void CheckingSchedule(PublishActionEventArgs e);
+
         int GetDistance(int[] target);
 
         int[] GetRelativePosition(int[] target);
@@ -22,9 +24,9 @@ namespace AxeMan.DungeonObject
 
         void SetPosition(int[] position);
 
-        void TakenAction(TakenActionEventArgs e);
+        void TakenAction(PublishActionEventArgs e);
 
-        void TakingAction(TakingActionEventArgs e);
+        void TakingAction(PublishActionEventArgs e);
     }
 
     public class LocalManager : MonoBehaviour, ILocalManager
@@ -33,6 +35,12 @@ namespace AxeMan.DungeonObject
         {
             GameCore.AxeManCore.GetComponent<PublishSkill>()
                 .PublishSkillCooldown(e);
+        }
+
+        public void CheckingSchedule(PublishActionEventArgs e)
+        {
+            GameCore.AxeManCore.GetComponent<PublishAction>()
+               .ActorCheckingSchedule(e);
         }
 
         public int GetDistance(int[] target)
@@ -80,13 +88,13 @@ namespace AxeMan.DungeonObject
                 .Convert(position);
         }
 
-        public void TakenAction(TakenActionEventArgs e)
+        public void TakenAction(PublishActionEventArgs e)
         {
             GameCore.AxeManCore.GetComponent<PublishAction>()
                .ActorTakenAction(e);
         }
 
-        public void TakingAction(TakingActionEventArgs e)
+        public void TakingAction(PublishActionEventArgs e)
         {
             GameCore.AxeManCore.GetComponent<PublishAction>()
                 .ActorTakingAction(e);

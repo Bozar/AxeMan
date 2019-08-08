@@ -69,12 +69,15 @@ namespace AxeMan.DungeonObject
             MainTag mainTag = GetComponent<MetaInfo>().MainTag;
             SubTag subTag = GetComponent<MetaInfo>().SubTag;
             int id = GetComponent<MetaInfo>().ObjectID;
+            var ea = new PublishActionEventArgs(action, mainTag, subTag, id);
 
             GetComponent<LocalManager>().SetPosition(target);
-            GetComponent<LocalManager>().TakenAction(
-                new TakenActionEventArgs(action, mainTag, subTag, id));
+            GetComponent<LocalManager>().TakenAction(ea);
+
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(source);
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(target);
+
+            GetComponent<LocalManager>().CheckingSchedule(ea);
         }
 
         private void Start()

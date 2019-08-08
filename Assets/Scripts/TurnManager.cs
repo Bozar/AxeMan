@@ -114,12 +114,12 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         private void Start()
         {
-            GetComponent<PublishAction>().TakenAction
-                += TurnManager_TakenAction;
+            GetComponent<PublishAction>().CheckingSchedule
+                += TurnManager_CheckingSchedule;
         }
 
-        private void TurnManager_TakenAction(object sender,
-            TakenActionEventArgs e)
+        private void TurnManager_CheckingSchedule(object sender,
+            PublishActionEventArgs e)
         {
             if (!GetComponent<Schedule>().Current
                 .GetComponent<LocalManager>().MatchID(e.ObjectID))
