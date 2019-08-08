@@ -15,6 +15,9 @@ namespace AxeMan.GameSystem.ObjectFactory
             {
                 return;
             }
+
+            e.Data.AddComponent<ApplySkillFlawEffect>();
+
             e.Data.AddComponent<PCCheckTerrain>();
             e.Data.AddComponent<PCInputManager>().enabled = false;
             e.Data.AddComponent<PCInputSwitcher>();

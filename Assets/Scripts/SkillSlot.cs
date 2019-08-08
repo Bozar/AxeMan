@@ -152,6 +152,10 @@ namespace AxeMan.DungeonObject.ActorSkill
                 SkillComponentTag.AirCurse);
             TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Flaw1,
                 SkillComponentTag.AirFlaw);
+            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Flaw2,
+               SkillComponentTag.AirFlaw);
+            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Flaw3,
+              SkillComponentTag.EarthFlaw);
 
             TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Merit1,
                 SkillComponentTag.AirMerit);
