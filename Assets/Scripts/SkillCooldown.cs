@@ -121,7 +121,8 @@ namespace AxeMan.DungeonObject.ActorSkill
             if (currentCDDict.ContainsKey(skillNameTag))
             {
                 currentCDDict[skillNameTag] = cooldown;
-                GetComponent<LocalManager>().ChangedSkillCooldown(
+                GameCore.AxeManCore.GetComponent<PublishSkill>()
+                    .PublishSkillCooldown(
                     new ChangedSkillCooldownEventArgs(skillNameTag));
             }
         }

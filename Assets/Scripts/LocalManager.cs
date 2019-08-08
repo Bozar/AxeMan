@@ -8,8 +8,6 @@ namespace AxeMan.DungeonObject
 {
     public interface ILocalManager
     {
-        void ChangedSkillCooldown(ChangedSkillCooldownEventArgs e);
-
         void CheckingSchedule(PublishActionEventArgs e);
 
         int GetDistance(int[] target);
@@ -31,12 +29,6 @@ namespace AxeMan.DungeonObject
 
     public class LocalManager : MonoBehaviour, ILocalManager
     {
-        public void ChangedSkillCooldown(ChangedSkillCooldownEventArgs e)
-        {
-            GameCore.AxeManCore.GetComponent<PublishSkill>()
-                .PublishSkillCooldown(e);
-        }
-
         public void CheckingSchedule(PublishActionEventArgs e)
         {
             GameCore.AxeManCore.GetComponent<PublishAction>()
