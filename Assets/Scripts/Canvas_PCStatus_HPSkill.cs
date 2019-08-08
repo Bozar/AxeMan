@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace AxeMan.GameSystem.UserInterface
 {
-    public class Canvas_PCStatus_Left : MonoBehaviour
+    public class Canvas_PCStatus_HPSkill : MonoBehaviour
     {
         private CanvasTag canvasTag;
         private HP hp;
@@ -18,7 +18,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Awake()
         {
-            canvasTag = CanvasTag.Canvas_PCStatus_Left;
+            canvasTag = CanvasTag.Canvas_PCStatus_HPSkill;
         }
 
         private void Canvas_PCStatus_Left_ChangedHP(object sender,

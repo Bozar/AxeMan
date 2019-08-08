@@ -5570,7 +5570,7 @@ GameObject:
   - component: {fileID: 1663025252}
   - component: {fileID: 1663025255}
   m_Layer: 5
-  m_Name: Canvas_PCStatus_Middle
+  m_Name: Canvas_PCStatus_CurrentStatus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5816,7 +5816,7 @@ GameObject:
   - component: {fileID: 1777155825}
   - component: {fileID: 1777155828}
   m_Layer: 5
-  m_Name: Canvas_PCStatus_Right
+  m_Name: Canvas_PCStatus_SkillData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5939,7 +5939,7 @@ GameObject:
   - component: {fileID: 1803236023}
   - component: {fileID: 1803236026}
   m_Layer: 5
-  m_Name: Canvas_PCStatus_Left
+  m_Name: Canvas_PCStatus_HPSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
