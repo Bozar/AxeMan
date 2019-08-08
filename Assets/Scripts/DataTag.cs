@@ -15,7 +15,8 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum CanvasTag
     {
         Canvas_World,
-        Canvas_PCStatus_Left, Canvas_PCStatus_Middle, Canvas_PCStatus_Right,
+        Canvas_PCStatus_HPSkill, Canvas_PCStatus_CurrentStatus,
+        Canvas_PCStatus_SkillData,
     }
 
     public enum CommandTag

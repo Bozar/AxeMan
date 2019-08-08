@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace AxeMan.GameSystem.UserInterface
 {
-    public class Canvas_PCStatus_Right : MonoBehaviour
+    public class Canvas_PCStatus_SkillData : MonoBehaviour
     {
         private CanvasTag canvasTag;
         private SkillTypeTag[] printEffect;
@@ -23,7 +23,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Awake()
         {
-            canvasTag = CanvasTag.Canvas_PCStatus_Right;
+            canvasTag = CanvasTag.Canvas_PCStatus_SkillData;
 
             uiCurseText = new UITag[]
             {

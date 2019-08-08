@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace AxeMan.GameSystem.UserInterface
 {
-    public class Canvas_PCStatus_Middle : MonoBehaviour
+    public class Canvas_PCStatus_CurrentStatus : MonoBehaviour
     {
         private ActorStatus actorStatus;
         private CanvasTag canvasTag;
@@ -23,7 +23,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Awake()
         {
-            canvasTag = CanvasTag.Canvas_PCStatus_Middle;
+            canvasTag = CanvasTag.Canvas_PCStatus_CurrentStatus;
 
             orderedComponents = new SkillComponentTag[]
             {
