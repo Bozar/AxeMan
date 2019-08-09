@@ -33,6 +33,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Canvas_PCStatus_CurrentStatus>();
             gameObject.AddComponent<Canvas_PCStatus_HPSkill>();
             gameObject.AddComponent<Canvas_PCStatus_SkillData>();
+            gameObject.AddComponent<Canvas_PCStatus_SkillFlawEffect>();
+
             gameObject.AddComponent<Canvas_World>();
 
             gameObject.AddComponent<ConfirmCancelInput>();
