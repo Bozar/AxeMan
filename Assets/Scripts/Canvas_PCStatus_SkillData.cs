@@ -64,32 +64,32 @@ namespace AxeMan.GameSystem.UserInterface
             skillManager = GetComponent<SearchObject>().Search(SubTag.PC)[0]
                 .GetComponent<PCSkillManager>();
 
-            ClearUIText(uiObjects);
+            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
         }
 
         private void Canvas_PCStatus_Right_EnteringAimMode(object sender,
             EnteringAimModeEventArgs e)
         {
-            ClearUIText(uiObjects);
+            foreach (GameObject go in uiObjects)
+            {
+                go.GetComponent<Text>().text = "";
+            }
 
             Range(e.CommandTag);
             Cooldown(e.CommandTag);
             Damage(e.CommandTag);
             Effect(e.CommandTag);
+
+            if (e.SubTag == SubTag.PC)
+            {
+                GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, true);
+            }
         }
 
         private void Canvas_PCStatus_Right_LeavingAimMode(object sender,
             EventArgs e)
         {
-            ClearUIText(uiObjects);
-        }
-
-        private void ClearUIText(GameObject[] uiObjects)
-        {
-            foreach (GameObject go in uiObjects)
-            {
-                go.GetComponent<Text>().text = "";
-            }
+            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
         }
 
         private void Cooldown(CommandTag commandTag)

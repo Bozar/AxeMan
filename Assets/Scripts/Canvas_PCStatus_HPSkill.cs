@@ -2,6 +2,7 @@
 using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
 using UnityEngine;
@@ -21,6 +22,22 @@ namespace AxeMan.GameSystem.UserInterface
             canvasTag = CanvasTag.Canvas_PCStatus_HPSkill;
         }
 
+        private void Canvas_PCStatus_HPSkill_EnteringAimMode(object sender,
+            EnteringAimModeEventArgs e)
+        {
+            if (e.SubTag != SubTag.PC)
+            {
+                return;
+            }
+            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
+        }
+
+        private void Canvas_PCStatus_HPSkill_LeavingAimMode(object sender,
+            EventArgs e)
+        {
+            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, true);
+        }
+
         private void Canvas_PCStatus_Left_ChangedHP(object sender,
             ChangedHPEventArgs e)
         {
@@ -37,7 +54,8 @@ namespace AxeMan.GameSystem.UserInterface
             SkillCooldown();
         }
 
-        private void Canvas_PCStatus_Left_CreatedWorld(object sender, EventArgs e)
+        private void Canvas_PCStatus_Left_CreatedWorld(object sender,
+            EventArgs e)
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
 
@@ -121,6 +139,10 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_PCStatus_Left_ChangedHP;
             GetComponent<PublishSkill>().ChangedSkillCooldown
                 += Canvas_PCStatus_Left_ChangedSkillCooldown;
+            GetComponent<AimMode>().EnteringAimMode
+                += Canvas_PCStatus_HPSkill_EnteringAimMode;
+            GetComponent<AimMode>().LeavingAimMode
+                += Canvas_PCStatus_HPSkill_LeavingAimMode;
         }
     }
 }

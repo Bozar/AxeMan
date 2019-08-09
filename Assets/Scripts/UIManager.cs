@@ -6,12 +6,12 @@ namespace AxeMan.GameSystem.UserInterface
 {
     public interface IUIManager
     {
-        void SwitchCanvas(CanvasTag cTag, bool switchOn);
+        void SwitchCanvasVisibility(CanvasTag cTag, bool switchOn);
     }
 
     public class UIManager : MonoBehaviour, IUIManager
     {
-        public void SwitchCanvas(CanvasTag cTag, bool switchOn)
+        public void SwitchCanvasVisibility(CanvasTag cTag, bool switchOn)
         {
             GetComponent<SearchUI>().SearchCanvas(cTag)
                 .GetComponent<CanvasGroup>().alpha
