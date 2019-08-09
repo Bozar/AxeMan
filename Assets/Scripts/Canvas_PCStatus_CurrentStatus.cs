@@ -46,16 +46,16 @@ namespace AxeMan.GameSystem.UserInterface
             };
         }
 
-        private void Canvas_PCStatus_Middle_ChangedActorStatus(object sender,
-            EventArgs e)
+        private void Canvas_PCStatus_CurrentStatus_ChangedActorStatus(
+            object sender, EventArgs e)
         {
             ClearUIText(orderedUIStatusName);
             ClearUIText(orderedUIStatusData);
             PCStatus();
         }
 
-        private void Canvas_PCStatus_Middle_CreatedWorld(object sender,
-            EventArgs e)
+        private void Canvas_PCStatus_CurrentStatus_CreatedWorld(
+            object sender, EventArgs e)
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
             skillManager = pc.GetComponent<PCSkillManager>();
@@ -66,8 +66,8 @@ namespace AxeMan.GameSystem.UserInterface
             PCStatus();
         }
 
-        private void Canvas_PCStatus_Middle_EnteringAimMode(object sender,
-            EnteringAimModeEventArgs e)
+        private void Canvas_PCStatus_CurrentStatus_EnteringAimMode(
+            object sender, EnteringAimModeEventArgs e)
         {
             SkillNameTag skillName = skillManager.GetSkillNameTag(e.CommandTag);
             SkillTypeTag skillType = skillManager.GetSkillTypeTag(skillName);
@@ -79,8 +79,8 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.SkillData).text = name;
         }
 
-        private void Canvas_PCStatus_Middle_LeavingAimMode(object sender,
-            EventArgs e)
+        private void Canvas_PCStatus_CurrentStatus_LeavingAimMode(
+            object sender, EventArgs e)
         {
             UITag[] uiTags = new UITag[] { UITag.SkillText, UITag.SkillData, };
             ClearUIText(uiTags);
@@ -144,13 +144,13 @@ namespace AxeMan.GameSystem.UserInterface
         private void Start()
         {
             GetComponent<Wizard>().CreatedWorld
-                += Canvas_PCStatus_Middle_CreatedWorld;
+                += Canvas_PCStatus_CurrentStatus_CreatedWorld;
             GetComponent<AimMode>().EnteringAimMode
-                += Canvas_PCStatus_Middle_EnteringAimMode;
+                += Canvas_PCStatus_CurrentStatus_EnteringAimMode;
             GetComponent<AimMode>().LeavingAimMode
-                += Canvas_PCStatus_Middle_LeavingAimMode;
+                += Canvas_PCStatus_CurrentStatus_LeavingAimMode;
             GetComponent<PublishActorStatus>().ChangedActorStatus
-                += Canvas_PCStatus_Middle_ChangedActorStatus;
+                += Canvas_PCStatus_CurrentStatus_ChangedActorStatus;
         }
     }
 }

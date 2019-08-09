@@ -57,7 +57,7 @@ namespace AxeMan.GameSystem.UserInterface
             };
         }
 
-        private void Canvas_PCStatus_Right_CreatedWorld(object sender,
+        private void Canvas_PCStatus_SkillData_CreatedWorld(object sender,
             EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
@@ -67,7 +67,7 @@ namespace AxeMan.GameSystem.UserInterface
             GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
         }
 
-        private void Canvas_PCStatus_Right_EnteringAimMode(object sender,
+        private void Canvas_PCStatus_SkillData_EnteringAimMode(object sender,
             EnteringAimModeEventArgs e)
         {
             foreach (GameObject go in uiObjects)
@@ -86,8 +86,8 @@ namespace AxeMan.GameSystem.UserInterface
             }
         }
 
-        private void Canvas_PCStatus_Right_LeavingAimMode(object sender,
-            EventArgs e)
+        private void Canvas_PCStatus_SkillData_LeavingAimMode(
+            object sender, EventArgs e)
         {
             GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
         }
@@ -189,11 +189,11 @@ namespace AxeMan.GameSystem.UserInterface
         private void Start()
         {
             GetComponent<Wizard>().CreatedWorld
-                += Canvas_PCStatus_Right_CreatedWorld;
+                += Canvas_PCStatus_SkillData_CreatedWorld;
             GetComponent<AimMode>().EnteringAimMode
-                += Canvas_PCStatus_Right_EnteringAimMode;
+                += Canvas_PCStatus_SkillData_EnteringAimMode;
             GetComponent<AimMode>().LeavingAimMode
-                += Canvas_PCStatus_Right_LeavingAimMode;
+                += Canvas_PCStatus_SkillData_LeavingAimMode;
         }
     }
 }

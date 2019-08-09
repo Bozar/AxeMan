@@ -22,23 +22,7 @@ namespace AxeMan.GameSystem.UserInterface
             canvasTag = CanvasTag.Canvas_PCStatus_HPSkill;
         }
 
-        private void Canvas_PCStatus_HPSkill_EnteringAimMode(object sender,
-            EnteringAimModeEventArgs e)
-        {
-            if (e.SubTag != SubTag.PC)
-            {
-                return;
-            }
-            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
-        }
-
-        private void Canvas_PCStatus_HPSkill_LeavingAimMode(object sender,
-            EventArgs e)
-        {
-            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, true);
-        }
-
-        private void Canvas_PCStatus_Left_ChangedHP(object sender,
+        private void Canvas_PCStatus_HPSkill_ChangedHP(object sender,
             ChangedHPEventArgs e)
         {
             if (e.STag != SubTag.PC)
@@ -48,13 +32,13 @@ namespace AxeMan.GameSystem.UserInterface
             HPData();
         }
 
-        private void Canvas_PCStatus_Left_ChangedSkillCooldown(object sender,
+        private void Canvas_PCStatus_HPSkill_ChangedSkillCooldown(object sender,
             ChangedSkillCooldownEventArgs e)
         {
             SkillCooldown();
         }
 
-        private void Canvas_PCStatus_Left_CreatedWorld(object sender,
+        private void Canvas_PCStatus_HPSkill_CreatedWorld(object sender,
             EventArgs e)
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
@@ -69,6 +53,22 @@ namespace AxeMan.GameSystem.UserInterface
             SkillName();
             SkillCooldown();
             SkillType();
+        }
+
+        private void Canvas_PCStatus_HPSkill_EnteringAimMode(object sender,
+            EnteringAimModeEventArgs e)
+        {
+            if (e.SubTag != SubTag.PC)
+            {
+                return;
+            }
+            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
+        }
+
+        private void Canvas_PCStatus_HPSkill_LeavingAimMode(object sender,
+            EventArgs e)
+        {
+            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, true);
         }
 
         private void HPData()
@@ -134,11 +134,11 @@ namespace AxeMan.GameSystem.UserInterface
         private void Start()
         {
             GetComponent<Wizard>().CreatedWorld
-                += Canvas_PCStatus_Left_CreatedWorld;
+                += Canvas_PCStatus_HPSkill_CreatedWorld;
             GetComponent<PublishHP>().ChangedHP
-                += Canvas_PCStatus_Left_ChangedHP;
+                += Canvas_PCStatus_HPSkill_ChangedHP;
             GetComponent<PublishSkill>().ChangedSkillCooldown
-                += Canvas_PCStatus_Left_ChangedSkillCooldown;
+                += Canvas_PCStatus_HPSkill_ChangedSkillCooldown;
             GetComponent<AimMode>().EnteringAimMode
                 += Canvas_PCStatus_HPSkill_EnteringAimMode;
             GetComponent<AimMode>().LeavingAimMode
