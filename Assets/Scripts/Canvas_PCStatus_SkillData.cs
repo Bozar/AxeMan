@@ -27,12 +27,12 @@ namespace AxeMan.GameSystem.UserInterface
 
             uiCurseText = new UITag[]
             {
-                UITag.Curse1Text, UITag.Curse2Text, UITag.Curse3Text,
+                UITag.Status1Text, UITag.Status2Text, UITag.Status3Text,
             };
 
             uiCurseData = new UITag[]
             {
-                UITag.Curse1Data, UITag.Curse2Data, UITag.Curse3Data,
+                UITag.Status1Data, UITag.Status2Data, UITag.Status3Data,
             };
 
             printEffect = new SkillTypeTag[]

@@ -64,8 +64,6 @@ namespace AxeMan.GameSystem.GameDataTag
         Status1Data, Status2Data, Status3Data, Status4Data,
         RangeText, CooldownText, DamageText,
         RangeData, CooldownData, DamageData,
-        Curse1Text, Curse2Text, Curse3Text,
-        Curse1Data, Curse2Data, Curse3Data,
     }
 
     public class DataTag : MonoBehaviour
