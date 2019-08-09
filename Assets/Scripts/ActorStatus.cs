@@ -104,12 +104,13 @@ namespace AxeMan.DungeonObject
                 SkillComponentTag.EarthMerit,
             };
 
+            // Fire and Water cancels each other. So does Air and Earth.
             negativeStatus = new SkillComponentTag[]
             {
-                SkillComponentTag.FireFlaw,
                 SkillComponentTag.WaterFlaw,
-                SkillComponentTag.AirFlaw,
+                SkillComponentTag.FireFlaw,
                 SkillComponentTag.EarthFlaw,
+                SkillComponentTag.AirFlaw,
             };
         }
 
