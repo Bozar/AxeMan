@@ -11,6 +11,8 @@ namespace AxeMan.DungeonObject.ActorSkill
 {
     public interface ISkillCooldown
     {
+        int MinCooldown { get; }
+
         int GetCurrentCooldown(SkillNameTag skillNameTag);
 
         int GetCurrentCooldown(CommandTag commandTag);
@@ -30,7 +32,8 @@ namespace AxeMan.DungeonObject.ActorSkill
         private Dictionary<SkillNameTag, int> currentCDDict;
         private int invalidCD;
         private Dictionary<SkillNameTag, int> maxCDDict;
-        private int minCD;
+
+        public int MinCooldown { get; private set; }
 
         public int GetCurrentCooldown(SkillNameTag skillNameTag)
         {
@@ -85,19 +88,19 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         private void Awake()
         {
-            minCD = 0;
+            MinCooldown = 0;
             baseCD = 5;
             invalidCD = 99;
 
             maxCDDict = new Dictionary<SkillNameTag, int>()
             {
                 { SkillNameTag.Q, invalidCD }, { SkillNameTag.W, invalidCD },
-                { SkillNameTag.E, invalidCD }, { SkillNameTag.R, invalidCD }
+                { SkillNameTag.E, invalidCD }, { SkillNameTag.R, invalidCD },
             };
             currentCDDict = new Dictionary<SkillNameTag, int>()
             {
-                { SkillNameTag.Q, minCD }, { SkillNameTag.W, minCD },
-                { SkillNameTag.E, minCD }, { SkillNameTag.R, minCD }
+                { SkillNameTag.Q, MinCooldown }, { SkillNameTag.W, MinCooldown },
+                { SkillNameTag.E, MinCooldown }, { SkillNameTag.R, MinCooldown },
             };
         }
 
@@ -167,7 +170,7 @@ namespace AxeMan.DungeonObject.ActorSkill
             // TODO: Freeze counting down if PC has Water- curse.
             foreach (SkillNameTag snt in currentCDDict.Keys.ToArray())
             {
-                if (currentCDDict[snt] > minCD)
+                if (currentCDDict[snt] > MinCooldown)
                 {
                     SetCurrentCooldown(snt, --currentCDDict[snt]);
                 }

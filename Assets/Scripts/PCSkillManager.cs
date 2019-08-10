@@ -9,6 +9,11 @@ namespace AxeMan.DungeonObject.ActorSkill
         ISkillCooldown, ISkillDamage, ISkillSlot, ISkillEffect,
         IConvertSkillMetaInfo
     {
+        public int MinCooldown
+        {
+            get { return GetComponent<SkillCooldown>().MinCooldown; }
+        }
+
         public int GetCurrentCooldown(SkillNameTag skillNameTag)
         {
             return GetComponent<SkillCooldown>().GetCurrentCooldown(skillNameTag);
