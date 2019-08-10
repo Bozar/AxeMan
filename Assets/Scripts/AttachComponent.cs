@@ -72,6 +72,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<UIManager>();
             gameObject.AddComponent<VerifySkillCooldown>();
             gameObject.AddComponent<VerifySkillRange>();
+            gameObject.AddComponent<VerifySkillTarget>();
 
             gameObject.AddComponent<Wizard>();
             gameObject.AddComponent<WizardInput>();
