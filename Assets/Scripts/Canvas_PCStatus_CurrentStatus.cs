@@ -2,7 +2,6 @@
 using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
-using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
 using System.Collections.Generic;
@@ -66,26 +65,6 @@ namespace AxeMan.GameSystem.UserInterface
             PCStatus();
         }
 
-        private void Canvas_PCStatus_CurrentStatus_EnteringAimMode(
-            object sender, EnteringAimModeEventArgs e)
-        {
-            SkillNameTag skillName = skillManager.GetSkillNameTag(e.CommandTag);
-            SkillTypeTag skillType = skillManager.GetSkillTypeTag(skillName);
-
-            string name = skillManager.GetSkillName(e.CommandTag);
-            string type = skillManager.GetLongSkillTypeName(skillType);
-
-            SearchText(UITag.SkillText).text = type;
-            SearchText(UITag.SkillData).text = name;
-        }
-
-        private void Canvas_PCStatus_CurrentStatus_LeavingAimMode(
-            object sender, EventArgs e)
-        {
-            UITag[] uiTags = new UITag[] { UITag.SkillText, UITag.SkillData, };
-            ClearUIText(uiTags);
-        }
-
         private void ClearUIText(UITag[] uiTags)
         {
             foreach (UITag uit in uiTags)
@@ -145,10 +124,6 @@ namespace AxeMan.GameSystem.UserInterface
         {
             GetComponent<Wizard>().CreatedWorld
                 += Canvas_PCStatus_CurrentStatus_CreatedWorld;
-            GetComponent<AimMode>().EnteringAimMode
-                += Canvas_PCStatus_CurrentStatus_EnteringAimMode;
-            GetComponent<AimMode>().LeavingAimMode
-                += Canvas_PCStatus_CurrentStatus_LeavingAimMode;
             GetComponent<PublishActorStatus>().ChangedActorStatus
                 += Canvas_PCStatus_CurrentStatus_ChangedActorStatus;
         }

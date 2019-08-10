@@ -79,6 +79,7 @@ namespace AxeMan.GameSystem.UserInterface
             Cooldown(e.CommandTag);
             Damage(e.CommandTag);
             Effect(e.CommandTag);
+            SkillNameType(e.CommandTag);
 
             if (e.SubTag == SubTag.PC)
             {
@@ -107,8 +108,8 @@ namespace AxeMan.GameSystem.UserInterface
                 return;
             }
 
-            SearchText(UITag.DamageText).text = "Dmg";
-            SearchText(UITag.DamageData).text
+            SearchText(UITag.Status1Text).text = "Dmg";
+            SearchText(UITag.Status1Data).text
                 = skillManager.GetSkillDamage(commandTag).ToString();
         }
 
@@ -153,6 +154,18 @@ namespace AxeMan.GameSystem.UserInterface
         private Text SearchText(UITag uiTag)
         {
             return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
+        }
+
+        private void SkillNameType(CommandTag e)
+        {
+            SkillNameTag skillName = skillManager.GetSkillNameTag(e);
+            SkillTypeTag skillType = skillManager.GetSkillTypeTag(skillName);
+
+            string name = skillManager.GetSkillName(e);
+            string type = skillManager.GetLongSkillTypeName(skillType);
+
+            SearchText(UITag.SkillText).text = type;
+            SearchText(UITag.SkillData).text = name;
         }
 
         private SkillComponentTag[] SortComponents(SkillTypeTag skillTypeTag,
