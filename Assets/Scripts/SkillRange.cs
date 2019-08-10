@@ -1,7 +1,4 @@
-﻿using AxeMan.GameSystem;
-using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.GameMode;
-using AxeMan.GameSystem.SearchGameObject;
+﻿using AxeMan.GameSystem.GameDataTag;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -76,26 +73,6 @@ namespace AxeMan.DungeonObject.ActorSkill
 
             nameRange[skillNameTag] = range;
             return range;
-        }
-
-        private void SkillRange_VerifyingSkill(object sender,
-            VerifyingSkillEventArgs e)
-        {
-            int[] aimMarker
-                = GameCore.AxeManCore.GetComponent<SearchObject>()
-                .Search(SubTag.AimMarker)[0]
-                .GetComponent<MetaInfo>().Position;
-            int distance = GetComponent<LocalManager>().GetDistance(aimMarker);
-            int skillRange = GetSkillRange(
-                GetComponent<PCSkillManager>().GetSkillNameTag(e.UseSkill));
-
-            e.CanUseSkill.Push(distance <= skillRange);
-        }
-
-        private void Start()
-        {
-            GameCore.AxeManCore.GetComponent<AimMode>().VerifyingSkill
-                += SkillRange_VerifyingSkill;
         }
     }
 }

@@ -70,6 +70,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<TurnManager>();
 
             gameObject.AddComponent<UIManager>();
+            gameObject.AddComponent<VerifySkillCooldown>();
+            gameObject.AddComponent<VerifySkillRange>();
+
             gameObject.AddComponent<Wizard>();
             gameObject.AddComponent<WizardInput>();
         }
