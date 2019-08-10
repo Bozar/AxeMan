@@ -91,11 +91,5 @@ namespace AxeMan.DungeonObject.ActorSkill
 
             e.CanUseSkill.Push(distance <= skillRange);
         }
-
-        private void Start()
-        {
-            GameCore.AxeManCore.GetComponent<AimMode>().VerifyingSkill
-                += SkillRange_VerifyingSkill;
-        }
     }
 }

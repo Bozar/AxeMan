@@ -1,7 +1,6 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
-using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.SchedulingSystem;
 using System.Collections.Generic;
 using System.Linq;
@@ -191,20 +190,12 @@ namespace AxeMan.DungeonObject.ActorSkill
             SetCurrentCooldown(skill, GetMaxCooldown(skill));
         }
 
-        private void SkillCooldown_VerifyingSkill(object sender,
-            VerifyingSkillEventArgs e)
-        {
-            e.CanUseSkill.Push(GetCurrentCooldown(e.UseSkill) <= minCD);
-        }
-
         private void Start()
         {
             GameCore.AxeManCore.GetComponent<PublishAction>().TakenAction
                 += SkillCooldown_TakenAction;
             GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn
                 += SkillCooldown_StartingTurn;
-            GameCore.AxeManCore.GetComponent<AimMode>().VerifyingSkill
-                += SkillCooldown_VerifyingSkill;
         }
     }
 }
