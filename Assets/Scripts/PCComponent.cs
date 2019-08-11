@@ -20,6 +20,8 @@ namespace AxeMan.GameSystem.ObjectFactory
 
             e.Data.AddComponent<PCBuffSelf>();
             e.Data.AddComponent<PCCheckTerrain>();
+            e.Data.AddComponent<PCCurseTarget>();
+
             e.Data.AddComponent<PCInputManager>().enabled = false;
             e.Data.AddComponent<PCInputSwitcher>();
 
