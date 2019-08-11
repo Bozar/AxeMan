@@ -32,6 +32,13 @@ namespace AxeMan.DungeonObject
 
             SkillNameTag skillName = GetComponent<PCSkillManager>()
                .GetSkillNameTag(e.Action);
+            SkillTypeTag skillType = GetComponent<PCSkillManager>()
+               .GetSkillTypeTag(skillName);
+            if (skillType != SkillTypeTag.Buff)
+            {
+                return;
+            }
+
             Dictionary<SkillComponentTag, EffectData> compInt
                 = GetComponent<PCSkillManager>().GetSkillEffect(skillName);
 
