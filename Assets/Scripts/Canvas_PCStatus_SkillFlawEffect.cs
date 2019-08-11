@@ -45,8 +45,6 @@ namespace AxeMan.GameSystem.UserInterface
             EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            skillManager = pc.GetComponent<PCSkillManager>();
 
             ClearUIText();
         }
@@ -67,6 +65,12 @@ namespace AxeMan.GameSystem.UserInterface
             object sender, EventArgs e)
         {
             ClearUIText();
+        }
+
+        private void Canvas_PCStatus_SkillFlawEffect_SettingReference(
+            object sender, SettingReferenceEventArgs e)
+        {
+            skillManager = e.PC.GetComponent<PCSkillManager>();
         }
 
         private void ClearUIText()
@@ -115,6 +119,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
+            GetComponent<Wizard>().SettingReference
+                += Canvas_PCStatus_SkillFlawEffect_SettingReference;
             GetComponent<Wizard>().CreatedWorld
                 += Canvas_PCStatus_SkillFlawEffect_CreatedWorld;
             GetComponent<AimMode>().EnteringAimMode

@@ -3,7 +3,6 @@ using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.SearchGameObject;
-using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
@@ -15,8 +14,8 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<Wizard>().CreatedWorld
-                += VerifySkillTarget_CreatedWorld;
+            GetComponent<Wizard>().SettingReference
+                += VerifySkillTarget_SettingReference;
             GetComponent<AimMode>().VerifyingSkill
                 += VerifySkillTarget_VerifyingSkill;
         }
@@ -59,11 +58,11 @@ namespace AxeMan.GameSystem
             return true;
         }
 
-        private void VerifySkillTarget_CreatedWorld(object sender, EventArgs e)
+        private void VerifySkillTarget_SettingReference(object sender,
+            SettingReferenceEventArgs e)
         {
-            aimMarker = GetComponent<SearchObject>().Search(SubTag.AimMarker)[0];
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            skillManager = pc.GetComponent<PCSkillManager>();
+            aimMarker = e.AimMarker;
+            skillManager = e.PC.GetComponent<PCSkillManager>();
         }
 
         private void VerifySkillTarget_VerifyingSkill(object sender,

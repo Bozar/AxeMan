@@ -13,6 +13,19 @@ using UnityEngine.SceneManagement;
 
 namespace AxeMan.GameSystem
 {
+    public class SettingReferenceEventArgs : EventArgs
+    {
+        public SettingReferenceEventArgs(GameObject aimMarker, GameObject pc)
+        {
+            AimMarker = aimMarker;
+            PC = pc;
+        }
+
+        public GameObject AimMarker { get; }
+
+        public GameObject PC { get; }
+    }
+
     public class UpdateUIEventArgs : EventArgs
     {
         public ReadOnlyDictionary<string, string> UIData;
@@ -27,9 +40,16 @@ namespace AxeMan.GameSystem
 
         public event EventHandler CreatedWorld;
 
+        public event EventHandler<SettingReferenceEventArgs> SettingReference;
+
         protected virtual void OnCreatedWorld()
         {
             CreatedWorld?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnSettingReference(SettingReferenceEventArgs e)
+        {
+            SettingReference?.Invoke(this, e);
         }
 
         private void AddStatus()
@@ -70,7 +90,9 @@ namespace AxeMan.GameSystem
             {
                 if (!turnStarted)
                 {
+                    SetReference();
                     OnCreatedWorld();
+
                     GetComponent<TurnManager>().StartTurn();
                     GetComponent<TileOverlay>().RefreshDungeonBoard();
 
@@ -130,6 +152,13 @@ namespace AxeMan.GameSystem
                     .GetSkillEffectName(comp, effectDict[comp]);
                 Debug.Log(compName + ": " + effect);
             }
+        }
+
+        private void SetReference()
+        {
+            GameObject aimMarker = GetComponent<SearchObject>().Search(SubTag.AimMarker)[0];
+            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+            OnSettingReference(new SettingReferenceEventArgs(aimMarker, pc));
         }
 
         private void Start()

@@ -2,8 +2,6 @@
 using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using AxeMan.GameSystem.SearchGameObject;
-using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
@@ -15,16 +13,17 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<Wizard>().CreatedWorld
-                += VerifySkillRange_CreatedWorld;
+            GetComponent<Wizard>().SettingReference
+                += VerifySkillRange_SettingReference;
             GetComponent<AimMode>().VerifyingSkill
                 += VerifySkillRange_VerifyingSkill;
         }
 
-        private void VerifySkillRange_CreatedWorld(object sender, EventArgs e)
+        private void VerifySkillRange_SettingReference(object sender,
+            SettingReferenceEventArgs e)
         {
-            aimMarker = GetComponent<SearchObject>().Search(SubTag.AimMarker)[0];
-            pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
+            aimMarker = e.AimMarker;
+            pc = e.PC;
         }
 
         private void VerifySkillRange_VerifyingSkill(object sender,

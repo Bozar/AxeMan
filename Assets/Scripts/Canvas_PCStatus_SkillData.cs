@@ -61,8 +61,6 @@ namespace AxeMan.GameSystem.UserInterface
             EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-            skillManager = GetComponent<SearchObject>().Search(SubTag.PC)[0]
-                .GetComponent<PCSkillManager>();
 
             GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
         }
@@ -91,6 +89,12 @@ namespace AxeMan.GameSystem.UserInterface
             object sender, EventArgs e)
         {
             GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
+        }
+
+        private void Canvas_PCStatus_SkillData_SettingReference(object sender,
+            SettingReferenceEventArgs e)
+        {
+            skillManager = e.PC.GetComponent<PCSkillManager>();
         }
 
         private void Cooldown(CommandTag commandTag)
@@ -201,6 +205,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
+            GetComponent<Wizard>().SettingReference
+                += Canvas_PCStatus_SkillData_SettingReference;
             GetComponent<Wizard>().CreatedWorld
                 += Canvas_PCStatus_SkillData_CreatedWorld;
             GetComponent<AimMode>().EnteringAimMode

@@ -1,8 +1,5 @@
 ﻿using AxeMan.DungeonObject.ActorSkill;
-using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using AxeMan.GameSystem.SearchGameObject;
-using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
@@ -13,16 +10,16 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<Wizard>().CreatedWorld
-                += VerifySkillCooldown_CreatedWorld;
+            GetComponent<Wizard>().SettingReference
+                += VerifySkillCooldown_SettingReference;
             GetComponent<AimMode>().VerifyingSkill
                 += VerifySkillCooldown_VerifyingSkill;
         }
 
-        private void VerifySkillCooldown_CreatedWorld(object sender, EventArgs e)
+        private void VerifySkillCooldown_SettingReference(object sender,
+            SettingReferenceEventArgs e)
         {
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            skillManager = pc.GetComponent<PCSkillManager>();
+            skillManager = e.PC.GetComponent<PCSkillManager>();
         }
 
         private void VerifySkillCooldown_VerifyingSkill(object sender,

@@ -56,13 +56,18 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_PCStatus_CurrentStatus_CreatedWorld(
             object sender, EventArgs e)
         {
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            skillManager = pc.GetComponent<PCSkillManager>();
-            actorStatus = pc.GetComponent<ActorStatus>();
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
 
             ClearUIText(uiObjects);
             PCStatus();
+        }
+
+        private void Canvas_PCStatus_CurrentStatus_SettingReference(
+            object sender, SettingReferenceEventArgs e)
+        {
+            GameObject pc = e.PC;
+            skillManager = pc.GetComponent<PCSkillManager>();
+            actorStatus = pc.GetComponent<ActorStatus>();
         }
 
         private void ClearUIText(UITag[] uiTags)
@@ -122,6 +127,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
+            GetComponent<Wizard>().SettingReference
+                += Canvas_PCStatus_CurrentStatus_SettingReference;
             GetComponent<Wizard>().CreatedWorld
                 += Canvas_PCStatus_CurrentStatus_CreatedWorld;
             GetComponent<PublishActorStatus>().ChangedActorStatus

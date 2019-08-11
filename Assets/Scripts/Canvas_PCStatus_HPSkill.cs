@@ -41,11 +41,7 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_PCStatus_HPSkill_CreatedWorld(object sender,
             EventArgs e)
         {
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-            skillManager = pc.GetComponent<PCSkillManager>();
-            hp = pc.GetComponent<HP>();
 
             HPText();
             HPData();
@@ -69,6 +65,14 @@ namespace AxeMan.GameSystem.UserInterface
             EventArgs e)
         {
             GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, true);
+        }
+
+        private void Canvas_PCStatus_HPSkill_SettingReference(object sender,
+            SettingReferenceEventArgs e)
+        {
+            GameObject pc = e.PC;
+            skillManager = pc.GetComponent<PCSkillManager>();
+            hp = pc.GetComponent<HP>();
         }
 
         private void HPData()
@@ -133,6 +137,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
+            GetComponent<Wizard>().SettingReference
+                += Canvas_PCStatus_HPSkill_SettingReference;
             GetComponent<Wizard>().CreatedWorld
                 += Canvas_PCStatus_HPSkill_CreatedWorld;
             GetComponent<PublishHP>().ChangedHP

@@ -46,14 +46,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Canvas_World_CreatedWorld(object sender, EventArgs e)
         {
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            GameObject aim = GetComponent<SearchObject>().Search(
-                SubTag.AimMarker)[0];
-
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-            skillManager = pc.GetComponent<PCSkillManager>();
-            localManager = pc.GetComponent<LocalManager>();
-            aimMetaInfo = aim.GetComponent<MetaInfo>();
 
             ClearModeline();
         }
@@ -79,8 +72,16 @@ namespace AxeMan.GameSystem.UserInterface
             ClearModeline();
         }
 
+        private void Canvas_World_SettingReference(object sender,
+            SettingReferenceEventArgs e)
+        {
+            skillManager = e.PC.GetComponent<PCSkillManager>();
+            localManager = e.PC.GetComponent<LocalManager>();
+            aimMetaInfo = e.AimMarker.GetComponent<MetaInfo>();
+        }
+
         private void Canvas_World_TakenAction(object sender,
-            PublishActionEventArgs e)
+                    PublishActionEventArgs e)
         {
             if ((e.SubTag != SubTag.AimMarker) || (e.Action != ActionTag.Move))
             {
@@ -101,7 +102,10 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
-            GetComponent<Wizard>().CreatedWorld += Canvas_World_CreatedWorld;
+            GetComponent<Wizard>().SettingReference
+                += Canvas_World_SettingReference;
+            GetComponent<Wizard>().CreatedWorld
+                += Canvas_World_CreatedWorld;
             GetComponent<AimMode>().EnteredAimMode
                 += Canvas_World_EnteredAimMode;
             GetComponent<AimMode>().LeavingAimMode

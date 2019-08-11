@@ -2,8 +2,6 @@
 using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
-using AxeMan.GameSystem.SearchGameObject;
-using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -12,10 +10,10 @@ namespace AxeMan.DungeonObject
     {
         private GameObject aimMarker;
 
-        private void PCTeleportSelf_CreatedWorld(object sender, EventArgs e)
+        private void PCTeleportSelf_SettingReference(object sender,
+            SettingReferenceEventArgs e)
         {
-            aimMarker = GameCore.AxeManCore.GetComponent<SearchObject>()
-                .Search(SubTag.AimMarker)[0];
+            aimMarker = e.AimMarker;
         }
 
         private void PCTeleportSelf_TakingAction(object sender,
@@ -45,8 +43,8 @@ namespace AxeMan.DungeonObject
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<Wizard>().CreatedWorld
-                += PCTeleportSelf_CreatedWorld;
+            GameCore.AxeManCore.GetComponent<Wizard>().SettingReference
+                += PCTeleportSelf_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                  += PCTeleportSelf_TakingAction;
         }
