@@ -25,6 +25,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data.AddComponent<PCMove>();
             e.Data.AddComponent<PCSkillManager>();
             e.Data.AddComponent<PCStartEndTurn>();
+            e.Data.AddComponent<PCTeleportSelf>();
             e.Data.AddComponent<PCUseSKill>();
 
             e.Data.AddComponent<SkillCooldown>();
