@@ -57,11 +57,9 @@ namespace AxeMan.GameSystem
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
             ActorStatus actorStatus = pc.GetComponent<ActorStatus>();
 
-            //actorStatus.AddStatus(SkillComponentTag.AirFlaw, new EffectData(2, 3));
-            actorStatus.AddStatus(SkillComponentTag.AirMerit, new EffectData(2, 5));
-
-            actorStatus.AddStatus(SkillComponentTag.EarthFlaw, new EffectData(2, 3));
-            //actorStatus.AddStatus(SkillComponentTag.EarthMerit, new EffectData(2, 2));
+            actorStatus.AddStatus(SkillComponentTag.WaterFlaw, new EffectData(2, 5));
+            actorStatus.AddStatus(SkillComponentTag.FireMerit, new EffectData(2, 5));
+            actorStatus.AddStatus(SkillComponentTag.FireMerit, new EffectData(2, 5));
         }
 
         private void CreateAltar()

@@ -2,6 +2,7 @@
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.SchedulingSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,8 +30,10 @@ namespace AxeMan.DungeonObject.ActorSkill
     {
         private int baseCD;
         private Dictionary<SkillNameTag, int> currentCDDict;
+        private int fastDecrease;
         private int invalidCD;
         private Dictionary<SkillNameTag, int> maxCDDict;
+        private int normalDecrease;
 
         public int MinCooldown { get; private set; }
 
@@ -90,6 +93,8 @@ namespace AxeMan.DungeonObject.ActorSkill
             MinCooldown = 0;
             baseCD = 5;
             invalidCD = 99;
+            normalDecrease = 1;
+            fastDecrease = 2;
 
             maxCDDict = new Dictionary<SkillNameTag, int>()
             {
@@ -166,12 +171,31 @@ namespace AxeMan.DungeonObject.ActorSkill
                 return;
             }
 
-            // TODO: Freeze counting down if PC has Water- curse.
+            ActorStatus actorStatus = GetComponent<ActorStatus>();
+            if (actorStatus.CurrentStatus.ContainsKey(
+                SkillComponentTag.WaterFlaw))
+            {
+                return;
+            }
+
+            int decrease;
+            int cooldown;
+            if (actorStatus.CurrentStatus.ContainsKey(SkillComponentTag.FireMerit))
+            {
+                decrease = fastDecrease;
+            }
+            else
+            {
+                decrease = normalDecrease;
+            }
+
             foreach (SkillNameTag snt in currentCDDict.Keys.ToArray())
             {
                 if (currentCDDict[snt] > MinCooldown)
                 {
-                    SetCurrentCooldown(snt, --currentCDDict[snt]);
+                    cooldown = currentCDDict[snt] - decrease;
+                    cooldown = Math.Max(MinCooldown, cooldown);
+                    SetCurrentCooldown(snt, cooldown);
                 }
             }
         }
