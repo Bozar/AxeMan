@@ -75,19 +75,21 @@ namespace AxeMan.DungeonObject
 
             if (HasStatus(SkillComponentTag.FireFlaw, out _))
             {
-                compIntStatus[SkillComponentTag.FireFlaw].Duration
-                    -= reduceDuration;
-                TryRemoveStatus(SkillComponentTag.FireFlaw);
+                TryCountdownDuration(positiveStatus);
+                TryCountdownDuration(SkillComponentTag.FireFlaw);
+            }
+            else if (HasStatus(SkillComponentTag.WaterMerit, out _))
+            {
+                TryCountdownDuration(negativeStatus);
+                TryCountdownDuration(SkillComponentTag.WaterMerit);
             }
             else
             {
-                foreach (SkillComponentTag sct in compIntStatus.Keys.ToArray())
-                {
-                    compIntStatus[sct].Duration -= reduceDuration;
-                    TryRemoveStatus(sct);
-                }
+                TryCountdownDuration(positiveStatus);
+                TryCountdownDuration(negativeStatus);
             }
 
+            TryRemoveStatus();
             PublishPCStatus();
         }
 
@@ -128,6 +130,22 @@ namespace AxeMan.DungeonObject
         {
             GameCore.AxeManCore.GetComponent<TurnManager>().EndingTurn
                 += ActorStatus_EndingTurn;
+        }
+
+        private void TryCountdownDuration(SkillComponentTag skillComponent)
+        {
+            if (compIntStatus.ContainsKey(skillComponent))
+            {
+                compIntStatus[skillComponent].Duration -= reduceDuration;
+            }
+        }
+
+        private void TryCountdownDuration(SkillComponentTag[] skillComponents)
+        {
+            foreach (SkillComponentTag sct in skillComponents)
+            {
+                TryCountdownDuration(sct);
+            }
         }
 
         private void TryMergeStatus(SkillComponentTag skillComponentTag,
@@ -185,11 +203,14 @@ namespace AxeMan.DungeonObject
             }
         }
 
-        private void TryRemoveStatus(SkillComponentTag skillComponentTag)
+        private void TryRemoveStatus()
         {
-            if (compIntStatus[skillComponentTag].Duration < 1)
+            foreach (SkillComponentTag sct in compIntStatus.Keys.ToArray())
             {
-                compIntStatus.Remove(skillComponentTag);
+                if (compIntStatus[sct].Duration < 1)
+                {
+                    compIntStatus.Remove(sct);
+                }
             }
         }
     }
