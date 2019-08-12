@@ -10,6 +10,12 @@ namespace AxeMan.DungeonObject
     public class PCAttackTarget : MonoBehaviour
     {
         private GameObject aimMarker;
+        private int zeroDamage;
+
+        private void Awake()
+        {
+            zeroDamage = 0;
+        }
 
         private void PCAttackTarget_SettingReference(object sender,
             SettingReferenceEventArgs e)
@@ -43,6 +49,7 @@ namespace AxeMan.DungeonObject
             }
 
             int damage = GetComponent<PCSkillManager>().GetSkillDamage(skillName);
+            damage += StatusMod(targets[0]);
             targets[0].GetComponent<HP>().Subtract(damage);
         }
 
@@ -52,6 +59,18 @@ namespace AxeMan.DungeonObject
                 += PCAttackTarget_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                 += PCAttackTarget_TakingAction;
+        }
+
+        private int StatusMod(GameObject target)
+        {
+            ActorStatus actorStatus = target.GetComponent<ActorStatus>();
+
+            if (actorStatus.CurrentStatus.TryGetValue(SkillComponentTag.AirFlaw,
+                out EffectData effectData))
+            {
+                return effectData.Power;
+            }
+            return zeroDamage;
         }
     }
 }
