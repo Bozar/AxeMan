@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,8 +14,8 @@ namespace AxeMan.DungeonObject.ActorSkill
     {
         private int baseRange;
         private int invalidRange;
+        private int minRange;
         private Dictionary<SkillNameTag, int> nameRange;
-        private int zeroRange;
 
         public int GetSkillRange(SkillNameTag skillNameTag)
         {
@@ -29,7 +30,8 @@ namespace AxeMan.DungeonObject.ActorSkill
                 range = SetBaseRange(skillNameTag);
             }
 
-            // TODO: Change range based on PC status.
+            range += StatusMod();
+            range = Math.Max(minRange, range);
 
             return range;
         }
@@ -37,7 +39,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         private void Awake()
         {
             invalidRange = -1;
-            zeroRange = 0;
+            minRange = 0;
             baseRange = 1;
 
             nameRange = new Dictionary<SkillNameTag, int>
@@ -53,7 +55,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             SkillTypeTag skillType = GetComponent<PCSkillManager>()
                .GetSkillTypeTag(skillNameTag);
-            int range = zeroRange;
+            int range = minRange;
 
             Dictionary<SkillComponentTag, EffectData> compEffect;
             SkillComponentTag checkComp;
@@ -73,6 +75,26 @@ namespace AxeMan.DungeonObject.ActorSkill
 
             nameRange[skillNameTag] = range;
             return range;
+        }
+
+        private int StatusMod()
+        {
+            int increase = 0;
+            int decrease = 0;
+            ActorStatus actorStatus = GetComponent<ActorStatus>();
+            EffectData effectData;
+
+            if (actorStatus.CurrentStatus.TryGetValue(
+                SkillComponentTag.AirMerit, out effectData))
+            {
+                increase = effectData.Power;
+            }
+            if (actorStatus.CurrentStatus.TryGetValue(
+                SkillComponentTag.EarthFlaw, out effectData))
+            {
+                decrease = effectData.Power;
+            }
+            return increase - decrease;
         }
     }
 }
