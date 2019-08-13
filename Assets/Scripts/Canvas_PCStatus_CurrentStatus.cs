@@ -26,22 +26,31 @@ namespace AxeMan.GameSystem.UserInterface
 
             orderedComponents = new SkillComponentTag[]
             {
-                SkillComponentTag.FireMerit, SkillComponentTag.FireFlaw,
-                SkillComponentTag.WaterMerit, SkillComponentTag.WaterFlaw,
-                SkillComponentTag.AirMerit, SkillComponentTag.AirFlaw,
-                SkillComponentTag.EarthMerit, SkillComponentTag.EarthFlaw,
+                SkillComponentTag.FireMerit,
+                SkillComponentTag.WaterMerit,
+                SkillComponentTag.AirMerit,
+                SkillComponentTag.EarthMerit,
+
+                SkillComponentTag.FireFlaw,
+                SkillComponentTag.WaterFlaw,
+                SkillComponentTag.AirFlaw,
+                SkillComponentTag.EarthFlaw,
             };
 
             orderedUIStatusName = new UITag[]
             {
-                UITag.Status1Text, UITag.Status2Text,
-                UITag.Status3Text, UITag.Status4Text,
+                UITag.Status1Text,
+                UITag.Status2Text,
+                UITag.Status3Text,
+                UITag.Status4Text,
             };
 
             orderedUIStatusData = new UITag[]
             {
-                UITag.Status1Data, UITag.Status2Data,
-                UITag.Status3Data, UITag.Status4Data,
+                UITag.Status1Data,
+                UITag.Status2Data,
+                UITag.Status3Data,
+                UITag.Status4Data,
             };
         }
 
