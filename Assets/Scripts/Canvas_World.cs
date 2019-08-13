@@ -47,8 +47,6 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_World_CreatedWorld(object sender, EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-
-            ClearModeline();
         }
 
         private void Canvas_World_EnteredAimMode(object sender,

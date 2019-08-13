@@ -45,8 +45,6 @@ namespace AxeMan.GameSystem.UserInterface
             EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-
-            ClearUIText();
         }
 
         private void Canvas_PCStatus_SkillFlawEffect_EnteringAimMode(

@@ -67,7 +67,6 @@ namespace AxeMan.GameSystem.UserInterface
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
 
-            ClearUIText(uiObjects);
             PCStatus();
         }
 
