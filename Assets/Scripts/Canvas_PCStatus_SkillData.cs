@@ -66,7 +66,7 @@ namespace AxeMan.GameSystem.UserInterface
         }
 
         private void Canvas_PCStatus_SkillData_EnteringAimMode(object sender,
-            EnteringAimModeEventArgs e)
+            EnterAimModeEventArgs e)
         {
             foreach (GameObject go in uiObjects)
             {

@@ -48,7 +48,7 @@ namespace AxeMan.GameSystem.UserInterface
         }
 
         private void Canvas_PCStatus_SkillFlawEffect_EnteringAimMode(
-            object sender, EnteringAimModeEventArgs e)
+            object sender, EnterAimModeEventArgs e)
         {
             if ((e.SubTag != SubTag.PC) && (e.SubTag != SubTag.AimMarker))
             {
@@ -84,7 +84,7 @@ namespace AxeMan.GameSystem.UserInterface
             return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
         }
 
-        private void SkillFlawEffect(EnteringAimModeEventArgs e)
+        private void SkillFlawEffect(EnterAimModeEventArgs e)
         {
             SkillNameTag skillName = skillManager.GetSkillNameTag(e.CommandTag);
             Dictionary<SkillComponentTag, EffectData> compInt

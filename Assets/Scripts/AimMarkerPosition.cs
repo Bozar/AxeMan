@@ -10,7 +10,7 @@ namespace AxeMan.DungeonObject
     public class AimMarkerPosition : MonoBehaviour
     {
         private void AimMarkerPosition_EnteringAimMode(object sender,
-            EnteringAimModeEventArgs e)
+            EnterAimModeEventArgs e)
         {
             if (e.SubTag == SubTag.AimMarker)
             {

@@ -50,7 +50,7 @@ namespace AxeMan.GameSystem.UserInterface
         }
 
         private void Canvas_World_EnteredAimMode(object sender,
-            EnteredAimModeEventArgs e)
+            EnterAimModeEventArgs e)
         {
             skillNameTag = skillManager.GetSkillNameTag(e.CommandTag);
             SearchText(UITag.Modeline).text = AimModeText();

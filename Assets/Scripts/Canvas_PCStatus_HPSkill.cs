@@ -52,7 +52,7 @@ namespace AxeMan.GameSystem.UserInterface
         }
 
         private void Canvas_PCStatus_HPSkill_EnteringAimMode(object sender,
-            EnteringAimModeEventArgs e)
+            EnterAimModeEventArgs e)
         {
             if (e.SubTag != SubTag.PC)
             {

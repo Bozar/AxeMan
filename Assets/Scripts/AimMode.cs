@@ -10,9 +10,9 @@ namespace AxeMan.GameSystem.GameMode
     {
         private CommandTag pcUseSkill;
 
-        public event EventHandler<EnteredAimModeEventArgs> EnteredAimMode;
+        public event EventHandler<EnterAimModeEventArgs> EnteredAimMode;
 
-        public event EventHandler<EnteringAimModeEventArgs> EnteringAimMode;
+        public event EventHandler<EnterAimModeEventArgs> EnteringAimMode;
 
         public event EventHandler<FailedVerifyingEventArgs> FailedVerifying;
 
@@ -22,12 +22,12 @@ namespace AxeMan.GameSystem.GameMode
 
         public event EventHandler<VerifyingSkillEventArgs> VerifyingSkill;
 
-        protected virtual void OnEnteredAimMode(EnteredAimModeEventArgs e)
+        protected virtual void OnEnteredAimMode(EnterAimModeEventArgs e)
         {
             EnteredAimMode?.Invoke(this, e);
         }
 
-        protected virtual void OnEnteringAimMode(EnteringAimModeEventArgs e)
+        protected virtual void OnEnteringAimMode(EnterAimModeEventArgs e)
         {
             EnteringAimMode?.Invoke(this, e);
         }
@@ -57,10 +57,8 @@ namespace AxeMan.GameSystem.GameMode
         {
             if (EnterMode(e))
             {
-                OnEnteringAimMode(new EnteringAimModeEventArgs(
-                    e.SubTag, e.Command));
-                OnEnteredAimMode(new EnteredAimModeEventArgs(
-                    e.SubTag, e.Command));
+                OnEnteringAimMode(new EnterAimModeEventArgs(e.SubTag, e.Command));
+                OnEnteredAimMode(new EnterAimModeEventArgs(e.SubTag, e.Command));
             }
             else if (LeaveMode(e))
             {
@@ -138,22 +136,9 @@ namespace AxeMan.GameSystem.GameMode
         }
     }
 
-    public class EnteredAimModeEventArgs : EventArgs
+    public class EnterAimModeEventArgs : EventArgs
     {
-        public EnteredAimModeEventArgs(SubTag subTag, CommandTag commandTag)
-        {
-            SubTag = subTag;
-            CommandTag = commandTag;
-        }
-
-        public CommandTag CommandTag { get; }
-
-        public SubTag SubTag { get; }
-    }
-
-    public class EnteringAimModeEventArgs : EventArgs
-    {
-        public EnteringAimModeEventArgs(SubTag subTag, CommandTag commandTag)
+        public EnterAimModeEventArgs(SubTag subTag, CommandTag commandTag)
         {
             SubTag = subTag;
             CommandTag = commandTag;
