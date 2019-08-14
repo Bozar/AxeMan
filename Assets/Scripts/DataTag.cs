@@ -49,7 +49,7 @@ namespace AxeMan.GameSystem.GameDataTag
     {
         INVALID, Dummy, LifeAltar, ShieldAltar, Floor, ProgressBar,
         FireTrap, IceTrap, LightningTrap, EarthTrap,
-        PC, AimMarker,
+        PC, AimMarker, ExamineMarker,
     }
 
     public enum UITag
