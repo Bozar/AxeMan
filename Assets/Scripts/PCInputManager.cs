@@ -21,6 +21,7 @@ namespace AxeMan.DungeonObject.PlayerInput
             {
                 GameCore.AxeManCore.GetComponent<MovementInput>(),
                 GameCore.AxeManCore.GetComponent<SkillInput>(),
+                GameCore.AxeManCore.GetComponent<ExamineInput>(),
                 GameCore.AxeManCore.GetComponent<WizardInput>(),
             };
         }
