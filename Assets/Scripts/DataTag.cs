@@ -9,7 +9,8 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum BlueprintTag
     {
-        INVALID, Altar, Floor, Trap, Actor, ProgressBar, AimMarker,
+        INVALID, Altar, Floor, Trap, Actor, ProgressBar,
+        AimMarker, ExamineMarker,
     }
 
     public enum CanvasTag

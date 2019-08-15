@@ -24,8 +24,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Blueprint>();
             gameObject.AddComponent<BlueprintActor>();
             gameObject.AddComponent<BlueprintAimMarker>();
-
             gameObject.AddComponent<BlueprintAltar>();
+
+            gameObject.AddComponent<BlueprintExamineMarker>();
             gameObject.AddComponent<BlueprintFloor>();
             gameObject.AddComponent<BlueprintProgressBar>();
             gameObject.AddComponent<BlueprintTrap>();
