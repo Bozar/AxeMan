@@ -1,7 +1,6 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using AxeMan.GameSystem.SearchGameObject;
 using System;
 using UnityEngine;
 
@@ -9,6 +8,8 @@ namespace AxeMan.DungeonObject
 {
     public class MarkerPosition : MonoBehaviour
     {
+        private MetaInfo pcMetaInfo;
+
         private void MarkerPosition_EnteringAimMode(object sender,
             EnterAimModeEventArgs e)
         {
@@ -16,27 +17,44 @@ namespace AxeMan.DungeonObject
             {
                 return;
             }
+            MoveMarkerToPC();
+        }
 
-            GameObject pc = GameCore.AxeManCore.GetComponent<SearchObject>()
-                .Search(SubTag.PC)[0];
-            int[] position = pc.GetComponent<MetaInfo>().Position;
+        private void MarkerPosition_LeavingAimMode(object sender, EventArgs e)
+        {
+            ResetMarkerPosition();
+        }
+
+        private void MarkerPosition_SettingReference(object sender,
+            SettingReferenceEventArgs e)
+        {
+            GameObject pc = e.PC;
+            pcMetaInfo = pc.GetComponent<MetaInfo>();
+        }
+
+        private void MoveMarkerToPC()
+        {
+            int[] position = pcMetaInfo.Position;
 
             GetComponent<LocalManager>().SetPosition(position);
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(position);
         }
 
-        private void MarkerPosition_LeavingAimMode(object sender, EventArgs e)
+        private void ResetMarkerPosition()
         {
             int invalid = -999;
-            int[] position = GetComponent<MetaInfo>().Position;
+            int[] outOfScreen = new int[] { invalid, invalid };
+            int[] current = GetComponent<MetaInfo>().Position;
 
-            GetComponent<LocalManager>().SetPosition(
-                new int[] { invalid, invalid });
-            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(position);
+            GetComponent<LocalManager>().SetPosition(outOfScreen);
+            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(current);
         }
 
         private void Start()
         {
+            GameCore.AxeManCore.GetComponent<Wizard>().SettingReference
+                += MarkerPosition_SettingReference;
+
             GameCore.AxeManCore.GetComponent<AimMode>().EnteringAimMode
                 += MarkerPosition_EnteringAimMode;
             GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
