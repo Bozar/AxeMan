@@ -13,7 +13,26 @@ namespace AxeMan.DungeonObject
         private void MarkerPosition_EnteringAimMode(object sender,
             EnterAimModeEventArgs e)
         {
-            if (e.SubTag == SubTag.AimMarker)
+            // This event can be triggered by two objects: PC and AimMarker. In
+            // the first case, player presses skill key (QWER) in Normal Mode to
+            // enter Aim Mode. In the later case, player presses skill key inside
+            // Aim Mode. We should only move the aim marker to PC's position in
+            // the FIRST case.
+            if ((e.SubTag != SubTag.PC)
+                || (GetComponent<MetaInfo>().SubTag != SubTag.AimMarker))
+            {
+                return;
+            }
+            MoveMarkerToPC();
+        }
+
+        private void MarkerPosition_EnteringExamineMode(object sender,
+            EventArgs e)
+        {
+            // This component, MarkerPosition, is attached to two objects:
+            // AimMarker and ExamineMarker. We should only move one marker when a
+            // given event is triggered.
+            if (GetComponent<MetaInfo>().SubTag != SubTag.ExamineMarker)
             {
                 return;
             }
@@ -21,6 +40,12 @@ namespace AxeMan.DungeonObject
         }
 
         private void MarkerPosition_LeavingAimMode(object sender, EventArgs e)
+        {
+            ResetMarkerPosition();
+        }
+
+        private void MarkerPosition_LeavingExamineMode(object sender,
+            EventArgs e)
         {
             ResetMarkerPosition();
         }
@@ -59,6 +84,11 @@ namespace AxeMan.DungeonObject
                 += MarkerPosition_EnteringAimMode;
             GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
                 += MarkerPosition_LeavingAimMode;
+
+            GameCore.AxeManCore.GetComponent<ExamineMode>().EnteringExamineMode
+                += MarkerPosition_EnteringExamineMode;
+            GameCore.AxeManCore.GetComponent<ExamineMode>().LeavingExamineMode
+                += MarkerPosition_LeavingExamineMode;
         }
     }
 }

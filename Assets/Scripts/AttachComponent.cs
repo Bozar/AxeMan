@@ -46,6 +46,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Distance>();
             gameObject.AddComponent<DungeonBoard>();
             gameObject.AddComponent<ExamineInput>();
+            gameObject.AddComponent<ExamineMarkerComponent>();
             gameObject.AddComponent<ExamineMode>();
 
             gameObject.AddComponent<GameCore>();
