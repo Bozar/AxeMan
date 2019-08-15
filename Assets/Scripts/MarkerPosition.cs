@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace AxeMan.DungeonObject
 {
-    public class AimMarkerPosition : MonoBehaviour
+    public class MarkerPosition : MonoBehaviour
     {
-        private void AimMarkerPosition_EnteringAimMode(object sender,
+        private void MarkerPosition_EnteringAimMode(object sender,
             EnterAimModeEventArgs e)
         {
             if (e.SubTag == SubTag.AimMarker)
@@ -25,8 +25,7 @@ namespace AxeMan.DungeonObject
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(position);
         }
 
-        private void AimMarkerPosition_LeavingAimMode(object sender,
-            EventArgs e)
+        private void MarkerPosition_LeavingAimMode(object sender, EventArgs e)
         {
             int invalid = -999;
             int[] position = GetComponent<MetaInfo>().Position;
@@ -39,9 +38,9 @@ namespace AxeMan.DungeonObject
         private void Start()
         {
             GameCore.AxeManCore.GetComponent<AimMode>().EnteringAimMode
-                += AimMarkerPosition_EnteringAimMode;
+                += MarkerPosition_EnteringAimMode;
             GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
-                += AimMarkerPosition_LeavingAimMode;
+                += MarkerPosition_LeavingAimMode;
         }
     }
 }
