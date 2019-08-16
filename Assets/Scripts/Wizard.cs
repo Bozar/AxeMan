@@ -15,13 +15,17 @@ namespace AxeMan.GameSystem
 {
     public class SettingReferenceEventArgs : EventArgs
     {
-        public SettingReferenceEventArgs(GameObject aimMarker, GameObject pc)
+        public SettingReferenceEventArgs(GameObject aimMarker,
+            GameObject examineMarker, GameObject pc)
         {
             AimMarker = aimMarker;
+            ExamineMarker = examineMarker;
             PC = pc;
         }
 
         public GameObject AimMarker { get; }
+
+        public GameObject ExamineMarker { get; }
 
         public GameObject PC { get; }
     }
@@ -149,9 +153,14 @@ namespace AxeMan.GameSystem
 
         private void SetReference()
         {
-            GameObject aimMarker = GetComponent<SearchObject>().Search(SubTag.AimMarker)[0];
+            GameObject aimMarker = GetComponent<SearchObject>().Search(
+                SubTag.AimMarker)[0];
+            GameObject examineMarker = GetComponent<SearchObject>().Search(
+                SubTag.ExamineMarker)[0];
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            OnSettingReference(new SettingReferenceEventArgs(aimMarker, pc));
+
+            OnSettingReference(new SettingReferenceEventArgs(aimMarker,
+                examineMarker, pc));
         }
 
         private void Start()

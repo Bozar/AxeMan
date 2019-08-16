@@ -43,6 +43,7 @@ namespace AxeMan.GameSystem.GameMode
             if (EnterMode(e))
             {
                 OnEnteringExamineMode(EventArgs.Empty);
+                OnEnteredExamineMode(EventArgs.Empty);
             }
             else if (LeaveMode(e))
             {

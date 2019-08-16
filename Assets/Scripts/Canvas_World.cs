@@ -14,6 +14,7 @@ namespace AxeMan.GameSystem.UserInterface
     {
         private MetaInfo aimMetaInfo;
         private CanvasTag canvasTag;
+        private MetaInfo examineMetaInfo;
         private LocalManager localManager;
         private PCSkillManager skillManager;
         private SkillNameTag skillNameTag;
@@ -56,6 +57,11 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Modeline).text = AimModeText();
         }
 
+        private void Canvas_World_EnteredExamineMode(object sender, EventArgs e)
+        {
+            SearchText(UITag.Modeline).text = ExamineModeText();
+        }
+
         private void Canvas_World_FailedVerifying(object sender,
             FailedVerifyingEventArgs e)
         {
@@ -70,27 +76,70 @@ namespace AxeMan.GameSystem.UserInterface
             ClearModeline();
         }
 
+        private void Canvas_World_LeavingExamineMode(object sender, EventArgs e)
+        {
+            ClearModeline();
+        }
+
         private void Canvas_World_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
             skillManager = e.PC.GetComponent<PCSkillManager>();
             localManager = e.PC.GetComponent<LocalManager>();
             aimMetaInfo = e.AimMarker.GetComponent<MetaInfo>();
+            examineMetaInfo = e.ExamineMarker.GetComponent<MetaInfo>();
         }
 
         private void Canvas_World_TakenAction(object sender,
-                    PublishActionEventArgs e)
+            PublishActionEventArgs e)
         {
-            if ((e.SubTag != SubTag.AimMarker) || (e.Action != ActionTag.Move))
+            // Only responds to move action from aim or examine marker.
+            if (e.Action != ActionTag.Move)
             {
                 return;
             }
-            SearchText(UITag.Modeline).text = AimModeText();
+            if ((e.SubTag != SubTag.AimMarker)
+                && (e.SubTag != SubTag.ExamineMarker))
+            {
+                return;
+            }
+
+            switch (e.SubTag)
+            {
+                case SubTag.AimMarker:
+                    SearchText(UITag.Modeline).text = AimModeText();
+                    break;
+
+                case SubTag.ExamineMarker:
+                    SearchText(UITag.Modeline).text = ExamineModeText();
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         private void ClearModeline()
         {
             SearchText(UITag.Modeline).text = "";
+        }
+
+        private string ExamineModeText()
+        {
+            string mode = "Examine";
+
+            int[] relativePos = localManager.GetRelativePosition(
+                examineMetaInfo.Position);
+            int relativeX = relativePos[0];
+            int relativeY = relativePos[1];
+
+            int distance = localManager.GetDistance(examineMetaInfo.Position);
+
+            string text
+                = $"[ {mode} ] [ {relativeX}, {relativeY} ]"
+                + $" [ {distance} ]";
+
+            return text;
         }
 
         private Text SearchText(UITag uiTag)
@@ -104,12 +153,19 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_World_SettingReference;
             GetComponent<Wizard>().CreatedWorld
                 += Canvas_World_CreatedWorld;
+
             GetComponent<AimMode>().EnteredAimMode
                 += Canvas_World_EnteredAimMode;
             GetComponent<AimMode>().LeavingAimMode
                 += Canvas_World_LeavingAimMode;
             GetComponent<AimMode>().FailedVerifying
-                += Canvas_World_FailedVerifying;
+               += Canvas_World_FailedVerifying;
+
+            GetComponent<ExamineMode>().EnteredExamineMode
+                += Canvas_World_EnteredExamineMode;
+            GetComponent<ExamineMode>().LeavingExamineMode
+                += Canvas_World_LeavingExamineMode;
+
             GetComponent<PublishAction>().TakenAction
                 += Canvas_World_TakenAction;
         }
