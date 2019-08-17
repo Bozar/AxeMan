@@ -16,7 +16,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             }
             e.Data.AddComponent<AimMarkerInputManager>().enabled = false;
             e.Data.AddComponent<AimMarkerInputSwitcher>();
-            e.Data.AddComponent<MarkerPosition>();
+            e.Data.AddComponent<AimMarkerPosition>();
             e.Data.AddComponent<MarkerCheckTerrain>();
             e.Data.AddComponent<PCMove>();
         }

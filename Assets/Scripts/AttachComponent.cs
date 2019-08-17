@@ -52,6 +52,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<GameCore>();
             gameObject.AddComponent<InputManager>();
 
+            gameObject.AddComponent<MarkerPosition>();
             gameObject.AddComponent<MovementInput>();
             gameObject.AddComponent<NPCComponent>();
             gameObject.AddComponent<ObjectPool>();
