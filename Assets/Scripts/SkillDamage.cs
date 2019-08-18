@@ -32,8 +32,6 @@ namespace AxeMan.DungeonObject.ActorSkill
                 damage = SetBaseDamage(skillNameTag);
             }
 
-            // TODO: Change damage based on PC status.
-
             return damage;
         }
 

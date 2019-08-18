@@ -97,7 +97,6 @@ namespace AxeMan.GameSystem.UserInterface
                 UITag.QData, UITag.WData, UITag.EData, UITag.RData
             };
 
-            // TODO: Get cooldown data from skill component.
             for (int i = 0; i < ui.Length; i++)
             {
                 SearchText(ui[i]).text

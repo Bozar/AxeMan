@@ -71,6 +71,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             }
             go.transform.position = GetComponent<ConvertCoordinate>().Convert(
                 proto.Position);
+            // TODO: Puslish an event to reset object data.
 
             OnCreatedObject(new CreatedObjectEventArgs(go));
             return go;
