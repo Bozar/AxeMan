@@ -19,7 +19,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             Data = data;
         }
 
-        public GameObject Data { get; set; }
+        public GameObject Data { get; }
     }
 
     public class CreatedObjectEventArgs : EventArgs
@@ -103,7 +103,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             Position = core.Position;
         }
 
-        public GameObject Data { get; set; }
+        public GameObject Data { get; }
 
         public MainTag MainTag { get; }
 
