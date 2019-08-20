@@ -14,6 +14,7 @@ namespace AxeMan.GameSystem.UserInterface
         private MetaInfo aimMetaInfo;
         private CanvasTag canvasTag;
         private MetaInfo examineMetaInfo;
+        private LocalManager pcLocalManager;
         private GameObject[] uiObjects;
 
         private void Awake()
@@ -33,7 +34,7 @@ namespace AxeMan.GameSystem.UserInterface
             ClearText();
 
             GameObject target = GetTargetUnderMarker(SubTag.AimMarker);
-            PrintTargetData(target);
+            PrintModeline(target);
 
             SwitchVisibility(true);
         }
@@ -44,7 +45,7 @@ namespace AxeMan.GameSystem.UserInterface
             ClearText();
 
             GameObject target = GetTargetUnderMarker(SubTag.ExamineMarker);
-            PrintTargetData(target);
+            PrintModeline(target);
 
             SwitchVisibility(true);
         }
@@ -66,6 +67,7 @@ namespace AxeMan.GameSystem.UserInterface
         {
             aimMetaInfo = e.AimMarker.GetComponent<MetaInfo>();
             examineMetaInfo = e.ExamineMarker.GetComponent<MetaInfo>();
+            pcLocalManager = e.PC.GetComponent<LocalManager>();
         }
 
         private void Canvas_ExamineMode_TakenAction(object sender,
@@ -84,7 +86,11 @@ namespace AxeMan.GameSystem.UserInterface
             ClearText();
 
             GameObject target = GetTargetUnderMarker(e.SubTag);
-            PrintTargetData(target);
+            if (target == null)
+            {
+                return;
+            }
+            PrintModeline(target);
         }
 
         private void ClearText()
@@ -126,15 +132,22 @@ namespace AxeMan.GameSystem.UserInterface
             return null;
         }
 
-        private void PrintTargetData(GameObject target)
+        private void PrintModeline(GameObject target)
         {
-            if (target == null)
-            {
-                return;
-            }
+            // TODO: Get actor's name.
+            string name = target.GetComponent<MetaInfo>().SubTag.ToString();
 
-            SearchText(UITag.Modeline).text
-                = target.GetComponent<MetaInfo>().SubTag.ToString();
+            int[] targetPos = target.GetComponent<MetaInfo>().Position;
+            int[] relativePos = pcLocalManager.GetRelativePosition(targetPos);
+            int relativeX = relativePos[0];
+            int relativeY = relativePos[1];
+
+            int distance = pcLocalManager.GetDistance(targetPos);
+
+            string modeline
+                = $"[ {name} ] [ {relativeX}, {relativeY} ] [ {distance} ]";
+
+            SearchText(UITag.Modeline).text = modeline;
         }
 
         private Text SearchText(UITag uiTag)

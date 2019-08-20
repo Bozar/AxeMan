@@ -1364,7 +1364,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.999968
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -1374,12 +1374,12 @@ PrefabInstance:
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 430
+      value: 440
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 180
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
@@ -1414,9 +1414,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515162, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_Text
-      value: "Troll Berserker [ 2, 3 ] hits you.\r\nYou curse Goblin Archer [ -1,
-        -4 ].\r\nGiant Goblin Archer [ -1, -4 ] curses you.\r\nAltars are active.\r\nYou
-        are healed.\r\nYou are empowered.\r\nYou are cursed.\r"
+      value: Modeline
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce3f59b7e302cd648926ad779da36f25, type: 3}
@@ -5379,7 +5377,7 @@ PrefabInstance:
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5490796305519515161, guid: ce3f59b7e302cd648926ad779da36f25,
         type: 3}
