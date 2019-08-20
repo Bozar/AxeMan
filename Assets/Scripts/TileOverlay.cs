@@ -2,18 +2,37 @@
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
     public interface ITileOverlay
     {
+        GameObject[] GetSortedObjects(int x, int y);
+
         void TryHideTile(int x, int y);
     }
 
     public class TileOverlay : MonoBehaviour, ITileOverlay
     {
         private MainTag[] layer;
+
+        public GameObject[] GetSortedObjects(int x, int y)
+        {
+            if (!GetComponent<SearchObject>().Search(x, y,
+                out GameObject[] search))
+            {
+                return null;
+            }
+
+            IEnumerable<GameObject> sorted
+                = from s in search
+                  orderby GetLayer(s) descending
+                  select s;
+            return sorted.ToArray();
+        }
 
         public void RefreshDungeonBoard()
         {
@@ -28,22 +47,20 @@ namespace AxeMan.GameSystem
 
         public void TryHideTile(int x, int y)
         {
-            if (!GetComponent<SearchObject>().Search(x, y,
-                out GameObject[] search))
+            GameObject[] sorted = GetSortedObjects(x, y);
+            if (sorted == null)
             {
                 return;
             }
-            GameObject probe = search[0];
 
-            foreach (GameObject s in search)
+            SwitchRenderer(sorted[0], true);
+            if (sorted.Length > 1)
             {
-                SwitchRenderer(s, false);
-                if (GetLayer(probe) < GetLayer(s))
+                for (int i = 1; i < sorted.Length; i++)
                 {
-                    probe = s;
+                    SwitchRenderer(sorted[i], false);
                 }
             }
-            SwitchRenderer(probe, true);
         }
 
         public void TryHideTile(int[] position)
@@ -53,10 +70,16 @@ namespace AxeMan.GameSystem
 
         private void Awake()
         {
+            // NOTE: Two game objects of the same MainTag should not appear in
+            // the same place. Objects are sorted from bottom to top.
             layer = new MainTag[]
             {
-                MainTag.INVALID, MainTag.Floor, MainTag.Trap, MainTag.Building,
-                MainTag.Actor, MainTag.Marker,
+                MainTag.INVALID,
+                MainTag.Floor,
+                MainTag.Trap,
+                MainTag.Building,
+                MainTag.Actor,
+                MainTag.Marker,
             };
         }
 
