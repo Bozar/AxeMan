@@ -103,7 +103,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             Position = core.Position;
         }
 
-        public GameObject Data { get; }
+        public GameObject Data { get; set; }
 
         public MainTag MainTag { get; }
 
