@@ -98,9 +98,6 @@ namespace AxeMan.GameSystem.UserInterface
         private GameObject GetTargetUnderMarker(SubTag markerTag)
         {
             int x, y;
-            int index;
-
-            // Get marker position.
             switch (markerTag)
             {
                 case SubTag.AimMarker:
@@ -117,45 +114,11 @@ namespace AxeMan.GameSystem.UserInterface
                     return null;
             }
 
-            // PC, NPC, Building, Trap, Floor.
-            GameObject[] sortedTargets = new GameObject[5];
-            MainTag[] sortedMainTags = new MainTag[]
+            GameObject[] sorted
+                = GetComponent<TileOverlay>().GetSortedObjects(x, y);
+            foreach (GameObject s in sorted)
             {
-                MainTag.INVALID,
-                MainTag.Actor,
-                MainTag.Building,
-                MainTag.Trap,
-                MainTag.Floor,
-            };
-
-            // Sort targets under marker.
-            if (GetComponent<SearchObject>().Search(x, y,
-                out GameObject[] targets))
-            {
-                foreach (GameObject t in targets)
-                {
-                    index = Array.IndexOf(sortedMainTags,
-                        t.GetComponent<MetaInfo>().MainTag);
-
-                    if (t.GetComponent<MetaInfo>().SubTag == SubTag.PC)
-                    {
-                        sortedTargets[0] = t;
-                    }
-                    else if (index > 0)
-                    {
-                        sortedTargets[index] = t;
-                    }
-                }
-            }
-            else
-            {
-                return null;
-            }
-
-            // Return the target on the top layer.
-            foreach (GameObject s in sortedTargets)
-            {
-                if (s != null)
+                if (s.GetComponent<MetaInfo>().MainTag != MainTag.Marker)
                 {
                     return s;
                 }
