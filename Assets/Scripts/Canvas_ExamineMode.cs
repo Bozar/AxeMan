@@ -32,10 +32,7 @@ namespace AxeMan.GameSystem.UserInterface
             EnterAimModeEventArgs e)
         {
             ClearText();
-
-            GameObject target = GetTargetUnderMarker(SubTag.AimMarker);
-            PrintModeline(target);
-
+            PrintExamineText(SubTag.AimMarker);
             SwitchVisibility(true);
         }
 
@@ -43,10 +40,7 @@ namespace AxeMan.GameSystem.UserInterface
             EventArgs e)
         {
             ClearText();
-
-            GameObject target = GetTargetUnderMarker(SubTag.ExamineMarker);
-            PrintModeline(target);
-
+            PrintExamineText(SubTag.ExamineMarker);
             SwitchVisibility(true);
         }
 
@@ -84,13 +78,7 @@ namespace AxeMan.GameSystem.UserInterface
             }
 
             ClearText();
-
-            GameObject target = GetTargetUnderMarker(e.SubTag);
-            if (target == null)
-            {
-                return;
-            }
-            PrintModeline(target);
+            PrintExamineText(e.SubTag);
         }
 
         private void ClearText()
@@ -132,6 +120,41 @@ namespace AxeMan.GameSystem.UserInterface
             return null;
         }
 
+        private void PrintBuildingData(GameObject target)
+        {
+        }
+
+        private void PrintExamineText(SubTag markerTag)
+        {
+            GameObject target = GetTargetUnderMarker(markerTag);
+            if (target == null)
+            {
+                return;
+            }
+
+            PrintModeline(target);
+            switch (target.GetComponent<MetaInfo>().MainTag)
+            {
+                case MainTag.Building:
+                    PrintBuildingData(target);
+                    break;
+
+                case MainTag.Trap:
+                    PrintTrapData(target);
+                    break;
+
+                case MainTag.Actor:
+                    if (target.GetComponent<MetaInfo>().SubTag != SubTag.PC)
+                    {
+                        PrintNPCData(target);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         private void PrintModeline(GameObject target)
         {
             // TODO: Get actor's name.
@@ -148,6 +171,14 @@ namespace AxeMan.GameSystem.UserInterface
                 = $"[ {name} ] [ {relativeX}, {relativeY} ] [ {distance} ]";
 
             SearchText(UITag.Modeline).text = modeline;
+        }
+
+        private void PrintNPCData(GameObject target)
+        {
+        }
+
+        private void PrintTrapData(GameObject target)
+        {
         }
 
         private Text SearchText(UITag uiTag)
