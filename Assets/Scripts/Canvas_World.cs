@@ -15,7 +15,7 @@ namespace AxeMan.GameSystem.UserInterface
         private MetaInfo aimMetaInfo;
         private CanvasTag canvasTag;
         private MetaInfo examineMetaInfo;
-        private LocalManager localManager;
+        private LocalManager pcLocalManager;
         private PCSkillManager skillManager;
         private SkillNameTag skillNameTag;
         private GameObject[] uiObjects;
@@ -25,12 +25,12 @@ namespace AxeMan.GameSystem.UserInterface
             string mode = "Aim";
             string skillName = skillManager.GetSkillName(skillNameTag);
 
-            int[] relativePos = localManager.GetRelativePosition(
+            int[] relativePos = pcLocalManager.GetRelativePosition(
                 aimMetaInfo.Position);
             int relativeX = relativePos[0];
             int relativeY = relativePos[1];
 
-            int distance = localManager.GetDistance(aimMetaInfo.Position);
+            int distance = pcLocalManager.GetDistance(aimMetaInfo.Position);
             int range = skillManager.GetSkillRange(skillNameTag);
 
             string text
@@ -85,7 +85,7 @@ namespace AxeMan.GameSystem.UserInterface
             SettingReferenceEventArgs e)
         {
             skillManager = e.PC.GetComponent<PCSkillManager>();
-            localManager = e.PC.GetComponent<LocalManager>();
+            pcLocalManager = e.PC.GetComponent<LocalManager>();
             aimMetaInfo = e.AimMarker.GetComponent<MetaInfo>();
             examineMetaInfo = e.ExamineMarker.GetComponent<MetaInfo>();
         }
@@ -128,12 +128,12 @@ namespace AxeMan.GameSystem.UserInterface
         {
             string mode = "Examine";
 
-            int[] relativePos = localManager.GetRelativePosition(
+            int[] relativePos = pcLocalManager.GetRelativePosition(
                 examineMetaInfo.Position);
             int relativeX = relativePos[0];
             int relativeY = relativePos[1];
 
-            int distance = localManager.GetDistance(examineMetaInfo.Position);
+            int distance = pcLocalManager.GetDistance(examineMetaInfo.Position);
 
             string text
                 = $"[ {mode} ] [ {relativeX}, {relativeY} ]"
