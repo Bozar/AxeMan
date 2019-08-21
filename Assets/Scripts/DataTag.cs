@@ -56,15 +56,22 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum UITag
     {
         Modeline,
-        HPText, HPData,
+
+        HPText, SkillText, RangeText, CooldownText,
+        HPData, SkillData, RangeData, CooldownData,
+
         QText, WText, EText, RText,
         QData, WData, EData, RData,
         QType, WType, EType, RType,
-        SkillText, SkillData,
+
         Status1Text, Status2Text, Status3Text, Status4Text,
         Status1Data, Status2Data, Status3Data, Status4Data,
-        RangeText, CooldownText,
-        RangeData, CooldownData,
+
+        Curse1Text, Curse2Text,
+        Curse1Data, Curse2Data,
+
+        MoveText, AttackText, DamageText,
+        MoveData, AttackData, DamageData,
     }
 
     public class DataTag : MonoBehaviour

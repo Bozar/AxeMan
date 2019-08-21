@@ -144,10 +144,7 @@ namespace AxeMan.GameSystem.UserInterface
                     break;
 
                 case MainTag.Actor:
-                    if (target.GetComponent<MetaInfo>().SubTag != SubTag.PC)
-                    {
-                        PrintNPCData(target);
-                    }
+                    PrintNPCData(target);
                     break;
 
                 default:
@@ -173,8 +170,80 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Modeline).text = modeline;
         }
 
+        private void PrintNPCColumn1(GameObject target)
+        {
+            string hpText = "HP";
+            string moveText = "Move";
+            string attackText = "Attack";
+            string cooldownText = "CD";
+
+            SearchText(UITag.HPText).text = hpText;
+            SearchText(UITag.MoveText).text = moveText;
+            SearchText(UITag.AttackText).text = attackText;
+            SearchText(UITag.CooldownText).text = cooldownText;
+
+            int hpData = 12;
+            int moveData = 3;
+            int attackData = 1;
+            int cooldownData = 7;
+
+            SearchText(UITag.HPData).text = hpData.ToString();
+            SearchText(UITag.MoveData).text = moveData.ToString();
+            SearchText(UITag.AttackData).text = attackData.ToString();
+            SearchText(UITag.CooldownData).text = cooldownData.ToString();
+        }
+
+        private void PrintNPCColumn2(GameObject target)
+        {
+            string damageText = "Dmg";
+            string curse1Text = "Earth?";
+            string curse2Text = "Water?";
+
+            SearchText(UITag.DamageText).text = damageText;
+            SearchText(UITag.Curse1Text).text = curse1Text;
+            SearchText(UITag.Curse2Text).text = curse2Text;
+
+            int damageData = 5;
+            string curse1Data = "4 x 4";
+            string curse2Data = "T x 2";
+
+            SearchText(UITag.DamageData).text = damageData.ToString();
+            SearchText(UITag.Curse1Data).text = curse1Data;
+            SearchText(UITag.Curse2Data).text = curse2Data;
+        }
+
+        private void PrintNPCColumn3(GameObject target)
+        {
+            string status1Text = "Fire-";
+            string status2Text = "Water-";
+            string status3Text = "Air-";
+            string status4Text = "Earth-";
+
+            SearchText(UITag.Status1Text).text = status1Text;
+            SearchText(UITag.Status2Text).text = status2Text;
+            SearchText(UITag.Status3Text).text = status3Text;
+            SearchText(UITag.Status4Text).text = status4Text;
+
+            string status1Data = "T x 4";
+            string status2Data = "T x 8";
+            string status3Data = "4 x 3";
+            string status4Data = "8 x 1";
+
+            SearchText(UITag.Status1Data).text = status1Data;
+            SearchText(UITag.Status2Data).text = status2Data;
+            SearchText(UITag.Status3Data).text = status3Data;
+            SearchText(UITag.Status4Data).text = status4Data;
+        }
+
         private void PrintNPCData(GameObject target)
         {
+            if (target.GetComponent<MetaInfo>().SubTag == SubTag.PC)
+            {
+                return;
+            }
+            PrintNPCColumn1(target);
+            PrintNPCColumn2(target);
+            PrintNPCColumn3(target);
         }
 
         private void PrintTrapData(GameObject target)
