@@ -122,6 +122,17 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintBuildingData(GameObject target)
         {
+            string altarText = "Water+";
+            string cooldownText = "CD";
+
+            SearchText(UITag.HPText).text = altarText;
+            SearchText(UITag.MoveText).text = cooldownText;
+
+            string altarData = "8 x 8";
+            int cooldownData = 5;
+
+            SearchText(UITag.HPData).text = altarData;
+            SearchText(UITag.MoveData).text = cooldownData.ToString();
         }
 
         private void PrintExamineText(SubTag markerTag)
@@ -248,6 +259,11 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintTrapData(GameObject target)
         {
+            string trapText = "Earth-";
+            string trapData = "4 x 4";
+
+            SearchText(UITag.HPText).text = trapText;
+            SearchText(UITag.HPData).text = trapData;
         }
 
         private Text SearchText(UITag uiTag)
