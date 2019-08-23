@@ -10,9 +10,8 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 {
     public class InitializeMainGame : MonoBehaviour
     {
-        private bool turnStarted;
-
-        private bool uiUpdated;
+        private bool endedLoop1;
+        private bool endedLoop2;
 
         public event EventHandler CreatedWorld;
 
@@ -59,23 +58,28 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 
         private void Update()
         {
-            if (uiUpdated)
+            if (!endedLoop1)
             {
-                if (!turnStarted)
-                {
-                    SetReference();
-                    OnCreatedWorld();
+                CreateAltar();
+                endedLoop1 = true;
 
-                    GetComponent<TurnManager>().StartTurn();
-                    GetComponent<TileOverlay>().RefreshDungeonBoard();
-
-                    turnStarted = true;
-                }
                 return;
             }
-            CreateAltar();
+            else
+            {
+                if (endedLoop2)
+                {
+                    return;
+                }
+                SetReference();
+                OnCreatedWorld();
 
-            uiUpdated = true;
+                GetComponent<TurnManager>().StartTurn();
+                GetComponent<TileOverlay>().RefreshDungeonBoard();
+                endedLoop2 = true;
+
+                return;
+            }
         }
     }
 
