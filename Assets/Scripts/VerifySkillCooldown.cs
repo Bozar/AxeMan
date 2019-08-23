@@ -1,5 +1,6 @@
 ﻿using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameMode;
+using AxeMan.GameSystem.InitializeGameWorld;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
@@ -10,7 +11,7 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<Wizard>().SettingReference
+            GetComponent<InitializeMainGame>().SettingReference
                 += VerifySkillCooldown_SettingReference;
             GetComponent<AimMode>().VerifyingSkill
                 += VerifySkillCooldown_VerifyingSkill;

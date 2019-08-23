@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PlayerInput;
 using AxeMan.GameSystem.PrototypeFactory;
@@ -52,6 +53,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ExamineMode>();
 
             gameObject.AddComponent<GameCore>();
+            gameObject.AddComponent<InitializeMainGame>();
             gameObject.AddComponent<InputManager>();
 
             gameObject.AddComponent<MarkerPosition>();

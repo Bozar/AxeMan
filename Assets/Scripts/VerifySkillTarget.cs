@@ -2,6 +2,7 @@
 using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<Wizard>().SettingReference
+            GetComponent<InitializeMainGame>().SettingReference
                 += VerifySkillTarget_SettingReference;
             GetComponent<AimMode>().VerifyingSkill
                 += VerifySkillTarget_VerifyingSkill;

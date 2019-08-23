@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
 using UnityEngine;
@@ -54,7 +55,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
-            GetComponent<Wizard>().CreatedWorld
+            GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_Message_CreatedWorld;
 
             GetComponent<AimMode>().EnteredAimMode

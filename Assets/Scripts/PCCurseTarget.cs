@@ -2,6 +2,7 @@
 using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
 using System.Collections.Generic;
 using UnityEngine;
@@ -72,8 +73,8 @@ namespace AxeMan.DungeonObject
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<Wizard>().SettingReference
-                += PCCurseTarget_SettingReference;
+            GameCore.AxeManCore.GetComponent<InitializeMainGame>()
+                .SettingReference += PCCurseTarget_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                 += PCCurseTarget_TakingAction;
         }

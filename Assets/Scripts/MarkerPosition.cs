@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.InitializeGameWorld;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
@@ -41,7 +42,7 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<Wizard>().SettingReference
+            GetComponent<InitializeMainGame>().SettingReference
                 += MarkerPosition_SettingReference;
         }
     }

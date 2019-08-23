@@ -3,6 +3,7 @@ using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
 using UnityEngine;
@@ -149,9 +150,9 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
-            GetComponent<Wizard>().SettingReference
+            GetComponent<InitializeMainGame>().SettingReference
                 += Canvas_World_SettingReference;
-            GetComponent<Wizard>().CreatedWorld
+            GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_World_CreatedWorld;
 
             GetComponent<AimMode>().EnteredAimMode

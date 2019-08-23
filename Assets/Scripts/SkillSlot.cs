@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.InitializeGameWorld;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -140,7 +141,7 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<Wizard>().CreatedWorld
+            GameCore.AxeManCore.GetComponent<InitializeMainGame>().CreatedWorld
                 += SkillSlot_CreatedWorld;
         }
 

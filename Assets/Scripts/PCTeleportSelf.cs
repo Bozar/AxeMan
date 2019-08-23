@@ -2,6 +2,7 @@
 using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.InitializeGameWorld;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -43,8 +44,8 @@ namespace AxeMan.DungeonObject
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<Wizard>().SettingReference
-                += PCTeleportSelf_SettingReference;
+            GameCore.AxeManCore.GetComponent<InitializeMainGame>()
+                .SettingReference += PCTeleportSelf_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                  += PCTeleportSelf_TakingAction;
         }
