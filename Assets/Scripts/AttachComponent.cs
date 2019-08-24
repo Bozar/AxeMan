@@ -54,6 +54,7 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<GameCore>();
             gameObject.AddComponent<InitializeMainGame>();
+            gameObject.AddComponent<InitializerSwitcher>();
             gameObject.AddComponent<InputManager>();
 
             gameObject.AddComponent<MarkerPosition>();
