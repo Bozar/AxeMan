@@ -32,6 +32,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintExamineMarker>();
             gameObject.AddComponent<BlueprintFloor>();
             gameObject.AddComponent<BlueprintProgressBar>();
+            gameObject.AddComponent<BlueprintStartScreenCursor>();
             gameObject.AddComponent<BlueprintTrap>();
 
             gameObject.AddComponent<Canvas_ExamineMode>();
@@ -78,6 +79,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<SearchUI>();
 
             gameObject.AddComponent<SkillInput>();
+            gameObject.AddComponent<StartScreen>();
+            gameObject.AddComponent<StartScreenCursorComponent>();
             gameObject.AddComponent<TileOverlay>();
             gameObject.AddComponent<TurnManager>();
 

@@ -1,4 +1,6 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.ObjectFactory;
+using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SearchGameObject;
 using AxeMan.GameSystem.UserInterface;
 using UnityEngine;
@@ -40,6 +42,10 @@ namespace AxeMan.GameSystem.InitializeGameWorld
                 GameObject ui = GetComponent<SearchUI>().Search(
                     CanvasTag.Canvas_Start, UITag.UIText);
                 ui.GetComponent<Text>().text = "Start screen";
+
+                IPrototype[] proto = GetComponent<Blueprint>().GetBlueprint(
+                    BlueprintTag.StartScreenCursor);
+                GetComponent<CreateObject>().Create(proto);
 
                 hideCanvas = true;
             }
