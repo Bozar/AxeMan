@@ -18,6 +18,8 @@ namespace AxeMan.GameSystem
         private void Awake()
         {
             // The `gameObject` is `AxeManCore`.
+            gameObject.AddComponent<InitializeMainGame>().enabled = false;
+
             gameObject.AddComponent<ActorComponent>();
             gameObject.AddComponent<AimMarkerComponent>();
             gameObject.AddComponent<AimMode>();
@@ -53,8 +55,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ExamineMode>();
 
             gameObject.AddComponent<GameCore>();
-            gameObject.AddComponent<InitializeMainGame>();
             gameObject.AddComponent<InitializerSwitcher>();
+            gameObject.AddComponent<InitializeStartScreen>();
             gameObject.AddComponent<InputManager>();
 
             gameObject.AddComponent<MarkerPosition>();
@@ -75,8 +77,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Schedule>();
             gameObject.AddComponent<SearchObject>();
             gameObject.AddComponent<SearchUI>();
-            gameObject.AddComponent<SkillInput>();
 
+            gameObject.AddComponent<SkillInput>();
             gameObject.AddComponent<TileOverlay>();
             gameObject.AddComponent<TurnManager>();
 
