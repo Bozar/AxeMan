@@ -17,8 +17,6 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 
         public event EventHandler<SettingReferenceEventArgs> SettingReference;
 
-        public event EventHandler<EventArgs> SwitchOffInitMainGame;
-
         protected virtual void OnCreatedWorld()
         {
             CreatedWorld?.Invoke(this, EventArgs.Empty);
@@ -27,11 +25,6 @@ namespace AxeMan.GameSystem.InitializeGameWorld
         protected virtual void OnSettingReference(SettingReferenceEventArgs e)
         {
             SettingReference?.Invoke(this, e);
-        }
-
-        protected virtual void OnSwitchOffInitMainGame()
-        {
-            SwitchOffInitMainGame?.Invoke(this, EventArgs.Empty);
         }
 
         private void CreateAltar()
@@ -85,7 +78,8 @@ namespace AxeMan.GameSystem.InitializeGameWorld
                 GetComponent<TileOverlay>().RefreshDungeonBoard();
                 endedLoop2 = true;
 
-                OnSwitchOffInitMainGame();
+                enabled = false;
+
                 return;
             }
         }

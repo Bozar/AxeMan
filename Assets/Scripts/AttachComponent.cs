@@ -55,7 +55,6 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ExamineMode>();
 
             gameObject.AddComponent<GameCore>();
-            gameObject.AddComponent<InitializerSwitcher>();
             gameObject.AddComponent<InitializeStartScreen>();
             gameObject.AddComponent<InputManager>();
 

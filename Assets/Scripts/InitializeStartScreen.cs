@@ -13,6 +13,7 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 
         private void Awake()
         {
+            //skipStart = true;
             skipStart = false;
         }
 
