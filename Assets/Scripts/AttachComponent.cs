@@ -4,6 +4,7 @@ using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PlayerInput;
 using AxeMan.GameSystem.PrototypeFactory;
+using AxeMan.GameSystem.SaveLoadGameFile;
 using AxeMan.GameSystem.SchedulingSystem;
 using AxeMan.GameSystem.SearchGameObject;
 using AxeMan.GameSystem.UserInterface;
@@ -74,6 +75,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<PublishSkill>();
 
             gameObject.AddComponent<RemoveObject>();
+            gameObject.AddComponent<SaveLoadXML>();
             gameObject.AddComponent<Schedule>();
             gameObject.AddComponent<SearchObject>();
             gameObject.AddComponent<SearchUI>();
