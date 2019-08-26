@@ -15,11 +15,18 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 
         public event EventHandler CreatedWorld;
 
+        public event EventHandler<EventArgs> LoadingGameData;
+
         public event EventHandler<SettingReferenceEventArgs> SettingReference;
 
         protected virtual void OnCreatedWorld()
         {
             CreatedWorld?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnLoadingGameData(EventArgs e)
+        {
+            LoadingGameData?.Invoke(this, e);
         }
 
         protected virtual void OnSettingReference(SettingReferenceEventArgs e)
@@ -60,6 +67,7 @@ namespace AxeMan.GameSystem.InitializeGameWorld
         {
             if (!endedLoop1)
             {
+                OnLoadingGameData(EventArgs.Empty);
                 CreateAltar();
                 endedLoop1 = true;
 

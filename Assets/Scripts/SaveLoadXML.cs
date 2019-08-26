@@ -29,18 +29,5 @@ namespace AxeMan.GameSystem.SaveLoadGameFile
             string path = Path.Combine(directory, file);
             xElement.Save(path);
         }
-
-        private void Start()
-        {
-            string file = "setting.xml";
-            string directory = "Build";
-
-            XElement xElement = Load(file, directory);
-            string data = xElement.Element("Language").Element("User").Value;
-            Debug.Log(data);
-
-            xElement.Element("Language").Element("User").SetValue("Russian");
-            Save(xElement, file, directory);
-        }
     }
 }

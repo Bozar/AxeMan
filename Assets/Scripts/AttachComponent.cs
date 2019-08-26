@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameEvent;
+﻿using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.ObjectFactory;
@@ -22,6 +23,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<InitializeMainGame>().enabled = false;
 
             gameObject.AddComponent<ActorComponent>();
+            gameObject.AddComponent<ActorData>();
             gameObject.AddComponent<AimMarkerComponent>();
             gameObject.AddComponent<AimMode>();
 

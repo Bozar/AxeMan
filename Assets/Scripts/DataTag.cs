@@ -7,6 +7,8 @@ namespace AxeMan.GameSystem.GameDataTag
         INVALID, Skip, Move, UseSkillQ, UseSkillW, UseSkillE, UseSkillR,
     }
 
+    public enum ActorDataTag { }
+
     public enum BlueprintTag
     {
         INVALID, Altar, Floor, Trap, Actor, ProgressBar,
@@ -29,6 +31,8 @@ namespace AxeMan.GameSystem.GameDataTag
         Left, Right, Up, Down,
         SkillQ, SkillW, SkillE, SkillR,
     }
+
+    public enum LanguageTag { English, Chinese, }
 
     public enum MainTag { INVALID, Building, Trap, Actor, Floor, Marker, }
 
