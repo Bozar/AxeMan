@@ -30,9 +30,9 @@ namespace AxeMan.GameSystem.PrototypeFactory
                 new int[] { 0, 0 }));
             blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.FireTrap,
                 new int[] { 0, 1 }));
-            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.LightningTrap,
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
                 new int[] { 0, 2 }));
-            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.IceTrap,
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.WaterTrap,
                 new int[] { 0, 3 }));
 
             e.Data = blueprint.ToArray();
