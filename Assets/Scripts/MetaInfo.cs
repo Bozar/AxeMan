@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PrototypeFactory;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace AxeMan.DungeonObject
 
         int ObjectID { get; }
 
+        string ObjectName { get; }
+
         int[] Position { get; }
 
         SubTag SubTag { get; }
@@ -21,6 +24,15 @@ namespace AxeMan.DungeonObject
         public MainTag MainTag { get; private set; }
 
         public int ObjectID { get { return gameObject.GetInstanceID(); } }
+
+        public string ObjectName
+        {
+            get
+            {
+                return GameCore.AxeManCore.GetComponent<ActorData>()
+                    .GetStringData(SubTag, ActorDataTag.Name);
+            }
+        }
 
         public int[] Position
         {
