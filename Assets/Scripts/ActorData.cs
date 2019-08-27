@@ -47,7 +47,7 @@ namespace AxeMan.GameSystem.GameDataHub
         {
             // TODO: Read an actual data file.
             string file = "actorData.xml";
-            string directory = "Build";
+            string directory = "Data";
 
             xmlFile = GetComponent<SaveLoadXML>().Load(file, directory);
 
