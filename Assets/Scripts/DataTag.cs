@@ -53,7 +53,7 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum SubTag
     {
-        INVALID, Dummy, LifeAltar, ShieldAltar, Floor, ProgressBar,
+        INVALID, DEFAULT, Dummy, LifeAltar, ShieldAltar, Floor, ProgressBar,
         FireTrap, IceTrap, LightningTrap, EarthTrap,
         PC, AimMarker, ExamineMarker, StartScreenCursor,
     }

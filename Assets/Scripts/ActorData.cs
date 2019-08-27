@@ -11,34 +11,36 @@ namespace AxeMan.GameSystem.GameDataHub
     {
         int GetIntData(SubTag subTag, ActorDataTag actorData);
 
-        string GetStringData(SubTag subTag, ActorDataTag actorData,
-            LanguageTag language);
+        string GetStringData(SubTag subTag, ActorDataTag actorData);
     }
 
     public class ActorData : MonoBehaviour, IActorData
     {
+        private SubTag defaultActor;
+        private LanguageTag defaultLanguage;
         private LanguageTag language;
         private XElement xmlFile;
 
         public int GetIntData(SubTag subTag, ActorDataTag actorData)
         {
-            return (int)xmlFile
-               .Element(subTag.ToString())
-               .Element(actorData.ToString());
+            XElement data = TryGetData(subTag, actorData);
+
+            if (data == null)
+            {
+                return (int)TryGetData(defaultActor, actorData);
+            }
+            return (int)data;
         }
 
         public string GetStringData(SubTag subTag, ActorDataTag actorData)
         {
-            return GetStringData(subTag, actorData, language);
-        }
+            XElement data = TryGetData(subTag, actorData, language);
 
-        public string GetStringData(SubTag subTag, ActorDataTag actorData,
-            LanguageTag language)
-        {
-            return (string)xmlFile
-               .Element(subTag.ToString())
-               .Element(actorData.ToString())
-               .Element(language.ToString());
+            if (data == null)
+            {
+                return (string)TryGetData(subTag, actorData, defaultLanguage);
+            }
+            return (string)data;
         }
 
         private void ActorData_LoadingGameData(object sender, EventArgs e)
@@ -53,10 +55,32 @@ namespace AxeMan.GameSystem.GameDataHub
             language = LanguageTag.English;
         }
 
+        private void Awake()
+        {
+            defaultActor = SubTag.DEFAULT;
+            defaultLanguage = LanguageTag.English;
+        }
+
         private void Start()
         {
             GetComponent<InitializeMainGame>().LoadingGameData
                 += ActorData_LoadingGameData;
+        }
+
+        private XElement TryGetData(SubTag subTag, ActorDataTag actorData)
+        {
+            return xmlFile
+                .Element(subTag.ToString())
+                .Element(actorData.ToString());
+        }
+
+        private XElement TryGetData(SubTag subTag, ActorDataTag actorData,
+            LanguageTag language)
+        {
+            return xmlFile
+                .Element(subTag.ToString())
+                .Element(actorData.ToString())
+                .Element(language.ToString());
         }
     }
 }
