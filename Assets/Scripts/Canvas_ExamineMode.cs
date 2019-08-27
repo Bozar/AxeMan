@@ -166,8 +166,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintModeline(GameObject target)
         {
-            // TODO: Get actor's name.
-            string name = target.GetComponent<MetaInfo>().SubTag.ToString();
+            string name = target.GetComponent<MetaInfo>().ObjectName;
 
             int[] targetPos = target.GetComponent<MetaInfo>().Position;
             int[] relativePos = pcLocalManager.GetRelativePosition(targetPos);

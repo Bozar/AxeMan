@@ -4,8 +4,48 @@
   </DEFAULT>
   <PC>
     <Name>
-      <English>Player Character</English>
+      <English>PC</English>
     </Name>
   </PC>
+  <Dummy>
+    <Name>
+      <English>Dummy</English>
+    </Name>
+  </Dummy>
+  <LifeAltar>
+    <Name>
+      <English>Life Altar</English>
+    </Name>
+  </LifeAltar>
+  <ShieldAltar>
+    <Name>
+      <English>Shield Altar</English>
+    </Name>
+  </ShieldAltar>
+  <Floor>
+    <Name>
+      <English>Floor</English>
+    </Name>
+  </Floor>
+  <FireTrap>
+    <Name>
+      <English>Fire Trap</English>
+    </Name>
+  </FireTrap>
+  <WaterTrap>
+    <Name>
+      <English>Water Trap</English>
+    </Name>
+  </WaterTrap>
+  <AirTrap>
+    <Name>
+      <English>Air Trap</English>
+    </Name>
+  </AirTrap>
+  <EarthTrap>
+    <Name>
+      <English>Earth Trap</English>
+    </Name>
+  </EarthTrap>
   <!--- vim: set lbr sts=2 sw=2: -->
 </ActorData>
