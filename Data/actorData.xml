@@ -17,11 +17,26 @@
       <English>Life Altar</English>
     </Name>
   </LifeAltar>
-  <ShieldAltar>
+  <FireAltar>
     <Name>
-      <English>Shield Altar</English>
+      <English>Fire Altar</English>
     </Name>
-  </ShieldAltar>
+  </FireAltar>
+  <WaterAltar>
+    <Name>
+      <English>Water Altar</English>
+    </Name>
+  </WaterAltar>
+  <AirAltar>
+    <Name>
+      <English>Air Altar</English>
+    </Name>
+  </AirAltar>
+  <EarthAltar>
+    <Name>
+      <English>Earth Altar</English>
+    </Name>
+  </EarthAltar>
   <Floor>
     <Name>
       <English>Floor</English>

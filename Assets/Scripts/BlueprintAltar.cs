@@ -32,7 +32,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
         private Stack<IPrototype> GetShieldAltar()
         {
             MainTag mt = MainTag.Building;
-            SubTag st = SubTag.ShieldAltar;
+            SubTag st = SubTag.EarthAltar;
             int[][] position = new int[][]
             {
                 new int[] { 2, 2 }, new int[] { 2, 6 },
