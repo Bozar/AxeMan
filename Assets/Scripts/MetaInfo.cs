@@ -30,7 +30,7 @@ namespace AxeMan.DungeonObject
             get
             {
                 return GameCore.AxeManCore.GetComponent<ActorData>()
-                    .GetStringData(SubTag, ActorDataTag.Name);
+                    .GetStringData(MainTag, SubTag, ActorDataTag.Name);
             }
         }
 

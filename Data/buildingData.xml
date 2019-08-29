@@ -2,16 +2,6 @@
 <ActorData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DEFAULT>
   </DEFAULT>
-  <PC>
-    <Name>
-      <English>PC</English>
-    </Name>
-  </PC>
-  <Dummy>
-    <Name>
-      <English>Dummy</English>
-    </Name>
-  </Dummy>
   <LifeAltar>
     <Name>
       <English>Life Altar</English>
@@ -42,25 +32,5 @@
       <English>Floor</English>
     </Name>
   </Floor>
-  <FireTrap>
-    <Name>
-      <English>Fire Trap</English>
-    </Name>
-  </FireTrap>
-  <WaterTrap>
-    <Name>
-      <English>Water Trap</English>
-    </Name>
-  </WaterTrap>
-  <AirTrap>
-    <Name>
-      <English>Air Trap</English>
-    </Name>
-  </AirTrap>
-  <EarthTrap>
-    <Name>
-      <English>Earth Trap</English>
-    </Name>
-  </EarthTrap>
   <!--- vim: set lbr sts=2 sw=2: -->
 </ActorData>
