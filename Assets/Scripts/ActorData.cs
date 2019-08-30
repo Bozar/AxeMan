@@ -26,11 +26,9 @@ namespace AxeMan.GameSystem.GameDataHub
         public int GetIntData(MainTag mainTag, SubTag subTag,
             ActorDataTag actorData)
         {
-            XElement data = TryGetData(mainTag, subTag, actorData);
-
-            if (data == null)
+            if (!TryGetData(mainTag, subTag, actorData, out XElement data))
             {
-                return (int)TryGetData(mainTag, defaultActor, actorData);
+                TryGetData(mainTag, defaultActor, actorData, out data);
             }
             return (int)data;
         }
@@ -38,12 +36,10 @@ namespace AxeMan.GameSystem.GameDataHub
         public string GetStringData(MainTag mainTag, SubTag subTag,
             ActorDataTag actorData)
         {
-            XElement data = TryGetData(mainTag, subTag, actorData, userLanguage);
-
-            if (data == null)
+            if (!TryGetData(mainTag, subTag, actorData, userLanguage,
+                out XElement data))
             {
-                return (string)TryGetData(mainTag, subTag, actorData,
-                    defaultLanguage);
+                TryGetData(mainTag, subTag, actorData, defaultLanguage, out data);
             }
             return (string)data;
         }
@@ -103,28 +99,31 @@ namespace AxeMan.GameSystem.GameDataHub
                 += ActorData_LoadingGameData;
         }
 
-        private XElement TryGetData(MainTag mainTag, SubTag subTag,
-            ActorDataTag actorData)
+        private bool TryGetData(MainTag mainTag, SubTag subTag,
+            ActorDataTag actorData, out XElement xElement)
         {
-            if (mainTagXElement.TryGetValue(mainTag, out XElement xElement))
+            if (mainTagXElement.TryGetValue(mainTag, out xElement))
             {
-                return xElement
+                xElement = xElement
                     .Element(subTag.ToString())
                     .Element(actorData.ToString());
+
+                return xElement != null;
             }
-            return null;
+            return false;
         }
 
-        private XElement TryGetData(MainTag mainTag, SubTag subTag,
-            ActorDataTag actorData, LanguageTag language)
+        private bool TryGetData(MainTag mainTag, SubTag subTag,
+            ActorDataTag actorData, LanguageTag language, out XElement xElement)
         {
-            XElement xElement = TryGetData(mainTag, subTag, actorData);
-
-            if (xElement != null)
+            if (TryGetData(mainTag, subTag, actorData, out xElement))
             {
-                return xElement.Element(language.ToString());
+                xElement = xElement
+                    .Element(language.ToString());
+
+                return xElement != null;
             }
-            return null;
+            return false;
         }
     }
 }
