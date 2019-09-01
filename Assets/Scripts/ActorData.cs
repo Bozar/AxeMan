@@ -95,7 +95,7 @@ namespace AxeMan.GameSystem.GameDataHub
 
         private void Start()
         {
-            GetComponent<InitializeMainGame>().LoadingGameData
+            GetComponent<InitializeStartScreen>().LoadingGameData
                 += ActorData_LoadingGameData;
         }
 

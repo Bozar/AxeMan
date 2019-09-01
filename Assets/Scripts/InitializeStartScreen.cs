@@ -15,6 +15,13 @@ namespace AxeMan.GameSystem.InitializeGameWorld
         private bool hideCanvas;
         private bool skipStart;
 
+        public event EventHandler<EventArgs> LoadingGameData;
+
+        protected virtual void OnLoadingGameData(EventArgs e)
+        {
+            LoadingGameData?.Invoke(this, e);
+        }
+
         private void Awake()
         {
             //skipStart = true;
