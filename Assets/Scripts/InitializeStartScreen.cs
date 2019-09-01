@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
@@ -12,8 +13,9 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 {
     public class InitializeStartScreen : MonoBehaviour
     {
+        private bool dataLoaded;
         private bool hideCanvas;
-        private bool skipStart;
+        private bool showStart;
 
         public event EventHandler<EventArgs> LoadingGameData;
 
@@ -24,8 +26,7 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 
         private void Awake()
         {
-            //skipStart = true;
-            skipStart = false;
+            dataLoaded = false;
         }
 
         private void EnterMainScreen()
@@ -71,7 +72,16 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 
         private void Update()
         {
-            if (skipStart)
+            if (!dataLoaded)
+            {
+                OnLoadingGameData(EventArgs.Empty);
+                showStart = GetComponent<SettingData>().GetBoolData(
+                    SettingDataTag.ShowStartMenu);
+
+                dataLoaded = true;
+            }
+
+            if (!showStart)
             {
                 EnterMainScreen();
             }

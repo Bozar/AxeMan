@@ -79,8 +79,10 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<RemoveObject>();
             gameObject.AddComponent<SaveLoadXML>();
             gameObject.AddComponent<Schedule>();
+
             gameObject.AddComponent<SearchObject>();
             gameObject.AddComponent<SearchUI>();
+            gameObject.AddComponent<SettingData>();
 
             gameObject.AddComponent<SkillInput>();
             gameObject.AddComponent<StartScreen>();

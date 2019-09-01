@@ -38,6 +38,8 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum SearchEventTag { Position, MainTag, SubTag, }
 
+    public enum SettingDataTag { ShowStartMenu, }
+
     public enum SkillComponentTag
     {
         FireMerit, WaterMerit, AirMerit, EarthMerit,
