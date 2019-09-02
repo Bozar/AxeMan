@@ -7,7 +7,7 @@ namespace AxeMan.GameSystem.GameDataTag
         INVALID, Skip, Move, UseSkillQ, UseSkillW, UseSkillE, UseSkillR,
     }
 
-    public enum ActorDataTag { Name, }
+    public enum ActorDataTag { Name, Cooldown, }
 
     public enum BlueprintTag
     {

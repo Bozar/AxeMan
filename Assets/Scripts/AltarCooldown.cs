@@ -1,4 +1,6 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SchedulingSystem;
 using System;
 using UnityEngine;
@@ -22,6 +24,12 @@ namespace AxeMan.GameSystem
 
         public int MinCooldown { get; private set; }
 
+        private void AltarCooldown_CreatedWorld(object sender, EventArgs e)
+        {
+            MaxCooldown = GetComponent<ActorData>().GetIntData(
+                MainTag.Building, SubTag.DEFAULT, ActorDataTag.Cooldown);
+        }
+
         private void AltarCooldown_StartingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
@@ -40,14 +48,15 @@ namespace AxeMan.GameSystem
         private void Awake()
         {
             MinCooldown = 0;
-            CurrentCooldown = 5;
-            MaxCooldown = 5;
+            CurrentCooldown = MinCooldown;
         }
 
         private void Start()
         {
             GetComponent<TurnManager>().StartingTurn
                 += AltarCooldown_StartingTurn;
+            GetComponent<InitializeMainGame>().CreatedWorld
+                += AltarCooldown_CreatedWorld;
         }
     }
 }
