@@ -8,7 +8,8 @@ namespace AxeMan.DungeonObject
 {
     public class DummyAI : MonoBehaviour
     {
-        private void DummyAI_EndingTurn(object sender, EndingTurnEventArgs e)
+        private void DummyAI_EndingTurn(object sender,
+            StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
@@ -16,7 +17,8 @@ namespace AxeMan.DungeonObject
             }
         }
 
-        private void DummyAI_StartingTurn(object sender, StartingTurnEventArgs e)
+        private void DummyAI_StartingTurn(object sender,
+            StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {

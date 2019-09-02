@@ -66,7 +66,8 @@ namespace AxeMan.DungeonObject
             PublishPCStatus();
         }
 
-        private void ActorStatus_EndingTurn(object sender, EndingTurnEventArgs e)
+        private void ActorStatus_EndingTurn(object sender,
+            StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {

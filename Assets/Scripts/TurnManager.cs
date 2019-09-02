@@ -15,63 +15,35 @@ namespace AxeMan.GameSystem.SchedulingSystem
         void StartTurn();
     }
 
-    public class EndedTurnEventArgs : EventArgs
+    public class StartOrEndTurnEventArgs : EventArgs
     {
-        public EndedTurnEventArgs(int objectID)
+        public StartOrEndTurnEventArgs(SubTag subTag, int objectID)
         {
+            SubTag = subTag;
             ObjectID = objectID;
         }
 
         public int ObjectID { get; }
-    }
 
-    public class EndingTurnEventArgs : EventArgs
-    {
-        public EndingTurnEventArgs(int objectID)
-        {
-            ObjectID = objectID;
-        }
-
-        public int ObjectID { get; }
-    }
-
-    public class StartedTurnEventArgs : EventArgs
-    {
-        public StartedTurnEventArgs(int objectID)
-        {
-            ObjectID = objectID;
-        }
-
-        public int ObjectID { get; }
-    }
-
-    public class StartingTurnEventArgs : EventArgs
-    {
-        public StartingTurnEventArgs(int objectID)
-        {
-            ObjectID = objectID;
-        }
-
-        public int ObjectID { get; }
+        public SubTag SubTag { get; }
     }
 
     public class TurnManager : MonoBehaviour, ITurnManager
     {
-        public event EventHandler<EndedTurnEventArgs> EndedTurn;
+        public event EventHandler<StartOrEndTurnEventArgs> EndedTurn;
 
-        public event EventHandler<EndingTurnEventArgs> EndingTurn;
+        public event EventHandler<StartOrEndTurnEventArgs> EndingTurn;
 
-        public event EventHandler<StartedTurnEventArgs> StartedTurn;
+        public event EventHandler<StartOrEndTurnEventArgs> StartedTurn;
 
-        public event EventHandler<StartingTurnEventArgs> StartingTurn;
+        public event EventHandler<StartOrEndTurnEventArgs> StartingTurn;
 
         public void EndTurn()
         {
-            int id = GetComponent<Schedule>().Current
-                .GetComponent<MetaInfo>().ObjectID;
+            var ea = GetEventArg();
 
-            OnEndingTurn(new EndingTurnEventArgs(id));
-            OnEndedTurn(new EndedTurnEventArgs(id));
+            OnEndingTurn(ea);
+            OnEndedTurn(ea);
         }
 
         public GameObject NextActor()
@@ -85,31 +57,40 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         public void StartTurn()
         {
-            int id = GetComponent<Schedule>().Current
-                .GetComponent<MetaInfo>().ObjectID;
+            var ea = GetEventArg();
 
-            OnStartingTurn(new StartingTurnEventArgs(id));
-            OnStartedTurn(new StartedTurnEventArgs(id));
+            OnStartingTurn(ea);
+            OnStartedTurn(ea);
         }
 
-        protected virtual void OnEndedTurn(EndedTurnEventArgs e)
+        protected virtual void OnEndedTurn(StartOrEndTurnEventArgs e)
         {
             EndedTurn?.Invoke(this, e);
         }
 
-        protected virtual void OnEndingTurn(EndingTurnEventArgs e)
+        protected virtual void OnEndingTurn(StartOrEndTurnEventArgs e)
         {
             EndingTurn?.Invoke(this, e);
         }
 
-        protected virtual void OnStartedTurn(StartedTurnEventArgs e)
+        protected virtual void OnStartedTurn(StartOrEndTurnEventArgs e)
         {
             StartedTurn?.Invoke(this, e);
         }
 
-        protected virtual void OnStartingTurn(StartingTurnEventArgs e)
+        protected virtual void OnStartingTurn(StartOrEndTurnEventArgs e)
         {
             StartingTurn?.Invoke(this, e);
+        }
+
+        private StartOrEndTurnEventArgs GetEventArg()
+        {
+            SubTag subTag = GetComponent<Schedule>().Current
+               .GetComponent<MetaInfo>().SubTag;
+            int id = GetComponent<Schedule>().Current
+                .GetComponent<MetaInfo>().ObjectID;
+
+            return new StartOrEndTurnEventArgs(subTag, id);
         }
 
         private void Start()

@@ -156,7 +156,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         }
 
         private void SkillCooldown_StartingTurn(object sender,
-            StartingTurnEventArgs e)
+            StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
