@@ -26,6 +26,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ActorData>();
             gameObject.AddComponent<AimMarkerComponent>();
             gameObject.AddComponent<AimMode>();
+            gameObject.AddComponent<AltarCooldown>();
 
             gameObject.AddComponent<Blueprint>();
             gameObject.AddComponent<BlueprintActor>();

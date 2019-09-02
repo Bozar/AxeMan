@@ -130,7 +130,7 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.MoveText).text = cooldownText;
 
             string altarData = "8 x 8";
-            int cooldownData = 5;
+            int cooldownData = GetComponent<AltarCooldown>().CurrentCooldown;
 
             SearchText(UITag.HPData).text = altarData;
             SearchText(UITag.MoveData).text = cooldownData.ToString();
