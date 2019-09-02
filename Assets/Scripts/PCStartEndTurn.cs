@@ -7,7 +7,7 @@ namespace AxeMan.DungeonObject
     public class PCStartEndTurn : MonoBehaviour
     {
         private void PCStartEndTurn_EndingTurn(object sender,
-            EndingTurnEventArgs e)
+            StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
@@ -16,7 +16,7 @@ namespace AxeMan.DungeonObject
         }
 
         private void PCStartEndTurn_StartingTurn(object sender,
-            StartingTurnEventArgs e)
+            StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
