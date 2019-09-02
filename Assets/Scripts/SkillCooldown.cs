@@ -15,15 +15,7 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         int GetCurrentCooldown(SkillNameTag skillNameTag);
 
-        int GetCurrentCooldown(CommandTag commandTag);
-
-        int GetCurrentCooldown(UITag uiTag);
-
         int GetMaxCooldown(SkillNameTag skillNameTag);
-
-        int GetMaxCooldown(CommandTag commandTag);
-
-        int GetMaxCooldown(UITag uiTag);
     }
 
     public class SkillCooldown : MonoBehaviour, ISkillCooldown
