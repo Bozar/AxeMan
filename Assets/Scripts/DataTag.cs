@@ -61,6 +61,8 @@ namespace AxeMan.GameSystem.GameDataTag
         PC, AimMarker, ExamineMarker, StartScreenCursor,
     }
 
+    public enum UILabelDataTag { Cooldown, }
+
     public enum UITag
     {
         Modeline, UIText,

@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
@@ -124,7 +125,8 @@ namespace AxeMan.GameSystem.UserInterface
         private void PrintBuildingData(GameObject target)
         {
             string altarText = "Water+";
-            string cooldownText = "CD";
+            string cooldownText = GetComponent<UILabelData>().GetStringData(
+                UILabelDataTag.Cooldown);
 
             SearchText(UITag.HPText).text = altarText;
             SearchText(UITag.MoveText).text = cooldownText;
