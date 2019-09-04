@@ -21,7 +21,8 @@ namespace AxeMan.GameSystem.GameDataHub
 
         public string GetStringData(UILabelDataTag uiLabelData)
         {
-            if (TryGetData(uiLabelData, out XElement data))
+            if (TryGetData(uiLabelData, userLanguage, out XElement data)
+                || TryGetData(uiLabelData, defaultLanguage, out data))
             {
                 return (string)data;
             }
@@ -41,11 +42,12 @@ namespace AxeMan.GameSystem.GameDataHub
                 += UILabelData_LoadingGameData;
         }
 
-        private bool TryGetData(UILabelDataTag uiLabelData, out XElement data)
+        private bool TryGetData(UILabelDataTag uiLabelData, LanguageTag language,
+            out XElement data)
         {
             data = xmlFile
                 .Element(uiLabelData.ToString())
-                .Element(defaultLanguage.ToString());
+                .Element(language.ToString());
             return data != null;
         }
 
