@@ -7,12 +7,8 @@
   <Seed>0</Seed>
   <!-- Change UI color when PC's HP or Potion is lower than threshold. -->
   <LowHP>6</LowHP>
-  <Language>
-    <!-- Options: English, Chinese. -->
-    <User>English</User>
-    <!-- Do not change the default language. -->
-    <Default>English</Default>
-  </Language>
+  <!-- Options: English, Chinese. -->
+  <Language>English</Language>
   <!-- Show start menu. -->
   <ShowStartMenu>false</ShowStartMenu>
   <!-- vim: set lbr sts=2 sw=2: -->

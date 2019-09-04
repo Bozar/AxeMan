@@ -89,8 +89,9 @@ namespace AxeMan.GameSystem.GameDataHub
 
         private void LoadUserLanguage()
         {
-            // TODO: Retrieve language setting from another file.
-            userLanguage = LanguageTag.English;
+            string language = GetComponent<SettingData>().GetStringData(
+               SettingDataTag.Language);
+            Enum.TryParse(language, out userLanguage);
         }
 
         private void Start()

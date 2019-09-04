@@ -38,7 +38,7 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum SearchEventTag { Position, MainTag, SubTag, }
 
-    public enum SettingDataTag { ShowStartMenu, }
+    public enum SettingDataTag { ShowStartMenu, Language, }
 
     public enum SkillComponentTag
     {

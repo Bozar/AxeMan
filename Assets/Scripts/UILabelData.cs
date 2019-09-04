@@ -33,7 +33,6 @@ namespace AxeMan.GameSystem.GameDataHub
         {
             error = "INVALID";
             defaultLanguage = LanguageTag.English;
-            userLanguage = LanguageTag.English;
         }
 
         private void Start()
@@ -55,8 +54,11 @@ namespace AxeMan.GameSystem.GameDataHub
         {
             string file = "uiLabelData.xml";
             string directory = "Data";
-
             xmlFile = GetComponent<SaveLoadXML>().Load(file, directory);
+
+            string language = GetComponent<SettingData>().GetStringData(
+                SettingDataTag.Language);
+            Enum.TryParse(language, out userLanguage);
         }
     }
 }

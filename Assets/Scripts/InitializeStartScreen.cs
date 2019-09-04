@@ -19,9 +19,16 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 
         public event EventHandler<EventArgs> LoadingGameData;
 
+        public event EventHandler<EventArgs> LoadingSettingData;
+
         protected virtual void OnLoadingGameData(EventArgs e)
         {
             LoadingGameData?.Invoke(this, e);
+        }
+
+        protected virtual void OnLoadingSettingData(EventArgs e)
+        {
+            LoadingSettingData?.Invoke(this, e);
         }
 
         private void Awake()
@@ -74,6 +81,7 @@ namespace AxeMan.GameSystem.InitializeGameWorld
         {
             if (!dataLoaded)
             {
+                OnLoadingSettingData(EventArgs.Empty);
                 OnLoadingGameData(EventArgs.Empty);
                 showStart = GetComponent<SettingData>().GetBoolData(
                     SettingDataTag.ShowStartMenu);
