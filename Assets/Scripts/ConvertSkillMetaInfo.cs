@@ -7,6 +7,9 @@ namespace AxeMan.GameSystem
 {
     public interface IConvertSkillMetaInfo
     {
+        string GetAltarEffectName(SkillComponentTag skillComponentTag,
+            int powerDuration);
+
         string GetLongSkillTypeName(SkillTypeTag skillTypeTag);
 
         string GetShortSkillTypeName(SkillTypeTag skillTypeTag);
@@ -32,6 +35,16 @@ namespace AxeMan.GameSystem
         private Dictionary<SkillNameTag, string> nameString;
         private Dictionary<SkillTypeTag, string> typeLongName;
         private Dictionary<SkillTypeTag, string> typeShortName;
+
+        public string GetAltarEffectName(SkillComponentTag skillComponentTag,
+            int powerDuration)
+        {
+            if (HideSkillPower(skillComponentTag))
+            {
+                return "T X " + powerDuration;
+            }
+            return powerDuration + " X " + powerDuration;
+        }
 
         public string GetLongSkillTypeName(SkillTypeTag skillTypeTag)
         {

@@ -14,6 +14,13 @@ namespace AxeMan.DungeonObject.ActorSkill
             get { return GetComponent<SkillCooldown>().MinCooldown; }
         }
 
+        public string GetAltarEffectName(SkillComponentTag skillComponentTag,
+            int powerDuration)
+        {
+            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+                .GetAltarEffectName(skillComponentTag, powerDuration);
+        }
+
         public int GetCurrentCooldown(SkillNameTag skillNameTag)
         {
             return GetComponent<SkillCooldown>().GetCurrentCooldown(skillNameTag);
