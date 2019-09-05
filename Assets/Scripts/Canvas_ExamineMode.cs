@@ -91,6 +91,25 @@ namespace AxeMan.GameSystem.UserInterface
             }
         }
 
+        private string GetAltarEffectName(SubTag subTag, AltarEffect altar)
+        {
+            switch (subTag)
+            {
+                case SubTag.FireAltar:
+                case SubTag.WaterAltar:
+                case SubTag.AirAltar:
+                case SubTag.EarthAltar:
+                    return GetComponent<ConvertSkillMetaInfo>()
+                        .GetAltarEffectName(altar.Effect, altar.PowerDuration);
+
+                case SubTag.LifeAltar:
+                    return altar.PowerDuration.ToString();
+
+                default:
+                    return null;
+            }
+        }
+
         private GameObject GetTargetUnderMarker(SubTag markerTag)
         {
             int x, y;
@@ -124,18 +143,22 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintBuildingData(GameObject target)
         {
-            string altarText = "Water+";
+            SubTag subTag = target.GetComponent<MetaInfo>().SubTag;
+            AltarEffect altar = GetComponent<AltarEffect>();
+
+            string altarText = altar.Effect.ToString();
+            string altarData = GetAltarEffectName(subTag, altar);
+
             string cooldownText = GetComponent<UILabelData>().GetStringData(
                 UILabelDataTag.Cooldown);
+            string cooldownData = GetComponent<AltarCooldown>().CurrentCooldown
+                .ToString();
 
             SearchText(UITag.HPText).text = altarText;
-            SearchText(UITag.MoveText).text = cooldownText;
-
-            string altarData = "8 x 8";
-            int cooldownData = GetComponent<AltarCooldown>().CurrentCooldown;
-
             SearchText(UITag.HPData).text = altarData;
-            SearchText(UITag.MoveData).text = cooldownData.ToString();
+
+            SearchText(UITag.MoveText).text = cooldownText;
+            SearchText(UITag.MoveData).text = cooldownData;
         }
 
         private void PrintExamineText(SubTag markerTag)
