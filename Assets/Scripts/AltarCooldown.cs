@@ -16,6 +16,8 @@ namespace AxeMan.GameSystem
         int MinCooldown { get; }
     }
 
+    // All altars share the same cooldown counter. So this component is attached
+    // to GameCore.AxeManCore.
     public class AltarCooldown : MonoBehaviour, IAltarCooldown
     {
         public int CurrentCooldown { get; private set; }

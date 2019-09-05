@@ -85,9 +85,5 @@ namespace AxeMan.DungeonObject.ActorSkill
             }
             return compInt;
         }
-
-        private void Start()
-        {
-        }
     }
 }
