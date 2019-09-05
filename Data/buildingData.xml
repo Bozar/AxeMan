@@ -2,31 +2,38 @@
 <BuildingData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DEFAULT>
     <Cooldown>10</Cooldown>
+    <PowerDuration>4</PowerDuration>
   </DEFAULT>
   <LifeAltar>
     <Name>
       <English>Life Altar</English>
     </Name>
+    <PowerDuration>20</PowerDuration>
+    <AltarEffect>Life</AltarEffect>
   </LifeAltar>
   <FireAltar>
     <Name>
       <English>Fire Altar</English>
     </Name>
+    <AltarEffect>FireMerit</AltarEffect>
   </FireAltar>
   <WaterAltar>
     <Name>
       <English>Water Altar</English>
     </Name>
+    <AltarEffect>WaterMerit</AltarEffect>
   </WaterAltar>
   <AirAltar>
     <Name>
       <English>Air Altar</English>
     </Name>
+    <AltarEffect>AirMerit</AltarEffect>
   </AirAltar>
   <EarthAltar>
     <Name>
       <English>Earth Altar</English>
     </Name>
+    <AltarEffect>EarthMerit</AltarEffect>
   </EarthAltar>
   <Floor>
     <Name>

@@ -1,5 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.InitializeGameWorld;
+﻿using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameDataTag;
 using System;
 using UnityEngine;
 
@@ -7,27 +7,26 @@ namespace AxeMan.GameSystem
 {
     public interface IAltarEffect
     {
-        SkillComponentTag Effect { get; }
+        SkillComponentTag GetEffect(SubTag subTag);
 
-        int PowerDuration { get; }
+        int GetPowerDuration(SubTag subTag);
     }
 
     public class AltarEffect : MonoBehaviour, IAltarEffect
     {
-        public SkillComponentTag Effect { get; private set; }
-
-        public int PowerDuration { get; private set; }
-
-        private void AltarEffect_CreatedWorld(object sender, EventArgs e)
+        public SkillComponentTag GetEffect(SubTag subTag)
         {
-            Effect = SkillComponentTag.FireMerit;
-            PowerDuration = 4;
+            string effect = (string)GetComponent<ActorData>().GetXElementData(
+                MainTag.Building, subTag, ActorDataTag.AltarEffect);
+            Enum.TryParse(effect, out SkillComponentTag skill);
+
+            return skill;
         }
 
-        private void Start()
+        public int GetPowerDuration(SubTag subTag)
         {
-            GameCore.AxeManCore.GetComponent<InitializeMainGame>().CreatedWorld
-                += AltarEffect_CreatedWorld;
+            return GetComponent<ActorData>().GetIntData(MainTag.Building, subTag,
+                ActorDataTag.PowerDuration);
         }
     }
 }
