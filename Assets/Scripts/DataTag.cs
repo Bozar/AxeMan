@@ -7,7 +7,7 @@ namespace AxeMan.GameSystem.GameDataTag
         INVALID, Skip, Move, UseSkillQ, UseSkillW, UseSkillE, UseSkillR,
     }
 
-    public enum ActorDataTag { Name, Cooldown, }
+    public enum ActorDataTag { Name, Cooldown, PowerDuration, AltarEffect, }
 
     public enum BlueprintTag
     {
@@ -42,6 +42,7 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum SkillComponentTag
     {
+        INVALID, Life,
         FireMerit, WaterMerit, AirMerit, EarthMerit,
         FireFlaw, WaterFlaw, AirFlaw, EarthFlaw,
         FireCurse, WaterCurse, AirCurse, EarthCurse,

@@ -206,6 +206,8 @@ namespace AxeMan.GameSystem
 
             compString = new Dictionary<SkillComponentTag, string>
             {
+                [SkillComponentTag.Life] = "Life",
+
                 [SkillComponentTag.FireMerit] = "Fire+",
                 [SkillComponentTag.FireFlaw] = "Fire-",
                 [SkillComponentTag.FireCurse] = "Fire?",
