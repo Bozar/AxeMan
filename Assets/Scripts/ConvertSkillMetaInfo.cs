@@ -18,10 +18,6 @@ namespace AxeMan.GameSystem
 
         string GetSkillName(SkillNameTag skillNameTag);
 
-        string GetSkillName(CommandTag commandTag);
-
-        string GetSkillName(UITag uiTag);
-
         SkillNameTag GetSkillNameTag(UITag uiTag);
 
         SkillNameTag GetSkillNameTag(ActionTag actionTag);
