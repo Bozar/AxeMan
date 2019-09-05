@@ -14,6 +14,9 @@ namespace AxeMan.GameSystem.GameDataHub
 
         string GetStringData(MainTag mainTag, SubTag subTag,
             ActorDataTag actorData);
+
+        XElement GetXElementData(MainTag mainTag, SubTag subTag,
+            ActorDataTag actorData);
     }
 
     public class ActorData : MonoBehaviour, IActorData
@@ -42,6 +45,16 @@ namespace AxeMan.GameSystem.GameDataHub
                 TryGetData(mainTag, subTag, actorData, defaultLanguage, out data);
             }
             return (string)data;
+        }
+
+        public XElement GetXElementData(MainTag mainTag, SubTag subTag,
+            ActorDataTag actorData)
+        {
+            if (!TryGetData(mainTag, subTag, actorData, out XElement data))
+            {
+                TryGetData(mainTag, defaultActor, actorData, out data);
+            }
+            return data;
         }
 
         private void ActorData_LoadingGameData(object sender, EventArgs e)
