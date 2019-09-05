@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ActorData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<CharacterData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DEFAULT>
   </DEFAULT>
   <PC>
@@ -13,4 +13,4 @@
     </Name>
   </Dummy>
   <!--- vim: set lbr sts=2 sw=2: -->
-</ActorData>
+</CharacterData>

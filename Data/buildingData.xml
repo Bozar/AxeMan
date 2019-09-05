@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ActorData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<BuildingData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DEFAULT>
     <Cooldown>10</Cooldown>
   </DEFAULT>
@@ -34,4 +34,4 @@
     </Name>
   </Floor>
   <!--- vim: set lbr sts=2 sw=2: -->
-</ActorData>
+</BuildingData>
