@@ -3,7 +3,6 @@ using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.SchedulingSystem;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -124,7 +123,7 @@ namespace AxeMan.DungeonObject
                 return;
             }
             GameCore.AxeManCore.GetComponent<PublishActorStatus>()
-                .PublishChangedActorStatus(EventArgs.Empty);
+                .PublishChangedActorStatus();
         }
 
         private void Start()

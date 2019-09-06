@@ -7,9 +7,9 @@ namespace AxeMan.GameSystem.GameEvent
     {
         public event EventHandler<EventArgs> ChangedActorStatus;
 
-        public void PublishChangedActorStatus(EventArgs e)
+        public void PublishChangedActorStatus()
         {
-            OnChangedActorStatus(e);
+            OnChangedActorStatus(EventArgs.Empty);
         }
 
         protected virtual void OnChangedActorStatus(EventArgs e)
