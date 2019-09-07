@@ -1,6 +1,5 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.PlayerInput;
 using UnityEngine;
 
@@ -66,18 +65,14 @@ namespace AxeMan.DungeonObject
             }
 
             ActionTag action = ActionTag.Move;
-            MainTag mainTag = GetComponent<MetaInfo>().MainTag;
-            SubTag subTag = GetComponent<MetaInfo>().SubTag;
-            int id = GetComponent<MetaInfo>().ObjectID;
-            var ea = new PublishActionEventArgs(action, mainTag, subTag, id);
 
             GetComponent<LocalManager>().SetPosition(target);
-            GetComponent<LocalManager>().TakenAction(ea);
+            GetComponent<LocalManager>().TakenAction(action);
 
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(source);
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(target);
 
-            GetComponent<LocalManager>().CheckingSchedule(ea);
+            GetComponent<LocalManager>().CheckingSchedule(action);
         }
 
         private void Start()

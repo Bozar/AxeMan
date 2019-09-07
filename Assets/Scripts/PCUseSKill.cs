@@ -1,6 +1,5 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,21 +24,11 @@ namespace AxeMan.DungeonObject
         private void PCUseSKill_VerifiedSkill(object sender,
             VerifiedSkillEventArgs e)
         {
-            MainTag mainTag;
-            SubTag subTag;
-            int id;
-            PublishActionEventArgs ea;
-
             if (command2action.TryGetValue(e.UseSkill, out ActionTag action))
             {
-                mainTag = GetComponent<MetaInfo>().MainTag;
-                subTag = GetComponent<MetaInfo>().SubTag;
-                id = GetComponent<MetaInfo>().ObjectID;
-                ea = new PublishActionEventArgs(action, mainTag, subTag, id);
-
-                GetComponent<LocalManager>().TakingAction(ea);
-                GetComponent<LocalManager>().TakenAction(ea);
-                GetComponent<LocalManager>().CheckingSchedule(ea);
+                GetComponent<LocalManager>().TakingAction(action);
+                GetComponent<LocalManager>().TakenAction(action);
+                GetComponent<LocalManager>().CheckingSchedule(action);
             }
         }
 

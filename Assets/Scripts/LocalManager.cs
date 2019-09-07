@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.ObjectFactory;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace AxeMan.DungeonObject
 {
     public interface ILocalManager
     {
-        void CheckingSchedule(PublishActionEventArgs e);
+        void CheckingSchedule(ActionTag actionTag);
 
         int GetDistance(int[] target);
 
@@ -22,17 +23,17 @@ namespace AxeMan.DungeonObject
 
         void SetPosition(int[] position);
 
-        void TakenAction(PublishActionEventArgs e);
+        void TakenAction(ActionTag actionTag);
 
-        void TakingAction(PublishActionEventArgs e);
+        void TakingAction(ActionTag actionTag);
     }
 
     public class LocalManager : MonoBehaviour, ILocalManager
     {
-        public void CheckingSchedule(PublishActionEventArgs e)
+        public void CheckingSchedule(ActionTag actionTag)
         {
             GameCore.AxeManCore.GetComponent<PublishAction>()
-               .ActorCheckingSchedule(e);
+               .ActorCheckingSchedule(GetEventArg(actionTag));
         }
 
         public int GetDistance(int[] target)
@@ -80,16 +81,26 @@ namespace AxeMan.DungeonObject
                 .Convert(position);
         }
 
-        public void TakenAction(PublishActionEventArgs e)
+        public void TakenAction(ActionTag actionTag)
         {
             GameCore.AxeManCore.GetComponent<PublishAction>()
-               .ActorTakenAction(e);
+               .ActorTakenAction(GetEventArg(actionTag));
         }
 
-        public void TakingAction(PublishActionEventArgs e)
+        public void TakingAction(ActionTag actionTag)
         {
             GameCore.AxeManCore.GetComponent<PublishAction>()
-                .ActorTakingAction(e);
+                .ActorTakingAction(GetEventArg(actionTag));
+        }
+
+        private PublishActionEventArgs GetEventArg(ActionTag actionTag)
+        {
+            MetaInfo metaInfo = GetComponent<MetaInfo>();
+            MainTag mainTag = metaInfo.MainTag;
+            SubTag subTag = metaInfo.SubTag;
+            int id = metaInfo.ObjectID;
+
+            return new PublishActionEventArgs(actionTag, mainTag, subTag, id);
         }
     }
 }

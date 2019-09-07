@@ -1,6 +1,5 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.SchedulingSystem;
 using UnityEngine;
 
@@ -26,14 +25,10 @@ namespace AxeMan.DungeonObject
             }
 
             ActionTag action = ActionTag.Skip;
-            MainTag mainTag = GetComponent<MetaInfo>().MainTag;
-            SubTag subTag = GetComponent<MetaInfo>().SubTag;
-            int id = GetComponent<MetaInfo>().ObjectID;
-            var ea = new PublishActionEventArgs(action, mainTag, subTag, id);
 
-            GetComponent<LocalManager>().TakingAction(ea);
-            GetComponent<LocalManager>().TakenAction(ea);
-            GetComponent<LocalManager>().CheckingSchedule(ea);
+            GetComponent<LocalManager>().TakingAction(action);
+            GetComponent<LocalManager>().TakenAction(action);
+            GetComponent<LocalManager>().CheckingSchedule(action);
         }
 
         private void Start()
