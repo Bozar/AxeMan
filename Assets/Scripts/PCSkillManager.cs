@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +39,7 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         public string GetLongSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+            return GameCore.AxeManCore.GetComponent<SkillData>()
                 .GetLongSkillTypeName(skillTypeTag);
         }
 
@@ -59,13 +60,13 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         public string GetShortSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+            return GameCore.AxeManCore.GetComponent<SkillData>()
                 .GetShortSkillTypeName(skillTypeTag);
         }
 
         public string GetSkillComponentName(SkillComponentTag skillComponentTag)
         {
-            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+            return GameCore.AxeManCore.GetComponent<SkillData>()
                 .GetSkillComponentName(skillComponentTag);
         }
 
@@ -94,20 +95,8 @@ namespace AxeMan.DungeonObject.ActorSkill
 
         public string GetSkillName(SkillNameTag skillNameTag)
         {
-            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
+            return GameCore.AxeManCore.GetComponent<SkillData>()
                 .GetSkillName(skillNameTag);
-        }
-
-        public string GetSkillName(CommandTag commandTag)
-        {
-            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
-               .GetSkillName(commandTag);
-        }
-
-        public string GetSkillName(UITag uiTag)
-        {
-            return GameCore.AxeManCore.GetComponent<ConvertSkillMetaInfo>()
-               .GetSkillName(uiTag);
         }
 
         public SkillNameTag GetSkillNameTag(UITag uiTag)

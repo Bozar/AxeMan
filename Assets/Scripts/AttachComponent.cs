@@ -87,14 +87,16 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<SearchUI>();
             gameObject.AddComponent<SettingData>();
 
+            gameObject.AddComponent<SkillData>();
             gameObject.AddComponent<SkillInput>();
             gameObject.AddComponent<StartScreen>();
             gameObject.AddComponent<StartScreenCursorComponent>();
+
             gameObject.AddComponent<TileOverlay>();
             gameObject.AddComponent<TurnManager>();
-
             gameObject.AddComponent<UILabelData>();
             gameObject.AddComponent<UIManager>();
+
             gameObject.AddComponent<VerifySkillCooldown>();
             gameObject.AddComponent<VerifySkillRange>();
             gameObject.AddComponent<VerifySkillTarget>();

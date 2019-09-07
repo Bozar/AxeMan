@@ -1,5 +1,6 @@
 ﻿using AxeMan.DungeonObject;
 using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PlayerInput;
 using AxeMan.GameSystem.SchedulingSystem;
@@ -60,7 +61,7 @@ namespace AxeMan.GameSystem
 
             foreach (var comp in effectDict.Keys)
             {
-                compName = GetComponent<ConvertSkillMetaInfo>()
+                compName = GetComponent<SkillData>()
                     .GetSkillComponentName(comp);
                 effect = GetComponent<ConvertSkillMetaInfo>()
                     .GetSkillEffectName(comp, effectDict[comp]);

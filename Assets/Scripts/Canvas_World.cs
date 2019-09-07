@@ -66,7 +66,8 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_World_FailedVerifying(object sender,
             FailedVerifyingEventArgs e)
         {
-            string skillName = skillManager.GetSkillName(e.UseSkill);
+            SkillNameTag tag = skillManager.GetSkillNameTag(e.UseSkill);
+            string skillName = skillManager.GetSkillName(tag);
 
             SearchText(UITag.Modeline).text = $"Cannot use Skill {skillName}.";
         }

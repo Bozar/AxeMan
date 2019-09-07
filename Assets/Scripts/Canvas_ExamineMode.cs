@@ -150,7 +150,7 @@ namespace AxeMan.GameSystem.UserInterface
             SubTag subTag = target.GetComponent<MetaInfo>().SubTag;
 
             string altarText
-                = GetComponent<ConvertSkillMetaInfo>().GetSkillComponentName(
+                = GetComponent<SkillData>().GetSkillComponentName(
                     GetComponent<AltarEffect>().GetEffect(subTag));
             string altarData = GetAltarEffectName(subTag);
 

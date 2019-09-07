@@ -166,7 +166,7 @@ namespace AxeMan.GameSystem.UserInterface
             SkillNameTag skillName = skillManager.GetSkillNameTag(e);
             SkillTypeTag skillType = skillManager.GetSkillTypeTag(skillName);
 
-            string name = skillManager.GetSkillName(e);
+            string name = skillManager.GetSkillName(skillName);
             string type = skillManager.GetLongSkillTypeName(skillType);
 
             SearchText(UITag.SkillText).text = type;
