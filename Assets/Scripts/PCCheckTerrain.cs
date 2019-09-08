@@ -15,8 +15,25 @@ namespace AxeMan.DungeonObject
             {
                 return;
             }
-            e.IsPassable.Push(GameCore.AxeManCore.GetComponent<SearchObject>()
-                .Search(e.Position[0], e.Position[1], SubTag.Floor, out _));
+
+            bool isPassable = false;
+            GameCore.AxeManCore.GetComponent<SearchObject>()
+               .Search(e.Position[0], e.Position[1], out GameObject[] targets);
+
+            foreach (GameObject go in targets)
+            {
+                if ((go.GetComponent<MetaInfo>().MainTag == MainTag.Actor)
+                    || (go.GetComponent<MetaInfo>().MainTag == MainTag.Building))
+                {
+                    isPassable = false;
+                    break;
+                }
+                else if (go.GetComponent<MetaInfo>().MainTag == MainTag.Floor)
+                {
+                    isPassable = true;
+                }
+            }
+            e.IsPassable.Push(isPassable);
         }
 
         private void Start()
