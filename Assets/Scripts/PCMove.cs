@@ -1,12 +1,30 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PlayerInput;
+using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
 {
+    public class BlockPCMovementEventArgs : EventArgs
+    {
+        public BlockPCMovementEventArgs(int[] targetPosition)
+        {
+            TargetPosition = targetPosition;
+        }
+
+        public int[] TargetPosition { get; }
+    }
+
     public class PCMove : MonoBehaviour
     {
+        public event EventHandler<BlockPCMovementEventArgs> BlockingPCMovement;
+
+        protected virtual void OnBlockingPCMovement(BlockPCMovementEventArgs e)
+        {
+            BlockingPCMovement?.Invoke(this, e);
+        }
+
         private int[] GetNewPosition(int[] source, CommandTag command)
         {
             int[] target;
@@ -61,6 +79,7 @@ namespace AxeMan.DungeonObject
 
             if (!GetComponent<LocalManager>().IsPassable(target))
             {
+                OnBlockingPCMovement(new BlockPCMovementEventArgs(target));
                 return;
             }
 

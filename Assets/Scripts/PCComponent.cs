@@ -18,6 +18,7 @@ namespace AxeMan.GameSystem.ObjectFactory
 
             e.Data.AddComponent<ApplySkillFlawEffect>();
 
+            e.Data.AddComponent<PCActiveAltar>();
             e.Data.AddComponent<PCAttackTarget>();
             e.Data.AddComponent<PCBuffSelf>();
             e.Data.AddComponent<PCCheckTerrain>();
