@@ -2,6 +2,7 @@
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.SchedulingSystem
@@ -30,6 +31,8 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
     public class TurnManager : MonoBehaviour, ITurnManager
     {
+        private ActionTag[] endingTurnActions;
+
         public event EventHandler<StartOrEndTurnEventArgs> EndedTurn;
 
         public event EventHandler<StartOrEndTurnEventArgs> EndingTurn;
@@ -83,6 +86,20 @@ namespace AxeMan.GameSystem.SchedulingSystem
             StartingTurn?.Invoke(this, e);
         }
 
+        private void Awake()
+        {
+            endingTurnActions = new ActionTag[]
+            {
+                ActionTag.Skip,
+                ActionTag.Move,
+                ActionTag.UseSkillQ,
+                ActionTag.UseSkillW,
+                ActionTag.UseSkillE,
+                ActionTag.UseSkillR,
+                ActionTag.ActiveAltar,
+            };
+        }
+
         private StartOrEndTurnEventArgs GetEventArg()
         {
             SubTag subTag = GetComponent<Schedule>().Current
@@ -108,19 +125,9 @@ namespace AxeMan.GameSystem.SchedulingSystem
                 return;
             }
 
-            switch (e.Action)
+            if (endingTurnActions.Contains(e.Action))
             {
-                case ActionTag.Skip:
-                case ActionTag.Move:
-                case ActionTag.UseSkillQ:
-                case ActionTag.UseSkillW:
-                case ActionTag.UseSkillE:
-                case ActionTag.UseSkillR:
-                    NextActor();
-                    break;
-
-                default:
-                    break;
+                NextActor();
             }
         }
     }

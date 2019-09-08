@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SchedulingSystem;
 using System;
@@ -47,6 +48,16 @@ namespace AxeMan.GameSystem
             }
         }
 
+        private void AltarCooldown_TakenAction(object sender,
+            PublishActionEventArgs e)
+        {
+            if ((e.SubTag != SubTag.PC) || (e.Action != ActionTag.ActiveAltar))
+            {
+                return;
+            }
+            CurrentCooldown = MaxCooldown;
+        }
+
         private void Awake()
         {
             MinCooldown = 0;
@@ -59,6 +70,8 @@ namespace AxeMan.GameSystem
                 += AltarCooldown_StartingTurn;
             GetComponent<InitializeMainGame>().CreatedWorld
                 += AltarCooldown_CreatedWorld;
+            GetComponent<PublishAction>().TakenAction
+                += AltarCooldown_TakenAction;
         }
     }
 }

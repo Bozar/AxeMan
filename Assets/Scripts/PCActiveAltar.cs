@@ -12,16 +12,26 @@ namespace AxeMan.DungeonObject
         {
             int x = e.TargetPosition[0];
             int y = e.TargetPosition[1];
-
-            if (GameCore.AxeManCore.GetComponent<SearchObject>().Search(
+            if (!GameCore.AxeManCore.GetComponent<SearchObject>().Search(
                 x, y, MainTag.Building, out GameObject[] altars))
             {
-                Debug.Log(altars[0].GetComponent<MetaInfo>().SubTag);
+                return;
             }
-            else
+
+            int current = GameCore.AxeManCore.GetComponent<AltarCooldown>()
+                .CurrentCooldown;
+            int min = GameCore.AxeManCore.GetComponent<AltarCooldown>()
+                .MinCooldown;
+            if (current > min)
             {
-                Debug.Log("Blocked");
+                return;
             }
+
+            Debug.Log(altars[0].GetComponent<MetaInfo>().SubTag);
+
+            ActionTag action = ActionTag.ActiveAltar;
+            GetComponent<LocalManager>().TakenAction(action);
+            GetComponent<LocalManager>().CheckingSchedule(action);
         }
 
         private void Start()
