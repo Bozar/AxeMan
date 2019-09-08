@@ -1,116 +1,129 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
-using System.Collections.Generic;
+using AxeMan.GameSystem.InitializeGameWorld;
+using AxeMan.GameSystem.SaveLoadGameFile;
+using System;
+using System.Xml.Linq;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.GameDataHub
 {
     public interface ISkillData
     {
-        string GetLongSkillTypeName(SkillTypeTag skillType);
+        string GetLongSkillTypeName(SkillTypeTag skillTypeTag);
 
-        string GetShortSkillTypeName(SkillTypeTag skillType);
+        string GetShortSkillTypeName(SkillTypeTag skillTypeTag);
 
-        string GetSkillComponentName(SkillComponentTag skillComponent);
+        string GetSkillComponentName(SkillComponentTag skillComponentTag);
 
-        string GetSkillName(SkillNameTag skillName);
+        string GetSkillName(SkillNameTag skillNameTag);
     }
 
     public class SkillData : MonoBehaviour, ISkillData
     {
-        private Dictionary<SkillComponentTag, string> compString;
+        private string component;
+        private LanguageTag defaultLanguage;
+        private string error;
+        private string longType;
+        private string shortType;
+        private string skillName;
+        private LanguageTag userLanguage;
+        private XElement xmlFile;
 
-        private string invalidName;
-
-        private Dictionary<SkillNameTag, string> nameString;
-
-        private Dictionary<SkillTypeTag, string> typeLongName;
-
-        private Dictionary<SkillTypeTag, string> typeShortName;
-
-        public string GetLongSkillTypeName(SkillTypeTag skillType)
+        public string GetLongSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            if (typeLongName.TryGetValue(skillType, out string longType))
+            if (TryGetData(longType, skillTypeTag.ToString(),
+                userLanguage.ToString(), out XElement data)
+                || TryGetData(longType, skillTypeTag.ToString(),
+                defaultLanguage.ToString(), out data))
             {
-                return longType;
+                return (string)data;
             }
-            return invalidName;
+            return error;
         }
 
         public string GetShortSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            if (typeShortName.TryGetValue(skillTypeTag, out string shortType))
+            if (TryGetData(shortType, skillTypeTag.ToString(),
+                userLanguage.ToString(), out XElement data)
+                || TryGetData(shortType, skillTypeTag.ToString(),
+                defaultLanguage.ToString(), out data))
             {
-                return shortType;
+                return (string)data;
             }
-            return invalidName;
+            return error;
         }
 
         public string GetSkillComponentName(SkillComponentTag skillComponentTag)
         {
-            if (compString.TryGetValue(skillComponentTag, out string compName))
+            if (TryGetData(component, skillComponentTag.ToString(),
+               userLanguage.ToString(), out XElement data)
+               || TryGetData(component, skillComponentTag.ToString(),
+               defaultLanguage.ToString(), out data))
             {
-                return compName;
+                return (string)data;
             }
-            return invalidName;
+            return error;
         }
 
         public string GetSkillName(SkillNameTag skillNameTag)
         {
-            if (nameString.TryGetValue(skillNameTag, out string skillName))
+            if (TryGetData(skillName, skillNameTag.ToString(),
+              userLanguage.ToString(), out XElement data)
+              || TryGetData(skillName, skillNameTag.ToString(),
+              defaultLanguage.ToString(), out data))
             {
-                return skillName;
+                return (string)data;
             }
-            return invalidName;
+            return error;
         }
 
         private void Awake()
         {
-            invalidName = "INVALID_NAME";
+            error = "INVALID_NAME";
+            skillName = "Name";
+            component = "Component";
+            shortType = "ShortType";
+            longType = "LongType";
 
-            nameString = new Dictionary<SkillNameTag, string>
-            {
-                [SkillNameTag.Q] = "Q",
-                [SkillNameTag.W] = "W",
-                [SkillNameTag.E] = "E",
-                [SkillNameTag.R] = "R"
-            };
+            defaultLanguage = LanguageTag.English;
+        }
 
-            typeShortName = new Dictionary<SkillTypeTag, string>
-            {
-                [SkillTypeTag.Attack] = "Atk",
-                [SkillTypeTag.Move] = "Mov",
-                [SkillTypeTag.Buff] = "Buf",
-                [SkillTypeTag.Curse] = "Cur"
-            };
+        private void LoadSkillData()
+        {
+            string file = "skillData.xml";
+            string directory = "Data";
 
-            typeLongName = new Dictionary<SkillTypeTag, string>
-            {
-                [SkillTypeTag.Attack] = "Attack",
-                [SkillTypeTag.Move] = "Move",
-                [SkillTypeTag.Buff] = "Buff",
-                [SkillTypeTag.Curse] = "Curse"
-            };
+            xmlFile = GetComponent<SaveLoadXML>().Load(file, directory);
+        }
 
-            compString = new Dictionary<SkillComponentTag, string>
-            {
-                [SkillComponentTag.Life] = "Life",
+        private void LoadUserLanguage()
+        {
+            string language = GetComponent<SettingData>().GetStringData(
+               SettingDataTag.Language);
+            Enum.TryParse(language, out userLanguage);
+        }
 
-                [SkillComponentTag.FireMerit] = "Fire+",
-                [SkillComponentTag.FireFlaw] = "Fire-",
-                [SkillComponentTag.FireCurse] = "Fire?",
+        private void SkillData_LoadingGameData(object sender, EventArgs e)
+        {
+            LoadUserLanguage();
+            LoadSkillData();
+        }
 
-                [SkillComponentTag.WaterMerit] = "Water+",
-                [SkillComponentTag.WaterFlaw] = "Water-",
-                [SkillComponentTag.WaterCurse] = "Water?",
+        private void Start()
+        {
+            GetComponent<InitializeStartScreen>().LoadingGameData
+                += SkillData_LoadingGameData;
+        }
 
-                [SkillComponentTag.AirMerit] = "Air+",
-                [SkillComponentTag.AirFlaw] = "Air-",
-                [SkillComponentTag.AirCurse] = "Air?",
+        private bool TryGetData(string dataType, string tag, string language,
+            out XElement data)
+        {
+            data = xmlFile
+                .Element(dataType)
+                .Element(tag)
+                .Element(language);
 
-                [SkillComponentTag.EarthMerit] = "Earth+",
-                [SkillComponentTag.EarthFlaw] = "Earth-",
-                [SkillComponentTag.EarthCurse] = "Earth?",
-            };
+            return data != null;
         }
     }
 }
