@@ -7,25 +7,25 @@ namespace AxeMan.GameSystem
 {
     public interface IBuildingEffect
     {
-        SkillComponentTag GetEffect(SubTag subTag);
+        SkillComponentTag GetEffect(MainTag mainTag, SubTag subTag);
 
-        int GetPowerDuration(SubTag subTag);
+        int GetPowerDuration(MainTag mainTag, SubTag subTag);
     }
 
     public class BuildingEffect : MonoBehaviour, IBuildingEffect
     {
-        public SkillComponentTag GetEffect(SubTag subTag)
+        public SkillComponentTag GetEffect(MainTag mainTag, SubTag subTag)
         {
             string effect = (string)GetComponent<ActorData>().GetXElementData(
-                MainTag.Building, subTag, ActorDataTag.AltarEffect);
+                mainTag, subTag, ActorDataTag.BuildingEffect);
             Enum.TryParse(effect, out SkillComponentTag skill);
 
             return skill;
         }
 
-        public int GetPowerDuration(SubTag subTag)
+        public int GetPowerDuration(MainTag mainTag, SubTag subTag)
         {
-            return GetComponent<ActorData>().GetIntData(MainTag.Building, subTag,
+            return GetComponent<ActorData>().GetIntData(mainTag, subTag,
                 ActorDataTag.PowerDuration);
         }
     }

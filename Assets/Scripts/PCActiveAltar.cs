@@ -31,12 +31,16 @@ namespace AxeMan.DungeonObject
             }
 
             // Grant altar effect to PC.
+            MainTag mainTag = altars[0].GetComponent<MetaInfo>().MainTag;
+            SubTag subTag = altars[0].GetComponent<MetaInfo>().SubTag;
+
             SkillComponentTag skill
                 = GameCore.AxeManCore.GetComponent<BuildingEffect>()
-                .GetEffect(altars[0].GetComponent<MetaInfo>().SubTag);
+                .GetEffect(mainTag, subTag);
             int powerDuration
                 = GameCore.AxeManCore.GetComponent<BuildingEffect>()
-                .GetPowerDuration(altars[0].GetComponent<MetaInfo>().SubTag);
+                .GetPowerDuration(mainTag, subTag);
+
             if (skill == SkillComponentTag.Life)
             {
                 GetComponent<HP>().Add(powerDuration);
