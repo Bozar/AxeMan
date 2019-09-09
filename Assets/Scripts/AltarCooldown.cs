@@ -30,7 +30,7 @@ namespace AxeMan.GameSystem
         private void AltarCooldown_CreatedWorld(object sender, EventArgs e)
         {
             MaxCooldown = GetComponent<ActorData>().GetIntData(
-                MainTag.Building, SubTag.DEFAULT, ActorDataTag.Cooldown);
+                MainTag.Altar, SubTag.DEFAULT, ActorDataTag.Cooldown);
         }
 
         private void AltarCooldown_StartingTurn(object sender,

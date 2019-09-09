@@ -93,7 +93,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private string GetAltarEffectName(SubTag subTag)
         {
-            MainTag mainTag = MainTag.Building;
+            MainTag mainTag = MainTag.Altar;
             BuildingEffect altar = GetComponent<BuildingEffect>();
             SkillComponentTag skill = altar.GetEffect(mainTag, subTag);
             int data = altar.GetPowerDuration(mainTag, subTag);
@@ -146,7 +146,7 @@ namespace AxeMan.GameSystem.UserInterface
             return null;
         }
 
-        private void PrintBuildingData(GameObject target)
+        private void PrintAltarData(GameObject target)
         {
             MainTag mainTag = target.GetComponent<MetaInfo>().MainTag;
             SubTag subTag = target.GetComponent<MetaInfo>().SubTag;
@@ -179,8 +179,8 @@ namespace AxeMan.GameSystem.UserInterface
             PrintModeline(target);
             switch (target.GetComponent<MetaInfo>().MainTag)
             {
-                case MainTag.Building:
-                    PrintBuildingData(target);
+                case MainTag.Altar:
+                    PrintAltarData(target);
                     break;
 
                 case MainTag.Trap:

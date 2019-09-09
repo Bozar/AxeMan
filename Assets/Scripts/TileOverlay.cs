@@ -77,7 +77,7 @@ namespace AxeMan.GameSystem
                 MainTag.INVALID,
                 MainTag.Floor,
                 MainTag.Trap,
-                MainTag.Building,
+                MainTag.Altar,
                 MainTag.Actor,
                 MainTag.Marker,
             };

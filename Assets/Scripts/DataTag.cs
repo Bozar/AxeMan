@@ -35,7 +35,7 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum LanguageTag { English, Chinese, }
 
-    public enum MainTag { INVALID, Building, Trap, Actor, Floor, Marker, }
+    public enum MainTag { INVALID, Altar, Trap, Actor, Floor, Marker, }
 
     public enum SearchEventTag { Position, MainTag, SubTag, }
 

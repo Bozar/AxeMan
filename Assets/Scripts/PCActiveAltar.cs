@@ -15,7 +15,7 @@ namespace AxeMan.DungeonObject
             int x = e.TargetPosition[0];
             int y = e.TargetPosition[1];
             if (!GameCore.AxeManCore.GetComponent<SearchObject>().Search(
-                x, y, MainTag.Building, out GameObject[] altars))
+                x, y, MainTag.Altar, out GameObject[] altars))
             {
                 return;
             }

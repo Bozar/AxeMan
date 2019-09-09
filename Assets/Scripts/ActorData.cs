@@ -81,7 +81,7 @@ namespace AxeMan.GameSystem.GameDataHub
             MainTag[] mainTags = new MainTag[]
             {
                 MainTag.Actor,
-                MainTag.Building,
+                MainTag.Altar,
                 MainTag.Floor,
                 MainTag.Trap
             };

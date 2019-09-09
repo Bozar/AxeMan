@@ -22,7 +22,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
 
         private IPrototype GetLifeAltar()
         {
-            MainTag mt = MainTag.Building;
+            MainTag mt = MainTag.Altar;
             SubTag st = SubTag.LifeAltar;
             int[] position = new int[] { 4, 4 };
 
@@ -31,7 +31,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
 
         private Stack<IPrototype> GetShieldAltar()
         {
-            MainTag mt = MainTag.Building;
+            MainTag mt = MainTag.Altar;
             SubTag st = SubTag.EarthAltar;
             int[][] position = new int[][]
             {

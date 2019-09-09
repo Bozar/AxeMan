@@ -22,7 +22,7 @@ namespace AxeMan.GameSystem.PrototypeFactory
                     j++)
                 {
                     if (GetComponent<SearchObject>().Search(i, j,
-                        MainTag.Building, out _))
+                        MainTag.Altar, out _))
                     {
                         continue;
                     }

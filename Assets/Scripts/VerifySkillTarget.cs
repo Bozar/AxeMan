@@ -51,7 +51,7 @@ namespace AxeMan.GameSystem
             foreach (GameObject go in gameObjects)
             {
                 if ((go.GetComponent<MetaInfo>().MainTag == MainTag.Actor)
-                    || (go.GetComponent<MetaInfo>().MainTag == MainTag.Building))
+                    || (go.GetComponent<MetaInfo>().MainTag == MainTag.Altar))
                 {
                     return false;
                 }
