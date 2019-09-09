@@ -26,20 +26,19 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ActorData>();
             gameObject.AddComponent<AimMarkerComponent>();
             gameObject.AddComponent<AimMode>();
-
             gameObject.AddComponent<AltarCooldown>();
-            gameObject.AddComponent<AltarEffect>();
 
             gameObject.AddComponent<Blueprint>();
             gameObject.AddComponent<BlueprintActor>();
             gameObject.AddComponent<BlueprintAimMarker>();
             gameObject.AddComponent<BlueprintAltar>();
-
             gameObject.AddComponent<BlueprintExamineMarker>();
+
             gameObject.AddComponent<BlueprintFloor>();
             gameObject.AddComponent<BlueprintProgressBar>();
             gameObject.AddComponent<BlueprintStartScreenCursor>();
             gameObject.AddComponent<BlueprintTrap>();
+            gameObject.AddComponent<BuildingEffect>();
 
             gameObject.AddComponent<Canvas_ExamineMode>();
             gameObject.AddComponent<Canvas_Message>();

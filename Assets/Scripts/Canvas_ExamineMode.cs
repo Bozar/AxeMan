@@ -93,7 +93,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private string GetAltarEffectName(SubTag subTag)
         {
-            AltarEffect altar = GetComponent<AltarEffect>();
+            BuildingEffect altar = GetComponent<BuildingEffect>();
             SkillComponentTag skill = altar.GetEffect(subTag);
             int data = altar.GetPowerDuration(subTag);
 
@@ -151,7 +151,7 @@ namespace AxeMan.GameSystem.UserInterface
 
             string altarText
                 = GetComponent<SkillData>().GetSkillComponentName(
-                    GetComponent<AltarEffect>().GetEffect(subTag));
+                    GetComponent<BuildingEffect>().GetEffect(subTag));
             string altarData = GetAltarEffectName(subTag);
 
             string cooldownText = GetComponent<UILabelData>().GetStringData(

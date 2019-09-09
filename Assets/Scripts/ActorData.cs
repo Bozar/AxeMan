@@ -74,7 +74,7 @@ namespace AxeMan.GameSystem.GameDataHub
         private void LoadActorData()
         {
             string character = "charactorData.xml";
-            string building = "buildingData.xml";
+            string altar = "altarData.xml";
             string trap = "trapData.xml";
             string directory = "Data";
 
@@ -88,8 +88,8 @@ namespace AxeMan.GameSystem.GameDataHub
             string[] files = new string[]
             {
                 character,
-                building,
-                building,
+                altar,
+                altar,
                 trap
             };
 

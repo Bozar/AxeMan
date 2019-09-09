@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
-    public interface IAltarEffect
+    public interface IBuildingEffect
     {
         SkillComponentTag GetEffect(SubTag subTag);
 
         int GetPowerDuration(SubTag subTag);
     }
 
-    public class AltarEffect : MonoBehaviour, IAltarEffect
+    public class BuildingEffect : MonoBehaviour, IBuildingEffect
     {
         public SkillComponentTag GetEffect(SubTag subTag)
         {

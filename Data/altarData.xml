@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BuildingData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<AltarData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DEFAULT>
     <Cooldown>10</Cooldown>
     <PowerDuration>4</PowerDuration>
@@ -41,4 +41,4 @@
     </Name>
   </Floor>
   <!--- vim: set lbr sts=2 sw=2: -->
-</BuildingData>
+</AltarData>
