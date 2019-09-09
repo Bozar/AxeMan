@@ -6,7 +6,7 @@ namespace AxeMan.GameSystem
 {
     public interface IConvertSkillMetaInfo
     {
-        string GetAltarEffectName(SkillComponentTag skillComponentTag,
+        string GetBuildingEffectName(SkillComponentTag skillComponentTag,
             int powerDuration);
 
         string GetSkillEffectName(SkillComponentTag skillComponentTag,
@@ -21,7 +21,7 @@ namespace AxeMan.GameSystem
 
     public class ConvertSkillMetaInfo : MonoBehaviour, IConvertSkillMetaInfo
     {
-        public string GetAltarEffectName(SkillComponentTag skillComponentTag,
+        public string GetBuildingEffectName(SkillComponentTag skillComponentTag,
             int powerDuration)
         {
             if (HideSkillPower(skillComponentTag))

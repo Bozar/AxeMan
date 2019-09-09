@@ -1,26 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TrapData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DEFAULT>
+    <PowerDuration>2</PowerDuration>
   </DEFAULT>
   <FireTrap>
     <Name>
       <English>Fire Trap</English>
     </Name>
+    <BuildingEffect>FireFlaw</BuildingEffect>
   </FireTrap>
   <WaterTrap>
     <Name>
       <English>Water Trap</English>
     </Name>
+    <BuildingEffect>WaterFlaw</BuildingEffect>
   </WaterTrap>
   <AirTrap>
     <Name>
       <English>Air Trap</English>
     </Name>
+    <BuildingEffect>AirFlaw</BuildingEffect>
   </AirTrap>
   <EarthTrap>
     <Name>
       <English>Earth Trap</English>
     </Name>
+    <BuildingEffect>EarthFlaw</BuildingEffect>
   </EarthTrap>
   <Floor>
     <Name>

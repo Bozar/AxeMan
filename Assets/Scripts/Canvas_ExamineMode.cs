@@ -94,9 +94,9 @@ namespace AxeMan.GameSystem.UserInterface
         private string GetAltarEffectName(SubTag subTag)
         {
             MainTag mainTag = MainTag.Altar;
-            BuildingEffect altar = GetComponent<BuildingEffect>();
-            SkillComponentTag skill = altar.GetEffect(mainTag, subTag);
-            int data = altar.GetPowerDuration(mainTag, subTag);
+            BuildingEffect building = GetComponent<BuildingEffect>();
+            SkillComponentTag skill = building.GetEffect(mainTag, subTag);
+            int data = building.GetPowerDuration(mainTag, subTag);
 
             switch (subTag)
             {
@@ -105,7 +105,7 @@ namespace AxeMan.GameSystem.UserInterface
                 case SubTag.AirAltar:
                 case SubTag.EarthAltar:
                     return GetComponent<ConvertSkillMetaInfo>()
-                        .GetAltarEffectName(skill, data);
+                        .GetBuildingEffectName(skill, data);
 
                 case SubTag.LifeAltar:
                     return data.ToString();
@@ -144,6 +144,17 @@ namespace AxeMan.GameSystem.UserInterface
                 }
             }
             return null;
+        }
+
+        private string GetTrapEffectName(SubTag subTag)
+        {
+            MainTag mainTag = MainTag.Trap;
+            BuildingEffect building = GetComponent<BuildingEffect>();
+            SkillComponentTag skill = building.GetEffect(mainTag, subTag);
+            int data = building.GetPowerDuration(mainTag, subTag);
+
+            return GetComponent<ConvertSkillMetaInfo>()
+                .GetBuildingEffectName(skill, data);
         }
 
         private void PrintAltarData(GameObject target)
@@ -291,8 +302,13 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintTrapData(GameObject target)
         {
-            string trapText = "Earth-";
-            string trapData = "4 x 4";
+            MainTag mainTag = target.GetComponent<MetaInfo>().MainTag;
+            SubTag subTag = target.GetComponent<MetaInfo>().SubTag;
+
+            string trapText
+                = GetComponent<SkillData>().GetSkillComponentName(
+                    GetComponent<BuildingEffect>().GetEffect(mainTag, subTag));
+            string trapData = GetTrapEffectName(subTag);
 
             SearchText(UITag.HPText).text = trapText;
             SearchText(UITag.HPData).text = trapData;
