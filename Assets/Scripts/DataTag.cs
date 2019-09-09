@@ -8,7 +8,7 @@ namespace AxeMan.GameSystem.GameDataTag
         ActiveAltar,
     }
 
-    public enum ActorDataTag { Name, Cooldown, PowerDuration, AltarEffect, }
+    public enum ActorDataTag { Name, Cooldown, PowerDuration, BuildingEffect, }
 
     public enum BlueprintTag
     {

@@ -9,31 +9,31 @@
       <English>Life Altar</English>
     </Name>
     <PowerDuration>20</PowerDuration>
-    <AltarEffect>Life</AltarEffect>
+    <BuildingEffect>Life</BuildingEffect>
   </LifeAltar>
   <FireAltar>
     <Name>
       <English>Fire Altar</English>
     </Name>
-    <AltarEffect>FireMerit</AltarEffect>
+    <BuildingEffect>FireMerit</BuildingEffect>
   </FireAltar>
   <WaterAltar>
     <Name>
       <English>Water Altar</English>
     </Name>
-    <AltarEffect>WaterMerit</AltarEffect>
+    <BuildingEffect>WaterMerit</BuildingEffect>
   </WaterAltar>
   <AirAltar>
     <Name>
       <English>Air Altar</English>
     </Name>
-    <AltarEffect>AirMerit</AltarEffect>
+    <BuildingEffect>AirMerit</BuildingEffect>
   </AirAltar>
   <EarthAltar>
     <Name>
       <English>Earth Altar</English>
     </Name>
-    <AltarEffect>EarthMerit</AltarEffect>
+    <BuildingEffect>EarthMerit</BuildingEffect>
   </EarthAltar>
   <!--- vim: set lbr sts=2 sw=2: -->
 </AltarData>
