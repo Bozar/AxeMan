@@ -35,10 +35,5 @@
     </Name>
     <AltarEffect>EarthMerit</AltarEffect>
   </EarthAltar>
-  <Floor>
-    <Name>
-      <English>Floor</English>
-    </Name>
-  </Floor>
   <!--- vim: set lbr sts=2 sw=2: -->
 </AltarData>

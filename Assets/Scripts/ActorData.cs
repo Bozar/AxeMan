@@ -89,7 +89,7 @@ namespace AxeMan.GameSystem.GameDataHub
             {
                 character,
                 altar,
-                altar,
+                trap,
                 trap
             };
 

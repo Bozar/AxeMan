@@ -22,5 +22,10 @@
       <English>Earth Trap</English>
     </Name>
   </EarthTrap>
+  <Floor>
+    <Name>
+      <English>Floor</English>
+    </Name>
+  </Floor>
   <!--- vim: set lbr sts=2 sw=2: -->
 </TrapData>
