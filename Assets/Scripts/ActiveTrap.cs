@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem;
+﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.SchedulingSystem;
@@ -23,7 +24,15 @@ namespace AxeMan.DungeonObject
 
             while (trapTags.Count > 0)
             {
-                Debug.Log(trapTags.Pop());
+                BuildingEffect building
+                    = GameCore.AxeManCore.GetComponent<BuildingEffect>();
+                MainTag mainTag = MainTag.Trap;
+                SubTag subTag = trapTags.Pop();
+                SkillComponentTag skill = building.GetEffect(mainTag, subTag);
+                int data = building.GetPowerDuration(mainTag, subTag);
+
+                GetComponent<ActorStatus>().AddStatus(skill,
+                    new EffectData(data, data));
             }
         }
 
