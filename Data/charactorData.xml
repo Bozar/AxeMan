@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CharacterData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DEFAULT>
+    <HP>99</HP>
   </DEFAULT>
   <PC>
     <Name>
       <English>PC</English>
     </Name>
+    <HP>20</HP>
   </PC>
   <Dummy>
     <Name>

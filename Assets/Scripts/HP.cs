@@ -1,4 +1,6 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using System;
 using UnityEngine;
@@ -46,10 +48,11 @@ namespace AxeMan.DungeonObject
 
         private void Awake()
         {
-            // TODO: Get HP from an external XML file.
-            Max = 20;
             Min = 0;
-
+            Max = GameCore.AxeManCore.GetComponent<ActorData>().GetIntData(
+                GetComponent<MetaInfo>().MainTag,
+                GetComponent<MetaInfo>().SubTag,
+                ActorDataTag.HP);
             Current = Max;
         }
 

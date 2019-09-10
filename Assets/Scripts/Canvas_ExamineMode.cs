@@ -226,17 +226,21 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintNPCColumn1(GameObject target)
         {
-            string hpText = "HP";
-            string moveText = "Move";
-            string attackText = "Attack";
-            string cooldownText = "CD";
+            string hpText = GetComponent<UILabelData>().GetStringData(
+                UILabelDataTag.HP);
+            string moveText = GetComponent<UILabelData>().GetStringData(
+                UILabelDataTag.MoveDistance);
+            string attackText = GetComponent<UILabelData>().GetStringData(
+                UILabelDataTag.AttackRange);
+            string cooldownText = GetComponent<UILabelData>().GetStringData(
+                UILabelDataTag.Cooldown);
 
             SearchText(UITag.HPText).text = hpText;
             SearchText(UITag.MoveText).text = moveText;
             SearchText(UITag.AttackText).text = attackText;
             SearchText(UITag.CooldownText).text = cooldownText;
 
-            int hpData = 12;
+            int hpData = target.GetComponent<HP>().Current;
             int moveData = 3;
             int attackData = 1;
             int cooldownData = 7;

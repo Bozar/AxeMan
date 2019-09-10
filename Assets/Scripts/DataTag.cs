@@ -8,7 +8,10 @@ namespace AxeMan.GameSystem.GameDataTag
         ActiveAltar,
     }
 
-    public enum ActorDataTag { Name, Cooldown, PowerDuration, BuildingEffect, }
+    public enum ActorDataTag
+    {
+        Name, Cooldown, HP, PowerDuration, BuildingEffect,
+    }
 
     public enum BlueprintTag
     {
@@ -63,7 +66,7 @@ namespace AxeMan.GameSystem.GameDataTag
         PC, AimMarker, ExamineMarker, StartScreenCursor,
     }
 
-    public enum UILabelDataTag { Cooldown, }
+    public enum UILabelDataTag { Cooldown, HP, MoveDistance, AttackRange, }
 
     public enum UITag
     {
