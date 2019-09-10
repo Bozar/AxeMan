@@ -11,8 +11,9 @@ namespace AxeMan.GameSystem.ObjectFactory
         {
             if (e.Data.GetComponent<MetaInfo>().MainTag == MainTag.Actor)
             {
-                e.Data.AddComponent<HP>();
+                e.Data.AddComponent<ActiveTrap>();
                 e.Data.AddComponent<ActorStatus>();
+                e.Data.AddComponent<HP>();
             }
         }
 
