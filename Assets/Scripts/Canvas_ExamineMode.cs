@@ -241,7 +241,7 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.CooldownText).text = cooldownText;
 
             int hpData = target.GetComponent<HP>().Current;
-            int moveData = 3;
+            int moveData = target.GetComponent<NPCMove>().Distance;
             int attackData = 1;
             int cooldownData = 7;
 

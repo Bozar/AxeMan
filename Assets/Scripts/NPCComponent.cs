@@ -15,6 +15,7 @@ namespace AxeMan.GameSystem.ObjectFactory
                 return;
             }
             e.Data.AddComponent<DummyAI>();
+            e.Data.AddComponent<NPCMove>();
         }
 
         private void Start()
