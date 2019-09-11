@@ -5,21 +5,21 @@ using UnityEngine;
 
 namespace AxeMan.DungeonObject
 {
-    public interface INPCMove
+    public interface INPCAttack
     {
-        int Distance { get; }
+        int AttackRange { get; }
     }
 
-    public class NPCMove : MonoBehaviour, INPCMove
+    public class NPCAttack : MonoBehaviour, INPCAttack
     {
-        private int baseDistance;
+        private int baseAttackRange;
 
-        public int Distance
+        public int AttackRange
         {
             get
             {
                 // TODO: Change data based on actor status.
-                return baseDistance;
+                return baseAttackRange;
             }
         }
 
@@ -27,9 +27,9 @@ namespace AxeMan.DungeonObject
         {
             MainTag mainTag = GetComponent<MetaInfo>().MainTag;
             SubTag subTag = GetComponent<MetaInfo>().SubTag;
-            ActorDataTag dataTag = ActorDataTag.MoveDistance;
+            ActorDataTag dataTag = ActorDataTag.AttackRange;
 
-            baseDistance = GameCore.AxeManCore.GetComponent<ActorData>()
+            baseAttackRange = GameCore.AxeManCore.GetComponent<ActorData>()
                 .GetIntData(mainTag, subTag, dataTag);
         }
     }
