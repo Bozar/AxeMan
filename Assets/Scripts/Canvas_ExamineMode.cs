@@ -243,7 +243,8 @@ namespace AxeMan.GameSystem.UserInterface
             int hpData = target.GetComponent<HP>().Current;
             int moveData = target.GetComponent<NPCMove>().Distance;
             int attackData = target.GetComponent<NPCAttack>().AttackRange;
-            int cooldownData = 7;
+            int cooldownData = target.GetComponent<NPCBonusAction>()
+                .CurrentCooldown;
 
             SearchText(UITag.HPData).text = hpData.ToString();
             SearchText(UITag.MoveData).text = moveData.ToString();
