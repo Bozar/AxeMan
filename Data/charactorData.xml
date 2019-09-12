@@ -5,6 +5,7 @@
     <MoveDistance>99</MoveDistance>
     <AttackRange>99</AttackRange>
     <Cooldown>99</Cooldown>
+    <Damage>99</Damage>
   </DEFAULT>
   <PC>
     <Name>

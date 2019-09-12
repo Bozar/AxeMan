@@ -12,5 +12,8 @@
   <AttackRange>
     <English>Range</English>
   </AttackRange>
+  <Damage>
+    <English>Dmg</English>
+  </Damage>
   <!--- vim: set lbr sts=2 sw=2: -->
 </UILabelData>

@@ -11,7 +11,7 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum ActorDataTag
     {
         Name, Cooldown, HP, PowerDuration, BuildingEffect, MoveDistance,
-        AttackRange,
+        AttackRange, Damage,
     }
 
     public enum BlueprintTag
@@ -67,7 +67,10 @@ namespace AxeMan.GameSystem.GameDataTag
         PC, AimMarker, ExamineMarker, StartScreenCursor,
     }
 
-    public enum UILabelDataTag { Cooldown, HP, MoveDistance, AttackRange, }
+    public enum UILabelDataTag
+    {
+        Cooldown, HP, MoveDistance, AttackRange, Damage,
+    }
 
     public enum UITag
     {
