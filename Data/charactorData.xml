@@ -6,6 +6,8 @@
     <AttackRange>99</AttackRange>
     <Cooldown>99</Cooldown>
     <Damage>99</Damage>
+    <CurseEffect>INVALID</CurseEffect>
+    <CurseData>99</CurseData>
   </DEFAULT>
   <PC>
     <Name>
@@ -17,6 +19,8 @@
     <Name>
       <English>Dummy</English>
     </Name>
+    <CurseEffect>AirCurse</CurseEffect>
+    <CurseData>4</CurseData>
   </Dummy>
   <!--- vim: set lbr sts=2 sw=2: -->
 </CharacterData>

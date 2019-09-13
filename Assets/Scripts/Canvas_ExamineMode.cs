@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
@@ -254,15 +255,22 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintNPCColumn2(GameObject target)
         {
+            SkillComponentTag curseEffect = target.GetComponent<NPCAttack>()
+                .CurseEffect;
+            int powerDuration = target.GetComponent<NPCAttack>().CurseData;
+
             string damageText = GetComponent<UILabelData>().GetStringData(
                 UILabelDataTag.Damage);
-            string curseText = "Earth?";
+            string curseText = GetComponent<SkillData>().GetSkillComponentName(
+               curseEffect);
 
             SearchText(UITag.DamageText).text = damageText;
             SearchText(UITag.CurseText).text = curseText;
 
             int damageData = target.GetComponent<NPCAttack>().Damage;
-            string curseData = "4 x 4";
+            string curseData = GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillEffectName(curseEffect,
+                new EffectData(powerDuration, powerDuration));
 
             SearchText(UITag.DamageData).text = damageData.ToString();
             SearchText(UITag.CurseData).text = curseData;
