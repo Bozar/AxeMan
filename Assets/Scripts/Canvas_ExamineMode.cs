@@ -256,20 +256,16 @@ namespace AxeMan.GameSystem.UserInterface
         {
             string damageText = GetComponent<UILabelData>().GetStringData(
                 UILabelDataTag.Damage);
-            string curse1Text = "Earth?";
-            string curse2Text = "Water?";
+            string curseText = "Earth?";
 
             SearchText(UITag.DamageText).text = damageText;
-            SearchText(UITag.Curse1Text).text = curse1Text;
-            SearchText(UITag.Curse2Text).text = curse2Text;
+            SearchText(UITag.CurseText).text = curseText;
 
             int damageData = target.GetComponent<NPCAttack>().Damage;
-            string curse1Data = "4 x 4";
-            string curse2Data = "T x 2";
+            string curseData = "4 x 4";
 
             SearchText(UITag.DamageData).text = damageData.ToString();
-            SearchText(UITag.Curse1Data).text = curse1Data;
-            SearchText(UITag.Curse2Data).text = curse2Data;
+            SearchText(UITag.CurseData).text = curseData;
         }
 
         private void PrintNPCColumn3(GameObject target)
