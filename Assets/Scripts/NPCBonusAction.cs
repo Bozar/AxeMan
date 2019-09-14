@@ -1,6 +1,8 @@
 ﻿using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.SchedulingSystem;
+using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -16,7 +18,9 @@ namespace AxeMan.DungeonObject
 
     public class NPCBonusAction : MonoBehaviour, INPCBonusAction
     {
-        // TODO: Count down every turn.
+        private int decrease;
+
+        // TODO: Reset to max cooldown.
         public int CurrentCooldown { get; private set; }
 
         public int MaxCooldown { get; private set; }
@@ -33,6 +37,34 @@ namespace AxeMan.DungeonObject
                 .GetIntData(mainTag, subTag, dataTag);
             CurrentCooldown = MaxCooldown;
             MinCooldown = 0;
+
+            decrease = 1;
+        }
+
+        private void NPCBonusAction_StartingTurn(object sender,
+            StartOrEndTurnEventArgs e)
+        {
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
+            {
+                return;
+            }
+            if (GetComponent<ActorStatus>().HasStatus(
+                SkillComponentTag.WaterFlaw, out _))
+            {
+                return;
+            }
+
+            if (CurrentCooldown > MinCooldown)
+            {
+                CurrentCooldown -= decrease;
+            }
+            CurrentCooldown = Math.Max(MinCooldown, CurrentCooldown);
+        }
+
+        private void Start()
+        {
+            GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn
+                += NPCBonusAction_StartingTurn;
         }
     }
 }

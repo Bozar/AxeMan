@@ -21,6 +21,7 @@
     </Name>
     <CurseEffect>AirCurse</CurseEffect>
     <CurseData>4</CurseData>
+    <Cooldown>20</Cooldown>
   </Dummy>
   <!--- vim: set lbr sts=2 sw=2: -->
 </CharacterData>
