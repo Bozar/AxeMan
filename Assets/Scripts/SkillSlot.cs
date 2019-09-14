@@ -145,6 +145,7 @@ namespace AxeMan.DungeonObject.ActorSkill
                 += SkillSlot_CreatedWorld;
         }
 
+        // TODO: Change pre-set skill slot.
         private void TestSkillSlot()
         {
             TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Merit1,
@@ -173,9 +174,9 @@ namespace AxeMan.DungeonObject.ActorSkill
                SkillComponentTag.FireMerit);
 
             TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Merit1,
-                SkillComponentTag.AirCurse);
+                SkillComponentTag.EarthCurse);
             TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Merit2,
-                SkillComponentTag.WaterCurse);
+                SkillComponentTag.EarthCurse);
             TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Flaw2,
                 SkillComponentTag.AirFlaw);
         }

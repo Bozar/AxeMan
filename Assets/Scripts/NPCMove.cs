@@ -1,6 +1,8 @@
-﻿using AxeMan.GameSystem;
+﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
+using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -13,12 +15,17 @@ namespace AxeMan.DungeonObject
     public class NPCMove : MonoBehaviour, INPCMove
     {
         private int baseDistance;
+        private int minDistance;
 
         public int Distance
         {
             get
             {
-                // TODO: Change data based on actor status.
+                if (GetComponent<ActorStatus>().HasStatus(
+                    SkillComponentTag.EarthFlaw, out EffectData effect))
+                {
+                    return Math.Max(minDistance, baseDistance - effect.Power);
+                }
                 return baseDistance;
             }
         }
@@ -31,6 +38,8 @@ namespace AxeMan.DungeonObject
 
             baseDistance = GameCore.AxeManCore.GetComponent<ActorData>()
                 .GetIntData(mainTag, subTag, dataTag);
+
+            minDistance = 1;
         }
     }
 }

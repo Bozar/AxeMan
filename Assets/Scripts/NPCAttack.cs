@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem;
+﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using System;
@@ -19,15 +20,20 @@ namespace AxeMan.DungeonObject
 
     public class NPCAttack : MonoBehaviour, INPCAttack
     {
-        private int baseAttackRange;
         private int baseDamage;
+        private int baseRange;
+        private int minRange;
 
         public int AttackRange
         {
             get
             {
-                // TODO: Change data based on actor status.
-                return baseAttackRange;
+                if (GetComponent<ActorStatus>().HasStatus(
+                    SkillComponentTag.EarthFlaw, out EffectData effect))
+                {
+                    return Math.Max(minRange, baseRange - effect.Power);
+                }
+                return baseRange;
             }
         }
 
@@ -53,7 +59,7 @@ namespace AxeMan.DungeonObject
             ActorDataTag curseEffect = ActorDataTag.CurseEffect;
             ActorDataTag curseData = ActorDataTag.CurseData;
 
-            baseAttackRange = GameCore.AxeManCore.GetComponent<ActorData>()
+            baseRange = GameCore.AxeManCore.GetComponent<ActorData>()
                 .GetIntData(mainTag, subTag, range);
             baseDamage = GameCore.AxeManCore.GetComponent<ActorData>()
                .GetIntData(mainTag, subTag, damage);
@@ -64,6 +70,8 @@ namespace AxeMan.DungeonObject
             CurseEffect = effect;
             CurseData = GameCore.AxeManCore.GetComponent<ActorData>()
               .GetIntData(mainTag, subTag, curseData);
+
+            minRange = 1;
         }
     }
 }

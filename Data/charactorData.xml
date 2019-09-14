@@ -20,6 +20,8 @@
       <English>Dummy</English>
     </Name>
     <Cooldown>20</Cooldown>
+    <MoveDistance>5</MoveDistance>
+    <AttackRange>1</AttackRange>
   </Dummy>
   <!--- vim: set lbr sts=2 sw=2: -->
 </CharacterData>
