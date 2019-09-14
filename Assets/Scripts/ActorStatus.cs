@@ -11,8 +11,6 @@ namespace AxeMan.DungeonObject
 {
     public interface IActorStatus
     {
-        Dictionary<SkillComponentTag, EffectData> CurrentStatus { get; }
-
         void AddStatus(SkillComponentTag skillComponentTag,
             EffectData effectData);
 
@@ -28,15 +26,6 @@ namespace AxeMan.DungeonObject
         private SkillComponentTag[] negativeStatus;
         private SkillComponentTag[] positiveStatus;
         private int reduceDuration;
-
-        public Dictionary<SkillComponentTag, EffectData> CurrentStatus
-        {
-            get
-            {
-                return new Dictionary<SkillComponentTag, EffectData>(
-                    compIntStatus);
-            }
-        }
 
         public void AddStatus(SkillComponentTag skillComponentTag,
             EffectData effectData)

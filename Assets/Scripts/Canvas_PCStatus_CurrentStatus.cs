@@ -5,7 +5,6 @@ using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +15,8 @@ namespace AxeMan.GameSystem.UserInterface
         private ActorStatus actorStatus;
         private CanvasTag canvasTag;
         private SkillComponentTag[] orderedComponents;
-        private UITag[] orderedUIStatusData;
-        private UITag[] orderedUIStatusName;
+        private UITag[] orderedStatusData;
+        private UITag[] orderedStatusName;
         private PCSkillManager skillManager;
         private GameObject[] uiObjects;
 
@@ -38,7 +37,7 @@ namespace AxeMan.GameSystem.UserInterface
                 SkillComponentTag.EarthFlaw,
             };
 
-            orderedUIStatusName = new UITag[]
+            orderedStatusName = new UITag[]
             {
                 UITag.Status1Text,
                 UITag.Status2Text,
@@ -46,7 +45,7 @@ namespace AxeMan.GameSystem.UserInterface
                 UITag.Status4Text,
             };
 
-            orderedUIStatusData = new UITag[]
+            orderedStatusData = new UITag[]
             {
                 UITag.Status1Data,
                 UITag.Status2Data,
@@ -58,8 +57,8 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_PCStatus_CurrentStatus_ChangedActorStatus(
             object sender, EventArgs e)
         {
-            ClearUIText(orderedUIStatusName);
-            ClearUIText(orderedUIStatusData);
+            ClearUIText(orderedStatusName);
+            ClearUIText(orderedStatusData);
             PCStatus();
         }
 
@@ -95,37 +94,20 @@ namespace AxeMan.GameSystem.UserInterface
             }
         }
 
-        private SkillComponentTag[] GetOrderedComponents(
-            Dictionary<SkillComponentTag, EffectData> compInt)
+        private void PCStatus()
         {
-            Queue<SkillComponentTag> ordered = new Queue<SkillComponentTag>();
+            int index = 0;
 
             foreach (SkillComponentTag sct in orderedComponents)
             {
-                if (compInt.ContainsKey(sct))
+                if (actorStatus.HasStatus(sct, out EffectData effectData))
                 {
-                    ordered.Enqueue(sct);
+                    SearchText(orderedStatusName[index]).text =
+                        skillManager.GetSkillComponentName(sct);
+                    SearchText(orderedStatusData[index]).text =
+                        skillManager.GetSkillEffectName(sct, effectData);
+                    index++;
                 }
-            }
-            return ordered.ToArray();
-        }
-
-        private void PCStatus()
-        {
-            Dictionary<SkillComponentTag, EffectData> compInt
-                = actorStatus.CurrentStatus;
-            SkillComponentTag[] orderedComp = GetOrderedComponents(compInt);
-            string statusName;
-            string statusData;
-
-            for (int i = 0; i < orderedComp.Length; i++)
-            {
-                statusName = skillManager.GetSkillComponentName(orderedComp[i]);
-                statusData = skillManager.GetSkillEffectName(
-                    orderedComp[i], compInt[orderedComp[i]]);
-
-                SearchText(orderedUIStatusName[i]).text = statusName;
-                SearchText(orderedUIStatusData[i]).text = statusData;
             }
         }
 

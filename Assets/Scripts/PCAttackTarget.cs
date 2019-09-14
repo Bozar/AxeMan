@@ -66,7 +66,7 @@ namespace AxeMan.DungeonObject
         {
             ActorStatus actorStatus = target.GetComponent<ActorStatus>();
 
-            if (actorStatus.CurrentStatus.TryGetValue(SkillComponentTag.AirFlaw,
+            if (actorStatus.HasStatus(SkillComponentTag.AirFlaw,
                 out EffectData effectData))
             {
                 return effectData.Power;

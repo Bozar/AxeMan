@@ -164,15 +164,14 @@ namespace AxeMan.DungeonObject.ActorSkill
             }
 
             ActorStatus actorStatus = GetComponent<ActorStatus>();
-            if (actorStatus.CurrentStatus.ContainsKey(
-                SkillComponentTag.WaterFlaw))
+            if (actorStatus.HasStatus(SkillComponentTag.WaterFlaw, out _))
             {
                 return;
             }
 
             int decrease;
             int cooldown;
-            if (actorStatus.CurrentStatus.ContainsKey(SkillComponentTag.FireMerit))
+            if (actorStatus.HasStatus(SkillComponentTag.FireMerit, out _))
             {
                 decrease = fastDecrease;
             }

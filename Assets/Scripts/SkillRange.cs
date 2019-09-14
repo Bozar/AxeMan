@@ -84,13 +84,13 @@ namespace AxeMan.DungeonObject.ActorSkill
             ActorStatus actorStatus = GetComponent<ActorStatus>();
             EffectData effectData;
 
-            if (actorStatus.CurrentStatus.TryGetValue(
-                SkillComponentTag.AirMerit, out effectData))
+            if (actorStatus.HasStatus(SkillComponentTag.AirMerit,
+                out effectData))
             {
                 increase = effectData.Power;
             }
-            if (actorStatus.CurrentStatus.TryGetValue(
-                SkillComponentTag.EarthFlaw, out effectData))
+            if (actorStatus.HasStatus(SkillComponentTag.EarthFlaw,
+                out effectData))
             {
                 decrease = effectData.Power;
             }
