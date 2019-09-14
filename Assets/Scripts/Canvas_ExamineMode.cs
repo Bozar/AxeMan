@@ -207,6 +207,37 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.MoveData).text = cooldownData;
         }
 
+        private void PrintCurse(GameObject target)
+        {
+            SkillComponentTag curseEffect = target.GetComponent<NPCAttack>()
+                .CurseEffect;
+            int powerDuration = target.GetComponent<NPCAttack>().CurseData;
+
+            if (curseEffect == SkillComponentTag.INVALID)
+            {
+                return;
+            }
+
+            string curseText = GetComponent<SkillData>().GetSkillComponentName(
+               curseEffect);
+            string curseData = GetComponent<ConvertSkillMetaInfo>()
+                .GetSkillEffectName(curseEffect,
+                new EffectData(powerDuration, powerDuration));
+
+            SearchText(UITag.CurseText).text = curseText;
+            SearchText(UITag.CurseData).text = curseData;
+        }
+
+        private void PrintDamage(GameObject target)
+        {
+            string damageText = GetComponent<UILabelData>().GetStringData(
+                UILabelDataTag.Damage);
+            int damageData = target.GetComponent<NPCAttack>().Damage;
+
+            SearchText(UITag.DamageText).text = damageText;
+            SearchText(UITag.DamageData).text = damageData.ToString();
+        }
+
         private void PrintExamineText(SubTag markerTag)
         {
             GameObject target = GetTargetUnderMarker(markerTag);
@@ -282,25 +313,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintNPCColumn2(GameObject target)
         {
-            SkillComponentTag curseEffect = target.GetComponent<NPCAttack>()
-                .CurseEffect;
-            int powerDuration = target.GetComponent<NPCAttack>().CurseData;
-
-            string damageText = GetComponent<UILabelData>().GetStringData(
-                UILabelDataTag.Damage);
-            string curseText = GetComponent<SkillData>().GetSkillComponentName(
-               curseEffect);
-
-            SearchText(UITag.DamageText).text = damageText;
-            SearchText(UITag.CurseText).text = curseText;
-
-            int damageData = target.GetComponent<NPCAttack>().Damage;
-            string curseData = GetComponent<ConvertSkillMetaInfo>()
-                .GetSkillEffectName(curseEffect,
-                new EffectData(powerDuration, powerDuration));
-
-            SearchText(UITag.DamageData).text = damageData.ToString();
-            SearchText(UITag.CurseData).text = curseData;
+            PrintDamage(target);
+            PrintCurse(target);
         }
 
         private void PrintNPCColumn3(GameObject target)
