@@ -18,11 +18,38 @@ namespace AxeMan.GameSystem.UserInterface
         private CanvasTag canvasTag;
         private MetaInfo examineMetaInfo;
         private LocalManager pcLocalManager;
+        private SkillComponentTag[] sortedFlaws;
+        private UITag[] sortedStatusData;
+        private UITag[] sortedStatusText;
         private GameObject[] uiObjects;
 
         private void Awake()
         {
             canvasTag = CanvasTag.Canvas_ExamineMode;
+
+            sortedFlaws = new SkillComponentTag[]
+            {
+                SkillComponentTag.FireFlaw,
+                SkillComponentTag.WaterFlaw,
+                SkillComponentTag.AirFlaw,
+                SkillComponentTag.EarthFlaw,
+            };
+
+            sortedStatusText = new UITag[]
+            {
+                UITag.Status1Text,
+                UITag.Status2Text,
+                UITag.Status3Text,
+                UITag.Status4Text,
+            };
+
+            sortedStatusData = new UITag[]
+            {
+                UITag.Status1Data,
+                UITag.Status2Data,
+                UITag.Status3Data,
+                UITag.Status4Data,
+            };
         }
 
         private void Canvas_ExamineMode_CreatedWorld(object sender, EventArgs e)
@@ -278,25 +305,21 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintNPCColumn3(GameObject target)
         {
-            string status1Text = "Fire-";
-            string status2Text = "Water-";
-            string status3Text = "Air-";
-            string status4Text = "Earth-";
+            int index = 0;
 
-            SearchText(UITag.Status1Text).text = status1Text;
-            SearchText(UITag.Status2Text).text = status2Text;
-            SearchText(UITag.Status3Text).text = status3Text;
-            SearchText(UITag.Status4Text).text = status4Text;
-
-            string status1Data = "T x 4";
-            string status2Data = "T x 8";
-            string status3Data = "4 x 3";
-            string status4Data = "8 x 1";
-
-            SearchText(UITag.Status1Data).text = status1Data;
-            SearchText(UITag.Status2Data).text = status2Data;
-            SearchText(UITag.Status3Data).text = status3Data;
-            SearchText(UITag.Status4Data).text = status4Data;
+            foreach (SkillComponentTag sct in sortedFlaws)
+            {
+                if (target.GetComponent<ActorStatus>().HasStatus(sct,
+                    out EffectData effectData))
+                {
+                    SearchText(sortedStatusText[index]).text =
+                        GetComponent<SkillData>().GetSkillComponentName(sct);
+                    SearchText(sortedStatusData[index]).text =
+                        GetComponent<ConvertSkillMetaInfo>().GetSkillEffectName(
+                            sct, effectData);
+                    index++;
+                }
+            }
         }
 
         private void PrintNPCData(GameObject target)
