@@ -6,15 +6,21 @@ namespace AxeMan.GameSystem.GameEvent
 {
     public class ChangedHPEventArgs : EventArgs
     {
-        public ChangedHPEventArgs(SubTag sTag, int currentHP)
+        public ChangedHPEventArgs(SubTag subTag, int id, int hp, bool isAlive)
         {
-            STag = sTag;
-            CurrentHP = currentHP;
+            SubTag = subTag;
+            ID = id;
+            CurrentHP = hp;
+            IsAlive = isAlive;
         }
 
         public int CurrentHP { get; }
 
-        public SubTag STag { get; }
+        public int ID { get; }
+
+        public bool IsAlive { get; }
+
+        public SubTag SubTag { get; }
     }
 
     public class PublishHP : MonoBehaviour

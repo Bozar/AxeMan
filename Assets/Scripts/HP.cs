@@ -58,8 +58,12 @@ namespace AxeMan.DungeonObject
 
         private void PublishHP()
         {
+            SubTag subTag = GetComponent<MetaInfo>().SubTag;
+            int id = GetComponent<MetaInfo>().ObjectID;
+            bool isAlive = Current > Min;
+
             GameCore.AxeManCore.GetComponent<PublishHP>().PublishChangedHP(
-               new ChangedHPEventArgs(GetComponent<MetaInfo>().SubTag, Current));
+               new ChangedHPEventArgs(subTag, id, Current, isAlive));
         }
     }
 }

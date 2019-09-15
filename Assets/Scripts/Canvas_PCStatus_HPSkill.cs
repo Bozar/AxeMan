@@ -26,7 +26,7 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_PCStatus_HPSkill_ChangedHP(object sender,
             ChangedHPEventArgs e)
         {
-            if (e.STag != SubTag.PC)
+            if (e.SubTag != SubTag.PC)
             {
                 return;
             }
