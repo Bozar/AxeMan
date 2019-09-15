@@ -40,6 +40,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintTrap>();
             gameObject.AddComponent<BuildingEffect>();
 
+            gameObject.AddComponent<BuryNPC>();
             gameObject.AddComponent<Canvas_ExamineMode>();
             gameObject.AddComponent<Canvas_Message>();
 

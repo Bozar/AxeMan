@@ -22,6 +22,7 @@
     <Cooldown>20</Cooldown>
     <MoveDistance>5</MoveDistance>
     <AttackRange>1</AttackRange>
+    <HP>5</HP>
   </Dummy>
   <!--- vim: set lbr sts=2 sw=2: -->
 </CharacterData>
