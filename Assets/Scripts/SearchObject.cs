@@ -13,6 +13,21 @@ namespace AxeMan.GameSystem.SearchGameObject
         GameObject[] Search(MainTag mainTag);
 
         GameObject[] Search(SubTag subTag);
+
+        GameObject[] Search(int objectID);
+    }
+
+    public class SearchingIDEventArgs : EventArgs
+    {
+        public SearchingIDEventArgs(int objectID, Stack<GameObject> data)
+        {
+            ObjectID = objectID;
+            Data = data;
+        }
+
+        public Stack<GameObject> Data { get; }
+
+        public int ObjectID { get; }
     }
 
     public class SearchingMainTagEventArgs : EventArgs
@@ -56,6 +71,8 @@ namespace AxeMan.GameSystem.SearchGameObject
 
     public class SearchObject : MonoBehaviour, ISearchObject
     {
+        public event EventHandler<SearchingIDEventArgs> SearchingID;
+
         public event EventHandler<SearchingMainTagEventArgs> SearchingMainTag;
 
         public event EventHandler<SearchingPositionEventArgs> SearchingPosition;
@@ -106,6 +123,26 @@ namespace AxeMan.GameSystem.SearchGameObject
 
             OnSearchingSubTag(ea);
             return ea.Data.ToArray();
+        }
+
+        public GameObject[] Search(int objectID)
+        {
+            Stack<GameObject> data = new Stack<GameObject>();
+            var ea = new SearchingIDEventArgs(objectID, data);
+
+            OnSearchingID(ea);
+            return ea.Data.ToArray();
+        }
+
+        public bool Search(int objectID, out GameObject[] result)
+        {
+            result = Search(objectID);
+            return result.Length > 0;
+        }
+
+        protected virtual void OnSearchingID(SearchingIDEventArgs e)
+        {
+            SearchingID?.Invoke(this, e);
         }
 
         protected virtual void OnSearchingMainTag(SearchingMainTagEventArgs e)

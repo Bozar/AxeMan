@@ -15,24 +15,38 @@ namespace AxeMan.DungeonObject.SearchGameObject
                 && (localPosition[1] == position[1]);
         }
 
-        private bool MatchCriteria(SubTag sTag)
+        private bool MatchCriteria(SubTag subTag)
         {
-            return GetComponent<MetaInfo>().SubTag == sTag;
+            return GetComponent<MetaInfo>().SubTag == subTag;
         }
 
-        private bool MatchCriteria(MainTag mTag)
+        private bool MatchCriteria(MainTag mainTag)
         {
-            return GetComponent<MetaInfo>().MainTag == mTag;
+            return GetComponent<MetaInfo>().MainTag == mainTag;
+        }
+
+        private bool MatchCriteria(int objectID)
+        {
+            return GetComponent<MetaInfo>().ObjectID == objectID;
         }
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<SearchObject>().SearchingPosition
-                += SubscribeSearch_SearchingPosition;
-            GameCore.AxeManCore.GetComponent<SearchObject>().SearchingMainTag
-                += SubscribeSearch_SearchingMainTag;
-            GameCore.AxeManCore.GetComponent<SearchObject>().SearchingSubTag
-                += SubscribeSearch_SearchingSubTag;
+            SearchObject so = GameCore.AxeManCore.GetComponent<SearchObject>();
+
+            so.SearchingPosition += SubscribeSearch_SearchingPosition;
+            so.SearchingMainTag += SubscribeSearch_SearchingMainTag;
+            so.SearchingSubTag += SubscribeSearch_SearchingSubTag;
+            so.SearchingID += SubscribeSearch_SearchingID;
+        }
+
+        private void SubscribeSearch_SearchingID(object sender,
+            SearchingIDEventArgs e)
+        {
+            if (MatchCriteria(e.ObjectID))
+            {
+                e.Data.Push(gameObject);
+            }
         }
 
         private void SubscribeSearch_SearchingMainTag(object sender,
