@@ -11,7 +11,7 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum ActorDataTag
     {
         Name, Cooldown, HP, PowerDuration, BuildingEffect, MoveDistance,
-        AttackRange, Damage, CurseEffect, CurseData,
+        AttackRange, Damage, CurseEffect, CurseData, MaxUpgrade, MaxDistance,
     }
 
     public enum BlueprintTag

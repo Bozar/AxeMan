@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.InitializeGameWorld;
@@ -13,7 +14,9 @@ namespace AxeMan.GameSystem
     {
         private int[][] altarPositions;
         private int maxDistance;
+        private int maxUpgrade;
         private GameObject pc;
+        private int upgradeCount;
 
         public event EventHandler<EventArgs> UpgradingAltar;
 
@@ -24,7 +27,40 @@ namespace AxeMan.GameSystem
 
         private void Awake()
         {
-            maxDistance = 2;
+            upgradeCount = 0;
+        }
+
+        private bool CheckDistance(int[] position)
+        {
+            return GetComponent<Distance>().GetDistance(
+                position, pc.GetComponent<MetaInfo>().Position)
+                < maxDistance;
+        }
+
+        private bool CheckUpgrade()
+        {
+            return upgradeCount < maxUpgrade;
+        }
+
+        private void SetAltarPositions()
+        {
+            GameObject[] altars = GetComponent<SearchObject>().Search(
+                MainTag.Altar);
+            Stack<int[]> position = new Stack<int[]>();
+
+            foreach (GameObject go in altars)
+            {
+                position.Push(go.GetComponent<MetaInfo>().Position);
+            }
+            altarPositions = position.ToArray();
+        }
+
+        private void SetMaximums()
+        {
+            maxUpgrade = GetComponent<ActorData>().GetIntData(
+                MainTag.Altar, SubTag.DEFAULT, ActorDataTag.MaxUpgrade);
+            maxDistance = GetComponent<ActorData>().GetIntData(
+                MainTag.Altar, SubTag.DEFAULT, ActorDataTag.MaxDistance);
         }
 
         private void Start()
@@ -45,11 +81,10 @@ namespace AxeMan.GameSystem
 
             foreach (int[] pos in altarPositions)
             {
-                if (GetComponent<Distance>().GetDistance(
-                    pos, pc.GetComponent<MetaInfo>().Position)
-                    < maxDistance)
+                if (CheckDistance(pos) && CheckUpgrade())
                 {
                     OnUpgradingAltar(EventArgs.Empty);
+                    upgradeCount++;
                     break;
                 }
             }
@@ -57,15 +92,8 @@ namespace AxeMan.GameSystem
 
         private void UpgradeAltar_CreatedWorld(object sender, EventArgs e)
         {
-            GameObject[] altars = GetComponent<SearchObject>().Search(
-                MainTag.Altar);
-            Stack<int[]> position = new Stack<int[]>();
-
-            foreach (GameObject go in altars)
-            {
-                position.Push(go.GetComponent<MetaInfo>().Position);
-            }
-            altarPositions = position.ToArray();
+            SetAltarPositions();
+            SetMaximums();
         }
 
         private void UpgradeAltar_SettingReference(object sender,

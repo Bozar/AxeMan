@@ -3,6 +3,8 @@
   <DEFAULT>
     <Cooldown>10</Cooldown>
     <PowerDuration>4</PowerDuration>
+    <MaxUpgrade>3</MaxUpgrade>
+    <MaxDistance>2</MaxDistance>
   </DEFAULT>
   <LifeAltar>
     <Name>
