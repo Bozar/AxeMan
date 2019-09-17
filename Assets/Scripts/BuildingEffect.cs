@@ -28,5 +28,16 @@ namespace AxeMan.GameSystem
             return GetComponent<ActorData>().GetIntData(mainTag, subTag,
                 ActorDataTag.PowerDuration);
         }
+
+        private void BuildingEffect_UpgradingAltar(object sender, EventArgs e)
+        {
+            Debug.Log("Building");
+        }
+
+        private void Start()
+        {
+            GetComponent<UpgradeAltar>().UpgradingAltar
+                += BuildingEffect_UpgradingAltar;
+        }
     }
 }

@@ -15,6 +15,13 @@ namespace AxeMan.GameSystem
         private int maxDistance;
         private GameObject pc;
 
+        public event EventHandler<EventArgs> UpgradingAltar;
+
+        protected virtual void OnUpgradingAltar(EventArgs e)
+        {
+            UpgradingAltar?.Invoke(this, e);
+        }
+
         private void Awake()
         {
             maxDistance = 2;
@@ -42,7 +49,7 @@ namespace AxeMan.GameSystem
                     pos, pc.GetComponent<MetaInfo>().Position)
                     < maxDistance)
                 {
-                    Debug.Log("Upgrade altar");
+                    OnUpgradingAltar(EventArgs.Empty);
                     break;
                 }
             }

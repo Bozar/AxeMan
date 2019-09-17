@@ -58,6 +58,11 @@ namespace AxeMan.GameSystem
             CurrentCooldown = MaxCooldown;
         }
 
+        private void AltarCooldown_UpgradingAltar(object sender, EventArgs e)
+        {
+            Debug.Log("Cooldown");
+        }
+
         private void Awake()
         {
             MinCooldown = 0;
@@ -72,6 +77,8 @@ namespace AxeMan.GameSystem
                 += AltarCooldown_CreatedWorld;
             GetComponent<PublishAction>().TakenAction
                 += AltarCooldown_TakenAction;
+            GetComponent<UpgradeAltar>().UpgradingAltar
+                += AltarCooldown_UpgradingAltar;
         }
     }
 }
