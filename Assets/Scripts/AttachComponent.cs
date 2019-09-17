@@ -96,6 +96,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<TurnManager>();
             gameObject.AddComponent<UILabelData>();
             gameObject.AddComponent<UIManager>();
+            gameObject.AddComponent<UpgradeAltar>();
 
             gameObject.AddComponent<VerifySkillCooldown>();
             gameObject.AddComponent<VerifySkillRange>();
