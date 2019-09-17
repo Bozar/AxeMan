@@ -12,7 +12,13 @@ namespace AxeMan.GameSystem
     public class UpgradeAltar : MonoBehaviour
     {
         private int[][] altarPositions;
+        private int maxDistance;
         private GameObject pc;
+
+        private void Awake()
+        {
+            maxDistance = 2;
+        }
 
         private void Start()
         {
@@ -30,12 +36,15 @@ namespace AxeMan.GameSystem
                 return;
             }
 
-            int[] pos = pc.GetComponent<MetaInfo>().Position;
-            Debug.Log(pos[0] + "," + pos[1]);
-            Debug.Log("==========");
-            foreach (int[] p in altarPositions)
+            foreach (int[] pos in altarPositions)
             {
-                Debug.Log(p[0] + "," + p[1]);
+                if (GetComponent<Distance>().GetDistance(
+                    pos, pc.GetComponent<MetaInfo>().Position)
+                    < maxDistance)
+                {
+                    Debug.Log("Upgrade altar");
+                    break;
+                }
             }
         }
 
