@@ -197,8 +197,10 @@ namespace AxeMan.GameSystem.UserInterface
 
             string cooldownText = GetComponent<UILabelData>().GetStringData(
                 UILabelDataTag.Cooldown);
-            string cooldownData = GetComponent<AltarCooldown>().CurrentCooldown
-                .ToString();
+
+            int currentCD = GetComponent<AltarCooldown>().CurrentCooldown;
+            int maxCD = GetComponent<AltarCooldown>().MaxCooldown;
+            string cooldownData = currentCD + "/" + maxCD;
 
             SearchText(UITag.HPText).text = altarText;
             SearchText(UITag.HPData).text = altarData;
