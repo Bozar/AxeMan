@@ -3,7 +3,8 @@
   <DEFAULT>
     <Cooldown>10</Cooldown>
     <AddCooldown>5</AddCooldown>
-    <PowerDuration>4</PowerDuration>
+    <PowerDuration>3</PowerDuration>
+    <AddPowerDuration>3</AddPowerDuration>
     <MaxUpgrade>3</MaxUpgrade>
     <MaxDistance>2</MaxDistance>
   </DEFAULT>
@@ -11,7 +12,8 @@
     <Name>
       <English>Life Altar</English>
     </Name>
-    <PowerDuration>20</PowerDuration>
+    <PowerDuration>5</PowerDuration>
+    <AddPowerDuration>5</AddPowerDuration>
     <BuildingEffect>Life</BuildingEffect>
   </LifeAltar>
   <FireAltar>

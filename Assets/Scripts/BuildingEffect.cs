@@ -14,6 +14,8 @@ namespace AxeMan.GameSystem
 
     public class BuildingEffect : MonoBehaviour, IBuildingEffect
     {
+        private int countUpgrade;
+
         public SkillComponentTag GetEffect(MainTag mainTag, SubTag subTag)
         {
             string effect = (string)GetComponent<ActorData>().GetXElementData(
@@ -25,13 +27,35 @@ namespace AxeMan.GameSystem
 
         public int GetPowerDuration(MainTag mainTag, SubTag subTag)
         {
-            return GetComponent<ActorData>().GetIntData(mainTag, subTag,
-                ActorDataTag.PowerDuration);
+            int data;
+            int baseAltar;
+            int bonusAltar;
+
+            if (mainTag == MainTag.Altar)
+            {
+                baseAltar = GetComponent<ActorData>().GetIntData(
+                    mainTag, subTag, ActorDataTag.PowerDuration);
+                bonusAltar = GetComponent<ActorData>().GetIntData(
+                    mainTag, subTag, ActorDataTag.AddPowerDuration);
+
+                data = baseAltar + countUpgrade * bonusAltar;
+            }
+            else
+            {
+                data = GetComponent<ActorData>().GetIntData(mainTag, subTag,
+                    ActorDataTag.PowerDuration);
+            }
+            return data;
+        }
+
+        private void Awake()
+        {
+            countUpgrade = 0;
         }
 
         private void BuildingEffect_UpgradingAltar(object sender, EventArgs e)
         {
-            Debug.Log("Building");
+            countUpgrade++;
         }
 
         private void Start()
