@@ -15,7 +15,7 @@ namespace AxeMan.GameSystem
         private int[][] altarPositions;
         private int maxDistance;
         private int maxUpgrade;
-        private GameObject pc;
+        private MetaInfo pcMetaInfo;
         private int upgradeCount;
 
         public event EventHandler<EventArgs> UpgradingAltar;
@@ -33,7 +33,7 @@ namespace AxeMan.GameSystem
         private bool CheckDistance(int[] position)
         {
             return GetComponent<Distance>().GetDistance(
-                position, pc.GetComponent<MetaInfo>().Position)
+                position, pcMetaInfo.Position)
                 < maxDistance;
         }
 
@@ -99,7 +99,7 @@ namespace AxeMan.GameSystem
         private void UpgradeAltar_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
-            pc = e.PC;
+            pcMetaInfo = e.PC.GetComponent<MetaInfo>();
         }
     }
 }
