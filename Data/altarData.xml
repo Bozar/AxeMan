@@ -2,6 +2,7 @@
 <AltarData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DEFAULT>
     <Cooldown>10</Cooldown>
+    <AddCooldown>5</AddCooldown>
     <PowerDuration>4</PowerDuration>
     <MaxUpgrade>3</MaxUpgrade>
     <MaxDistance>2</MaxDistance>

@@ -21,6 +21,8 @@ namespace AxeMan.GameSystem
     // to GameCore.AxeManCore.
     public class AltarCooldown : MonoBehaviour, IAltarCooldown
     {
+        private int addCooldown;
+
         public int CurrentCooldown { get; private set; }
 
         public int MaxCooldown { get; private set; }
@@ -31,6 +33,8 @@ namespace AxeMan.GameSystem
         {
             MaxCooldown = GetComponent<ActorData>().GetIntData(
                 MainTag.Altar, SubTag.DEFAULT, ActorDataTag.Cooldown);
+            addCooldown = GetComponent<ActorData>().GetIntData(
+                MainTag.Altar, SubTag.DEFAULT, ActorDataTag.AddCooldown);
         }
 
         private void AltarCooldown_StartingTurn(object sender,
@@ -60,7 +64,8 @@ namespace AxeMan.GameSystem
 
         private void AltarCooldown_UpgradingAltar(object sender, EventArgs e)
         {
-            Debug.Log("Cooldown");
+            MaxCooldown += addCooldown;
+            CurrentCooldown = MaxCooldown;
         }
 
         private void Awake()
