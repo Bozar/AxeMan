@@ -13,6 +13,11 @@ namespace AxeMan.DungeonObject.PlayerInput
             GetComponent<PCInputManager>().enabled = enable;
         }
 
+        private void PCInputSwitcher_BuryingPC(object sender, EventArgs e)
+        {
+            Debug.Log("PC input");
+        }
+
         private void PCInputSwitcher_EndingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
@@ -71,6 +76,9 @@ namespace AxeMan.DungeonObject.PlayerInput
                 += PCInputSwitcher_EnteringExamineMode;
             GameCore.AxeManCore.GetComponent<ExamineMode>().LeavingExamineMode
                 += PCInputSwitcher_LeavingExamineMode;
+
+            GameCore.AxeManCore.GetComponent<BuryPC>().BuryingPC
+                += PCInputSwitcher_BuryingPC;
         }
     }
 }

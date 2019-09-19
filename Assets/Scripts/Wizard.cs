@@ -80,7 +80,7 @@ namespace AxeMan.GameSystem
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
 
             pc.GetComponent<HP>().Subtract(5);
-            pc.GetComponent<HP>().Add(2);
+            //pc.GetComponent<HP>().Add(2);
         }
 
         private void Wizard_PlayerCommanding(object sender,

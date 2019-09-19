@@ -114,6 +114,12 @@ namespace AxeMan.GameSystem.SchedulingSystem
         {
             GetComponent<PublishAction>().CheckingSchedule
                 += TurnManager_CheckingSchedule;
+            GetComponent<BuryPC>().BuryingPC += TurnManager_BuryingPC;
+        }
+
+        private void TurnManager_BuryingPC(object sender, EventArgs e)
+        {
+            Debug.Log("Turn manager");
         }
 
         private void TurnManager_CheckingSchedule(object sender,
