@@ -2,6 +2,7 @@
 using AxeMan.GameSystem.PlayerInput;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AxeMan.GameSystem.GameMode
 {
@@ -23,6 +24,15 @@ namespace AxeMan.GameSystem.GameMode
             return e.Command == CommandTag.Confirm;
         }
 
+        private bool ReloadGame(PlayerCommandingEventArgs e)
+        {
+            if (e.SubTag != SubTag.PC)
+            {
+                return false;
+            }
+            return e.Command == CommandTag.Reload;
+        }
+
         private void Start()
         {
             GetComponent<InputManager>().PlayerCommanding
@@ -35,6 +45,10 @@ namespace AxeMan.GameSystem.GameMode
             if (LeaveStartScreen(e))
             {
                 OnLeavingStartScreen(EventArgs.Empty);
+            }
+            else if (ReloadGame(e))
+            {
+                SceneManager.LoadSceneAsync(0);
             }
         }
     }
