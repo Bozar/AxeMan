@@ -29,7 +29,7 @@ namespace AxeMan.GameSystem
 
             switch (e.Command)
             {
-                case CommandTag.Reload:
+                case CommandTag.ForceReload:
                     SceneManager.LoadSceneAsync(0);
                     break;
 

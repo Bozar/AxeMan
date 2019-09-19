@@ -14,7 +14,7 @@ namespace AxeMan.GameSystem.PlayerInput
 
             if (reload)
             {
-                return CommandTag.Reload;
+                return CommandTag.ForceReload;
             }
             else if (schedule)
             {
