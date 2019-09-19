@@ -56,12 +56,13 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ConvertSkillMetaInfo>();
             gameObject.AddComponent<CreateObject>();
 
+            gameObject.AddComponent<DeadPCInput>();
             gameObject.AddComponent<Distance>();
             gameObject.AddComponent<DungeonBoard>();
             gameObject.AddComponent<ExamineInput>();
             gameObject.AddComponent<ExamineMarkerComponent>();
-            gameObject.AddComponent<ExamineMode>();
 
+            gameObject.AddComponent<ExamineMode>();
             gameObject.AddComponent<GameCore>();
             gameObject.AddComponent<InitializeStartScreen>();
             gameObject.AddComponent<InputManager>();
