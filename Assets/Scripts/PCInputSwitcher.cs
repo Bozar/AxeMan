@@ -15,7 +15,7 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         private void PCInputSwitcher_BuryingPC(object sender, EventArgs e)
         {
-            Debug.Log("PC input");
+            EnableInput(false);
         }
 
         private void PCInputSwitcher_EndingTurn(object sender,

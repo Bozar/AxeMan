@@ -32,6 +32,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
     public class TurnManager : MonoBehaviour, ITurnManager
     {
         private ActionTag[] endingTurnActions;
+        private bool pauseTurn;
 
         public event EventHandler<StartOrEndTurnEventArgs> EndedTurn;
 
@@ -53,7 +54,10 @@ namespace AxeMan.GameSystem.SchedulingSystem
         {
             EndTurn();
             GetComponent<Schedule>().GotoNext();
-            StartTurn();
+            if (!pauseTurn)
+            {
+                StartTurn();
+            }
 
             return GetComponent<Schedule>().Current;
         }
@@ -88,6 +92,8 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         private void Awake()
         {
+            pauseTurn = false;
+
             endingTurnActions = new ActionTag[]
             {
                 ActionTag.Skip,
@@ -119,7 +125,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
 
         private void TurnManager_BuryingPC(object sender, EventArgs e)
         {
-            Debug.Log("Turn manager");
+            pauseTurn = true;
         }
 
         private void TurnManager_CheckingSchedule(object sender,
