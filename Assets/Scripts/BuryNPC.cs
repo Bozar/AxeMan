@@ -22,8 +22,15 @@ namespace AxeMan.GameSystem
             }
 
             GameObject actor = actors[0];
+            bool isCurrentActor = (actor == GetComponent<Schedule>().Current);
             actor.GetComponent<LocalManager>().Remove();
-            GetComponent<TurnManager>().StartTurn();
+
+            // Call StartTurn() manually only when an active actor kills himself.
+            // Otherwise StartTurn() will be called implicitly.
+            if (isCurrentActor)
+            {
+                GetComponent<TurnManager>().StartTurn();
+            }
         }
 
         private void Start()
