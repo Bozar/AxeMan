@@ -1,6 +1,7 @@
 ﻿using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.SearchGameObject;
 using UnityEngine;
 
@@ -59,8 +60,8 @@ namespace AxeMan.DungeonObject
 
         private void Start()
         {
-            GetComponent<PCMove>().BlockingPCMovement
-                += PCActiveAltar_BlockingPCMovement;
+            GameCore.AxeManCore.GetComponent<PublishPosition>()
+                .BlockingPCMovement += PCActiveAltar_BlockingPCMovement;
         }
     }
 }
