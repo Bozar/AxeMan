@@ -25,19 +25,20 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data.AddComponent<PCAttackTarget>();
             e.Data.AddComponent<PCBuffSelf>();
 
+            e.Data.AddComponent<PCBumpAttack>();
             e.Data.AddComponent<PCCheckTerrain>();
             e.Data.AddComponent<PCCurseTarget>();
             e.Data.AddComponent<PCInputSwitcher>();
             e.Data.AddComponent<PCMove>();
+
             e.Data.AddComponent<PCSkillManager>();
             e.Data.AddComponent<PCStartEndTurn>();
-
             e.Data.AddComponent<PCTeleportSelf>();
             e.Data.AddComponent<PCUseSKill>();
             e.Data.AddComponent<SkillCooldown>();
+
             e.Data.AddComponent<SkillDamage>();
             e.Data.AddComponent<SkillEffect>();
-
             e.Data.AddComponent<SkillMetaInfo>();
             e.Data.AddComponent<SkillRange>();
             e.Data.AddComponent<SkillSlot>();
