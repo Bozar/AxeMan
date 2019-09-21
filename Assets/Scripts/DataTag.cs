@@ -5,7 +5,7 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum ActionTag
     {
         INVALID, Skip, Move, UseSkillQ, UseSkillW, UseSkillE, UseSkillR,
-        ActiveAltar,
+        ActiveAltar, BumpAttack,
     }
 
     public enum ActorDataTag

@@ -22,6 +22,8 @@ namespace AxeMan.DungeonObject
 
             Debug.Log(actor.GetComponent<MetaInfo>().SubTag);
             Debug.Log(actor.GetComponent<MetaInfo>().Position[0]);
+
+            GetComponent<LocalManager>().CheckingSchedule(ActionTag.BumpAttack);
         }
 
         private void Start()
