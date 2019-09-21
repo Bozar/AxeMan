@@ -6,6 +6,7 @@
     <AttackRange>99</AttackRange>
     <Cooldown>99</Cooldown>
     <Damage>99</Damage>
+    <BumpDamage>0</BumpDamage>
     <CurseEffect>INVALID</CurseEffect>
     <CurseData>99</CurseData>
   </DEFAULT>
@@ -14,6 +15,7 @@
       <English>PC</English>
     </Name>
     <HP>20</HP>
+    <BumpDamage>1</BumpDamage>
   </PC>
   <Dummy>
     <Name>
