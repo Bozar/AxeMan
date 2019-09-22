@@ -56,10 +56,10 @@ namespace AxeMan.DungeonObject.ActorSkill
             nameComp = new Dictionary<SkillNameTag,
                 Dictionary<SkillComponentTag, EffectData>>()
             {
-                { SkillNameTag.Q, null },
-                { SkillNameTag.W, null },
-                { SkillNameTag.E, null },
-                { SkillNameTag.R, null },
+                { SkillNameTag.SkillQ, null },
+                { SkillNameTag.SkillW, null },
+                { SkillNameTag.SkillE, null },
+                { SkillNameTag.SkillR, null },
             };
         }
 

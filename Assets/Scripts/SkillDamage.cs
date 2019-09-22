@@ -50,10 +50,10 @@ namespace AxeMan.DungeonObject.ActorSkill
 
             nameDamage = new Dictionary<SkillNameTag, int>
             {
-                { SkillNameTag.Q, invalidDamage },
-                { SkillNameTag.W, invalidDamage },
-                { SkillNameTag.E, invalidDamage },
-                { SkillNameTag.R, invalidDamage },
+                { SkillNameTag.SkillQ, invalidDamage },
+                { SkillNameTag.SkillW, invalidDamage },
+                { SkillNameTag.SkillE, invalidDamage },
+                { SkillNameTag.SkillR, invalidDamage },
             };
         }
 

@@ -90,13 +90,17 @@ namespace AxeMan.DungeonObject.ActorSkill
 
             maxCDDict = new Dictionary<SkillNameTag, int>()
             {
-                { SkillNameTag.Q, invalidCD }, { SkillNameTag.W, invalidCD },
-                { SkillNameTag.E, invalidCD }, { SkillNameTag.R, invalidCD },
+                { SkillNameTag.SkillQ, invalidCD },
+                { SkillNameTag.SkillW, invalidCD },
+                { SkillNameTag.SkillE, invalidCD },
+                { SkillNameTag.SkillR, invalidCD },
             };
             currentCDDict = new Dictionary<SkillNameTag, int>()
             {
-                { SkillNameTag.Q, MinCooldown }, { SkillNameTag.W, MinCooldown },
-                { SkillNameTag.E, MinCooldown }, { SkillNameTag.R, MinCooldown },
+                { SkillNameTag.SkillQ, MinCooldown },
+                { SkillNameTag.SkillW, MinCooldown },
+                { SkillNameTag.SkillE, MinCooldown },
+                { SkillNameTag.SkillR, MinCooldown },
             };
         }
 

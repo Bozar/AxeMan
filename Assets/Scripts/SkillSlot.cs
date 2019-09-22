@@ -86,7 +86,10 @@ namespace AxeMan.DungeonObject.ActorSkill
                 Dictionary<SkillSlotTag, SkillComponentTag>>();
             SkillNameTag[] skillNameTags = new SkillNameTag[]
             {
-                SkillNameTag.Q, SkillNameTag.W, SkillNameTag.E, SkillNameTag.R
+                SkillNameTag.SkillQ,
+                SkillNameTag.SkillW,
+                SkillNameTag.SkillE,
+                SkillNameTag.SkillR,
             };
 
             foreach (SkillNameTag snt in skillNameTags)
@@ -148,36 +151,36 @@ namespace AxeMan.DungeonObject.ActorSkill
         // TODO: Change pre-set skill slot.
         private void TestSkillSlot()
         {
-            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Merit1,
+            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Merit1,
                 SkillComponentTag.AirMerit);
-            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Merit2,
+            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Merit2,
                 SkillComponentTag.AirCurse);
-            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Flaw1,
+            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Flaw1,
                 SkillComponentTag.AirFlaw);
-            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Flaw2,
+            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Flaw2,
                SkillComponentTag.AirFlaw);
-            TrySetSkillSlot(SkillNameTag.Q, SkillSlotTag.Flaw3,
+            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Flaw3,
               SkillComponentTag.EarthFlaw);
 
-            TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Merit1,
+            TrySetSkillSlot(SkillNameTag.SkillW, SkillSlotTag.Merit1,
                 SkillComponentTag.AirMerit);
-            TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Merit2,
+            TrySetSkillSlot(SkillNameTag.SkillW, SkillSlotTag.Merit2,
                 SkillComponentTag.AirMerit);
-            TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Merit3,
+            TrySetSkillSlot(SkillNameTag.SkillW, SkillSlotTag.Merit3,
                 SkillComponentTag.AirMerit);
-            TrySetSkillSlot(SkillNameTag.W, SkillSlotTag.Flaw1,
+            TrySetSkillSlot(SkillNameTag.SkillW, SkillSlotTag.Flaw1,
                 SkillComponentTag.WaterFlaw);
 
-            TrySetSkillSlot(SkillNameTag.E, SkillSlotTag.Merit1,
+            TrySetSkillSlot(SkillNameTag.SkillE, SkillSlotTag.Merit1,
                 SkillComponentTag.FireMerit);
-            TrySetSkillSlot(SkillNameTag.E, SkillSlotTag.Merit3,
+            TrySetSkillSlot(SkillNameTag.SkillE, SkillSlotTag.Merit3,
                SkillComponentTag.FireMerit);
 
-            TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Merit1,
+            TrySetSkillSlot(SkillNameTag.SkillR, SkillSlotTag.Merit1,
                 SkillComponentTag.EarthCurse);
-            TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Merit2,
+            TrySetSkillSlot(SkillNameTag.SkillR, SkillSlotTag.Merit2,
                 SkillComponentTag.EarthCurse);
-            TrySetSkillSlot(SkillNameTag.R, SkillSlotTag.Flaw2,
+            TrySetSkillSlot(SkillNameTag.SkillR, SkillSlotTag.Flaw2,
                 SkillComponentTag.AirFlaw);
         }
 

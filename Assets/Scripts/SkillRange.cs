@@ -44,10 +44,10 @@ namespace AxeMan.DungeonObject.ActorSkill
 
             nameRange = new Dictionary<SkillNameTag, int>
             {
-                [SkillNameTag.Q] = invalidRange,
-                [SkillNameTag.W] = invalidRange,
-                [SkillNameTag.E] = invalidRange,
-                [SkillNameTag.R] = invalidRange,
+                [SkillNameTag.SkillQ] = invalidRange,
+                [SkillNameTag.SkillW] = invalidRange,
+                [SkillNameTag.SkillE] = invalidRange,
+                [SkillNameTag.SkillR] = invalidRange,
             };
         }
 

@@ -55,7 +55,7 @@ namespace AxeMan.GameSystem
         {
             GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
             PCSkillManager skillManager = pc.GetComponent<PCSkillManager>();
-            var effectDict = skillManager.GetSkillEffect(SkillNameTag.E);
+            var effectDict = skillManager.GetSkillEffect(SkillNameTag.SkillE);
             string compName;
             string effect;
 

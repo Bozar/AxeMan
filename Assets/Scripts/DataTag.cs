@@ -55,7 +55,7 @@ namespace AxeMan.GameSystem.GameDataTag
         FireCurse, WaterCurse, AirCurse, EarthCurse,
     };
 
-    public enum SkillNameTag { INVALID, Q, W, E, R }
+    public enum SkillNameTag { INVALID, SkillQ, SkillW, SkillE, SkillR }
 
     public enum SkillSlotTag { Merit1, Merit2, Merit3, Flaw1, Flaw2, Flaw3, }
 

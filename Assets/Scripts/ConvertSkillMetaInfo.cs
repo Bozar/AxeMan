@@ -51,22 +51,22 @@ namespace AxeMan.GameSystem
                 case UITag.QText:
                 case UITag.QData:
                 case UITag.QType:
-                    return SkillNameTag.Q;
+                    return SkillNameTag.SkillQ;
 
                 case UITag.WText:
                 case UITag.WData:
                 case UITag.WType:
-                    return SkillNameTag.W;
+                    return SkillNameTag.SkillW;
 
                 case UITag.EText:
                 case UITag.EData:
                 case UITag.EType:
-                    return SkillNameTag.E;
+                    return SkillNameTag.SkillE;
 
                 case UITag.RText:
                 case UITag.RData:
                 case UITag.RType:
-                    return SkillNameTag.R;
+                    return SkillNameTag.SkillR;
 
                 default:
                     return SkillNameTag.INVALID;
@@ -78,16 +78,16 @@ namespace AxeMan.GameSystem
             switch (commandTag)
             {
                 case CommandTag.SkillQ:
-                    return SkillNameTag.Q;
+                    return SkillNameTag.SkillQ;
 
                 case CommandTag.SkillW:
-                    return SkillNameTag.W;
+                    return SkillNameTag.SkillW;
 
                 case CommandTag.SkillE:
-                    return SkillNameTag.E;
+                    return SkillNameTag.SkillE;
 
                 case CommandTag.SkillR:
-                    return SkillNameTag.R;
+                    return SkillNameTag.SkillR;
 
                 default:
                     return SkillNameTag.INVALID;
@@ -99,16 +99,16 @@ namespace AxeMan.GameSystem
             switch (actionTag)
             {
                 case ActionTag.UseSkillQ:
-                    return SkillNameTag.Q;
+                    return SkillNameTag.SkillQ;
 
                 case ActionTag.UseSkillW:
-                    return SkillNameTag.W;
+                    return SkillNameTag.SkillW;
 
                 case ActionTag.UseSkillE:
-                    return SkillNameTag.E;
+                    return SkillNameTag.SkillE;
 
                 case ActionTag.UseSkillR:
-                    return SkillNameTag.R;
+                    return SkillNameTag.SkillR;
 
                 default:
                     return SkillNameTag.INVALID;
