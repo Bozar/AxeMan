@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SkillTemplate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- Type: Attack, Move, Buff, Curse -->
+  <!-- FireMerit, FireFlaw, FireCurse -->
+  <!-- WaterMerit, WaterFlaw, WaterCurse -->
+  <!-- AirMerit, AirFlaw, AirCurse -->
+  <!-- EarthMerit, EarthFlaw, EarthCurse -->
+  <SkillQ>
+    <SKillType>Attack</SKillType>
+    <Merit1>AirMerit</Merit1>
+    <Merit2>AirCurse</Merit2>
+    <Merit3></Merit3>
+    <Flaw1>AirFlaw</Flaw1>
+    <Flaw2>AirFlaw</Flaw2>
+    <Flaw3>EarthFlaw</Flaw3>
+  </SkillQ>
+  <SkillW>
+    <SKillType>Move</SKillType>
+    <Merit1>AirMerit</Merit1>
+    <Merit2>AirMerit</Merit2>
+    <Merit3>AirMerit</Merit3>
+    <Flaw1>WaterFlaw</Flaw1>
+    <Flaw2></Flaw2>
+    <Flaw3></Flaw3>
+  </SkillW>
+  <SkillE>
+    <SKillType>Buff</SKillType>
+    <Merit1>FireMerit</Merit1>
+    <Merit2></Merit2>
+    <Merit3>FireMerit</Merit3>
+    <Flaw1></Flaw1>
+    <Flaw2></Flaw2>
+    <Flaw3></Flaw3>
+  </SkillE>
+  <SkillR>
+    <SKillType>Curse</SKillType>
+    <Merit1>EarthCurse</Merit1>
+    <Merit2>EarthCurse</Merit2>
+    <Merit3></Merit3>
+    <Flaw1></Flaw1>
+    <Flaw2>AirFlaw</Flaw2>
+    <Flaw3></Flaw3>
+  </SkillR>
+  <!--- vim: set lbr sts=2 sw=2: -->
+</SkillTemplate>
