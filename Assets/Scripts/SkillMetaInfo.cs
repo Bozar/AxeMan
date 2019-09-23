@@ -8,10 +8,6 @@ namespace AxeMan.DungeonObject.ActorSkill
     public interface ISkillMetaInfo
     {
         SkillTypeTag GetSkillTypeTag(SkillNameTag skillNameTag);
-
-        SkillTypeTag GetSkillTypeTag(CommandTag commandTag);
-
-        SkillTypeTag GetSkillTypeTag(UITag uiTag);
     }
 
     public class SkillMetaInfo : MonoBehaviour, ISkillMetaInfo
