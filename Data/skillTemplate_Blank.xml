@@ -6,7 +6,7 @@
   <!-- AirMerit, AirFlaw, AirCurse -->
   <!-- EarthMerit, EarthFlaw, EarthCurse -->
   <SkillQ>
-    <SKillType></SKillType>
+    <SkillType></SkillType>
     <Merit1></Merit1>
     <Merit2></Merit2>
     <Merit3></Merit3>
@@ -15,7 +15,7 @@
     <Flaw3></Flaw3>
   </SkillQ>
   <SkillW>
-    <SKillType></SKillType>
+    <SkillType></SkillType>
     <Merit1></Merit1>
     <Merit2></Merit2>
     <Merit3></Merit3>
@@ -24,7 +24,7 @@
     <Flaw3></Flaw3>
   </SkillW>
   <SkillE>
-    <SKillType></SKillType>
+    <SkillType></SkillType>
     <Merit1></Merit1>
     <Merit2></Merit2>
     <Merit3></Merit3>
@@ -33,7 +33,7 @@
     <Flaw3></Flaw3>
   </SkillE>
   <SkillR>
-    <SKillType></SKillType>
+    <SkillType></SkillType>
     <Merit1></Merit1>
     <Merit2></Merit2>
     <Merit3></Merit3>

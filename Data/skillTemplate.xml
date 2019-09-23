@@ -6,7 +6,7 @@
   <!-- AirMerit, AirFlaw, AirCurse -->
   <!-- EarthMerit, EarthFlaw, EarthCurse -->
   <SkillQ>
-    <SKillType>Attack</SKillType>
+    <SkillType>Attack</SkillType>
     <Merit1>AirMerit</Merit1>
     <Merit2>AirCurse</Merit2>
     <Merit3></Merit3>
@@ -15,7 +15,7 @@
     <Flaw3>EarthFlaw</Flaw3>
   </SkillQ>
   <SkillW>
-    <SKillType>Move</SKillType>
+    <SkillType>Move</SkillType>
     <Merit1>AirMerit</Merit1>
     <Merit2>AirMerit</Merit2>
     <Merit3>AirMerit</Merit3>
@@ -24,7 +24,7 @@
     <Flaw3></Flaw3>
   </SkillW>
   <SkillE>
-    <SKillType>Buff</SKillType>
+    <SkillType>Buff</SkillType>
     <Merit1>FireMerit</Merit1>
     <Merit2></Merit2>
     <Merit3>FireMerit</Merit3>
@@ -33,7 +33,7 @@
     <Flaw3></Flaw3>
   </SkillE>
   <SkillR>
-    <SKillType>Curse</SKillType>
+    <SkillType>Curse</SkillType>
     <Merit1>EarthCurse</Merit1>
     <Merit2>EarthCurse</Merit2>
     <Merit3></Merit3>
