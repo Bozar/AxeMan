@@ -91,6 +91,7 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<SkillData>();
             gameObject.AddComponent<SkillInput>();
+            gameObject.AddComponent<SkillTemplateData>();
             gameObject.AddComponent<StartScreen>();
             gameObject.AddComponent<StartScreenCursorComponent>();
 
