@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.InitializeGameWorld;
 using System;
@@ -21,6 +22,8 @@ namespace AxeMan.DungeonObject.ActorSkill
 
     public class SkillSlot : MonoBehaviour, ISkillSlot
     {
+        private SkillNameTag[] skillNameTags;
+
         private Dictionary<SkillNameTag,
             Dictionary<SkillSlotTag, SkillComponentTag>> slotCompDict;
 
@@ -84,7 +87,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             slotCompDict = new Dictionary<SkillNameTag,
                 Dictionary<SkillSlotTag, SkillComponentTag>>();
-            SkillNameTag[] skillNameTags = new SkillNameTag[]
+            skillNameTags = new SkillNameTag[]
             {
                 SkillNameTag.SkillQ,
                 SkillNameTag.SkillW,
@@ -137,51 +140,30 @@ namespace AxeMan.DungeonObject.ActorSkill
                 };
         }
 
+        private void LoadSkillSlot()
+        {
+            Dictionary<SkillSlotTag, SkillComponentTag> slotCompDict;
+
+            foreach (SkillNameTag name in skillNameTags)
+            {
+                slotCompDict = GameCore.AxeManCore
+                    .GetComponent<SkillTemplateData>().GetSkillSlot(name);
+                foreach (SkillSlotTag slot in slotCompDict.Keys)
+                {
+                    TrySetSkillSlot(name, slot, slotCompDict[slot]);
+                }
+            }
+        }
+
         private void SkillSlot_CreatedWorld(object sender, EventArgs e)
         {
-            TestSkillSlot();
+            LoadSkillSlot();
         }
 
         private void Start()
         {
             GameCore.AxeManCore.GetComponent<InitializeMainGame>().CreatedWorld
                 += SkillSlot_CreatedWorld;
-        }
-
-        // TODO: Change pre-set skill slot.
-        private void TestSkillSlot()
-        {
-            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Merit1,
-                SkillComponentTag.AirMerit);
-            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Merit2,
-                SkillComponentTag.AirCurse);
-            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Flaw1,
-                SkillComponentTag.AirFlaw);
-            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Flaw2,
-               SkillComponentTag.AirFlaw);
-            TrySetSkillSlot(SkillNameTag.SkillQ, SkillSlotTag.Flaw3,
-              SkillComponentTag.EarthFlaw);
-
-            TrySetSkillSlot(SkillNameTag.SkillW, SkillSlotTag.Merit1,
-                SkillComponentTag.AirMerit);
-            TrySetSkillSlot(SkillNameTag.SkillW, SkillSlotTag.Merit2,
-                SkillComponentTag.AirMerit);
-            TrySetSkillSlot(SkillNameTag.SkillW, SkillSlotTag.Merit3,
-                SkillComponentTag.AirMerit);
-            TrySetSkillSlot(SkillNameTag.SkillW, SkillSlotTag.Flaw1,
-                SkillComponentTag.WaterFlaw);
-
-            TrySetSkillSlot(SkillNameTag.SkillE, SkillSlotTag.Merit1,
-                SkillComponentTag.FireMerit);
-            TrySetSkillSlot(SkillNameTag.SkillE, SkillSlotTag.Merit3,
-               SkillComponentTag.FireMerit);
-
-            TrySetSkillSlot(SkillNameTag.SkillR, SkillSlotTag.Merit1,
-                SkillComponentTag.EarthCurse);
-            TrySetSkillSlot(SkillNameTag.SkillR, SkillSlotTag.Merit2,
-                SkillComponentTag.EarthCurse);
-            TrySetSkillSlot(SkillNameTag.SkillR, SkillSlotTag.Flaw2,
-                SkillComponentTag.AirFlaw);
         }
 
         private bool VerifyFlawSlot(SkillComponentTag skillComponentTag)
