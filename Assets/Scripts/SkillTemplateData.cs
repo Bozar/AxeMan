@@ -18,14 +18,22 @@ namespace AxeMan.GameSystem.GameDataHub
 
     public class SkillTemplateData : MonoBehaviour, ISkillTemplateData
     {
+        private Dictionary<SkillNameTag,
+            Dictionary<SkillSlotTag, SkillComponentTag>> nameSlotCompDict;
+
         private Dictionary<SkillNameTag, SkillTypeTag> nameTypeDict;
         private SkillNameTag[] skillNames;
+        private SkillSlotTag[] skillSlots;
         private XElement templateFile;
 
         public Dictionary<SkillSlotTag, SkillComponentTag> GetSkillSlot(
             SkillNameTag skillNameTag)
         {
-            throw new System.NotImplementedException();
+            if (nameSlotCompDict.TryGetValue(skillNameTag, out var slotComp))
+            {
+                return new Dictionary<SkillSlotTag, SkillComponentTag>(slotComp);
+            }
+            return null;
         }
 
         public SkillTypeTag GetSkillTypeTag(SkillNameTag skillNameTag)
@@ -39,7 +47,6 @@ namespace AxeMan.GameSystem.GameDataHub
 
         private void Awake()
         {
-            nameTypeDict = new Dictionary<SkillNameTag, SkillTypeTag>();
             skillNames = new SkillNameTag[]
             {
                 SkillNameTag.SkillQ,
@@ -47,6 +54,26 @@ namespace AxeMan.GameSystem.GameDataHub
                 SkillNameTag.SkillE,
                 SkillNameTag.SkillR,
             };
+
+            skillSlots = new SkillSlotTag[]
+            {
+                SkillSlotTag.Merit1,
+                SkillSlotTag.Merit2,
+                SkillSlotTag.Merit3,
+                SkillSlotTag.Flaw1,
+                SkillSlotTag.Flaw2,
+                SkillSlotTag.Flaw3,
+            };
+
+            nameTypeDict = new Dictionary<SkillNameTag, SkillTypeTag>();
+
+            nameSlotCompDict = new Dictionary<SkillNameTag,
+                Dictionary<SkillSlotTag, SkillComponentTag>>();
+            foreach (SkillNameTag snt in skillNames)
+            {
+                nameSlotCompDict[snt]
+                    = new Dictionary<SkillSlotTag, SkillComponentTag>();
+            }
         }
 
         private void LoadFile()
@@ -55,6 +82,23 @@ namespace AxeMan.GameSystem.GameDataHub
             string directory = "Data";
 
             templateFile = GetComponent<SaveLoadXML>().Load(file, directory);
+        }
+
+        private void SetSkillSlot()
+        {
+            foreach (SkillNameTag name in skillNames)
+            {
+                foreach (SkillSlotTag slot in skillSlots)
+                {
+                    if (TryGetData(name, slot, out XElement xElement)
+                        && Enum.TryParse((string)xElement,
+                        out SkillComponentTag data)
+                        && (data != SkillComponentTag.INVALID))
+                    {
+                        nameSlotCompDict[name][slot] = data;
+                    }
+                }
+            }
         }
 
         private void SetSkillType()
@@ -75,6 +119,7 @@ namespace AxeMan.GameSystem.GameDataHub
         {
             LoadFile();
             SetSkillType();
+            SetSkillSlot();
         }
 
         private void Start()
