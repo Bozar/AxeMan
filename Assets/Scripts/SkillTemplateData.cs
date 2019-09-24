@@ -18,6 +18,8 @@ namespace AxeMan.GameSystem.GameDataHub
 
     public class SkillTemplateData : MonoBehaviour, ISkillTemplateData
     {
+        private Dictionary<SkillNameTag, SkillTypeTag> nameTypeDict;
+        private SkillNameTag[] skillNames;
         private XElement templateFile;
 
         public Dictionary<SkillSlotTag, SkillComponentTag> GetSkillSlot(
@@ -28,22 +30,51 @@ namespace AxeMan.GameSystem.GameDataHub
 
         public SkillTypeTag GetSkillTypeTag(SkillNameTag skillNameTag)
         {
-            if (TryGetData(skillNameTag, SkillSlotTag.SkillType,
-                out XElement xElement)
-                && Enum.TryParse((string)xElement, out SkillTypeTag data))
+            if (nameTypeDict.TryGetValue(skillNameTag, out SkillTypeTag data))
             {
                 return data;
             }
             return SkillTypeTag.INVALID;
         }
 
-        private void SkillTemplateData_LoadingGameData(object sender,
-            EventArgs e)
+        private void Awake()
+        {
+            nameTypeDict = new Dictionary<SkillNameTag, SkillTypeTag>();
+            skillNames = new SkillNameTag[]
+            {
+                SkillNameTag.SkillQ,
+                SkillNameTag.SkillW,
+                SkillNameTag.SkillE,
+                SkillNameTag.SkillR,
+            };
+        }
+
+        private void LoadFile()
         {
             string file = "skillTemplate.xml";
             string directory = "Data";
 
             templateFile = GetComponent<SaveLoadXML>().Load(file, directory);
+        }
+
+        private void SetSkillType()
+        {
+            foreach (SkillNameTag snt in skillNames)
+            {
+                if (TryGetData(snt, SkillSlotTag.SkillType,
+                    out XElement xElement))
+                {
+                    Enum.TryParse((string)xElement, out SkillTypeTag data);
+                    nameTypeDict[snt] = data;
+                }
+            }
+        }
+
+        private void SkillTemplateData_LoadingGameData(object sender,
+            EventArgs e)
+        {
+            LoadFile();
+            SetSkillType();
         }
 
         private void Start()
