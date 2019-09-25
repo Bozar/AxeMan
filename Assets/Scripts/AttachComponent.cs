@@ -70,6 +70,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<MarkerPosition>();
             gameObject.AddComponent<MovementInput>();
             gameObject.AddComponent<NPCComponent>();
+            gameObject.AddComponent<ObjectOnBoard>();
             gameObject.AddComponent<ObjectPool>();
 
             gameObject.AddComponent<PCComponent>();
