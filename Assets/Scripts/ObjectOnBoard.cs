@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.GameDataTag;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,17 +20,35 @@ namespace AxeMan.GameSystem
 
         public void Add(GameObject go)
         {
-            throw new System.NotImplementedException();
+            MainTag mainTag = go.GetComponent<MetaInfo>().MainTag;
+            int[] position = go.GetComponent<MetaInfo>().Position;
+
+            board[mainTag][position[0], position[1]] = go;
         }
 
         public void Remove(GameObject go)
         {
-            throw new System.NotImplementedException();
+            MainTag mainTag = go.GetComponent<MetaInfo>().MainTag;
+            int[] position = go.GetComponent<MetaInfo>().Position;
+
+            if (board[mainTag][position[0], position[1]] == go)
+            {
+                board[mainTag][position[0], position[1]] = null;
+            }
         }
 
         public GameObject[] Search(int x, int y)
         {
-            throw new System.NotImplementedException();
+            Stack<GameObject> goStack = new Stack<GameObject>();
+
+            foreach (MainTag mt in board.Keys)
+            {
+                if (board[mt][x, y] != null)
+                {
+                    goStack.Push(board[mt][x, y]);
+                }
+            }
+            return goStack.ToArray();
         }
 
         private void Awake()
