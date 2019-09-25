@@ -71,6 +71,8 @@ namespace AxeMan.GameSystem.SearchGameObject
 
     public class SearchObject : MonoBehaviour, ISearchObject
     {
+        private bool searchInArray;
+
         public event EventHandler<SearchingIDEventArgs> SearchingID;
 
         public event EventHandler<SearchingMainTagEventArgs> SearchingMainTag;
@@ -99,12 +101,19 @@ namespace AxeMan.GameSystem.SearchGameObject
 
         public GameObject[] Search(int x, int y)
         {
-            int[] pos = new int[] { x, y };
-            Stack<GameObject> data = new Stack<GameObject>();
-            var ea = new SearchingPositionEventArgs(pos, data);
+            if (searchInArray)
+            {
+                return null;
+            }
+            else
+            {
+                int[] pos = new int[] { x, y };
+                Stack<GameObject> data = new Stack<GameObject>();
+                var ea = new SearchingPositionEventArgs(pos, data);
 
-            OnSearchingPosition(ea);
-            return ea.Data.ToArray();
+                OnSearchingPosition(ea);
+                return ea.Data.ToArray();
+            }
         }
 
         public GameObject[] Search(MainTag mainTag)
@@ -158,6 +167,11 @@ namespace AxeMan.GameSystem.SearchGameObject
         protected virtual void OnSearchingSubTag(SearchingSubTagEventArgs e)
         {
             SearchingSubTag?.Invoke(this, e);
+        }
+
+        private void Awake()
+        {
+            searchInArray = false;
         }
 
         private GameObject[] Filter(GameObject[] source, MainTag mainTag)
