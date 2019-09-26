@@ -32,12 +32,13 @@ namespace AxeMan.DungeonObject
             ActionTag action;
             if (GetComponent<NPCAttack>().IsInsideRage)
             {
-                Debug.Log("Attack");
+                GetComponent<NPCAttack>().DealDamage();
+                GetComponent<NPCAttack>().Curse();
+
                 action = ActionTag.NPCAttack;
             }
             else
             {
-                Debug.Log("Move");
                 action = ActionTag.Move;
             }
 

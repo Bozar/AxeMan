@@ -19,6 +19,10 @@ namespace AxeMan.DungeonObject
         int Damage { get; }
 
         bool IsInsideRage { get; }
+
+        void Curse();
+
+        void DealDamage();
     }
 
     public class NPCAttack : MonoBehaviour, INPCAttack
@@ -49,8 +53,7 @@ namespace AxeMan.DungeonObject
         {
             get
             {
-                // TODO: Change data based on actor status.
-                return baseDamage;
+                return baseDamage + ModDamage();
             }
         }
 
@@ -65,6 +68,20 @@ namespace AxeMan.DungeonObject
 
                 return AttackRange >= range;
             }
+        }
+
+        public void Curse()
+        {
+            if (CurseEffect != SkillComponentTag.INVALID)
+            {
+                pc.GetComponent<ActorStatus>().AddStatus(CurseEffect,
+                    new EffectData(CurseData, CurseData));
+            }
+        }
+
+        public void DealDamage()
+        {
+            pc.GetComponent<HP>().Subtract(Damage);
         }
 
         private void Awake()
@@ -89,6 +106,16 @@ namespace AxeMan.DungeonObject
               .GetIntData(mainTag, subTag, curseData);
 
             minRange = 1;
+        }
+
+        private int ModDamage()
+        {
+            if (pc.GetComponent<ActorStatus>().HasStatus(
+                SkillComponentTag.AirFlaw, out EffectData effectData))
+            {
+                return effectData.Power;
+            }
+            return 0;
         }
 
         private void NPCAttack_SettingReference(object sender,
