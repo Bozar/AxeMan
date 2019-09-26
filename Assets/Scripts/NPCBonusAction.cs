@@ -24,7 +24,6 @@ namespace AxeMan.DungeonObject
         private int decrease;
         private int restoreHP;
 
-        // TODO: Reset to max cooldown.
         public int CurrentCooldown { get; private set; }
 
         public bool HasBonusAction
@@ -42,6 +41,7 @@ namespace AxeMan.DungeonObject
         public void TakeBonusAction()
         {
             GetComponent<HP>().Add(restoreHP);
+            CurrentCooldown = MaxCooldown;
         }
 
         private void Awake()
