@@ -2,6 +2,7 @@
 using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.InitializeGameWorld;
 using System;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace AxeMan.DungeonObject
         SkillComponentTag CurseEffect { get; }
 
         int Damage { get; }
+
+        bool IsInsideRage { get; }
     }
 
     public class NPCAttack : MonoBehaviour, INPCAttack
@@ -23,6 +26,7 @@ namespace AxeMan.DungeonObject
         private int baseDamage;
         private int baseRange;
         private int minRange;
+        private GameObject pc;
 
         public int AttackRange
         {
@@ -50,6 +54,19 @@ namespace AxeMan.DungeonObject
             }
         }
 
+        public bool IsInsideRage
+        {
+            get
+            {
+                int[] npcPos = GetComponent<MetaInfo>().Position;
+                int[] pcPos = pc.GetComponent<MetaInfo>().Position;
+                int range = GameCore.AxeManCore.GetComponent<Distance>()
+                    .GetDistance(npcPos, pcPos);
+
+                return AttackRange >= range;
+            }
+        }
+
         private void Awake()
         {
             MainTag mainTag = GetComponent<MetaInfo>().MainTag;
@@ -72,6 +89,18 @@ namespace AxeMan.DungeonObject
               .GetIntData(mainTag, subTag, curseData);
 
             minRange = 1;
+        }
+
+        private void NPCAttack_SettingReference(object sender,
+            SettingReferenceEventArgs e)
+        {
+            pc = e.PC;
+        }
+
+        private void Start()
+        {
+            GameCore.AxeManCore.GetComponent<InitializeMainGame>()
+                .SettingReference += NPCAttack_SettingReference;
         }
     }
 }
