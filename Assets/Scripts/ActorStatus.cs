@@ -3,6 +3,7 @@ using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.SchedulingSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace AxeMan.DungeonObject
     public class ActorStatus : MonoBehaviour, IActorStatus
     {
         private Dictionary<SkillComponentTag, EffectData> compIntStatus;
+        private int maxPowerDuration;
         private SkillComponentTag[] negativeStatus;
         private SkillComponentTag[] positiveStatus;
         private int reduceDuration;
@@ -32,6 +34,7 @@ namespace AxeMan.DungeonObject
         {
             TryMergeStatus(skillComponentTag, effectData);
             TryNegateStatus();
+            SetMaxPowerDuration();
 
             PublishPCStatus();
         }
@@ -86,6 +89,7 @@ namespace AxeMan.DungeonObject
         {
             compIntStatus = new Dictionary<SkillComponentTag, EffectData>();
             reduceDuration = 1;
+            maxPowerDuration = 9;
 
             positiveStatus = new SkillComponentTag[]
             {
@@ -113,6 +117,17 @@ namespace AxeMan.DungeonObject
             }
             GameCore.AxeManCore.GetComponent<PublishActorStatus>()
                 .PublishChangedActorStatus();
+        }
+
+        private void SetMaxPowerDuration()
+        {
+            foreach (SkillComponentTag sct in compIntStatus.Keys)
+            {
+                compIntStatus[sct].Power
+                    = Math.Min(maxPowerDuration, compIntStatus[sct].Power);
+                compIntStatus[sct].Duration
+                    = Math.Min(maxPowerDuration, compIntStatus[sct].Duration);
+            }
         }
 
         private void Start()
