@@ -2,7 +2,6 @@
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.SchedulingSystem;
-using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -11,21 +10,39 @@ namespace AxeMan.DungeonObject
     {
         int CurrentCooldown { get; }
 
+        bool HasBonusAction { get; }
+
         int MaxCooldown { get; }
 
         int MinCooldown { get; }
+
+        void TakeBonusAction();
     }
 
     public class NPCBonusAction : MonoBehaviour, INPCBonusAction
     {
         private int decrease;
+        private int restoreHP;
 
         // TODO: Reset to max cooldown.
         public int CurrentCooldown { get; private set; }
 
+        public bool HasBonusAction
+        {
+            get
+            {
+                return CurrentCooldown == MinCooldown;
+            }
+        }
+
         public int MaxCooldown { get; private set; }
 
         public int MinCooldown { get; private set; }
+
+        public void TakeBonusAction()
+        {
+            GetComponent<HP>().Add(restoreHP);
+        }
 
         private void Awake()
         {
@@ -58,11 +75,15 @@ namespace AxeMan.DungeonObject
             {
                 CurrentCooldown -= decrease;
             }
-            CurrentCooldown = Math.Max(MinCooldown, CurrentCooldown);
         }
 
         private void Start()
         {
+            MainTag mainTag = GetComponent<MetaInfo>().MainTag;
+            SubTag subTag = GetComponent<MetaInfo>().SubTag;
+            restoreHP = GameCore.AxeManCore.GetComponent<ActorData>()
+                .GetIntData(mainTag, subTag, ActorDataTag.RestoreHP);
+
             GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn
                 += NPCBonusAction_StartingTurn;
         }
