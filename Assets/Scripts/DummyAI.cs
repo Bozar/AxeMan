@@ -24,7 +24,22 @@ namespace AxeMan.DungeonObject
                 return;
             }
 
-            ActionTag action = ActionTag.Skip;
+            if (GetComponent<NPCBonusAction>().HasBonusAction)
+            {
+                GetComponent<NPCBonusAction>().TakeBonusAction();
+            }
+
+            ActionTag action;
+            if (GetComponent<NPCAttack>().IsInsideRage)
+            {
+                Debug.Log("Attack");
+                action = ActionTag.NPCAttack;
+            }
+            else
+            {
+                Debug.Log("Move");
+                action = ActionTag.Move;
+            }
 
             GetComponent<LocalManager>().TakingAction(action);
             GetComponent<LocalManager>().TakenAction(action);
