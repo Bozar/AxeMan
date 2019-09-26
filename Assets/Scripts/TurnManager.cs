@@ -104,6 +104,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
                 ActionTag.UseSkillR,
                 ActionTag.ActiveAltar,
                 ActionTag.BumpAttack,
+                ActionTag.NPCAttack,
             };
         }
 
