@@ -23,7 +23,10 @@ namespace AxeMan.GameSystem
 
             GameObject actor = actors[0];
             bool isCurrentActor = (actor == GetComponent<Schedule>().Current);
+            int[] position = actor.GetComponent<MetaInfo>().Position;
+
             actor.GetComponent<LocalManager>().Remove();
+            GetComponent<TileOverlay>().TryHideTile(position);
 
             // Call StartTurn() manually only when an active actor kills himself.
             // Otherwise StartTurn() will be called implicitly.
