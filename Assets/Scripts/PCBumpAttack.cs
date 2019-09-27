@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem;
+﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
@@ -13,6 +14,18 @@ namespace AxeMan.DungeonObject
     {
         private int bumpDamage;
 
+        private int GetDamage(ActorStatus actor)
+        {
+            int extraDamage = 0;
+
+            if (actor.HasStatus(SkillComponentTag.AirFlaw,
+                out EffectData effectData))
+            {
+                extraDamage = effectData.Power;
+            }
+            return bumpDamage + extraDamage;
+        }
+
         private void PCBumpAttack_BlockingPCMovement(object sender,
             BlockPCMovementEventArgs e)
         {
@@ -25,7 +38,8 @@ namespace AxeMan.DungeonObject
             }
 
             GameObject actor = actors[0];
-            actor.GetComponent<HP>().Subtract(bumpDamage);
+            int damage = GetDamage(actor.GetComponent<ActorStatus>());
+            actor.GetComponent<HP>().Subtract(damage);
 
             GetComponent<LocalManager>().CheckingSchedule(ActionTag.BumpAttack);
         }
