@@ -1,5 +1,4 @@
 ﻿using AxeMan.DungeonObject;
-using AxeMan.DungeonObject.SearchGameObject;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PrototypeFactory;
 using System;
@@ -59,8 +58,6 @@ namespace AxeMan.GameSystem.ObjectFactory
                 go = Instantiate(Resources.Load(proto.SubTag.ToString())
                    as GameObject);
                 go.AddComponent<MetaInfo>().SetValue(proto);
-                go.AddComponent<LocalManager>();
-                go.AddComponent<SubscribeSearch>();
 
                 // Puslish an event to add specific components when necessary.
                 OnAddingComponent(new AddingComponentEventArgs(go));
