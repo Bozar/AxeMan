@@ -74,6 +74,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<NPCComponent>();
             gameObject.AddComponent<ObjectPool>();
 
+            gameObject.AddComponent<PathFinding>();
             gameObject.AddComponent<PCComponent>();
             gameObject.AddComponent<ProgressBar>();
 

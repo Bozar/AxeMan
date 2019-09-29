@@ -3,6 +3,7 @@ using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -45,6 +46,8 @@ namespace AxeMan.DungeonObject
         {
             ResetMap(passableMap, passableInitial);
             ResetMap(trapMap, trapInitial);
+
+            SearchObstacleEventArgs e = SearchObstacle();
         }
 
         private void Awake()
@@ -80,6 +83,19 @@ namespace AxeMan.DungeonObject
                     map[i, j] = initial;
                 }
             }
+        }
+
+        private SearchObstacleEventArgs SearchObstacle()
+        {
+            Stack<int[]> impassable = new Stack<int[]>();
+            Stack<int[]> trap = new Stack<int[]>();
+            int[] pc = new int[] { };
+            SearchObstacleEventArgs e = new SearchObstacleEventArgs(pc,
+                impassable, trap);
+
+            GameCore.AxeManCore.GetComponent<PathFinding>()
+                .PublishSearchObstacle(e);
+            return e;
         }
     }
 }

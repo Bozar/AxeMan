@@ -15,6 +15,7 @@ namespace AxeMan.GameSystem.ObjectFactory
                 return;
             }
             e.Data.AddComponent<LocalManager>();
+            e.Data.AddComponent<SubscribePathFinding>();
             e.Data.AddComponent<SubscribeSearch>();
         }
 
