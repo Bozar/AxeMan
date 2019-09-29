@@ -39,6 +39,8 @@ namespace AxeMan.DungeonObject
             }
             else
             {
+                GetComponent<NPCMove>().Approach();
+
                 action = ActionTag.Move;
             }
 

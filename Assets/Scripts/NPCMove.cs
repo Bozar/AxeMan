@@ -10,12 +10,21 @@ namespace AxeMan.DungeonObject
     public interface INPCMove
     {
         int Distance { get; }
+
+        void Approach();
     }
 
     public class NPCMove : MonoBehaviour, INPCMove
     {
         private int baseDistance;
+        private int impassable;
         private int minDistance;
+        private int move;
+        private int passableInitial;
+        private int[,] passableMap;
+        private int trap;
+        private int trapInitial;
+        private int[,] trapMap;
 
         public int Distance
         {
@@ -30,6 +39,10 @@ namespace AxeMan.DungeonObject
             }
         }
 
+        public void Approach()
+        {
+        }
+
         private void Awake()
         {
             MainTag mainTag = GetComponent<MetaInfo>().MainTag;
@@ -38,8 +51,20 @@ namespace AxeMan.DungeonObject
 
             baseDistance = GameCore.AxeManCore.GetComponent<ActorData>()
                 .GetIntData(mainTag, subTag, dataTag);
-
             minDistance = 1;
+
+            int width = GameCore.AxeManCore.GetComponent<DungeonBoard>().Width;
+            int height = GameCore.AxeManCore.GetComponent<DungeonBoard>().Height;
+
+            passableMap = new int[width, height];
+            trapMap = new int[width, height];
+
+            passableInitial = -99999;
+            trapInitial = 0;
+
+            impassable = 99999;
+            move = 10;
+            trap = 5;
         }
     }
 }
