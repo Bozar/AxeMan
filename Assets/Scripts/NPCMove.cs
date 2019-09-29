@@ -17,6 +17,7 @@ namespace AxeMan.DungeonObject
     public class NPCMove : MonoBehaviour, INPCMove
     {
         private int baseDistance;
+        private int height;
         private int impassable;
         private int minDistance;
         private int move;
@@ -25,6 +26,7 @@ namespace AxeMan.DungeonObject
         private int trap;
         private int trapInitial;
         private int[,] trapMap;
+        private int width;
 
         public int Distance
         {
@@ -41,6 +43,8 @@ namespace AxeMan.DungeonObject
 
         public void Approach()
         {
+            ResetMap(passableMap, passableInitial);
+            ResetMap(trapMap, trapInitial);
         }
 
         private void Awake()
@@ -53,8 +57,8 @@ namespace AxeMan.DungeonObject
                 .GetIntData(mainTag, subTag, dataTag);
             minDistance = 1;
 
-            int width = GameCore.AxeManCore.GetComponent<DungeonBoard>().Width;
-            int height = GameCore.AxeManCore.GetComponent<DungeonBoard>().Height;
+            width = GameCore.AxeManCore.GetComponent<DungeonBoard>().Width;
+            height = GameCore.AxeManCore.GetComponent<DungeonBoard>().Height;
 
             passableMap = new int[width, height];
             trapMap = new int[width, height];
@@ -65,6 +69,17 @@ namespace AxeMan.DungeonObject
             impassable = 99999;
             move = 10;
             trap = 5;
+        }
+
+        private void ResetMap(int[,] map, int initial)
+        {
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    map[i, j] = initial;
+                }
+            }
         }
     }
 }
