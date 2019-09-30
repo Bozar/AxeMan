@@ -48,6 +48,7 @@ namespace AxeMan.DungeonObject
             ResetMap(trapMap, trapInitial);
 
             SearchObstacleEventArgs e = SearchObstacle();
+            SetImpassableObstacle(e.Impassable);
         }
 
         private void Awake()
@@ -96,6 +97,17 @@ namespace AxeMan.DungeonObject
             GameCore.AxeManCore.GetComponent<PathFinding>()
                 .PublishSearchObstacle(e);
             return e;
+        }
+
+        private void SetImpassableObstacle(Stack<int[]> obstacle)
+        {
+            int[] position;
+
+            while (obstacle.Count > 0)
+            {
+                position = obstacle.Pop();
+                passableMap[position[0], position[1]] = impassable;
+            }
         }
     }
 }
