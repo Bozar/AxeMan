@@ -5,6 +5,7 @@ using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.SchedulingSystem;
 using AxeMan.GameSystem.SearchGameObject;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -13,6 +14,7 @@ namespace AxeMan.DungeonObject
     {
         private GameObject[] traps;
         private Stack<SubTag> trapTags;
+        private ActionTag[] validActions;
 
         private void ActiveTrap_EndingTurn(object sender,
             StartOrEndTurnEventArgs e)
@@ -39,7 +41,8 @@ namespace AxeMan.DungeonObject
         private void ActiveTrap_TakenAction(object sender,
             PublishActionEventArgs e)
         {
-            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID)
+                || !validActions.Contains(e.Action))
             {
                 return;
             }
@@ -58,6 +61,16 @@ namespace AxeMan.DungeonObject
         private void Awake()
         {
             trapTags = new Stack<SubTag>();
+
+            validActions = new ActionTag[]
+            {
+                ActionTag.Move,
+                ActionTag.UseSkillQ,
+                ActionTag.UseSkillW,
+                ActionTag.UseSkillE,
+                ActionTag.UseSkillR,
+                ActionTag.NPCFindPath,
+            };
         }
 
         private void Start()
