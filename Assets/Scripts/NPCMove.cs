@@ -20,14 +20,13 @@ namespace AxeMan.DungeonObject
         private int baseDistance;
         private int height;
         private int impassable;
+        private int[,] map;
+        private int mapInitial;
         private int minDistance;
         private int move;
-        private int passableInitial;
-        private int[,] passableMap;
         private int trap;
-        private int trapInitial;
-        private int[,] trapMap;
         private int width;
+        private int zeroPoint;
 
         public int Distance
         {
@@ -44,11 +43,16 @@ namespace AxeMan.DungeonObject
 
         public void Approach()
         {
-            ResetMap(passableMap, passableInitial);
-            ResetMap(trapMap, trapInitial);
+            ResetMap();
 
             SearchObstacleEventArgs e = SearchObstacle();
-            SetImpassableObstacle(e.Impassable);
+            Stack<int[]> startPoint = new Stack<int[]>();
+            startPoint.Push(e.PC);
+
+            SetZeroPoint(e.PC);
+            SetDistance(startPoint);
+            SetObstacle(e.Impassable, impassable, false);
+            SetObstacle(e.Trap, trap, true);
         }
 
         private void Awake()
@@ -63,25 +67,45 @@ namespace AxeMan.DungeonObject
 
             width = GameCore.AxeManCore.GetComponent<DungeonBoard>().Width;
             height = GameCore.AxeManCore.GetComponent<DungeonBoard>().Height;
+            map = new int[width, height];
 
-            passableMap = new int[width, height];
-            trapMap = new int[width, height];
-
-            passableInitial = -99999;
-            trapInitial = 0;
+            mapInitial = -99999;
+            zeroPoint = 0;
 
             impassable = 99999;
             move = 10;
-            trap = 5;
+            trap = 20;
         }
 
-        private void ResetMap(int[,] map, int initial)
+        private bool DistanceNotSet(int[] position)
+        {
+            return map[position[0], position[1]] == mapInitial;
+        }
+
+        private int GetMinDistance(int[] position)
+        {
+            int[][] neighbors = GameCore.AxeManCore.GetComponent<Distance>()
+                .GetNeighbor(position);
+            int minDistance = impassable;
+
+            foreach (int[] pos in neighbors)
+            {
+                if (DistanceNotSet(pos))
+                {
+                    continue;
+                }
+                minDistance = Math.Min(minDistance, map[pos[0], pos[1]]);
+            }
+            return minDistance;
+        }
+
+        private void ResetMap()
         {
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    map[i, j] = initial;
+                    map[i, j] = mapInitial;
                 }
             }
         }
@@ -99,15 +123,52 @@ namespace AxeMan.DungeonObject
             return e;
         }
 
-        private void SetImpassableObstacle(Stack<int[]> obstacle)
+        private void SetDistance(Stack<int[]> startPoint)
+        {
+            if (startPoint.Count < 1)
+            {
+                return;
+            }
+
+            int[] check = startPoint.Pop();
+            int[][] neighbors = GameCore.AxeManCore.GetComponent<Distance>()
+                .GetNeighbor(check);
+
+            foreach (int[] pos in neighbors)
+            {
+                if (DistanceNotSet(pos))
+                {
+                    map[pos[0], pos[1]] = move + GetMinDistance(pos);
+                    startPoint.Push(pos);
+                }
+            }
+
+            SetDistance(startPoint);
+        }
+
+        private void SetObstacle(Stack<int[]> obstacle, int distance,
+            bool addDistance)
         {
             int[] position;
 
             while (obstacle.Count > 0)
             {
                 position = obstacle.Pop();
-                passableMap[position[0], position[1]] = impassable;
+
+                if (addDistance)
+                {
+                    map[position[0], position[1]] += distance;
+                }
+                else
+                {
+                    map[position[0], position[1]] = distance;
+                }
             }
+        }
+
+        private void SetZeroPoint(int[] position)
+        {
+            map[position[0], position[1]] = zeroPoint;
         }
     }
 }
