@@ -11,7 +11,7 @@ namespace AxeMan.DungeonObject
     {
         int Distance { get; }
 
-        void Approach();
+        void Approach(int moveDistance);
     }
 
     public class NPCMove : MonoBehaviour, INPCMove
@@ -32,13 +32,13 @@ namespace AxeMan.DungeonObject
             }
         }
 
-        public void Approach()
+        public void Approach(int moveDistance)
         {
             int[] source = GetComponent<MetaInfo>().Position;
-            // TODO: Set maxStep
-            int maxStep = 0;
+            int move = Math.Min(moveDistance, Distance);
             int[][] path = GetComponent<NPCFindPath>().GetNextStep(
-                source, maxStep);
+                source, move);
+
             // TODO: Follow the given path.
         }
 

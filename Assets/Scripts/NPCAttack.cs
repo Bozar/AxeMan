@@ -18,11 +18,11 @@ namespace AxeMan.DungeonObject
 
         int Damage { get; }
 
-        bool IsInsideRage { get; }
-
         void Curse();
 
         void DealDamage();
+
+        bool IsInsideRage(out int outOfRange);
     }
 
     public class NPCAttack : MonoBehaviour, INPCAttack
@@ -57,19 +57,6 @@ namespace AxeMan.DungeonObject
             }
         }
 
-        public bool IsInsideRage
-        {
-            get
-            {
-                int[] npcPos = GetComponent<MetaInfo>().Position;
-                int[] pcPos = pc.GetComponent<MetaInfo>().Position;
-                int range = GameCore.AxeManCore.GetComponent<Distance>()
-                    .GetDistance(npcPos, pcPos);
-
-                return AttackRange >= range;
-            }
-        }
-
         public void Curse()
         {
             if (CurseEffect != SkillComponentTag.INVALID)
@@ -82,6 +69,17 @@ namespace AxeMan.DungeonObject
         public void DealDamage()
         {
             pc.GetComponent<HP>().Subtract(Damage);
+        }
+
+        public bool IsInsideRage(out int outOfRange)
+        {
+            int[] npcPos = GetComponent<MetaInfo>().Position;
+            int[] pcPos = pc.GetComponent<MetaInfo>().Position;
+            int range = GameCore.AxeManCore.GetComponent<Distance>()
+                .GetDistance(npcPos, pcPos);
+
+            outOfRange = range - AttackRange;
+            return AttackRange >= range;
         }
 
         private void Awake()

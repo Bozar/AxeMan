@@ -30,7 +30,7 @@ namespace AxeMan.DungeonObject
             }
 
             ActionTag action;
-            if (GetComponent<NPCAttack>().IsInsideRage)
+            if (GetComponent<NPCAttack>().IsInsideRage(out int outOfRange))
             {
                 GetComponent<NPCAttack>().DealDamage();
                 GetComponent<NPCAttack>().Curse();
@@ -39,7 +39,7 @@ namespace AxeMan.DungeonObject
             }
             else
             {
-                GetComponent<NPCMove>().Approach();
+                GetComponent<NPCMove>().Approach(outOfRange);
 
                 action = ActionTag.Move;
             }
