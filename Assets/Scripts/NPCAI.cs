@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace AxeMan.DungeonObject
 {
-    public class DummyAI : MonoBehaviour
+    public class NPCAI : MonoBehaviour
     {
-        private void DummyAI_EndingTurn(object sender,
+        private void NPCAI_EndingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
@@ -16,7 +16,7 @@ namespace AxeMan.DungeonObject
             }
         }
 
-        private void DummyAI_StartingTurn(object sender,
+        private void NPCAI_StartingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
@@ -52,9 +52,9 @@ namespace AxeMan.DungeonObject
         private void Start()
         {
             GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn
-                += DummyAI_StartingTurn;
+                += NPCAI_StartingTurn;
             GameCore.AxeManCore.GetComponent<TurnManager>().EndingTurn
-                += DummyAI_EndingTurn;
+                += NPCAI_EndingTurn;
         }
     }
 }

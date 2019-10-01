@@ -14,7 +14,7 @@ namespace AxeMan.GameSystem.ObjectFactory
             {
                 return;
             }
-            e.Data.AddComponent<DummyAI>();
+            e.Data.AddComponent<NPCAI>();
             e.Data.AddComponent<NPCAttack>();
             e.Data.AddComponent<NPCBonusAction>();
             e.Data.AddComponent<NPCFindPath>();
