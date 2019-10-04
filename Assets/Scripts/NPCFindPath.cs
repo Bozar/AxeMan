@@ -49,7 +49,7 @@ namespace AxeMan.DungeonObject
 
         private bool DistanceNotSet(int[] position)
         {
-            return distanceMap[position[0], position[1]] == distanceInitial;
+            return GetDistanceMapValue(position) == distanceInitial;
         }
 
         private void DrawDistanceMap()
@@ -63,9 +63,14 @@ namespace AxeMan.DungeonObject
 
             SetObstacle(distanceMap, e.Impassable, impassable);
             SetObstacle(trapMap, e.Trap, trap);
-            SetZeroPoint(e.PC);
+            SetDistanceMapValue(e.PC, zeroPoint);
 
             SetDistance(startPoint);
+        }
+
+        private int GetDistanceMapValue(int[] position)
+        {
+            return distanceMap[position[0], position[1]];
         }
 
         private int GetMinDistance(int[] position)
@@ -80,7 +85,7 @@ namespace AxeMan.DungeonObject
                 {
                     continue;
                 }
-                minDistance = Math.Min(minDistance, distanceMap[pos[0], pos[1]]);
+                minDistance = Math.Min(minDistance, GetDistanceMapValue(pos));
             }
             return minDistance;
         }
@@ -90,13 +95,13 @@ namespace AxeMan.DungeonObject
             // Step 1: Search all available destinations.
             int[][] neighbors = GameCore.AxeManCore.GetComponent<Distance>()
                 .GetNeighbor(source);
-            int minDistance = distanceMap[source[0], source[1]];
+            int minDistance = GetDistanceMapValue(source);
             int currentDistance;
             Stack<int[]> steps = new Stack<int[]>();
 
             foreach (int[] neighbor in neighbors)
             {
-                currentDistance = distanceMap[neighbor[0], neighbor[1]];
+                currentDistance = GetDistanceMapValue(neighbor);
                 if (currentDistance < minDistance)
                 {
                     minDistance = currentDistance;
@@ -168,20 +173,27 @@ namespace AxeMan.DungeonObject
             int[] check = startPoint.Dequeue();
             int[][] neighbors = GameCore.AxeManCore.GetComponent<Distance>()
                 .GetNeighbor(check);
+            int distance;
 
             foreach (int[] neighbor in neighbors)
             {
                 if (DistanceNotSet(neighbor))
                 {
-                    distanceMap[neighbor[0], neighbor[1]]
+                    distance
                         = move
                         + GetMinDistance(neighbor)
                         + trapMap[neighbor[0], neighbor[1]];
 
+                    SetDistanceMapValue(neighbor, distance);
                     startPoint.Enqueue(neighbor);
                 }
             }
             SetDistance(startPoint);
+        }
+
+        private void SetDistanceMapValue(int[] position, int distance)
+        {
+            distanceMap[position[0], position[1]] = distance;
         }
 
         private void SetObstacle(int[,] map, Stack<int[]> obstacle, int distance)
@@ -198,11 +210,6 @@ namespace AxeMan.DungeonObject
                     map[position[0], position[1]] = distance;
                 }
             }
-        }
-
-        private void SetZeroPoint(int[] position)
-        {
-            distanceMap[position[0], position[1]] = zeroPoint;
         }
 
         private int[][] TryGetPath(int[] source, int distance)
