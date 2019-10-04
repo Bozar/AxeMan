@@ -36,8 +36,15 @@ namespace AxeMan.DungeonObject
         {
             int[] source = GetComponent<MetaInfo>().Position;
             int move = Math.Min(moveDistance, Distance);
-            int[][] path = GetComponent<NPCFindPath>().GetNextStep(
-                source, move);
+            int[][] path = GetComponent<NPCFindPath>().GetPath(source, move);
+
+            if (source[0] == 1)
+            {
+                foreach (var item in path)
+                {
+                    Debug.Log(item[0] + "," + item[1]);
+                }
+            }
 
             // TODO: Follow the given path.
         }

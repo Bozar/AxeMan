@@ -7,7 +7,7 @@ namespace AxeMan.DungeonObject
 {
     public interface INPCFindPath
     {
-        int[][] GetNextStep(int[] source, int distance);
+        int[][] GetPath(int[] source, int distance);
     }
 
     public class NPCFindPath : MonoBehaviour, INPCFindPath
@@ -23,13 +23,12 @@ namespace AxeMan.DungeonObject
         private int width;
         private int zeroPoint;
 
-        public int[][] GetNextStep(int[] source, int distance)
+        public int[][] GetPath(int[] source, int distance)
         {
             DrawDistanceMap();
+            int[][] path = TryGetPath(source, distance);
 
-            // TODO: Choose steps.
-
-            return null;
+            return path;
         }
 
         private void Awake()
@@ -84,6 +83,55 @@ namespace AxeMan.DungeonObject
                 minDistance = Math.Min(minDistance, distanceMap[pos[0], pos[1]]);
             }
             return minDistance;
+        }
+
+        private bool GetNextStep(int[] source, out int[] next)
+        {
+            // Step 1: Search all available destinations.
+            int[][] neighbors = GameCore.AxeManCore.GetComponent<Distance>()
+                .GetNeighbor(source);
+            int minDistance = distanceMap[source[0], source[1]];
+            int currentDistance;
+            Stack<int[]> steps = new Stack<int[]>();
+
+            foreach (int[] neighbor in neighbors)
+            {
+                currentDistance = distanceMap[neighbor[0], neighbor[1]];
+                if (currentDistance < minDistance)
+                {
+                    minDistance = currentDistance;
+                    steps.Clear();
+                    steps.Push(neighbor);
+                }
+                else if (currentDistance == minDistance)
+                {
+                    steps.Push(neighbor);
+                }
+            }
+
+            // Step 2: Pick one destination.
+            next = null;
+            int count = steps.Count;
+            int pick;
+
+            if (count > 1)
+            {
+                // TODO: Get a random int from 0 to count.
+                pick = 0;
+                for (int i = 0; i < count; i++)
+                {
+                    next = steps.Pop();
+                    if (i == pick)
+                    {
+                        break;
+                    }
+                }
+            }
+            else if (count == 1)
+            {
+                next = steps.Pop();
+            }
+            return count > 0;
         }
 
         private void ResetMap(int[,] map, int initial)
@@ -155,6 +203,25 @@ namespace AxeMan.DungeonObject
         private void SetZeroPoint(int[] position)
         {
             distanceMap[position[0], position[1]] = zeroPoint;
+        }
+
+        private int[][] TryGetPath(int[] source, int distance)
+        {
+            Queue<int[]> path = new Queue<int[]>();
+
+            for (int i = 0; i < distance; i++)
+            {
+                if (GetNextStep(source, out int[] next))
+                {
+                    path.Enqueue(next);
+                    source = next;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return path.ToArray();
         }
     }
 }
