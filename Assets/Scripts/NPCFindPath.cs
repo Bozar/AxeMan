@@ -29,30 +29,6 @@ namespace AxeMan.DungeonObject
 
             // TODO: Choose steps.
 
-            if (GetComponent<MetaInfo>().Position[0] == 1)
-            {
-                Debug.Log(distanceMap[0, 0]);
-                Debug.Log(distanceMap[0, 1]);
-                Debug.Log(distanceMap[0, 2]);
-                Debug.Log(distanceMap[0, 3]);
-                Debug.Log(distanceMap[0, 4]);
-                Debug.Log(distanceMap[0, 5]);
-                Debug.Log(distanceMap[0, 6]);
-                Debug.Log(distanceMap[0, 7]);
-                Debug.Log(distanceMap[0, 8]);
-                Debug.Log("==========");
-                Debug.Log(distanceMap[1, 0]);
-                Debug.Log(distanceMap[1, 1]);
-                Debug.Log(distanceMap[1, 2]);
-                Debug.Log(distanceMap[1, 3]);
-                Debug.Log(distanceMap[1, 4]);
-                Debug.Log(distanceMap[1, 5]);
-                Debug.Log(distanceMap[1, 6]);
-                Debug.Log(distanceMap[1, 7]);
-                Debug.Log(distanceMap[1, 8]);
-                Debug.Log("==========");
-            }
-
             return null;
         }
 
@@ -83,12 +59,11 @@ namespace AxeMan.DungeonObject
             ResetMap(trapMap, trapInitial);
 
             SearchObstacleEventArgs e = SearchObstacle();
-            SetObstacle(distanceMap, e.Impassable, impassable);
-            SetObstacle(trapMap, e.Trap, trap);
-
             Queue<int[]> startPoint = new Queue<int[]>();
             startPoint.Enqueue(e.PC);
 
+            SetObstacle(distanceMap, e.Impassable, impassable);
+            SetObstacle(trapMap, e.Trap, trap);
             SetZeroPoint(e.PC);
 
             SetDistance(startPoint);
@@ -145,18 +120,19 @@ namespace AxeMan.DungeonObject
             int[] check = startPoint.Dequeue();
             int[][] neighbors = GameCore.AxeManCore.GetComponent<Distance>()
                 .GetNeighbor(check);
-            foreach (int[] pos in neighbors)
+
+            foreach (int[] neighbor in neighbors)
             {
-                if (DistanceNotSet(pos))
+                if (DistanceNotSet(neighbor))
                 {
-                    distanceMap[check[0], check[1]]
+                    distanceMap[neighbor[0], neighbor[1]]
                         = move
-                        + GetMinDistance(check)
-                        + trapMap[check[0], check[1]];
-                    startPoint.Enqueue(pos);
+                        + GetMinDistance(neighbor)
+                        + trapMap[neighbor[0], neighbor[1]];
+
+                    startPoint.Enqueue(neighbor);
                 }
             }
-
             SetDistance(startPoint);
         }
 
@@ -172,27 +148,6 @@ namespace AxeMan.DungeonObject
                     .IndexOutOfRange(position[0], position[1]))
                 {
                     map[position[0], position[1]] = distance;
-                }
-            }
-        }
-
-        // TODO: Remove this.
-        private void SetObstacle(Stack<int[]> obstacle, int distance,
-            bool addDistance)
-        {
-            int[] position;
-
-            while (obstacle.Count > 0)
-            {
-                position = obstacle.Pop();
-
-                if (addDistance)
-                {
-                    distanceMap[position[0], position[1]] += distance;
-                }
-                else
-                {
-                    distanceMap[position[0], position[1]] = distance;
                 }
             }
         }
