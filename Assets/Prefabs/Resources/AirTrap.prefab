@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5758335174465539340}
   - component: {fileID: 3510567190783372250}
   m_Layer: 0
-  m_Name: LightningTrap
+  m_Name: AirTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4215820830524099526, guid: ae9a0be1bc354354ca2e33aa2b1ca3f4,
+  m_Sprite: {fileID: -1368845364631530344, guid: ae9a0be1bc354354ca2e33aa2b1ca3f4,
     type: 3}
   m_Color: {r: 0.28627452, g: 0.31764707, b: 0.38431373, a: 1}
   m_FlipX: 0
