@@ -1,6 +1,8 @@
 ﻿using AxeMan.DungeonObject;
 using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.ObjectFactory;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +23,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
     {
         private int pointer;
         private List<GameObject> schedule;
+        private Queue<GameObject> tempNPCSchedule;
 
         public GameObject Current
         {
@@ -74,6 +77,7 @@ namespace AxeMan.GameSystem.SchedulingSystem
         private void Awake()
         {
             schedule = new List<GameObject>();
+            tempNPCSchedule = new Queue<GameObject>();
             pointer = 0;
         }
 
@@ -93,7 +97,24 @@ namespace AxeMan.GameSystem.SchedulingSystem
             {
                 return;
             }
-            Add(e.Data);
+
+            // Make sure that PC always acts first.
+            if (e.Data.GetComponent<MetaInfo>().SubTag == SubTag.PC)
+            {
+                Add(e.Data);
+            }
+            else
+            {
+                tempNPCSchedule.Enqueue(e.Data);
+            }
+        }
+
+        private void Schedule_CreatedWorld(object sender, EventArgs e)
+        {
+            while (tempNPCSchedule.Count > 0)
+            {
+                Add(tempNPCSchedule.Dequeue());
+            }
         }
 
         private void Schedule_RemovingObject(object sender,
@@ -108,6 +129,8 @@ namespace AxeMan.GameSystem.SchedulingSystem
                 += Schedule_CreatedObject;
             GetComponent<RemoveObject>().RemovingObject
                 += Schedule_RemovingObject;
+            GetComponent<InitializeMainGame>().CreatedWorld
+                += Schedule_CreatedWorld;
         }
     }
 }
