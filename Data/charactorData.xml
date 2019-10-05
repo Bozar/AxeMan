@@ -23,7 +23,7 @@
       <English>Dummy</English>
     </Name>
     <Cooldown>20</Cooldown>
-    <MoveDistance>5</MoveDistance>
+    <MoveDistance>1</MoveDistance>
     <AttackRange>1</AttackRange>
     <HP>5</HP>
     <Damage>1</Damage>

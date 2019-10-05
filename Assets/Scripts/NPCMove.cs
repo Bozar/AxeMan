@@ -3,6 +3,7 @@ using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -38,15 +39,15 @@ namespace AxeMan.DungeonObject
             int move = Math.Min(moveDistance, Distance);
             int[][] path = GetComponent<NPCFindPath>().GetPath(source, move);
 
-            if (source[0] == 1)
+            foreach (int[] p in path)
             {
-                foreach (var item in path)
-                {
-                    Debug.Log(item[0] + "," + item[1]);
-                }
+                GetComponent<LocalManager>().SetPosition(p);
+                GetComponent<LocalManager>().TakenAction(ActionTag.NPCFindPath);
             }
 
-            // TODO: Follow the given path.
+            TileOverlay to = GameCore.AxeManCore.GetComponent<TileOverlay>();
+            to.TryHideTile(source);
+            to.TryHideTile(path.Last());
         }
 
         private void Awake()
