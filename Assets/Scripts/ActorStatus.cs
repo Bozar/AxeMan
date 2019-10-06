@@ -57,7 +57,7 @@ namespace AxeMan.DungeonObject
             PublishPCStatus();
         }
 
-        private void ActorStatus_EndingTurn(object sender,
+        private void ActorStatus_StartedTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
@@ -132,8 +132,8 @@ namespace AxeMan.DungeonObject
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<TurnManager>().EndingTurn
-                += ActorStatus_EndingTurn;
+            GameCore.AxeManCore.GetComponent<TurnManager>().StartedTurn
+                += ActorStatus_StartedTurn;
         }
 
         private void TryCountdownDuration(SkillComponentTag skillComponent)
