@@ -53,7 +53,7 @@ namespace AxeMan.DungeonObject
         {
             get
             {
-                return baseDamage + ModDamage();
+                return Math.Max(0, baseDamage + ModDamage());
             }
         }
 
@@ -108,12 +108,19 @@ namespace AxeMan.DungeonObject
 
         private int ModDamage()
         {
+            int damage = 0;
+
             if (pc.GetComponent<ActorStatus>().HasStatus(
-                SkillComponentTag.AirFlaw, out EffectData effectData))
+                SkillComponentTag.AirFlaw, out EffectData airFlaw))
             {
-                return effectData.Power;
+                damage += airFlaw.Power;
             }
-            return 0;
+            if (pc.GetComponent<ActorStatus>().HasStatus(
+                SkillComponentTag.EarthMerit, out EffectData earthMerit))
+            {
+                damage -= earthMerit.Power;
+            }
+            return damage;
         }
 
         private void NPCAttack_SettingReference(object sender,
