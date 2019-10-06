@@ -2,6 +2,7 @@
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SaveLoadGameFile;
 using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ namespace AxeMan.GameSystem.GameDataHub
 {
     public interface ISkillData
     {
+        bool ConvertCurse2Flaw(SkillComponentTag curse,
+            out SkillComponentTag flaw);
+
         string GetLongSkillTypeName(SkillTypeTag skillTypeTag);
 
         string GetShortSkillTypeName(SkillTypeTag skillTypeTag);
@@ -21,6 +25,7 @@ namespace AxeMan.GameSystem.GameDataHub
     public class SkillData : MonoBehaviour, ISkillData
     {
         private string component;
+        private Dictionary<SkillComponentTag, SkillComponentTag> curse2flaw;
         private LanguageTag defaultLanguage;
         private string error;
         private string longType;
@@ -28,6 +33,18 @@ namespace AxeMan.GameSystem.GameDataHub
         private string skillName;
         private LanguageTag userLanguage;
         private XElement xmlFile;
+
+        public bool ConvertCurse2Flaw(SkillComponentTag curse,
+            out SkillComponentTag flaw)
+        {
+            if (curse2flaw.TryGetValue(curse, out SkillComponentTag data))
+            {
+                flaw = data;
+                return true;
+            }
+            flaw = SkillComponentTag.INVALID;
+            return false;
+        }
 
         public string GetLongSkillTypeName(SkillTypeTag skillTypeTag)
         {
@@ -86,6 +103,14 @@ namespace AxeMan.GameSystem.GameDataHub
             longType = "LongType";
 
             defaultLanguage = LanguageTag.English;
+
+            curse2flaw = new Dictionary<SkillComponentTag, SkillComponentTag>()
+            {
+                { SkillComponentTag.FireCurse, SkillComponentTag.FireFlaw },
+                { SkillComponentTag.WaterCurse, SkillComponentTag.WaterFlaw },
+                { SkillComponentTag.AirCurse, SkillComponentTag.AirFlaw },
+                { SkillComponentTag.EarthCurse, SkillComponentTag.EarthFlaw },
+            };
         }
 
         private void LoadSkillData()

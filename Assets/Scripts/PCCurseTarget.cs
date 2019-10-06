@@ -1,5 +1,6 @@
 ﻿using AxeMan.DungeonObject.ActorSkill;
 using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.InitializeGameWorld;
@@ -12,18 +13,6 @@ namespace AxeMan.DungeonObject
     public class PCCurseTarget : MonoBehaviour
     {
         private GameObject aimMarker;
-        private Dictionary<SkillComponentTag, SkillComponentTag> curse2flaw;
-
-        private void Awake()
-        {
-            curse2flaw = new Dictionary<SkillComponentTag, SkillComponentTag>()
-            {
-                { SkillComponentTag.FireCurse, SkillComponentTag.FireFlaw },
-                { SkillComponentTag.WaterCurse, SkillComponentTag.WaterFlaw },
-                { SkillComponentTag.AirCurse, SkillComponentTag.AirFlaw },
-                { SkillComponentTag.EarthCurse, SkillComponentTag.EarthFlaw },
-            };
-        }
 
         private void PCCurseTarget_SettingReference(object sender,
             SettingReferenceEventArgs e)
@@ -59,14 +48,13 @@ namespace AxeMan.DungeonObject
                 return;
             }
 
-            SkillComponentTag flaw;
-            foreach (SkillComponentTag curse in curse2flaw.Keys)
+            foreach (SkillComponentTag sct in compInt.Keys)
             {
-                if (compInt.ContainsKey(curse))
+                if (GameCore.AxeManCore.GetComponent<SkillData>()
+                    .ConvertCurse2Flaw(sct, out SkillComponentTag flaw))
                 {
-                    flaw = curse2flaw[curse];
                     targets[0].GetComponent<ActorStatus>().AddStatus(
-                        flaw, compInt[curse]);
+                        flaw, compInt[sct]);
                 }
             }
         }
