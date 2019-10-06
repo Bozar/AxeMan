@@ -6,6 +6,19 @@ namespace AxeMan.GameSystem.PrototypeFactory
 {
     public class BlueprintAltar : MonoBehaviour
     {
+        private int[][] altarPositions;
+
+        private void Awake()
+        {
+            altarPositions = new int[][]
+            {
+                new int[] { 2, 2 },
+                new int[] { 2, 6 },
+                new int[] { 6, 2 },
+                new int[] { 6, 6 },
+            };
+        }
+
         private void BlueprintAltar_DrawingBlueprint(object sender,
             DrawingBlueprintEventArgs e)
         {
@@ -14,10 +27,20 @@ namespace AxeMan.GameSystem.PrototypeFactory
                 return;
             }
 
-            Stack<IPrototype> blueprint = GetShieldAltar();
-            blueprint.Push(GetLifeAltar());
-
+            Stack<IPrototype> blueprint = new Stack<IPrototype>();
+            foreach (int[] ap in altarPositions)
+            {
+                blueprint.Push(GetLifeAltar(ap));
+            }
             e.Data = blueprint.ToArray();
+        }
+
+        private IPrototype GetLifeAltar(int[] position)
+        {
+            MainTag mt = MainTag.Altar;
+            SubTag st = SubTag.LifeAltar;
+
+            return new ProtoObject(mt, st, position);
         }
 
         private IPrototype GetLifeAltar()
