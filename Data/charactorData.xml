@@ -27,7 +27,7 @@
     <AttackRange>1</AttackRange>
     <HP>5</HP>
     <Damage>1</Damage>
-    <CurseEffect>FireFlaw</CurseEffect>
+    <CurseEffect>FireCurse</CurseEffect>
     <CurseData>4</CurseData>
   </Dummy>
   <!--- vim: set lbr sts=2 sw=2: -->

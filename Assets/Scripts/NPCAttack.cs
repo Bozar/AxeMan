@@ -61,7 +61,9 @@ namespace AxeMan.DungeonObject
         {
             if (CurseEffect != SkillComponentTag.INVALID)
             {
-                pc.GetComponent<ActorStatus>().AddStatus(CurseEffect,
+                GameCore.AxeManCore.GetComponent<SkillData>()
+                    .ConvertCurse2Flaw(CurseEffect, out SkillComponentTag flaw);
+                pc.GetComponent<ActorStatus>().AddStatus(flaw,
                     new EffectData(CurseData, CurseData));
             }
         }
