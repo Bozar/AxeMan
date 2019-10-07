@@ -93,6 +93,8 @@ namespace AxeMan.GameSystem.GameDataTag
 
         MoveText, AttackText, DamageText, CurseText,
         MoveData, AttackData, DamageData, CurseData,
+
+        Line1, Line2, Line3, Line4, Line5, Line6,
     }
 
     public class DataTag : MonoBehaviour

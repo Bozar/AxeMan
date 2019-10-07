@@ -21,8 +21,8 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_Message_CreatedWorld(object sender, EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-
-            SearchText(UITag.Modeline).text = "Message";
+            // TODO: Remove this line later.
+            PrintTestMessage();
         }
 
         private void Canvas_Message_EnteredAimMode(object sender,
@@ -46,6 +46,21 @@ namespace AxeMan.GameSystem.UserInterface
             EventArgs e)
         {
             SwitchVisibility(true);
+        }
+
+        private void PrintTestMessage()
+        {
+            UITag[] tags = new UITag[]
+            {
+                UITag.Line1, UITag.Line2, UITag.Line3, UITag.Line4, UITag.Line5,
+                UITag.Line6,
+            };
+
+            for (int i = 0; i < tags.Length; i++)
+            {
+                SearchText(tags[i]).text
+                    = "Troll Berserker [" + (i + 1) + ", 1] hits you.";
+            }
         }
 
         private Text SearchText(UITag uiTag)
