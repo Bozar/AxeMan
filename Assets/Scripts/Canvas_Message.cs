@@ -50,17 +50,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintTestMessage()
         {
-            UITag[] tags = new UITag[]
-            {
-                UITag.Line1, UITag.Line2, UITag.Line3, UITag.Line4, UITag.Line5,
-                UITag.Line6,
-            };
-
-            for (int i = 0; i < tags.Length; i++)
-            {
-                SearchText(tags[i]).text
-                    = "Troll Berserker [" + (i + 1) + ", 1] hits you.";
-            }
+            SearchText(UITag.Line1).text = "Message";
         }
 
         private Text SearchText(UITag uiTag)
