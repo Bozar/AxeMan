@@ -29,11 +29,17 @@ namespace AxeMan.GameSystem.PrototypeFactory
             Stack<IPrototype> blueprint = new Stack<IPrototype>();
 
             blueprint.Push(new ProtoObject(MainTag.Actor, SubTag.PC,
-             new int[] { 0, 8 }));
+                new int[] { 0, 8 }));
             blueprint.Push(new ProtoObject(MainTag.Actor, SubTag.Dummy,
-            new int[] { 1, 1 }));
+                new int[] { 0, 0 }));
             blueprint.Push(new ProtoObject(MainTag.Actor, SubTag.Dummy,
-            new int[] { 4, 0 }));
+                new int[] { 0, 4 }));
+            blueprint.Push(new ProtoObject(MainTag.Actor, SubTag.Dummy,
+                new int[] { 8, 0 }));
+            blueprint.Push(new ProtoObject(MainTag.Actor, SubTag.Dummy,
+                new int[] { 8, 2 }));
+            blueprint.Push(new ProtoObject(MainTag.Actor, SubTag.Dummy,
+                new int[] { 8, 4 }));
 
             e.Data = blueprint.ToArray();
         }

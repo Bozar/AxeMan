@@ -26,14 +26,33 @@ namespace AxeMan.GameSystem.PrototypeFactory
         {
             Stack<IPrototype> blueprint = new Stack<IPrototype>();
 
-            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.EarthTrap,
-                new int[] { 0, 0 }));
-            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.FireTrap,
-                new int[] { 0, 1 }));
             blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
-                new int[] { 0, 2 }));
-            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.WaterTrap,
-                new int[] { 0, 3 }));
+                new int[] { 3, 2 }));
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 4, 2 }));
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 5, 2 }));
+
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 3, 6 }));
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 4, 6 }));
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 5, 6 }));
+
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 2, 3 }));
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 2, 4 }));
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 2, 5 }));
+
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 6, 3 }));
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 6, 4 }));
+            blueprint.Push(new ProtoObject(MainTag.Trap, SubTag.AirTrap,
+                new int[] { 6, 5 }));
 
             e.Data = blueprint.ToArray();
         }
