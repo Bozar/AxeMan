@@ -39,7 +39,7 @@ namespace AxeMan.DungeonObject.ActorSkill
         private void Awake()
         {
             invalidRange = -1;
-            minRange = 0;
+            minRange = 1;
             baseRange = 1;
 
             nameRange = new Dictionary<SkillNameTag, int>
