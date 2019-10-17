@@ -219,6 +219,8 @@ duration remains and their durations negate each other.
 * `Air Merit: 4 x 3` and `Earth Flaw: 3 x 3` cancels each other because they
   have the same duration.
 
+Merits and their oppositing flaws:
+
     |-------------------------------|
     | Merit         | Flaw          |
     |-------------------------------|
