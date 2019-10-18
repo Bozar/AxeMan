@@ -64,8 +64,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ExamineInput>();
             gameObject.AddComponent<ExamineMarkerComponent>();
             gameObject.AddComponent<ExamineMode>();
-            gameObject.AddComponent<GameCore>();
 
+            gameObject.AddComponent<GameCore>();
+            gameObject.AddComponent<GameVersion>();
             gameObject.AddComponent<InitializeStartScreen>();
             gameObject.AddComponent<InputManager>();
 
