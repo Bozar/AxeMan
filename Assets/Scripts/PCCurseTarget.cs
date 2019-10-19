@@ -3,8 +3,10 @@ using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +15,12 @@ namespace AxeMan.DungeonObject
     public class PCCurseTarget : MonoBehaviour
     {
         private GameObject aimMarker;
+        private int[] targetPosition;
+
+        private void PCCurseTarget_LeavingAimMode(object sender, EventArgs e)
+        {
+            targetPosition = aimMarker.GetComponent<MetaInfo>().Position;
+        }
 
         private void PCCurseTarget_SettingReference(object sender,
             SettingReferenceEventArgs e)
@@ -39,10 +47,9 @@ namespace AxeMan.DungeonObject
 
             Dictionary<SkillComponentTag, EffectData> compInt
                 = GetComponent<PCSkillManager>().GetSkillEffect(skillName);
-            int[] position = aimMarker.GetComponent<MetaInfo>().Position;
 
             if (!GameCore.AxeManCore.GetComponent<SearchObject>()
-                .Search(position[0], position[1], MainTag.Actor,
+                .Search(targetPosition[0], targetPosition[1], MainTag.Actor,
                 out GameObject[] targets))
             {
                 return;
@@ -65,6 +72,8 @@ namespace AxeMan.DungeonObject
                 .SettingReference += PCCurseTarget_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                 += PCCurseTarget_TakingAction;
+            GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
+                += PCCurseTarget_LeavingAimMode;
         }
     }
 }

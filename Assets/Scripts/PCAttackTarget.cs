@@ -2,8 +2,10 @@
 using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
+using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -11,11 +13,17 @@ namespace AxeMan.DungeonObject
     public class PCAttackTarget : MonoBehaviour
     {
         private GameObject aimMarker;
+        private int[] targetPosition;
         private int zeroDamage;
 
         private void Awake()
         {
             zeroDamage = 0;
+        }
+
+        private void PCAttackTarget_LeavingAimMode(object sender, EventArgs e)
+        {
+            targetPosition = aimMarker.GetComponent<MetaInfo>().Position;
         }
 
         private void PCAttackTarget_SettingReference(object sender,
@@ -41,9 +49,8 @@ namespace AxeMan.DungeonObject
                 return;
             }
 
-            int[] position = aimMarker.GetComponent<MetaInfo>().Position;
             if (!GameCore.AxeManCore.GetComponent<SearchObject>()
-                .Search(position[0], position[1], MainTag.Actor,
+                .Search(targetPosition[0], targetPosition[1], MainTag.Actor,
                 out GameObject[] targets))
             {
                 return;
@@ -60,6 +67,8 @@ namespace AxeMan.DungeonObject
                 .SettingReference += PCAttackTarget_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                 += PCAttackTarget_TakingAction;
+            GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
+                += PCAttackTarget_LeavingAimMode;
         }
 
         private int StatusMod(GameObject target)

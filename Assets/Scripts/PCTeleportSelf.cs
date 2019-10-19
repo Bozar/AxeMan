@@ -2,7 +2,9 @@
 using AxeMan.GameSystem;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
+using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -10,6 +12,12 @@ namespace AxeMan.DungeonObject
     public class PCTeleportSelf : MonoBehaviour
     {
         private GameObject aimMarker;
+        private int[] targetPosition;
+
+        private void PCTeleportSelf_LeavingAimMode(object sender, EventArgs e)
+        {
+            targetPosition = aimMarker.GetComponent<MetaInfo>().Position;
+        }
 
         private void PCTeleportSelf_SettingReference(object sender,
             SettingReferenceEventArgs e)
@@ -35,7 +43,7 @@ namespace AxeMan.DungeonObject
             }
 
             int[] source = GetComponent<MetaInfo>().Position;
-            int[] target = aimMarker.GetComponent<MetaInfo>().Position;
+            int[] target = targetPosition;
 
             GetComponent<LocalManager>().SetPosition(target);
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(source);
@@ -48,6 +56,8 @@ namespace AxeMan.DungeonObject
                 .SettingReference += PCTeleportSelf_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                  += PCTeleportSelf_TakingAction;
+            GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
+                += PCTeleportSelf_LeavingAimMode;
         }
     }
 }

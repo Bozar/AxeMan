@@ -71,6 +71,11 @@ namespace AxeMan.GameSystem.GameMode
             {
                 OnLeavingAimMode(EventArgs.Empty);
                 OnLeftAimMode(EventArgs.Empty);
+
+                if (pcUseSkill != CommandTag.INVALID)
+                {
+                    OnVerifiedSkill(new VerifiedSkillEventArgs(pcUseSkill));
+                }
             }
         }
 
@@ -100,6 +105,22 @@ namespace AxeMan.GameSystem.GameMode
             }
         }
 
+        private bool IsValidSkill(CommandTag skill)
+        {
+            Stack<bool> result = new Stack<bool>();
+            OnVerifyingSkill(new VerifyingSkillEventArgs(skill, result));
+
+            while (result.Count > 0)
+            {
+                if (!result.Pop())
+                {
+                    OnFailedVerifying(new FailedVerifyingEventArgs(skill));
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private bool LeaveMode(PlayerCommandingEventArgs e)
         {
             if (e.SubTag != SubTag.AimMarker)
@@ -109,7 +130,7 @@ namespace AxeMan.GameSystem.GameMode
             switch (e.Command)
             {
                 case CommandTag.Confirm:
-                    return VerifySkill(pcUseSkill);
+                    return IsValidSkill(pcUseSkill);
 
                 case CommandTag.Cancel:
                     pcUseSkill = CommandTag.INVALID;
@@ -124,23 +145,6 @@ namespace AxeMan.GameSystem.GameMode
         {
             GetComponent<InputManager>().PlayerCommanding
                 += AimMode_PlayerCommanding;
-        }
-
-        private bool VerifySkill(CommandTag skill)
-        {
-            Stack<bool> result = new Stack<bool>();
-            OnVerifyingSkill(new VerifyingSkillEventArgs(skill, result));
-
-            while (result.Count > 0)
-            {
-                if (!result.Pop())
-                {
-                    OnFailedVerifying(new FailedVerifyingEventArgs(skill));
-                    return false;
-                }
-            }
-            OnVerifiedSkill(new VerifiedSkillEventArgs(skill));
-            return true;
         }
     }
 
