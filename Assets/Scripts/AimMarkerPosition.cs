@@ -25,7 +25,7 @@ namespace AxeMan.DungeonObject
                 gameObject);
         }
 
-        private void AimMarkerPosition_LeavingAimMode(object sender, EventArgs e)
+        private void AimMarkerPosition_LeftAimMode(object sender, EventArgs e)
         {
             GameCore.AxeManCore.GetComponent<MarkerPosition>().
                 ResetMarkerPosition(gameObject);
@@ -35,8 +35,8 @@ namespace AxeMan.DungeonObject
         {
             GameCore.AxeManCore.GetComponent<AimMode>().EnteringAimMode
                 += AimMarkerPosition_EnteringAimMode;
-            GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
-                += AimMarkerPosition_LeavingAimMode;
+            GameCore.AxeManCore.GetComponent<AimMode>().LeftAimMode
+                += AimMarkerPosition_LeftAimMode;
         }
     }
 }

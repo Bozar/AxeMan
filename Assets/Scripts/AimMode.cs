@@ -18,6 +18,8 @@ namespace AxeMan.GameSystem.GameMode
 
         public event EventHandler<EventArgs> LeavingAimMode;
 
+        public event EventHandler<EventArgs> LeftAimMode;
+
         public event EventHandler<VerifiedSkillEventArgs> VerifiedSkill;
 
         public event EventHandler<VerifyingSkillEventArgs> VerifyingSkill;
@@ -42,6 +44,11 @@ namespace AxeMan.GameSystem.GameMode
             LeavingAimMode?.Invoke(this, e);
         }
 
+        protected virtual void OnLeftAimMode(EventArgs e)
+        {
+            LeftAimMode?.Invoke(this, e);
+        }
+
         protected virtual void OnVerifiedSkill(VerifiedSkillEventArgs e)
         {
             VerifiedSkill?.Invoke(this, e);
@@ -63,6 +70,7 @@ namespace AxeMan.GameSystem.GameMode
             else if (LeaveMode(e))
             {
                 OnLeavingAimMode(EventArgs.Empty);
+                OnLeftAimMode(EventArgs.Empty);
             }
         }
 
