@@ -58,15 +58,13 @@ namespace AxeMan.DungeonObject
             decrease = 1;
         }
 
-        private void NPCBonusAction_StartingTurn(object sender,
+        private void NPCBonusAction_StartedTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
-            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
-            {
-                return;
-            }
-            if (GetComponent<ActorStatus>().HasStatus(
-                SkillComponentTag.WaterFlaw, out _))
+            SkillComponentTag flaw = SkillComponentTag.WaterFlaw;
+
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID)
+                || GetComponent<ActorStatus>().HasStatus(flaw, out _))
             {
                 return;
             }
@@ -84,8 +82,8 @@ namespace AxeMan.DungeonObject
             restoreHP = GameCore.AxeManCore.GetComponent<ActorData>()
                 .GetIntData(mainTag, subTag, ActorDataTag.RestoreHP);
 
-            GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn
-                += NPCBonusAction_StartingTurn;
+            GameCore.AxeManCore.GetComponent<TurnManager>().StartedTurn
+                += NPCBonusAction_StartedTurn;
         }
     }
 }

@@ -159,23 +159,22 @@ namespace AxeMan.DungeonObject.ActorSkill
             maxCDDict[skillNameTag] = cd;
         }
 
-        private void SkillCooldown_StartingTurn(object sender,
+        private void SkillCooldown_StartedTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
-            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
-            {
-                return;
-            }
-
             ActorStatus actorStatus = GetComponent<ActorStatus>();
-            if (actorStatus.HasStatus(SkillComponentTag.WaterFlaw, out _))
-            {
-                return;
-            }
-
+            SkillComponentTag flaw = SkillComponentTag.WaterFlaw;
+            SkillComponentTag merit = SkillComponentTag.FireMerit;
             int decrease;
             int cooldown;
-            if (actorStatus.HasStatus(SkillComponentTag.FireMerit, out _))
+
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID)
+                || actorStatus.HasStatus(flaw, out _))
+            {
+                return;
+            }
+
+            if (actorStatus.HasStatus(merit, out _))
             {
                 decrease = fastDecrease;
             }
@@ -213,8 +212,8 @@ namespace AxeMan.DungeonObject.ActorSkill
         {
             GameCore.AxeManCore.GetComponent<PublishAction>().TakenAction
                 += SkillCooldown_TakenAction;
-            GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn
-                += SkillCooldown_StartingTurn;
+            GameCore.AxeManCore.GetComponent<TurnManager>().StartedTurn
+                += SkillCooldown_StartedTurn;
         }
     }
 }

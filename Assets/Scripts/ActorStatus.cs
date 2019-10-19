@@ -57,30 +57,42 @@ namespace AxeMan.DungeonObject
             PublishPCStatus();
         }
 
-        private void ActorStatus_StartedTurn(object sender,
+        private void ActorStatus_EndingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
+            SkillComponentTag merit = SkillComponentTag.WaterMerit;
+            SkillComponentTag flaw = SkillComponentTag.FireFlaw;
+
             if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
             {
                 return;
             }
 
-            if (HasStatus(SkillComponentTag.FireFlaw, out _))
+            if (HasStatus(flaw, out _))
             {
+                TryCountdownDuration(flaw);
                 TryCountdownDuration(positiveStatus);
-                TryCountdownDuration(SkillComponentTag.FireFlaw);
             }
-            else if (HasStatus(SkillComponentTag.WaterMerit, out _))
+            else if (HasStatus(merit, out _))
             {
+                TryCountdownDuration(merit);
                 TryCountdownDuration(negativeStatus);
-                TryCountdownDuration(SkillComponentTag.WaterMerit);
             }
             else
             {
                 TryCountdownDuration(positiveStatus);
                 TryCountdownDuration(negativeStatus);
             }
+            PublishPCStatus();
+        }
 
+        private void ActorStatus_StartingTurn(object sender,
+            StartOrEndTurnEventArgs e)
+        {
+            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
+            {
+                return;
+            }
             TryRemoveStatus();
             PublishPCStatus();
         }
@@ -132,8 +144,10 @@ namespace AxeMan.DungeonObject
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<TurnManager>().StartedTurn
-                += ActorStatus_StartedTurn;
+            GameCore.AxeManCore.GetComponent<TurnManager>().StartingTurn
+                += ActorStatus_StartingTurn;
+            GameCore.AxeManCore.GetComponent<TurnManager>().EndingTurn
+                += ActorStatus_EndingTurn;
         }
 
         private void TryCountdownDuration(SkillComponentTag skillComponent)
