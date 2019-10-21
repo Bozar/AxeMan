@@ -2,6 +2,7 @@
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PrototypeFactory;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.ObjectFactory
@@ -39,12 +40,17 @@ namespace AxeMan.GameSystem.ObjectFactory
 
         public event EventHandler<CreatingObjectEventArgs> CreatingObject;
 
-        public void Create(IPrototype[] proto)
+        public GameObject[] Create(IPrototype[] proto)
         {
+            GameObject go;
+            Stack<GameObject> goStack = new Stack<GameObject>();
+
             foreach (IPrototype p in proto)
             {
-                Create(p);
+                go = Create(p);
+                goStack.Push(go);
             }
+            return goStack.ToArray();
         }
 
         public GameObject Create(IPrototype proto)

@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.DungeonObject;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
@@ -36,11 +37,26 @@ namespace AxeMan.GameSystem.InitializeGameWorld
                 BlueprintTag.AimMarker, BlueprintTag.ExamineMarker,
             };
             IPrototype[] proto;
+            GameObject[] goStack;
+            int[] position;
 
             foreach (BlueprintTag t in tags)
             {
                 proto = GetComponent<Blueprint>().GetBlueprint(t);
-                GetComponent<CreateObject>().Create(proto);
+                goStack = GetComponent<CreateObject>().Create(proto);
+
+                // Game objects inside the dungeon board are invisible for now
+                // and they will be visible after the whole world is created.
+                // This is used to fix a visual glitch.
+                foreach (GameObject go in goStack)
+                {
+                    position = go.GetComponent<MetaInfo>().Position;
+                    if (!GetComponent<DungeonBoard>().IndexOutOfRange(
+                        position[0], position[1]))
+                    {
+                        go.GetComponent<Renderer>().enabled = false;
+                    }
+                }
             }
         }
 
