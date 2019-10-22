@@ -36,19 +36,19 @@ namespace AxeMan.GameSystem.InitializeGameWorld
                 BlueprintTag.Trap, BlueprintTag.Actor,
                 BlueprintTag.AimMarker, BlueprintTag.ExamineMarker,
             };
-            IPrototype[] proto;
-            GameObject[] goStack;
+            IPrototype[] prototypes;
+            GameObject[] gameObjects;
             int[] position;
 
             foreach (BlueprintTag t in tags)
             {
-                proto = GetComponent<Blueprint>().GetBlueprint(t);
-                goStack = GetComponent<CreateObject>().Create(proto);
+                prototypes = GetComponent<Blueprint>().GetBlueprint(t);
+                gameObjects = GetComponent<CreateObject>().Create(prototypes);
 
                 // Game objects inside the dungeon board are invisible for now
                 // and they will be visible after the whole world is created.
                 // This is used to fix a visual glitch.
-                foreach (GameObject go in goStack)
+                foreach (GameObject go in gameObjects)
                 {
                     position = go.GetComponent<MetaInfo>().Position;
                     if (!GetComponent<DungeonBoard>().IndexOutOfRange(
