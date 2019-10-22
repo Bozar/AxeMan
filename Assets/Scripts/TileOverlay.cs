@@ -12,7 +12,11 @@ namespace AxeMan.GameSystem
     {
         GameObject[] GetSortedObjects(int x, int y);
 
+        GameObject[] GetSortedObjects(GameObject[] gameObjects);
+
         void TryHideTile(int x, int y);
+
+        void TryHideTile(GameObject[] gameObjects);
     }
 
     public class TileOverlay : MonoBehaviour, ITileOverlay
@@ -21,37 +25,39 @@ namespace AxeMan.GameSystem
 
         public GameObject[] GetSortedObjects(int x, int y)
         {
-            if (!GetComponent<SearchObject>().Search(x, y,
-                out GameObject[] search))
+            if (TrySearchObjects(x, y, out GameObject[] search))
             {
-                return null;
+                return GetSortedObjects(search);
             }
-
-            IEnumerable<GameObject> sorted
-                = from s in search
-                  orderby GetLayer(s) descending
-                  select s;
-            return sorted.ToArray();
+            return null;
         }
 
-        public void RefreshDungeonBoard()
+        public GameObject[] GetSortedObjects(GameObject[] gameObjects)
         {
-            for (int i = 0; i < GetComponent<DungeonBoard>().Width; i++)
-            {
-                for (int j = 0; j < GetComponent<DungeonBoard>().Height; j++)
-                {
-                    TryHideTile(i, j);
-                }
-            }
+            IEnumerable<GameObject> sorted
+               = from go in gameObjects
+                 orderby GetLayer(go) descending
+                 select go;
+
+            return sorted.ToArray();
         }
 
         public void TryHideTile(int x, int y)
         {
-            GameObject[] sorted = GetSortedObjects(x, y);
-            if (sorted == null)
+            if (TrySearchObjects(x, y, out GameObject[] search))
             {
-                return;
+                TryHideTile(search);
             }
+        }
+
+        public void TryHideTile(int[] position)
+        {
+            TryHideTile(position[0], position[1]);
+        }
+
+        public void TryHideTile(GameObject[] gameObjects)
+        {
+            GameObject[] sorted = GetSortedObjects(gameObjects);
 
             SwitchRenderer(sorted[0], true);
             if (sorted.Length > 1)
@@ -61,11 +67,6 @@ namespace AxeMan.GameSystem
                     SwitchRenderer(sorted[i], false);
                 }
             }
-        }
-
-        public void TryHideTile(int[] position)
-        {
-            TryHideTile(position[0], position[1]);
         }
 
         private void Awake()
@@ -97,6 +98,18 @@ namespace AxeMan.GameSystem
         private void SwitchRenderer(GameObject go, bool switchOn)
         {
             go.GetComponent<Renderer>().enabled = switchOn;
+        }
+
+        private bool TrySearchObjects(int x, int y, out GameObject[] gameObjects)
+        {
+            if (!GetComponent<SearchObject>().Search(x, y,
+                out GameObject[] search))
+            {
+                gameObjects = null;
+                return false;
+            }
+            gameObjects = search;
+            return true;
         }
     }
 }

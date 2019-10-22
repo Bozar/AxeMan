@@ -5,12 +5,14 @@ using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.InitializeGameWorld
 {
     public class InitializeMainGame : MonoBehaviour
     {
+        private Stack<GameObject>[,] board;
         private bool endedLoop1;
         private bool endedLoop2;
 
@@ -55,9 +57,19 @@ namespace AxeMan.GameSystem.InitializeGameWorld
                         position[0], position[1]))
                     {
                         go.GetComponent<Renderer>().enabled = false;
+                        board[position[0], position[1]].Push(go);
                     }
                 }
             }
+        }
+
+        private void RefreshDungeonBoard()
+        {
+            foreach (Stack<GameObject> s in board)
+            {
+                GetComponent<TileOverlay>().TryHideTile(s.ToArray());
+            }
+            board = null;
         }
 
         private void SetReference()
@@ -70,6 +82,21 @@ namespace AxeMan.GameSystem.InitializeGameWorld
 
             OnSettingReference(new SettingReferenceEventArgs(aimMarker,
                 examineMarker, pc));
+        }
+
+        private void Start()
+        {
+            int width = GetComponent<DungeonBoard>().Width;
+            int height = GetComponent<DungeonBoard>().Height;
+
+            board = new Stack<GameObject>[width, height];
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    board[i, j] = new Stack<GameObject>();
+                }
+            }
         }
 
         private void Update()
@@ -91,7 +118,7 @@ namespace AxeMan.GameSystem.InitializeGameWorld
                 OnCreatedWorld();
 
                 GetComponent<TurnManager>().StartTurn();
-                GetComponent<TileOverlay>().RefreshDungeonBoard();
+                RefreshDungeonBoard();
                 endedLoop2 = true;
 
                 enabled = false;
