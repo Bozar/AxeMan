@@ -210,8 +210,8 @@ adds up separately.
 When you have two effects of the opposite name and type, the effect with longer
 duration remains and their durations negate each other.
 
-* `Fire Merit: T x 3` and `Water Flaw: T x 1` results in `Water Flaw: T x 2`.
-    + `Water Flaw` has longer duration. The difference of duration between two
+* `Fire Merit: T x 3` and `Water Flaw: T x 1` results in `Fire Merit: T x 2`.
+    + `Fire Merit` has longer duration. The difference of duration between two
       effects is 2.
 * `Air Merit: 2 x 3` and `Earth Flaw: 5 x 2` results in `Air Merit: 2 x 1`.
     + `Air Merit` has longer duration. The difference of duration between two
