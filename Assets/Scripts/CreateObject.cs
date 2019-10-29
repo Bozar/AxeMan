@@ -75,7 +75,13 @@ namespace AxeMan.GameSystem.ObjectFactory
             }
             go.transform.position = GetComponent<ConvertCoordinate>().Convert(
                 proto.Position);
-            // TODO: Puslish an event to reset object data.
+
+            // Test code.
+            if (go.GetComponent<MetaInfo>().SubTag == SubTag.LifeAltar)
+            {
+                go.GetComponent<SpriteRenderer>().sprite
+                    = Resources.LoadAll<Sprite>("curses_vector_32x48")[29];
+            }
 
             OnCreatedObject(new CreatedObjectEventArgs(go));
             return go;
