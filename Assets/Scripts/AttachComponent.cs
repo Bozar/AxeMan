@@ -27,6 +27,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<AimMarkerComponent>();
             gameObject.AddComponent<AimMode>();
 
+            gameObject.AddComponent<AltarColor>();
             gameObject.AddComponent<AltarCooldown>();
             gameObject.AddComponent<AltarSprite>();
 
