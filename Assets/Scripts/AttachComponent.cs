@@ -53,6 +53,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Canvas_PCStatus_SkillFlawEffect>();
             gameObject.AddComponent<Canvas_World>();
 
+            gameObject.AddComponent<ColorData>();
             gameObject.AddComponent<ConfirmCancelInput>();
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<ConvertSkillMetaInfo>();

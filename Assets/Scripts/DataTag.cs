@@ -29,6 +29,11 @@ namespace AxeMan.GameSystem.GameDataTag
         Canvas_PCStatus_SkillData, Canvas_PCStatus_SkillFlawEffect,
     }
 
+    public enum ColorTag
+    {
+        INVALID, White, Black, Grey, Orange, Green,
+    }
+
     public enum CommandTag
     {
         INVALID, Confirm, Cancel, ExamineMode,

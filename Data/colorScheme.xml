@@ -45,7 +45,7 @@
       <Alpha>255</Alpha>
     </RGBAColor>
   </Green>
-  <TEST>
+  <INVALID>
     <HexColor>FF0000</HexColor>
     <RGBAColor>
       <Red>255</Red>
@@ -53,6 +53,6 @@
       <Blue>0</Blue>
       <Alpha>255</Alpha>
     </RGBAColor>
-  </TEST>
+  </INVALID>
   <!-- vim: set lbr sts=2 sw=2: -->
 </ColorScheme>
