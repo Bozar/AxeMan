@@ -1,5 +1,4 @@
-﻿using AxeMan.GameSystem.GameDataHub;
-using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SchedulingSystem;
 using AxeMan.GameSystem.SearchGameObject;
@@ -40,8 +39,8 @@ namespace AxeMan.GameSystem
         {
             foreach (GameObject go in altars)
             {
-                go.GetComponent<SpriteRenderer>().color
-                    = GetComponent<ColorData>().GetRGBAColor(colorTag);
+                GetComponent<ColorManager>().SetColor(
+                    go.GetComponent<SpriteRenderer>(), colorTag);
             }
         }
 

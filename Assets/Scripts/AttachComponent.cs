@@ -55,7 +55,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Canvas_World>();
 
             gameObject.AddComponent<ColorData>();
+            gameObject.AddComponent<ColorManager>();
             gameObject.AddComponent<ConfirmCancelInput>();
+
             gameObject.AddComponent<ConvertCoordinate>();
             gameObject.AddComponent<ConvertSkillMetaInfo>();
             gameObject.AddComponent<CreateObject>();
