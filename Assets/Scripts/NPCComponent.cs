@@ -17,8 +17,10 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data.AddComponent<NPCAI>();
             e.Data.AddComponent<NPCAttack>();
             e.Data.AddComponent<NPCBonusAction>();
+
             e.Data.AddComponent<NPCFindPath>();
             e.Data.AddComponent<NPCMove>();
+            e.Data.AddComponent<NPCSetTrap>();
         }
 
         private void Start()
