@@ -24,7 +24,7 @@ namespace AxeMan.GameSystem.UserInterface
         }
 
         private void Canvas_PCStatus_HPSkill_ChangedHP(object sender,
-            ChangedHPEventArgs e)
+            ChangeHPEventArgs e)
         {
             if (e.SubTag != SubTag.PC)
             {
@@ -142,7 +142,7 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_PCStatus_HPSkill_SettingReference;
             GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_PCStatus_HPSkill_CreatedWorld;
-            GetComponent<PublishHP>().ChangedHP
+            GetComponent<PublishActorHP>().ChangedHP
                 += Canvas_PCStatus_HPSkill_ChangedHP;
             GetComponent<PublishSkill>().ChangedSkillCooldown
                 += Canvas_PCStatus_HPSkill_ChangedSkillCooldown;

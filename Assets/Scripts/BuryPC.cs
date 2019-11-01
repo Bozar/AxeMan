@@ -14,7 +14,7 @@ namespace AxeMan.GameSystem
             BuryingPC?.Invoke(this, e);
         }
 
-        private void BuryPC_ChangedHP(object sender, ChangedHPEventArgs e)
+        private void BuryPC_ChangedHP(object sender, ChangeHPEventArgs e)
         {
             if (e.IsAlive || (e.SubTag != SubTag.PC))
             {
@@ -25,7 +25,7 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<PublishHP>().ChangedHP += BuryPC_ChangedHP;
+            GetComponent<PublishActorHP>().ChangedHP += BuryPC_ChangedHP;
         }
     }
 }

@@ -87,7 +87,7 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<PublishAction>();
             gameObject.AddComponent<PublishActorStatus>();
-            gameObject.AddComponent<PublishHP>();
+            gameObject.AddComponent<PublishActorHP>();
             gameObject.AddComponent<PublishPosition>();
             gameObject.AddComponent<PublishSkill>();
 

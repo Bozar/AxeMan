@@ -69,10 +69,10 @@ namespace AxeMan.GameSystem
                 += UpgradeAltar_SettingReference;
             GetComponent<InitializeMainGame>().CreatedWorld
                 += UpgradeAltar_CreatedWorld;
-            GetComponent<PublishHP>().ChangedHP += UpgradeAltar_ChangedHP;
+            GetComponent<PublishActorHP>().ChangedHP += UpgradeAltar_ChangedHP;
         }
 
-        private void UpgradeAltar_ChangedHP(object sender, ChangedHPEventArgs e)
+        private void UpgradeAltar_ChangedHP(object sender, ChangeHPEventArgs e)
         {
             if (e.IsAlive || (e.SubTag == SubTag.PC))
             {

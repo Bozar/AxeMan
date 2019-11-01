@@ -9,7 +9,7 @@ namespace AxeMan.GameSystem
 {
     public class BuryNPC : MonoBehaviour
     {
-        private void BuryNPC_ChangedHP(object sender, ChangedHPEventArgs e)
+        private void BuryNPC_ChangedHP(object sender, ChangeHPEventArgs e)
         {
             if (e.IsAlive || (e.SubTag == SubTag.PC))
             {
@@ -38,7 +38,7 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<PublishHP>().ChangedHP += BuryNPC_ChangedHP;
+            GetComponent<PublishActorHP>().ChangedHP += BuryNPC_ChangedHP;
         }
     }
 }
