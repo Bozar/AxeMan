@@ -1,5 +1,11 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
+using AxeMan.GameSystem.ObjectFactory;
+using AxeMan.GameSystem.PrototypeFactory;
+using System;
+using System.Xml.Linq;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -13,9 +19,21 @@ namespace AxeMan.DungeonObject
             {
                 return;
             }
-            // Test.
+            SetTrap();
+        }
+
+        private void SetTrap()
+        {
+            MainTag mainTag = GetComponent<MetaInfo>().MainTag;
+            SubTag subTag = GetComponent<MetaInfo>().SubTag;
+            XElement trapData = GameCore.AxeManCore.GetComponent<ActorData>()
+                .GetXElementData(mainTag, subTag, ActorDataTag.SetTrap);
+            Enum.TryParse((string)trapData, out SubTag trapTag);
+
             int[] position = GetComponent<MetaInfo>().Position;
-            Debug.Log("Dead: " + position[0] + "," + position[1]);
+
+            ProtoObject proto = new ProtoObject(MainTag.Trap, trapTag, position);
+            GameCore.AxeManCore.GetComponent<CreateObject>().Create(proto);
         }
 
         private void Start()

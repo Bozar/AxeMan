@@ -12,7 +12,7 @@ namespace AxeMan.GameSystem.GameDataTag
     {
         Name, Cooldown, HP, PowerDuration, BuildingEffect, MoveDistance,
         AttackRange, Damage, CurseEffect, CurseData, MaxUpgrade, MaxDistance,
-        AddCooldown, AddPowerDuration, BumpDamage, RestoreHP,
+        AddCooldown, AddPowerDuration, BumpDamage, RestoreHP, SetTrap,
     }
 
     public enum BlueprintTag

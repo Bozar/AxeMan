@@ -10,6 +10,7 @@
     <BumpDamage>0</BumpDamage>
     <CurseEffect>INVALID</CurseEffect>
     <CurseData>99</CurseData>
+    <SetTrap>INVALID</SetTrap>
   </DEFAULT>
   <PC>
     <Name>
@@ -29,6 +30,7 @@
     <Damage>1</Damage>
     <CurseEffect>FireCurse</CurseEffect>
     <CurseData>4</CurseData>
+    <SetTrap>FireTrap</SetTrap>
   </Dummy>
   <!--- vim: set lbr sts=2 sw=2: -->
 </CharacterData>
