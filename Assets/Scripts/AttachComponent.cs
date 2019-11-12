@@ -76,6 +76,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<InitializeStartScreen>();
             gameObject.AddComponent<InputManager>();
 
+            gameObject.AddComponent<LogData>();
+            gameObject.AddComponent<LogManager>();
+
             gameObject.AddComponent<MarkerPosition>();
             gameObject.AddComponent<MovementInput>();
             gameObject.AddComponent<NPCComponent>();
