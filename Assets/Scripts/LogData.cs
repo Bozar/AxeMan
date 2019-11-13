@@ -17,6 +17,8 @@ namespace AxeMan.GameSystem.GameDataHub
         private LanguageTag defaultLanguage;
         private string errorMessage;
         private XElement logDataFile;
+        private string replaceActor;
+        private string replaceTrap;
         private LanguageTag userLanguage;
 
         public string GetStringData(LogMessage logMessage)
@@ -27,6 +29,12 @@ namespace AxeMan.GameSystem.GameDataHub
                 || TryGetData(logMessage, defaultLanguage, out xElement))
             {
                 message = (string)xElement;
+
+                message = TryReplacePlaceholder(message, replaceActor,
+                    MainTag.Actor, logMessage.ActorTag);
+
+                message = TryReplacePlaceholder(message, replaceTrap,
+                   MainTag.Trap, logMessage.TrapTag);
             }
             else
             {
@@ -39,6 +47,8 @@ namespace AxeMan.GameSystem.GameDataHub
         {
             defaultLanguage = LanguageTag.English;
             errorMessage = "INVALID";
+            replaceActor = "%ACTOR%";
+            replaceTrap = "%TRAP%";
         }
 
         private void LoadLogData()
@@ -77,6 +87,20 @@ namespace AxeMan.GameSystem.GameDataHub
                 ?.Element(languageTag.ToString());
 
             return xElement != null;
+        }
+
+        private string TryReplacePlaceholder(string source, string placeholder,
+            MainTag mainTag, SubTag subTag)
+        {
+            string newText;
+
+            if (subTag != SubTag.INVALID)
+            {
+                newText = GetComponent<ActorData>().GetStringData(
+                    mainTag, subTag, ActorDataTag.Name);
+                source = source.Replace(placeholder, newText);
+            }
+            return source;
         }
     }
 }
