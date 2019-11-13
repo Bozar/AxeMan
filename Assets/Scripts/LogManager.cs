@@ -51,6 +51,18 @@ namespace AxeMan.GameSystem
             LogMessageTag = message;
         }
 
+        public LogMessage(LogCategoryTag category, LogMessageTag message,
+            SubTag actor) : this(category, message)
+        {
+            ActorTag = actor;
+        }
+
+        public LogMessage(LogCategoryTag category, LogMessageTag message,
+            SubTag actor, SubTag trap) : this(category, message, actor)
+        {
+            TrapTag = trap;
+        }
+
         public SubTag ActorTag { get; }
 
         public LogCategoryTag LogCategoryTag { get; }
