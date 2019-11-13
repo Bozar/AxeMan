@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LogData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Combat>
+    <PCHit>
+      <English>You hit %ACTOR%.</English>
+    </PCHit>
+    <PCCurse>
+      <English>You curse %ACTOR%.</English>
+    </PCCurse>
+    <NPCHit>
+      <English>%ACTOR% hits you.</English>
+    </NPCHit>
+    <NPCCurse>
+      <English>%ACTOR% curses you.</English>
+    </NPCCurse>
+  </Combat>
+  <Altar>
+    <UpgradeAltar>
+      <English>Life Altar is upgraded.</English>
+    </UpgradeAltar>
+    <ActivateAltar>
+      <English>You are healed.</English>
+    </ActivateAltar>
+  </Altar>
+  <Trap>
+    <PCTriggerTrap>
+      <English>You trigger %TRAP%.</English>
+    </PCTriggerTrap>
+    <NPCTriggerTrap>
+      <English>%ACTOR% triggers %TRAP%.</English>
+    </NPCTriggerTrap>
+  </Trap>
+  <!--- vim: set lbr sts=2 sw=2: -->
+</LogData>
