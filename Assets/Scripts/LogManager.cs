@@ -9,7 +9,7 @@ namespace AxeMan.GameSystem
     {
         void Add(LogMessage logMessage);
 
-        string[] GetTail(int logLength);
+        string[] GetLog(int logLength);
     }
 
     public class LogManager : MonoBehaviour, ILogManager
@@ -23,7 +23,7 @@ namespace AxeMan.GameSystem
             // Remove overflowed message.
         }
 
-        public string[] GetTail(int logLength)
+        public string[] GetLog(int logLength)
         {
             throw new System.NotImplementedException();
         }
