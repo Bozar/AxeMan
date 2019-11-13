@@ -7,6 +7,8 @@ namespace AxeMan.GameSystem
 {
     public interface ILogManager
     {
+        int LogLength { get; }
+
         void Add(LogMessage logMessage);
 
         string[] GetLog(int logLength);
@@ -15,12 +17,18 @@ namespace AxeMan.GameSystem
     public class LogManager : MonoBehaviour, ILogManager
     {
         private List<string> fullLog;
+        private int maxLogLength;
+        private int minLogLength;
+
+        public int LogLength { get { return fullLog.Count; } }
 
         public void Add(LogMessage logMessage)
         {
             string message = GetComponent<LogData>().GetStringData(logMessage);
             fullLog.Add(message);
-            // Remove overflowed message.
+
+            ReduceLogLength();
+
             PrintLog();
         }
 
@@ -32,6 +40,8 @@ namespace AxeMan.GameSystem
         private void Awake()
         {
             fullLog = new List<string>();
+            minLogLength = 20;
+            maxLogLength = 200;
         }
 
         private void PrintLog()
@@ -39,6 +49,14 @@ namespace AxeMan.GameSystem
             foreach (string message in fullLog)
             {
                 Debug.Log(message);
+            }
+        }
+
+        private void ReduceLogLength()
+        {
+            if (LogLength > maxLogLength)
+            {
+                fullLog.RemoveRange(0, maxLogLength - minLogLength);
             }
         }
     }
