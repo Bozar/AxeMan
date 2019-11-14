@@ -11,6 +11,7 @@ namespace AxeMan.GameSystem.UserInterface
     public class Canvas_Message : MonoBehaviour
     {
         private CanvasTag canvasTag;
+        private Text[] logUIs;
         private GameObject[] uiObjects;
 
         private void Awake()
@@ -18,11 +19,25 @@ namespace AxeMan.GameSystem.UserInterface
             canvasTag = CanvasTag.Canvas_Message;
         }
 
+        private void Canvas_Message_AddingLog(object sender, EventArgs e)
+        {
+            PringLog();
+        }
+
         private void Canvas_Message_CreatedWorld(object sender, EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
-            // TODO: Remove this line later.
-            PrintTestMessage();
+
+            // Store log UI objects in reverse order.
+            logUIs = new Text[]
+            {
+                SearchText(UITag.Line6),
+                SearchText(UITag.Line5),
+                SearchText(UITag.Line4),
+                SearchText(UITag.Line3),
+                SearchText(UITag.Line2),
+                SearchText(UITag.Line1),
+            };
         }
 
         private void Canvas_Message_EnteredAimMode(object sender,
@@ -48,9 +63,12 @@ namespace AxeMan.GameSystem.UserInterface
             SwitchVisibility(true);
         }
 
-        private void PrintTestMessage()
+        private void PringLog()
         {
-            SearchText(UITag.Line1).text = "Message";
+            for (int i = 0; i < logUIs.Length; i++)
+            {
+                logUIs[i].text = GetComponent<LogManager>().GetLog(i);
+            }
         }
 
         private Text SearchText(UITag uiTag)
@@ -72,6 +90,8 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_Message_EnteredExamineMode;
             GetComponent<ExamineMode>().LeavingExamineMode
                 += Canvas_Message_LeavingExamineMode;
+
+            GetComponent<LogManager>().AddingLog += Canvas_Message_AddingLog;
         }
 
         private void SwitchVisibility(bool switchOn)

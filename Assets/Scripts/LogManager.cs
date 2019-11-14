@@ -1,5 +1,6 @@
 ﻿using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace AxeMan.GameSystem
         private int maxLogLength;
         private int minLogLength;
 
+        public event EventHandler<EventArgs> AddingLog;
+
         public void Add(LogMessage logMessage)
         {
             string message = GetComponent<LogData>().GetStringData(logMessage);
@@ -30,8 +33,7 @@ namespace AxeMan.GameSystem
         {
             fullLog.Add(message);
             ReduceLogLength();
-
-            PrintLog();
+            OnAddingLog(EventArgs.Empty);
         }
 
         public string GetLog(int reverseIndex)
@@ -45,19 +47,16 @@ namespace AxeMan.GameSystem
             return fullLog[index];
         }
 
+        protected virtual void OnAddingLog(EventArgs e)
+        {
+            AddingLog?.Invoke(this, e);
+        }
+
         private void Awake()
         {
             fullLog = new List<string>();
             minLogLength = 20;
             maxLogLength = 200;
-        }
-
-        private void PrintLog()
-        {
-            for (int i = 5; i >= 0; i--)
-            {
-                Debug.Log(GetLog(i));
-            }
         }
 
         private void ReduceLogLength()
