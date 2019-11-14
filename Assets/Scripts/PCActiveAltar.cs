@@ -45,6 +45,10 @@ namespace AxeMan.DungeonObject
             if (skill == SkillComponentTag.Life)
             {
                 GetComponent<HP>().Add(powerDuration);
+
+                GameCore.AxeManCore.GetComponent<LogManager>().Add(
+                    new LogMessage(LogCategoryTag.Altar,
+                    LogMessageTag.ActivateAltar));
             }
             else
             {

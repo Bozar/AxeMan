@@ -85,6 +85,11 @@ namespace AxeMan.GameSystem
                 {
                     OnUpgradingAltar(EventArgs.Empty);
                     upgradeCount++;
+
+                    GetComponent<LogManager>().Add(
+                        new LogMessage(LogCategoryTag.Altar,
+                        LogMessageTag.UpgradeAltar));
+
                     break;
                 }
             }

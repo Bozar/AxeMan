@@ -35,6 +35,7 @@ namespace AxeMan.DungeonObject
 
                 GetComponent<ActorStatus>().AddStatus(skill,
                     new EffectData(data, data));
+                AddLog(subTag);
             }
         }
 
@@ -56,6 +57,25 @@ namespace AxeMan.DungeonObject
                 trapTags.Push(go.GetComponent<MetaInfo>().SubTag);
                 go.GetComponent<LocalManager>().Remove();
             }
+        }
+
+        private void AddLog(SubTag trapSubTag)
+        {
+            SubTag actorSubTag = GetComponent<MetaInfo>().SubTag;
+            LogMessageTag messageTag;
+
+            if (actorSubTag == SubTag.PC)
+            {
+                messageTag = LogMessageTag.PCTriggerTrap;
+            }
+            else
+            {
+                messageTag = LogMessageTag.NPCTriggerTrap;
+            }
+
+            GameCore.AxeManCore.GetComponent<LogManager>().Add(
+                new LogMessage(LogCategoryTag.Trap, messageTag,
+                actorSubTag, trapSubTag));
         }
 
         private void Awake()
