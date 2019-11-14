@@ -65,12 +65,20 @@ namespace AxeMan.DungeonObject
                     .ConvertCurse2Flaw(CurseEffect, out SkillComponentTag flaw);
                 pc.GetComponent<ActorStatus>().AddStatus(flaw,
                     new EffectData(CurseData, CurseData));
+
+                GameCore.AxeManCore.GetComponent<LogManager>().Add(
+                    new LogMessage(LogCategoryTag.Combat, LogMessageTag.NPCCurse,
+                    GetComponent<MetaInfo>().SubTag));
             }
         }
 
         public void DealDamage()
         {
             pc.GetComponent<HP>().Subtract(Damage);
+
+            GameCore.AxeManCore.GetComponent<LogManager>().Add(
+                new LogMessage(LogCategoryTag.Combat, LogMessageTag.NPCHit,
+                GetComponent<MetaInfo>().SubTag));
         }
 
         public bool IsInsideRage(out int outOfRange)

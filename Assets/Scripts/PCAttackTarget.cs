@@ -59,6 +59,11 @@ namespace AxeMan.DungeonObject
             int damage = GetComponent<PCSkillManager>().GetSkillDamage(skillName);
             damage += StatusMod(targets[0]);
             targets[0].GetComponent<HP>().Subtract(damage);
+
+            SubTag targetSubTag = targets[0].GetComponent<MetaInfo>().SubTag;
+            GameCore.AxeManCore.GetComponent<LogManager>().Add(
+                new LogMessage(LogCategoryTag.Combat, LogMessageTag.PCHit,
+                targetSubTag));
         }
 
         private void Start()

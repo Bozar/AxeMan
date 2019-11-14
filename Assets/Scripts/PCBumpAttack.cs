@@ -41,6 +41,11 @@ namespace AxeMan.DungeonObject
             int damage = GetDamage(actor.GetComponent<ActorStatus>());
             actor.GetComponent<HP>().Subtract(damage);
 
+            SubTag targetSubTag = actor.GetComponent<MetaInfo>().SubTag;
+            GameCore.AxeManCore.GetComponent<LogManager>().Add(
+                new LogMessage(LogCategoryTag.Combat, LogMessageTag.PCHit,
+                targetSubTag));
+
             GetComponent<LocalManager>().CheckingSchedule(ActionTag.BumpAttack);
         }
 

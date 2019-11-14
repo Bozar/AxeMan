@@ -64,6 +64,11 @@ namespace AxeMan.DungeonObject
                         flaw, compInt[sct]);
                 }
             }
+
+            SubTag targetSubTag = targets[0].GetComponent<MetaInfo>().SubTag;
+            GameCore.AxeManCore.GetComponent<LogManager>().Add(
+                new LogMessage(LogCategoryTag.Combat, LogMessageTag.PCCurse,
+                targetSubTag));
         }
 
         private void Start()
