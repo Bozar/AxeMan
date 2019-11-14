@@ -7,11 +7,10 @@ namespace AxeMan.GameSystem
 {
     public interface ILogManager
     {
-        int LogLength { get; }
-
         void Add(LogMessage logMessage);
 
-        string[] GetLog(int logLength);
+        // The index of the last line is 0. The second last one is 1.
+        string GetLog(int reverseIndex);
     }
 
     public class LogManager : MonoBehaviour, ILogManager
@@ -20,21 +19,30 @@ namespace AxeMan.GameSystem
         private int maxLogLength;
         private int minLogLength;
 
-        public int LogLength { get { return fullLog.Count; } }
-
         public void Add(LogMessage logMessage)
         {
             string message = GetComponent<LogData>().GetStringData(logMessage);
-            fullLog.Add(message);
+            Add(message);
+        }
 
+        // It is not recommended to use this method unless for testing.
+        public void Add(string message)
+        {
+            fullLog.Add(message);
             ReduceLogLength();
 
             PrintLog();
         }
 
-        public string[] GetLog(int logLength)
+        public string GetLog(int reverseIndex)
         {
-            throw new System.NotImplementedException();
+            int index = fullLog.Count - reverseIndex - 1;
+
+            if ((index < 0) || (index > fullLog.Count - 1))
+            {
+                return "";
+            }
+            return fullLog[index];
         }
 
         private void Awake()
@@ -46,15 +54,15 @@ namespace AxeMan.GameSystem
 
         private void PrintLog()
         {
-            foreach (string message in fullLog)
+            for (int i = 5; i >= 0; i--)
             {
-                Debug.Log(message);
+                Debug.Log(GetLog(i));
             }
         }
 
         private void ReduceLogLength()
         {
-            if (LogLength > maxLogLength)
+            if (fullLog.Count > maxLogLength)
             {
                 fullLog.RemoveRange(0, maxLogLength - minLogLength);
             }
