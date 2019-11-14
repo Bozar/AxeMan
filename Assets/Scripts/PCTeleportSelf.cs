@@ -48,6 +48,9 @@ namespace AxeMan.DungeonObject
             GetComponent<LocalManager>().SetPosition(target);
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(source);
             GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(target);
+
+            GameCore.AxeManCore.GetComponent<LogManager>().Add(
+                new LogMessage(LogCategoryTag.Combat, LogMessageTag.PCTeleport));
         }
 
         private void Start()

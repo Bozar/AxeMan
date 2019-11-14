@@ -53,9 +53,11 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum LogMessageTag
     {
-        INVALID, PCHit, PCCurse, NPCHit, NPCCurse,
-        UpgradeAltar, ActivateAltar,
+        INVALID,
+        PCHit, PCCurse, NPCHit, NPCCurse,
         PCTriggerTrap, NPCTriggerTrap,
+        PCBuff, PCTeleport,
+        UpgradeAltar, ActivateAltar,
     }
 
     public enum MainTag { INVALID, Altar, Trap, Actor, Floor, Marker, }

@@ -49,6 +49,9 @@ namespace AxeMan.DungeonObject
                     GetComponent<ActorStatus>().AddStatus(sct, compInt[sct]);
                 }
             }
+
+            GameCore.AxeManCore.GetComponent<LogManager>().Add(
+               new LogMessage(LogCategoryTag.Combat, LogMessageTag.PCBuff));
         }
 
         private void Start()

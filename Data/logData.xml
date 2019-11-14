@@ -7,6 +7,12 @@
     <PCCurse>
       <English>You curse %ACTOR%.</English>
     </PCCurse>
+    <PCBuff>
+      <English>You buff yourself.</English>
+    </PCBuff>
+    <PCTeleport>
+      <English>You teleport yourself.</English>
+    </PCTeleport>
     <NPCHit>
       <English>%ACTOR% hits you.</English>
     </NPCHit>
