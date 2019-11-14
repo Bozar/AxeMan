@@ -10,6 +10,8 @@ namespace AxeMan.GameSystem
     {
         void Add(LogMessage logMessage);
 
+        void Add(string message);
+
         // The index of the last line is 0. The second last one is 1.
         string GetLog(int reverseIndex);
     }
@@ -28,7 +30,6 @@ namespace AxeMan.GameSystem
             Add(message);
         }
 
-        // It is not recommended to use this method unless for testing.
         public void Add(string message)
         {
             fullLog.Add(message);
