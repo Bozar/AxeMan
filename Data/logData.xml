@@ -40,6 +40,9 @@
     <NewTurn>
       <English>====================</English>
     </NewTurn>
+    <PCDeath>
+      <English>You are dead.</English>
+    </PCDeath>
   </GameProgress>
   <!--- vim: set lbr sts=2 sw=2: -->
 </LogData>

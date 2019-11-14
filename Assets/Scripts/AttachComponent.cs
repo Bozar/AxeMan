@@ -30,6 +30,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<AltarColor>();
             gameObject.AddComponent<AltarCooldown>();
             gameObject.AddComponent<AltarSprite>();
+            gameObject.AddComponent<AnnouncePCDeath>();
 
             gameObject.AddComponent<Blueprint>();
             gameObject.AddComponent<BlueprintActor>();

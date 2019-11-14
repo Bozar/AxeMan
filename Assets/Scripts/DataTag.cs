@@ -53,7 +53,7 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum LogMessageTag
     {
-        INVALID, NewTurn,
+        INVALID, NewTurn, PCDeath,
         PCHit, PCCurse, NPCHit, NPCCurse,
         PCTriggerTrap, NPCTriggerTrap,
         PCBuff, PCTeleport,
