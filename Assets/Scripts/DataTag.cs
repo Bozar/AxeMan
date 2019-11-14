@@ -48,12 +48,12 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum LogCategoryTag
     {
-        INVALID, Combat, Altar, Trap,
+        INVALID, Combat, Altar, Trap, GameProgress,
     }
 
     public enum LogMessageTag
     {
-        INVALID,
+        INVALID, NewTurn,
         PCHit, PCCurse, NPCHit, NPCCurse,
         PCTriggerTrap, NPCTriggerTrap,
         PCBuff, PCTeleport,

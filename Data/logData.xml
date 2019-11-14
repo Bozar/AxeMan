@@ -36,5 +36,10 @@
       <English>%ACTOR% triggers %TRAP%.</English>
     </NPCTriggerTrap>
   </Trap>
+  <GameProgress>
+    <NewTurn>
+      <English>====================</English>
+    </NewTurn>
+  </GameProgress>
   <!--- vim: set lbr sts=2 sw=2: -->
 </LogData>
