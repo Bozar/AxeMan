@@ -36,7 +36,7 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum CommandTag
     {
-        INVALID, Confirm, Cancel, ExamineMode,
+        INVALID, Confirm, Cancel, ExamineMode, LogMode,
         Test, ForceReload, Reload, PrintSchedule, RemoveFromSchedule,
         NextInSchedule,
         ChangeHP, PrintSkill,

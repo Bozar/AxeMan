@@ -78,6 +78,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<InputManager>();
 
             gameObject.AddComponent<LogData>();
+            gameObject.AddComponent<LogInput>();
             gameObject.AddComponent<LogManager>();
 
             gameObject.AddComponent<MarkerPosition>();
