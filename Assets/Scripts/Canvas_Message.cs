@@ -21,7 +21,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Canvas_Message_AddingLog(object sender, EventArgs e)
         {
-            PringLog();
+            PrintLog();
         }
 
         private void Canvas_Message_CreatedWorld(object sender, EventArgs e)
@@ -63,7 +63,7 @@ namespace AxeMan.GameSystem.UserInterface
             SwitchVisibility(true);
         }
 
-        private void PringLog()
+        private void PrintLog()
         {
             for (int i = 0; i < logUIs.Length; i++)
             {
