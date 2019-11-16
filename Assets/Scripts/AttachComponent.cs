@@ -50,12 +50,13 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Canvas_ExamineMode>();
             gameObject.AddComponent<Canvas_Message>();
 
+            gameObject.AddComponent<Canvas_PCStatus>();
             gameObject.AddComponent<Canvas_PCStatus_CurrentStatus>();
             gameObject.AddComponent<Canvas_PCStatus_HPSkill>();
             gameObject.AddComponent<Canvas_PCStatus_SkillData>();
             gameObject.AddComponent<Canvas_PCStatus_SkillFlawEffect>();
-            gameObject.AddComponent<Canvas_World>();
 
+            gameObject.AddComponent<Canvas_World>();
             gameObject.AddComponent<ColorData>();
             gameObject.AddComponent<ColorManager>();
             gameObject.AddComponent<ConfirmCancelInput>();
