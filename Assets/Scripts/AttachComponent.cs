@@ -50,6 +50,7 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<Canvas_ExamineMode>();
             gameObject.AddComponent<Canvas_Help>();
+            gameObject.AddComponent<Canvas_Log>();
             gameObject.AddComponent<Canvas_Message>();
 
             gameObject.AddComponent<Canvas_PCStatus>();
