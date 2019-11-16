@@ -47,7 +47,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BuildingEffect>();
             gameObject.AddComponent<BuryNPC>();
             gameObject.AddComponent<BuryPC>();
+
             gameObject.AddComponent<Canvas_ExamineMode>();
+            gameObject.AddComponent<Canvas_Help>();
             gameObject.AddComponent<Canvas_Message>();
 
             gameObject.AddComponent<Canvas_PCStatus>();
