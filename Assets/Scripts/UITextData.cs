@@ -7,22 +7,22 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem.GameDataHub
 {
-    public interface IUILabelData
+    public interface IUITextData
     {
-        string GetStringData(UILabelDataTag uiLabelData);
+        string GetStringData(UITextDataTag uiTextDataTag);
     }
 
-    public class UILabelData : MonoBehaviour, IUILabelData
+    public class UITextData : MonoBehaviour, IUITextData
     {
         private LanguageTag defaultLanguage;
         private string error;
         private LanguageTag userLanguage;
         private XElement xmlFile;
 
-        public string GetStringData(UILabelDataTag uiLabelData)
+        public string GetStringData(UITextDataTag uiTextDataTag)
         {
-            if (TryGetData(uiLabelData, userLanguage, out XElement data)
-                || TryGetData(uiLabelData, defaultLanguage, out data))
+            if (TryGetData(uiTextDataTag, userLanguage, out XElement data)
+                || TryGetData(uiTextDataTag, defaultLanguage, out data))
             {
                 return (string)data;
             }
@@ -41,7 +41,7 @@ namespace AxeMan.GameSystem.GameDataHub
                 += UILabelData_LoadingGameData;
         }
 
-        private bool TryGetData(UILabelDataTag uiLabelData, LanguageTag language,
+        private bool TryGetData(UITextDataTag uiLabelData, LanguageTag language,
             out XElement data)
         {
             data = xmlFile
@@ -52,7 +52,7 @@ namespace AxeMan.GameSystem.GameDataHub
 
         private void UILabelData_LoadingGameData(object sender, EventArgs e)
         {
-            string file = "uiLabelData.xml";
+            string file = "uiTextData.xml";
             string directory = "Data";
             xmlFile = GetComponent<SaveLoadXML>().Load(file, directory);
 

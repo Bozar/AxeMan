@@ -119,7 +119,7 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<TileOverlay>();
             gameObject.AddComponent<TurnManager>();
-            gameObject.AddComponent<UILabelData>();
+            gameObject.AddComponent<UITextData>();
             gameObject.AddComponent<UIManager>();
             gameObject.AddComponent<UpgradeAltar>();
 

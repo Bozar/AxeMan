@@ -195,8 +195,8 @@ namespace AxeMan.GameSystem.UserInterface
                     GetComponent<BuildingEffect>().GetEffect(mainTag, subTag));
             string altarData = GetAltarEffectName(subTag);
 
-            string cooldownText = GetComponent<UILabelData>().GetStringData(
-                UILabelDataTag.Cooldown);
+            string cooldownText = GetComponent<UITextData>().GetStringData(
+                UITextDataTag.Cooldown);
 
             int currentCD = GetComponent<AltarCooldown>().CurrentCooldown;
             int maxCD = GetComponent<AltarCooldown>().MaxCooldown;
@@ -232,8 +232,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintDamage(GameObject target)
         {
-            string damageText = GetComponent<UILabelData>().GetStringData(
-                UILabelDataTag.Damage);
+            string damageText = GetComponent<UITextData>().GetStringData(
+                UITextDataTag.Damage);
             int damageData = target.GetComponent<NPCAttack>().Damage;
 
             SearchText(UITag.DamageText).text = damageText;
@@ -287,14 +287,14 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintNPCColumn1(GameObject target)
         {
-            string hpText = GetComponent<UILabelData>().GetStringData(
-                UILabelDataTag.HP);
-            string moveText = GetComponent<UILabelData>().GetStringData(
-                UILabelDataTag.MoveDistance);
-            string attackText = GetComponent<UILabelData>().GetStringData(
-                UILabelDataTag.AttackRange);
-            string cooldownText = GetComponent<UILabelData>().GetStringData(
-                UILabelDataTag.Cooldown);
+            string hpText = GetComponent<UITextData>().GetStringData(
+                UITextDataTag.HP);
+            string moveText = GetComponent<UITextData>().GetStringData(
+                UITextDataTag.MoveDistance);
+            string attackText = GetComponent<UITextData>().GetStringData(
+                UITextDataTag.AttackRange);
+            string cooldownText = GetComponent<UITextData>().GetStringData(
+                UITextDataTag.Cooldown);
 
             SearchText(UITag.HPText).text = hpText;
             SearchText(UITag.MoveText).text = moveText;

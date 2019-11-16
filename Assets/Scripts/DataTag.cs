@@ -91,11 +91,6 @@ namespace AxeMan.GameSystem.GameDataTag
         PC, AimMarker, ExamineMarker, StartScreenCursor, LogMarker,
     }
 
-    public enum UILabelDataTag
-    {
-        Cooldown, HP, MoveDistance, AttackRange, Damage,
-    }
-
     public enum UITag
     {
         Modeline, UIText,
@@ -117,6 +112,11 @@ namespace AxeMan.GameSystem.GameDataTag
         Line6, Line7, Line8, Line9, Line10,
         Line11, Line12, Line13, Line14, Line15,
         Line16, Line17, Line18, Line19, Line20,
+    }
+
+    public enum UITextDataTag
+    {
+        Cooldown, HP, MoveDistance, AttackRange, Damage,
     }
 
     public class DataTag : MonoBehaviour
