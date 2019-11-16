@@ -1,4 +1,5 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
@@ -23,6 +24,7 @@ namespace AxeMan.GameSystem.UserInterface
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
             SwitchVisibility(false);
+            SetModelineText();
 
             logUIs = new Text[]
             {
@@ -71,6 +73,14 @@ namespace AxeMan.GameSystem.UserInterface
         private Text SearchText(UITag uiTag)
         {
             return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
+        }
+
+        private void SetModelineText()
+        {
+            string hint = GetComponent<UITextData>().
+                GetStringData(UITextCategoryTag.Log, UITextDataTag.Hint);
+            GetComponent<ColorManager>().SetColor(hint, ColorTag.Grey, out hint);
+            SearchText(UITag.Modeline).text = hint;
         }
 
         private void Start()

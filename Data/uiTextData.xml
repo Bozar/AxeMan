@@ -17,5 +17,10 @@
       <English>Dmg</English>
     </Damage>
   </ActorStatus>
+  <Log>
+    <Hint>
+      <English>[ Log Mode ] Press Esc to exit.</English>
+    </Hint>
+  </Log>
   <!--- vim: set lbr sts=2 sw=2: -->
 </UILabelData>
