@@ -37,6 +37,7 @@ namespace AxeMan.GameSystem.InitializeGameWorld
                 BlueprintTag.Altar, BlueprintTag.Floor,
                 BlueprintTag.Trap, BlueprintTag.Actor,
                 BlueprintTag.AimMarker, BlueprintTag.ExamineMarker,
+                BlueprintTag.LogMarker,
             };
             IPrototype[] prototypes;
             GameObject[] gameObjects;

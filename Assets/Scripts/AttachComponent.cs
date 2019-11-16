@@ -39,11 +39,12 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintExamineMarker>();
 
             gameObject.AddComponent<BlueprintFloor>();
+            gameObject.AddComponent<BlueprintLogMarker>();
             gameObject.AddComponent<BlueprintProgressBar>();
             gameObject.AddComponent<BlueprintStartScreenCursor>();
             gameObject.AddComponent<BlueprintTrap>();
-            gameObject.AddComponent<BuildingEffect>();
 
+            gameObject.AddComponent<BuildingEffect>();
             gameObject.AddComponent<BuryNPC>();
             gameObject.AddComponent<BuryPC>();
             gameObject.AddComponent<Canvas_ExamineMode>();
