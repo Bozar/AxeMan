@@ -9,18 +9,16 @@ namespace AxeMan.GameSystem.ObjectFactory
         private void NPCComponent_AddingComponent(object sender,
             AddingComponentEventArgs e)
         {
-            if ((e.Data.GetComponent<MetaInfo>()?.MainTag != MainTag.Actor)
-                || (e.Data.GetComponent<MetaInfo>()?.SubTag == SubTag.PC))
+            if ((e.Data.GetComponent<MetaInfo>().MainTag != MainTag.Actor)
+                || (e.Data.GetComponent<MetaInfo>().SubTag == SubTag.PC))
             {
                 return;
             }
             e.Data.AddComponent<NPCAI>();
             e.Data.AddComponent<NPCAttack>();
             e.Data.AddComponent<NPCBonusAction>();
-
             e.Data.AddComponent<NPCFindPath>();
             e.Data.AddComponent<NPCMove>();
-            e.Data.AddComponent<NPCSetTrap>();
         }
 
         private void Start()
