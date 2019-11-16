@@ -32,7 +32,7 @@ namespace AxeMan.GameSystem
             SubTag subTag = actor.GetComponent<MetaInfo>().SubTag;
             int[] position = actor.GetComponent<MetaInfo>().Position;
 
-            SetTrap(mainTag, subTag, position);
+            //SetTrap(mainTag, subTag, position);
             actor.GetComponent<LocalManager>().Remove();
             GetComponent<TileOverlay>().TryHideTile(position);
 
