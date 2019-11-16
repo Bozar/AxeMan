@@ -196,7 +196,7 @@ namespace AxeMan.GameSystem.UserInterface
             string altarData = GetAltarEffectName(subTag);
 
             string cooldownText = GetComponent<UITextData>().GetStringData(
-                UITextDataTag.Cooldown);
+                UITextCategoryTag.ActorStatus, UITextDataTag.Cooldown);
 
             int currentCD = GetComponent<AltarCooldown>().CurrentCooldown;
             int maxCD = GetComponent<AltarCooldown>().MaxCooldown;
@@ -233,7 +233,7 @@ namespace AxeMan.GameSystem.UserInterface
         private void PrintDamage(GameObject target)
         {
             string damageText = GetComponent<UITextData>().GetStringData(
-                UITextDataTag.Damage);
+                UITextCategoryTag.ActorStatus, UITextDataTag.Damage);
             int damageData = target.GetComponent<NPCAttack>().Damage;
 
             SearchText(UITag.DamageText).text = damageText;
@@ -288,13 +288,13 @@ namespace AxeMan.GameSystem.UserInterface
         private void PrintNPCColumn1(GameObject target)
         {
             string hpText = GetComponent<UITextData>().GetStringData(
-                UITextDataTag.HP);
+                UITextCategoryTag.ActorStatus, UITextDataTag.HP);
             string moveText = GetComponent<UITextData>().GetStringData(
-                UITextDataTag.MoveDistance);
+                UITextCategoryTag.ActorStatus, UITextDataTag.MoveDistance);
             string attackText = GetComponent<UITextData>().GetStringData(
-                UITextDataTag.AttackRange);
+                UITextCategoryTag.ActorStatus, UITextDataTag.AttackRange);
             string cooldownText = GetComponent<UITextData>().GetStringData(
-                UITextDataTag.Cooldown);
+                UITextCategoryTag.ActorStatus, UITextDataTag.Cooldown);
 
             SearchText(UITag.HPText).text = hpText;
             SearchText(UITag.MoveText).text = moveText;

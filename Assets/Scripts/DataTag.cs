@@ -114,6 +114,11 @@ namespace AxeMan.GameSystem.GameDataTag
         Line16, Line17, Line18, Line19, Line20,
     }
 
+    public enum UITextCategoryTag
+    {
+        ActorStatus,
+    }
+
     public enum UITextDataTag
     {
         Cooldown, HP, MoveDistance, AttackRange, Damage,

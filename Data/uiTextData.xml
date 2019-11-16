@@ -1,19 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UILabelData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Cooldown>
-    <English>CD</English>
-  </Cooldown>
-  <HP>
-    <English>HP</English>
-  </HP>
-  <MoveDistance>
-    <English>Move</English>
-  </MoveDistance>
-  <AttackRange>
-    <English>Range</English>
-  </AttackRange>
-  <Damage>
-    <English>Dmg</English>
-  </Damage>
+  <ActorStatus>
+    <Cooldown>
+      <English>CD</English>
+    </Cooldown>
+    <HP>
+      <English>HP</English>
+    </HP>
+    <MoveDistance>
+      <English>Move</English>
+    </MoveDistance>
+    <AttackRange>
+      <English>Range</English>
+    </AttackRange>
+    <Damage>
+      <English>Dmg</English>
+    </Damage>
+  </ActorStatus>
   <!--- vim: set lbr sts=2 sw=2: -->
 </UILabelData>

@@ -9,7 +9,8 @@ namespace AxeMan.GameSystem.GameDataHub
 {
     public interface IUITextData
     {
-        string GetStringData(UITextDataTag uiTextDataTag);
+        string GetStringData(UITextCategoryTag categoryTag,
+            UITextDataTag dataTag);
     }
 
     public class UITextData : MonoBehaviour, IUITextData
@@ -19,10 +20,11 @@ namespace AxeMan.GameSystem.GameDataHub
         private LanguageTag userLanguage;
         private XElement xmlFile;
 
-        public string GetStringData(UITextDataTag uiTextDataTag)
+        public string GetStringData(UITextCategoryTag categoryTag,
+            UITextDataTag dataTag)
         {
-            if (TryGetData(uiTextDataTag, userLanguage, out XElement data)
-                || TryGetData(uiTextDataTag, defaultLanguage, out data))
+            if (TryGetData(categoryTag, dataTag, userLanguage, out XElement data)
+                || TryGetData(categoryTag, dataTag, defaultLanguage, out data))
             {
                 return (string)data;
             }
@@ -41,11 +43,12 @@ namespace AxeMan.GameSystem.GameDataHub
                 += UILabelData_LoadingGameData;
         }
 
-        private bool TryGetData(UITextDataTag uiLabelData, LanguageTag language,
-            out XElement data)
+        private bool TryGetData(UITextCategoryTag categoryTag,
+            UITextDataTag dataTag, LanguageTag language, out XElement data)
         {
             data = xmlFile
-                .Element(uiLabelData.ToString())
+                .Element(categoryTag.ToString())
+                .Element(dataTag.ToString())
                 .Element(language.ToString());
             return data != null;
         }
