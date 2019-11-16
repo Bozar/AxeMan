@@ -39,6 +39,11 @@ namespace AxeMan.DungeonObject.PlayerInput
             EnableInput(false);
         }
 
+        private void PCInputSwitcher_EnteringLogMode(object sender, EventArgs e)
+        {
+            EnableInput(false);
+        }
+
         private void PCInputSwitcher_LeavingAimMode(object sender, EventArgs e)
         {
             EnableInput(true);
@@ -46,6 +51,11 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         private void PCInputSwitcher_LeavingExamineMode(object sender,
             EventArgs e)
+        {
+            EnableInput(true);
+        }
+
+        private void PCInputSwitcher_LeavingLogMode(object sender, EventArgs e)
         {
             EnableInput(true);
         }
@@ -76,6 +86,11 @@ namespace AxeMan.DungeonObject.PlayerInput
                 += PCInputSwitcher_EnteringExamineMode;
             GameCore.AxeManCore.GetComponent<ExamineMode>().LeavingExamineMode
                 += PCInputSwitcher_LeavingExamineMode;
+
+            GameCore.AxeManCore.GetComponent<LogMode>().EnteringLogMode
+                += PCInputSwitcher_EnteringLogMode;
+            GameCore.AxeManCore.GetComponent<LogMode>().LeavingLogMode
+                += PCInputSwitcher_LeavingLogMode;
 
             GameCore.AxeManCore.GetComponent<BuryPC>().BuryingPC
                 += PCInputSwitcher_BuryingPC;
