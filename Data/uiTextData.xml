@@ -22,5 +22,16 @@
       <English>[ Log Mode ] Press Esc to exit.</English>
     </Hint>
   </Log>
+  <Help>
+    <NormalMode>
+      <English>[ Normal Mode ]</English>
+    </NormalMode>
+    <ExamineMode>
+      <English>[ Examine Mode ]</English>
+    </ExamineMode>
+    <AimMode>
+      <English>[ Aim Mode ]</English>
+    </AimMode>
+  </Help>
   <!--- vim: set lbr sts=2 sw=2: -->
 </UILabelData>

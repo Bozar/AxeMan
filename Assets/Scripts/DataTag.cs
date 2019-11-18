@@ -116,12 +116,13 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum UITextCategoryTag
     {
-        ActorStatus, Log,
+        ActorStatus, Log, Help,
     }
 
     public enum UITextDataTag
     {
         Cooldown, HP, MoveDistance, AttackRange, Damage, Hint,
+        NormalMode, AimMode, ExamineMode,
     }
 
     public class DataTag : MonoBehaviour
