@@ -32,6 +32,33 @@
     <AimMode>
       <English>[ Aim Mode ]</English>
     </AimMode>
+    <MovePC>
+      <English>[ Arrow keys | HJKL ] -- Move PC around.</English>
+    </MovePC>
+    <EnterExamine>
+      <English>[ X ] -- Enter Examine Mode.</English>
+    </EnterExamine>
+    <EnterAim>
+      <English>[ QWER ] -- Enter Aim Mode.</English>
+    </EnterAim>
+    <ViewLog>
+      <English>[ M ] -- View log.</English>
+    </ViewLog>
+    <Save>
+      <English>[ Ctrl+S ] -- Save and quit game.</English>
+    </Save>
+    <MoveCursor>
+      <English>[ Arrow keys | HJKL ] -- Move cursor around.</English>
+    </MoveCursor>
+    <UseSkill>
+      <English>[ Space ] -- Confirm to use skill.</English>
+    </UseSkill>
+    <SwitchSkill>
+      <English>[ QWER ] -- Switch to another skill.</English>
+    </SwitchSkill>
+    <ExitMode>
+      <English>[ Esc ] -- Exit current mode.</English>
+    </ExitMode>
   </Help>
   <!--- vim: set lbr sts=2 sw=2: -->
 </UILabelData>

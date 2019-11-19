@@ -122,7 +122,8 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum UITextDataTag
     {
         Cooldown, HP, MoveDistance, AttackRange, Damage, Hint,
-        NormalMode, AimMode, ExamineMode,
+        NormalMode, AimMode, ExamineMode, MovePC, EnterExamine, EnterAim,
+        ViewLog, Save, MoveCursor, UseSkill, ExitMode,
     }
 
     public class DataTag : MonoBehaviour
