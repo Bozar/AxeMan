@@ -123,7 +123,7 @@ namespace AxeMan.GameSystem.GameDataTag
     {
         Cooldown, HP, MoveDistance, AttackRange, Damage, Hint,
         NormalMode, AimMode, ExamineMode, MovePC, EnterExamine, EnterAim,
-        ViewLog, Save, MoveCursor, UseSkill, ExitMode,
+        ViewLog, Save, MoveCursor, UseSkill, SwitchSkill, ExitMode,
     }
 
     public class DataTag : MonoBehaviour

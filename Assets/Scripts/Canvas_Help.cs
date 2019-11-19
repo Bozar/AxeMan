@@ -81,18 +81,51 @@ namespace AxeMan.GameSystem.UserInterface
         {
             SearchText(UITag.Modeline).text = GetStringData(
                 UITextDataTag.AimMode);
+
+            SearchText(UITag.Line1).text = GetStringData(
+               UITextDataTag.MoveCursor);
+
+            SearchText(UITag.Line2).text = GetStringData(
+                UITextDataTag.UseSkill);
+
+            SearchText(UITag.Line3).text = GetStringData(
+                UITextDataTag.SwitchSkill);
+
+            SearchText(UITag.Line4).text = GetStringData(
+                UITextDataTag.ExitMode);
         }
 
         private void PrintExamineModeText()
         {
             SearchText(UITag.Modeline).text = GetStringData(
                 UITextDataTag.ExamineMode);
+
+            SearchText(UITag.Line1).text = GetStringData(
+             UITextDataTag.MoveCursor);
+
+            SearchText(UITag.Line2).text = GetStringData(
+                UITextDataTag.ExitMode);
         }
 
         private void PrintNormalModeText()
         {
             SearchText(UITag.Modeline).text = GetStringData(
                 UITextDataTag.NormalMode);
+
+            SearchText(UITag.Line1).text = GetStringData(
+                UITextDataTag.MovePC);
+
+            SearchText(UITag.Line2).text = GetStringData(
+                UITextDataTag.EnterExamine);
+
+            SearchText(UITag.Line3).text = GetStringData(
+                UITextDataTag.EnterAim);
+
+            SearchText(UITag.Line4).text = GetStringData(
+                UITextDataTag.ViewLog);
+
+            SearchText(UITag.Line5).text = GetStringData(
+                UITextDataTag.Save);
         }
 
         private Text SearchText(UITag uiTag)
