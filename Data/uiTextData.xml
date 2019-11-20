@@ -60,5 +60,34 @@
       <English>[ Esc ] -- Exit current mode.</English>
     </ExitMode>
   </Help>
+  <World>
+    <AimMode>
+      <English>Aim</English>
+    </AimMode>
+    <ExamineMode>
+      <English>Examine</English>
+    </ExamineMode>
+    <UseSkill>
+      <English>Cannot use Skill %PLACEHOLDER1%.</English>
+    </UseSkill>
+    <Version>
+      <English>Version: %PLACEHOLDER1%</English>
+    </Version>
+    <Seed>
+      <English>Seed: %PLACEHOLDER1%</English>
+    </Seed>
+    <Difficulty>
+      <English>Difficulty: %PLACEHOLDER1%</English>
+    </Difficulty>
+    <GameProgress>
+      <English>Remaining Enemy: %PLACEHOLDER1% / %PLACEHOLDER2%</English>
+    </GameProgress>
+    <AltarLevel>
+      <English>Altar Level: %PLACEHOLDER1%</English>
+    </AltarLevel>
+    <AltarCooldown>
+      <English>Altar Cooldown: %PLACEHOLDER1% / %PLACEHOLDER2%</English>
+    </AltarCooldown>
+  </World>
   <!--- vim: set lbr sts=2 sw=2: -->
 </UILabelData>
