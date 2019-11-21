@@ -49,6 +49,8 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_World_CreatedWorld(object sender, EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
+
+            NormalModeText();
         }
 
         private void Canvas_World_EnteredAimMode(object sender,
@@ -142,6 +144,17 @@ namespace AxeMan.GameSystem.UserInterface
                 + $" [ {distance} ]";
 
             return text;
+        }
+
+        private void NormalModeText()
+        {
+            SearchText(UITag.Line1).text = "Version: 0.0.1";
+            SearchText(UITag.Line2).text = "Seed: 123-456-789";
+            SearchText(UITag.Line3).text = "Difficulty: Hard";
+
+            SearchText(UITag.Line4).text = "Remaining Enemy: 12/50";
+            SearchText(UITag.Line5).text = "Altar Level: 1/3";
+            SearchText(UITag.Line6).text = "Altar Cooldown: 12/20";
         }
 
         private Text SearchText(UITag uiTag)
