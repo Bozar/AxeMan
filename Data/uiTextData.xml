@@ -83,7 +83,7 @@
       <English>Remaining Enemy: %PLACEHOLDER1% / %PLACEHOLDER2%</English>
     </GameProgress>
     <AltarLevel>
-      <English>Altar Level: %PLACEHOLDER1%</English>
+      <English>Altar Level: %PLACEHOLDER1% / %PLACEHOLDER2%</English>
     </AltarLevel>
     <AltarCooldown>
       <English>Altar Cooldown: %PLACEHOLDER1% / %PLACEHOLDER2%</English>

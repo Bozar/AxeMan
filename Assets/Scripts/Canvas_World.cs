@@ -1,5 +1,6 @@
 ﻿using AxeMan.DungeonObject;
 using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
@@ -25,7 +26,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private string AimModeText()
         {
-            string mode = "Aim";
+            string mode = GetText(UITextDataTag.AimMode);
             string skillName = skillManager.GetSkillName(skillNameTag);
 
             int[] relativePos = pcLocalManager.GetRelativePosition(
@@ -74,7 +75,8 @@ namespace AxeMan.GameSystem.UserInterface
             SkillNameTag tag = skillManager.GetSkillNameTag(e.UseSkill);
             string skillName = skillManager.GetSkillName(tag);
 
-            SearchText(UITag.Modeline).text = $"Cannot use Skill {skillName}.";
+            SearchText(UITag.Modeline).text = GetText(UITextDataTag.UseSkill,
+                skillName);
         }
 
         private void Canvas_World_LeavingAimMode(object sender, EventArgs e)
@@ -133,7 +135,7 @@ namespace AxeMan.GameSystem.UserInterface
 
         private string ExamineModeText()
         {
-            string mode = "Examine";
+            string mode = GetText(UITextDataTag.ExamineMode);
 
             int[] relativePos = pcLocalManager.GetRelativePosition(
                 examineMetaInfo.Position);
@@ -149,15 +151,56 @@ namespace AxeMan.GameSystem.UserInterface
             return text;
         }
 
+        private string GetColorfulText(string text, ColorTag colorTag)
+        {
+            GetComponent<ColorManager>().SetColor(text, colorTag, out text);
+            return text;
+        }
+
+        private string GetText(UITextDataTag dataTag)
+        {
+            UITextCategoryTag categoryTag = UITextCategoryTag.World;
+
+            return GetComponent<UITextData>().GetStringData(categoryTag, dataTag);
+        }
+
+        private string GetText(UITextDataTag dataTag, string newText)
+        {
+            string placeholder = "%PLACEHOLDER1%";
+            string text = GetText(dataTag);
+            text = text.Replace(placeholder, newText);
+
+            return text;
+        }
+
+        private string GetText(UITextDataTag dataTag, string newText1,
+            string newText2)
+        {
+            string placeholder = "%PLACEHOLDER2%";
+            string text = GetText(dataTag, newText1);
+            text = text.Replace(placeholder, newText2);
+
+            return text;
+        }
+
         private void NormalModeText()
         {
-            SearchText(UITag.Line1).text = "Version: 0.0.1";
-            SearchText(UITag.Line2).text = "Seed: 123-456-789";
-            SearchText(UITag.Line3).text = "Difficulty: Hard";
+            SearchText(UITag.Line1).text
+                = GetColorfulText(
+                    GetText(UITextDataTag.Version, "0.0.2"), ColorTag.Grey);
+            SearchText(UITag.Line2).text
+                 = GetColorfulText(
+                     GetText(UITextDataTag.Seed, "123-456-789"), ColorTag.Grey);
+            SearchText(UITag.Line3).text
+                 = GetColorfulText(
+                     GetText(UITextDataTag.Difficulty, "Hard"), ColorTag.Grey);
 
-            SearchText(UITag.Line4).text = "Remaining Enemy: 12/50";
-            SearchText(UITag.Line5).text = "Altar Level: 1/3";
-            SearchText(UITag.Line6).text = "Altar Cooldown: 12/20";
+            SearchText(UITag.Line4).text
+                = GetText(UITextDataTag.GameProgress, "12", "50");
+            SearchText(UITag.Line5).text
+                = GetText(UITextDataTag.AltarLevel, "1", "3");
+            SearchText(UITag.Line6).text
+                = GetText(UITextDataTag.AltarCooldown, "12", "20");
         }
 
         private Text SearchText(UITag uiTag)
