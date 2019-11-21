@@ -6,6 +6,7 @@ using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,7 @@ namespace AxeMan.GameSystem.UserInterface
         private LocalManager pcLocalManager;
         private PCSkillManager skillManager;
         private SkillNameTag skillNameTag;
+        private Dictionary<UITag, Text> uiDict;
         private GameObject[] uiObjects;
 
         private string AimModeText()
@@ -44,6 +46,7 @@ namespace AxeMan.GameSystem.UserInterface
         private void Awake()
         {
             canvasTag = CanvasTag.Canvas_World;
+            uiDict = new Dictionary<UITag, Text>();
         }
 
         private void Canvas_World_CreatedWorld(object sender, EventArgs e)
@@ -159,7 +162,12 @@ namespace AxeMan.GameSystem.UserInterface
 
         private Text SearchText(UITag uiTag)
         {
-            return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
+            if (!uiDict.ContainsKey(uiTag))
+            {
+                uiDict[uiTag] = GetComponent<SearchUI>().SearchText(uiObjects,
+                    uiTag);
+            }
+            return uiDict[uiTag];
         }
 
         private void Start()
