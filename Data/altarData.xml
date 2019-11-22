@@ -5,7 +5,7 @@
     <AddCooldown>5</AddCooldown>
     <PowerDuration>3</PowerDuration>
     <AddPowerDuration>3</AddPowerDuration>
-    <MaxUpgrade>2</MaxUpgrade>
+    <MaxLevel>3</MaxLevel>
     <MaxDistance>2</MaxDistance>
   </DEFAULT>
   <LifeAltar>

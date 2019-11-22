@@ -54,6 +54,15 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Line6).text = text;
         }
 
+        private void AltarLevel()
+        {
+            string current = GetComponent<UpgradeAltar>().CurrentLevel.ToString();
+            string max = GetComponent<UpgradeAltar>().MaxLevel.ToString();
+            string text = GetText(UITextDataTag.AltarLevel, current, max);
+
+            SearchText(UITag.Line5).text = text;
+        }
+
         private void Awake()
         {
             canvasTag = CanvasTag.Canvas_World;
@@ -144,6 +153,11 @@ namespace AxeMan.GameSystem.UserInterface
             }
         }
 
+        private void Canvas_World_UpgradingAltar(object sender, EventArgs e)
+        {
+            AltarLevel();
+        }
+
         private void ClearModeline()
         {
             SearchText(UITag.Modeline).text = "";
@@ -223,11 +237,7 @@ namespace AxeMan.GameSystem.UserInterface
             text = GetText(UITextDataTag.GameProgress, current, max);
             SearchText(UITag.Line4).text = text;
 
-            current = "1";
-            max = "3";
-            text = GetText(UITextDataTag.AltarLevel, current, max);
-            SearchText(UITag.Line5).text = text;
-
+            AltarLevel();
             AltarCooldown();
         }
 
@@ -264,6 +274,8 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_World_TakenAction;
             GetComponent<AltarCooldown>().ChangedAltarCooldown
                 += Canvas_World_ChangedAltarCooldown;
+            GetComponent<UpgradeAltar>().UpgradingAltar
+                += Canvas_World_UpgradingAltar;
         }
     }
 }

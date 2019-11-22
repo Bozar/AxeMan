@@ -10,15 +10,24 @@ using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
-    public class UpgradeAltar : MonoBehaviour
+    public interface IUpgradeAltar
+    {
+        int CurrentLevel { get; }
+
+        int MaxLevel { get; }
+    }
+
+    public class UpgradeAltar : MonoBehaviour, IUpgradeAltar
     {
         private int[][] altarPositions;
         private int maxDistance;
-        private int maxUpgrade;
         private MetaInfo pcMetaInfo;
-        private int upgradeCount;
 
         public event EventHandler<EventArgs> UpgradingAltar;
+
+        public int CurrentLevel { get; private set; }
+
+        public int MaxLevel { get; private set; }
 
         protected virtual void OnUpgradingAltar(EventArgs e)
         {
@@ -27,7 +36,7 @@ namespace AxeMan.GameSystem
 
         private void Awake()
         {
-            upgradeCount = 0;
+            CurrentLevel = 1;
         }
 
         private bool CheckDistance(int[] position)
@@ -39,7 +48,7 @@ namespace AxeMan.GameSystem
 
         private bool CheckUpgrade()
         {
-            return upgradeCount < maxUpgrade;
+            return CurrentLevel < MaxLevel;
         }
 
         private void SetAltarPositions()
@@ -57,8 +66,8 @@ namespace AxeMan.GameSystem
 
         private void SetMaximums()
         {
-            maxUpgrade = GetComponent<ActorData>().GetIntData(
-                MainTag.Altar, SubTag.DEFAULT, ActorDataTag.MaxUpgrade);
+            MaxLevel = GetComponent<ActorData>().GetIntData(
+                MainTag.Altar, SubTag.DEFAULT, ActorDataTag.MaxLevel);
             maxDistance = GetComponent<ActorData>().GetIntData(
                 MainTag.Altar, SubTag.DEFAULT, ActorDataTag.MaxDistance);
         }
@@ -67,8 +76,6 @@ namespace AxeMan.GameSystem
         {
             GetComponent<InitializeMainGame>().SettingReference
                 += UpgradeAltar_SettingReference;
-            GetComponent<InitializeMainGame>().CreatedWorld
-                += UpgradeAltar_CreatedWorld;
             GetComponent<PublishActorHP>().ChangedHP += UpgradeAltar_ChangedHP;
         }
 
@@ -83,8 +90,8 @@ namespace AxeMan.GameSystem
             {
                 if (CheckDistance(pos) && CheckUpgrade())
                 {
+                    CurrentLevel++;
                     OnUpgradingAltar(EventArgs.Empty);
-                    upgradeCount++;
 
                     GetComponent<LogManager>().Add(
                         new LogMessage(LogCategoryTag.Altar,
@@ -95,16 +102,13 @@ namespace AxeMan.GameSystem
             }
         }
 
-        private void UpgradeAltar_CreatedWorld(object sender, EventArgs e)
-        {
-            SetAltarPositions();
-            SetMaximums();
-        }
-
         private void UpgradeAltar_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
             pcMetaInfo = e.PC.GetComponent<MetaInfo>();
+
+            SetAltarPositions();
+            SetMaximums();
         }
     }
 }
