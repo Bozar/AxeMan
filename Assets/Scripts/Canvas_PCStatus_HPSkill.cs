@@ -1,5 +1,6 @@
 ﻿using AxeMan.DungeonObject;
 using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
@@ -83,7 +84,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void HPText()
         {
-            SearchText(UITag.HPText).text = "HP";
+            SearchText(UITag.HPText).text = GetComponent<UITextData>()
+                .GetStringData(UITextCategoryTag.ActorStatus, UITextDataTag.HP);
         }
 
         private Text SearchText(UITag uiTag)

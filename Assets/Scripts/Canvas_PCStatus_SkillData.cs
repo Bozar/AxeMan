@@ -1,4 +1,5 @@
 ﻿using AxeMan.DungeonObject.ActorSkill;
+using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
@@ -100,7 +101,9 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Cooldown(CommandTag commandTag)
         {
-            SearchText(UITag.CooldownText).text = "CD";
+            SearchText(UITag.CooldownText).text
+                = GetComponent<UITextData>().GetStringData(
+                    UITextCategoryTag.ActorStatus, UITextDataTag.Cooldown);
             SearchText(UITag.CooldownData).text
                 = skillManager.GetMaxCooldown(commandTag).ToString();
         }
@@ -113,7 +116,9 @@ namespace AxeMan.GameSystem.UserInterface
                 return;
             }
 
-            SearchText(UITag.Status1Text).text = "Dmg";
+            SearchText(UITag.Status1Text).text
+                 = GetComponent<UITextData>().GetStringData(
+                    UITextCategoryTag.ActorStatus, UITextDataTag.Damage);
             SearchText(UITag.Status1Data).text
                 = skillManager.GetSkillDamage(commandTag).ToString();
         }
@@ -149,7 +154,9 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Range(CommandTag commandTag)
         {
-            SearchText(UITag.RangeText).text = "Range";
+            SearchText(UITag.RangeText).text
+                 = GetComponent<UITextData>().GetStringData(
+                    UITextCategoryTag.ActorStatus, UITextDataTag.AttackRange);
 
             SkillNameTag skillName = skillManager.GetSkillNameTag(commandTag);
             SearchText(UITag.RangeData).text
