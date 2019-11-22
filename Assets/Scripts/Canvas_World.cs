@@ -44,10 +44,26 @@ namespace AxeMan.GameSystem.UserInterface
             return text;
         }
 
+        private void AltarCooldown()
+        {
+            string current = GetComponent<AltarCooldown>().CurrentCooldown
+                .ToString();
+            string max = GetComponent<AltarCooldown>().MaxCooldown.ToString();
+            string text = GetText(UITextDataTag.AltarCooldown, current, max);
+
+            SearchText(UITag.Line6).text = text;
+        }
+
         private void Awake()
         {
             canvasTag = CanvasTag.Canvas_World;
             uiDict = new Dictionary<UITag, Text>();
+        }
+
+        private void Canvas_World_ChangedAltarCooldown(object sender,
+            EventArgs e)
+        {
+            AltarCooldown();
         }
 
         private void Canvas_World_CreatedWorld(object sender, EventArgs e)
@@ -212,10 +228,7 @@ namespace AxeMan.GameSystem.UserInterface
             text = GetText(UITextDataTag.AltarLevel, current, max);
             SearchText(UITag.Line5).text = text;
 
-            current = "12";
-            max = "20";
-            text = GetText(UITextDataTag.AltarCooldown, current, max);
-            SearchText(UITag.Line6).text = text;
+            AltarCooldown();
         }
 
         private Text SearchText(UITag uiTag)
@@ -249,6 +262,8 @@ namespace AxeMan.GameSystem.UserInterface
 
             GetComponent<PublishAction>().TakenAction
                 += Canvas_World_TakenAction;
+            GetComponent<AltarCooldown>().ChangedAltarCooldown
+                += Canvas_World_ChangedAltarCooldown;
         }
     }
 }

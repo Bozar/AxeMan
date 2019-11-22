@@ -23,13 +23,21 @@ namespace AxeMan.GameSystem
     {
         private int addCooldown;
 
+        public event EventHandler<EventArgs> ChangedAltarCooldown;
+
         public int CurrentCooldown { get; private set; }
 
         public int MaxCooldown { get; private set; }
 
         public int MinCooldown { get; private set; }
 
-        private void AltarCooldown_CreatedWorld(object sender, EventArgs e)
+        protected virtual void OnChangedAltarCooldown(EventArgs e)
+        {
+            ChangedAltarCooldown?.Invoke(this, e);
+        }
+
+        private void AltarCooldown_SettingReference(object sender,
+            SettingReferenceEventArgs e)
         {
             MaxCooldown = GetComponent<ActorData>().GetIntData(
                 MainTag.Altar, SubTag.DEFAULT, ActorDataTag.Cooldown);
@@ -49,6 +57,7 @@ namespace AxeMan.GameSystem
             {
                 CurrentCooldown--;
                 CurrentCooldown = Math.Max(MinCooldown, CurrentCooldown);
+                OnChangedAltarCooldown(EventArgs.Empty);
             }
         }
 
@@ -60,12 +69,14 @@ namespace AxeMan.GameSystem
                 return;
             }
             CurrentCooldown = MaxCooldown;
+            OnChangedAltarCooldown(EventArgs.Empty);
         }
 
         private void AltarCooldown_UpgradingAltar(object sender, EventArgs e)
         {
             MaxCooldown += addCooldown;
             CurrentCooldown = MaxCooldown;
+            OnChangedAltarCooldown(EventArgs.Empty);
         }
 
         private void Awake()
@@ -78,8 +89,8 @@ namespace AxeMan.GameSystem
         {
             GetComponent<TurnManager>().StartingTurn
                 += AltarCooldown_StartingTurn;
-            GetComponent<InitializeMainGame>().CreatedWorld
-                += AltarCooldown_CreatedWorld;
+            GetComponent<InitializeMainGame>().SettingReference
+                += AltarCooldown_SettingReference;
             GetComponent<PublishAction>().TakenAction
                 += AltarCooldown_TakenAction;
             GetComponent<UpgradeAltar>().UpgradingAltar
