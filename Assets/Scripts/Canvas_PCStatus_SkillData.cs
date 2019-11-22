@@ -101,11 +101,14 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Cooldown(CommandTag commandTag)
         {
-            SearchText(UITag.CooldownText).text
-                = GetComponent<UITextData>().GetStringData(
-                    UITextCategoryTag.ActorStatus, UITextDataTag.Cooldown);
+            string label = GetComponent<UITextData>().GetStringData(
+                UITextCategoryTag.ActorStatus, UITextDataTag.Cooldown);
+            int currentCooldown = skillManager.GetCurrentCooldown(commandTag);
+            int maxCooldown = skillManager.GetMaxCooldown(commandTag);
+
+            SearchText(UITag.CooldownText).text = label;
             SearchText(UITag.CooldownData).text
-                = skillManager.GetMaxCooldown(commandTag).ToString();
+                = currentCooldown + " / " + maxCooldown;
         }
 
         private void Damage(CommandTag commandTag)
