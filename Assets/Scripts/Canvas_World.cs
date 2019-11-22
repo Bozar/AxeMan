@@ -185,22 +185,37 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void NormalModeText()
         {
-            SearchText(UITag.Line1).text
-                = GetColorfulText(
-                    GetText(UITextDataTag.Version, "0.0.2"), ColorTag.Grey);
-            SearchText(UITag.Line2).text
-                 = GetColorfulText(
-                     GetText(UITextDataTag.Seed, "123-456-789"), ColorTag.Grey);
-            SearchText(UITag.Line3).text
-                 = GetColorfulText(
-                     GetText(UITextDataTag.Difficulty, "Hard"), ColorTag.Grey);
+            string text;
+            string current;
+            string max;
+            ColorTag color = ColorTag.Grey;
 
-            SearchText(UITag.Line4).text
-                = GetText(UITextDataTag.GameProgress, "12", "50");
-            SearchText(UITag.Line5).text
-                = GetText(UITextDataTag.AltarLevel, "1", "3");
-            SearchText(UITag.Line6).text
-                = GetText(UITextDataTag.AltarCooldown, "12", "20");
+            string version = GetComponent<GameVersion>().Version;
+            text = GetText(UITextDataTag.Version, version);
+            SearchText(UITag.Line1).text = GetColorfulText(text, color);
+
+            string seed = "123-456-789";
+            text = GetText(UITextDataTag.Seed, seed);
+            SearchText(UITag.Line2).text = GetColorfulText(text, color);
+
+            string difficulty = "Hard";
+            text = GetText(UITextDataTag.Difficulty, difficulty);
+            SearchText(UITag.Line3).text = GetColorfulText(text, color);
+
+            current = "12";
+            max = "50";
+            text = GetText(UITextDataTag.GameProgress, current, max);
+            SearchText(UITag.Line4).text = text;
+
+            current = "1";
+            max = "3";
+            text = GetText(UITextDataTag.AltarLevel, current, max);
+            SearchText(UITag.Line5).text = text;
+
+            current = "12";
+            max = "20";
+            text = GetText(UITextDataTag.AltarCooldown, current, max);
+            SearchText(UITag.Line6).text = text;
         }
 
         private Text SearchText(UITag uiTag)
