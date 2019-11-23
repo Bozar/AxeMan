@@ -16,9 +16,9 @@
 
 > Axe Man, Axe Man, does whatever an axe can!
 
-*Axe Man* is a Unity Roguelike game. You need to build four skills with effect
-blocks and fight your way through the dungeon. A successful run takes about
-fifteen minutes.
+*Axe Man* is a Unity Roguelike game. The current version is `0.0.2`. You need to
+build four skills with effect blocks and fight your way through the dungeon.
+A successful run takes about fifteen minutes.
 
 The game is inspired from *Baba Is You*, *Into The Breach*, *Captain Forever
 Remix* and *Space Grunts*. The ☼masterful☼ tileset, `curses_vector`, is created
@@ -32,17 +32,13 @@ games](https://github.com/Bozar/DevBlog/wiki/GameList) made by me.
 
 ## Roadmap
 
-Since I have been playing *Titanfall 2* and *RDR2* a lot recently and *The Outer
-Worlds* will be released next week (10/25/2019), I might not have enough time
-for programming in a few weeks. I am looking forward to publish the final
-version of *Axe Man* by the end of April, 2020.
-
-According to my plan, the game will have three difficulties: Easy, Normal and
-Hard. It is meant to be played on Hard. Easy and Normal act as tutorials for new
-players. A successful run takes about fifteen minutes. In order to survive the
-combat, players have to build four skills with effect blocks themselves. You can
-try it by editing `Data/skillTemplate.xml`. There will be an in-game UI to guide
-player through this.
+I am looking forward to publish the final version of *Axe Man* by the end of
+April, 2020. According to my plan, the game will have three difficulties: Easy,
+Normal and Hard. It is meant to be played on Hard. Easy and Normal act as
+tutorials for new players. A successful run takes about fifteen minutes. In
+order to survive the combat, players have to build four skills with effect
+blocks themselves. You can try it by editing `Data/skillTemplate.xml`. There
+will be an in-game UI to guide player through this.
 
 ## Key Binding
 
@@ -52,6 +48,7 @@ Main mode:
   Trigger a trap.
 * `x`: Enter examine mode.
 * `qwer`: Enter aim mode.
+* `m`: View game log.
 * Space: [Developer] Reload game.
 
 Examine mode:
@@ -62,6 +59,7 @@ Examine mode:
 Aim mode:
 
 * Arrow keys, `hjkl`: Move aim cursor around.
+* `qwer`: Switch to another skill.
 * Esc: Exit aim mode.
 * Space: Use the selected skill, which might be `Q`, `W`, `E` or `R`.
 
@@ -91,8 +89,9 @@ Attribute*, *Status* and *Skill* for more information.
 Message Panel prints combat log in normal mode. In examine or aim mode, it shows
 the detailed data of a target. Refer to *NPC Attribute* for more information.
 
-World Panel shows version number, seed, game difficulty, altar cooldown and
-remaining enemies. Help Panel shows available key inputs for current game mode.
+World Panel shows version number, seed, game difficulty, altar level, altar
+cooldown and remaining enemies. Help Panel shows available key inputs for
+current game mode.
 
 ## Dungeon Building
 

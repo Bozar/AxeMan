@@ -8,7 +8,7 @@
 blocks and fight your way through the dungeon. A successful run takes about
 fifteen minutes.
 
-The current version is `0.0.1`. The game is playable but it lacks a lot of user
+The current version is `0.0.2`. The game is playable but it lacks a lot of user
 friendly features. Try to kill five Dummies in the dungeon for fun, die
 a heroic death, or press Space to reload the game at any time. If you are bold
 and curious, edit `Data/skillTemplate.xml` to build your own skill. Please
@@ -34,6 +34,7 @@ Main mode:
   Trigger a trap.
 * `x`: Enter examine mode.
 * `qwer`: Enter aim mode.
+* `m`: View game log.
 * Space: [Developer] Reload game.
 
 Examine mode:
@@ -44,6 +45,7 @@ Examine mode:
 Aim mode:
 
 * Arrow keys, `hjkl`: Move aim cursor around.
+* `qwer`: Switch to another skill.
 * Esc: Exit aim mode.
 * Space: Use the selected skill, which might be `Q`, `W`, `E` or `R`.
 
