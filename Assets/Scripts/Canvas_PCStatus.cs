@@ -1,6 +1,5 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.UserInterface
@@ -14,22 +13,23 @@ namespace AxeMan.GameSystem.UserInterface
             canvasTag = CanvasTag.Canvas_PCStatus;
         }
 
-        private void Canvas_PCStatus_EnteringLogMode(object sender, EventArgs e)
+        private void Canvas_PCStatus_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
         {
-            SwitchVisibility(false);
-        }
-
-        private void Canvas_PCStatus_LeavingLogMode(object sender, EventArgs e)
-        {
-            SwitchVisibility(true);
+            if (e.EnterMode == GameModeTag.LogMode)
+            {
+                SwitchVisibility(false);
+            }
+            else if (e.EnterMode == GameModeTag.NormalMode)
+            {
+                SwitchVisibility(true);
+            }
         }
 
         private void Start()
         {
-            GetComponent<LogMode>().EnteringLogMode
-                += Canvas_PCStatus_EnteringLogMode;
-            GetComponent<LogMode>().LeavingLogMode
-                += Canvas_PCStatus_LeavingLogMode;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_PCStatus_SwitchingGameMode;
         }
 
         private void SwitchVisibility(bool switchOn)

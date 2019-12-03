@@ -1,6 +1,6 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject.PlayerInput
@@ -12,24 +12,23 @@ namespace AxeMan.DungeonObject.PlayerInput
             GetComponent<LogMarkerInputManager>().enabled = enable;
         }
 
-        private void LogMarkerInputSwitcher_EnteringLogMode(object sender,
-            EventArgs e)
+        private void LogMarkerInputSwitcher_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
         {
-            EnableInput(true);
-        }
-
-        private void LogMarkerInputSwitcher_LeavingLogMode(object sender,
-            EventArgs e)
-        {
-            EnableInput(false);
+            if (e.EnterMode == GameModeTag.LogMode)
+            {
+                EnableInput(true);
+            }
+            else if (e.LeaveMode == GameModeTag.LogMode)
+            {
+                EnableInput(false);
+            }
         }
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<LogMode>().EnteringLogMode
-                += LogMarkerInputSwitcher_EnteringLogMode;
-            GameCore.AxeManCore.GetComponent<LogMode>().LeavingLogMode
-                += LogMarkerInputSwitcher_LeavingLogMode;
+            GameCore.AxeManCore.GetComponent<GameModeManager>().SwitchingGameMode
+                += LogMarkerInputSwitcher_SwitchingGameMode;
         }
     }
 }

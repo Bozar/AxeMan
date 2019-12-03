@@ -51,15 +51,18 @@ namespace AxeMan.GameSystem.UserInterface
             };
         }
 
-        private void Canvas_Log_EnteringLogMode(object sender, EventArgs e)
+        private void Canvas_Log_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
         {
-            PrintLog();
-            SwitchVisibility(true);
-        }
-
-        private void Canvas_Log_LeavingLogMode(object sender, EventArgs e)
-        {
-            SwitchVisibility(false);
+            if (e.EnterMode == GameModeTag.LogMode)
+            {
+                PrintLog();
+                SwitchVisibility(true);
+            }
+            else if (e.LeaveMode == GameModeTag.LogMode)
+            {
+                SwitchVisibility(false);
+            }
         }
 
         private void PrintLog()
@@ -88,10 +91,8 @@ namespace AxeMan.GameSystem.UserInterface
             GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_Log_CreatedWorld;
 
-            GetComponent<LogMode>().EnteringLogMode
-                += Canvas_Log_EnteringLogMode;
-            GetComponent<LogMode>().LeavingLogMode
-                += Canvas_Log_LeavingLogMode;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_Log_SwitchingGameMode;
         }
 
         private void SwitchVisibility(bool switchOn)
