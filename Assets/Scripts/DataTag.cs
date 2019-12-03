@@ -44,6 +44,11 @@ namespace AxeMan.GameSystem.GameDataTag
         SkillQ, SkillW, SkillE, SkillR,
     }
 
+    public enum GameModeTag
+    {
+        INVALID, NormalMode, ExamineMode, AimMode, LogMode,
+    }
+
     public enum LanguageTag { English, Chinese, }
 
     public enum LogCategoryTag
