@@ -1,6 +1,6 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject.PlayerInput
@@ -12,24 +12,23 @@ namespace AxeMan.DungeonObject.PlayerInput
             GetComponent<ExamineMarkerInputManager>().enabled = enable;
         }
 
-        private void ExamineMarkerInputSwitcher_EnteringExamineMode(
-            object sender, EventArgs e)
+        private void ExamineMarkerInputSwitcher_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
         {
-            EnableInput(true);
-        }
-
-        private void ExamineMarkerInputSwitcher_LeavingExamineMode(
-            object sender, EventArgs e)
-        {
-            EnableInput(false);
+            if (e.EnterMode == GameModeTag.ExamineMode)
+            {
+                EnableInput(true);
+            }
+            else if (e.LeaveMode == GameModeTag.ExamineMode)
+            {
+                EnableInput(false);
+            }
         }
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<ExamineMode>().EnteringExamineMode
-                += ExamineMarkerInputSwitcher_EnteringExamineMode;
-            GameCore.AxeManCore.GetComponent<ExamineMode>().LeavingExamineMode
-                += ExamineMarkerInputSwitcher_LeavingExamineMode;
+            GameCore.AxeManCore.GetComponent<GameModeManager>().SwitchingGameMode
+                += ExamineMarkerInputSwitcher_SwitchingGameMode;
         }
     }
 }

@@ -66,21 +66,7 @@ namespace AxeMan.GameSystem.UserInterface
             SwitchVisibility(true);
         }
 
-        private void Canvas_ExamineMode_EnteredExamineMode(object sender,
-            EventArgs e)
-        {
-            ClearText();
-            PrintExamineText(SubTag.ExamineMarker);
-            SwitchVisibility(true);
-        }
-
         private void Canvas_ExamineMode_LeavingAimMode(object sender,
-            EventArgs e)
-        {
-            SwitchVisibility(false);
-        }
-
-        private void Canvas_ExamineMode_LeavingExamineMode(object sender,
             EventArgs e)
         {
             SwitchVisibility(false);
@@ -92,6 +78,26 @@ namespace AxeMan.GameSystem.UserInterface
             aimMetaInfo = e.AimMarker.GetComponent<MetaInfo>();
             examineMetaInfo = e.ExamineMarker.GetComponent<MetaInfo>();
             pcLocalManager = e.PC.GetComponent<LocalManager>();
+        }
+
+        private void Canvas_ExamineMode_SwitchedGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.EnterMode == GameModeTag.ExamineMode)
+            {
+                ClearText();
+                PrintExamineText(SubTag.ExamineMarker);
+                SwitchVisibility(true);
+            }
+        }
+
+        private void Canvas_ExamineMode_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.LeaveMode == GameModeTag.ExamineMode)
+            {
+                SwitchVisibility(false);
+            }
         }
 
         private void Canvas_ExamineMode_TakenAction(object sender,
@@ -380,10 +386,10 @@ namespace AxeMan.GameSystem.UserInterface
             GetComponent<AimMode>().LeavingAimMode
                 += Canvas_ExamineMode_LeavingAimMode;
 
-            GetComponent<ExamineMode>().EnteredExamineMode
-                += Canvas_ExamineMode_EnteredExamineMode;
-            GetComponent<ExamineMode>().LeavingExamineMode
-                += Canvas_ExamineMode_LeavingExamineMode;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_ExamineMode_SwitchingGameMode;
+            GetComponent<GameModeManager>().SwitchedGameMode
+                += Canvas_ExamineMode_SwitchedGameMode;
 
             GetComponent<PublishAction>().TakenAction
                 += Canvas_ExamineMode_TakenAction;

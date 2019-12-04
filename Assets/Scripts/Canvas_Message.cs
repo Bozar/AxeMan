@@ -46,19 +46,7 @@ namespace AxeMan.GameSystem.UserInterface
             SwitchVisibility(false);
         }
 
-        private void Canvas_Message_EnteredExamineMode(object sender,
-            EventArgs e)
-        {
-            SwitchVisibility(false);
-        }
-
         private void Canvas_Message_LeavingAimMode(object sender, EventArgs e)
-        {
-            SwitchVisibility(true);
-        }
-
-        private void Canvas_Message_LeavingExamineMode(object sender,
-            EventArgs e)
         {
             SwitchVisibility(true);
         }
@@ -66,7 +54,7 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_Message_SwitchingGameMode(object sender,
             SwitchGameModeEventArgs e)
         {
-            if (e.EnterMode == GameModeTag.LogMode)
+            if (e.LeaveMode == GameModeTag.NormalMode)
             {
                 SwitchVisibility(false);
             }
@@ -98,11 +86,6 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_Message_EnteredAimMode;
             GetComponent<AimMode>().LeavingAimMode
                 += Canvas_Message_LeavingAimMode;
-
-            GetComponent<ExamineMode>().EnteredExamineMode
-                += Canvas_Message_EnteredExamineMode;
-            GetComponent<ExamineMode>().LeavingExamineMode
-                += Canvas_Message_LeavingExamineMode;
 
             GetComponent<GameModeManager>().SwitchingGameMode
                 += Canvas_Message_SwitchingGameMode;

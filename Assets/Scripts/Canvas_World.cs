@@ -89,11 +89,6 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Modeline).text = AimModeText();
         }
 
-        private void Canvas_World_EnteredExamineMode(object sender, EventArgs e)
-        {
-            SearchText(UITag.Modeline).text = ExamineModeText();
-        }
-
         private void Canvas_World_FailedVerifying(object sender,
             FailedVerifyingEventArgs e)
         {
@@ -110,11 +105,6 @@ namespace AxeMan.GameSystem.UserInterface
             ClearModeline();
         }
 
-        private void Canvas_World_LeavingExamineMode(object sender, EventArgs e)
-        {
-            ClearModeline();
-        }
-
         private void Canvas_World_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
@@ -122,6 +112,24 @@ namespace AxeMan.GameSystem.UserInterface
             pcLocalManager = e.PC.GetComponent<LocalManager>();
             aimMetaInfo = e.AimMarker.GetComponent<MetaInfo>();
             examineMetaInfo = e.ExamineMarker.GetComponent<MetaInfo>();
+        }
+
+        private void Canvas_World_SwitchedGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.EnterMode == GameModeTag.ExamineMode)
+            {
+                SearchText(UITag.Modeline).text = ExamineModeText();
+            }
+        }
+
+        private void Canvas_World_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.LeaveMode == GameModeTag.ExamineMode)
+            {
+                ClearModeline();
+            }
         }
 
         private void Canvas_World_TakenAction(object sender,
@@ -265,10 +273,10 @@ namespace AxeMan.GameSystem.UserInterface
             GetComponent<AimMode>().FailedVerifying
                += Canvas_World_FailedVerifying;
 
-            GetComponent<ExamineMode>().EnteredExamineMode
-                += Canvas_World_EnteredExamineMode;
-            GetComponent<ExamineMode>().LeavingExamineMode
-                += Canvas_World_LeavingExamineMode;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_World_SwitchingGameMode;
+            GetComponent<GameModeManager>().SwitchedGameMode
+                += Canvas_World_SwitchedGameMode;
 
             GetComponent<PublishAction>().TakenAction
                 += Canvas_World_TakenAction;

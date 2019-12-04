@@ -34,19 +34,7 @@ namespace AxeMan.DungeonObject.PlayerInput
             EnableInput(false);
         }
 
-        private void PCInputSwitcher_EnteringExamineMode(object sender,
-            EventArgs e)
-        {
-            EnableInput(false);
-        }
-
         private void PCInputSwitcher_LeavingAimMode(object sender, EventArgs e)
-        {
-            EnableInput(true);
-        }
-
-        private void PCInputSwitcher_LeavingExamineMode(object sender,
-            EventArgs e)
         {
             EnableInput(true);
         }
@@ -85,11 +73,6 @@ namespace AxeMan.DungeonObject.PlayerInput
                 += PCInputSwitcher_EnteringAimMode;
             GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
                 += PCInputSwitcher_LeavingAimMode;
-
-            GameCore.AxeManCore.GetComponent<ExamineMode>().EnteringExamineMode
-                += PCInputSwitcher_EnteringExamineMode;
-            GameCore.AxeManCore.GetComponent<ExamineMode>().LeavingExamineMode
-                += PCInputSwitcher_LeavingExamineMode;
 
             GameCore.AxeManCore.GetComponent<GameModeManager>().SwitchingGameMode
                 += PCInputSwitcher_SwitchingGameMode;

@@ -1,33 +1,11 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.PlayerInput;
-using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.GameMode
 {
     public class ExamineMode : MonoBehaviour
     {
-        public event EventHandler<EventArgs> EnteredExamineMode;
-
-        public event EventHandler<EventArgs> EnteringExamineMode;
-
-        public event EventHandler<EventArgs> LeavingExamineMode;
-
-        protected virtual void OnEnteredExamineMode(EventArgs e)
-        {
-            EnteredExamineMode?.Invoke(this, e);
-        }
-
-        protected virtual void OnEnteringExamineMode(EventArgs e)
-        {
-            EnteringExamineMode?.Invoke(this, e);
-        }
-
-        protected virtual void OnLeavingExamineMode(EventArgs e)
-        {
-            LeavingExamineMode?.Invoke(this, e);
-        }
-
         private bool EnterMode(PlayerCommandingEventArgs e)
         {
             if (e.SubTag != SubTag.PC)
@@ -42,12 +20,15 @@ namespace AxeMan.GameSystem.GameMode
         {
             if (EnterMode(e))
             {
-                OnEnteringExamineMode(EventArgs.Empty);
-                OnEnteredExamineMode(EventArgs.Empty);
+                GetComponent<GameModeManager>().SwitchGameMode(
+                    new SwitchGameModeEventArgs(
+                        GameModeTag.NormalMode, GameModeTag.ExamineMode));
             }
             else if (LeaveMode(e))
             {
-                OnLeavingExamineMode(EventArgs.Empty);
+                GetComponent<GameModeManager>().SwitchGameMode(
+                    new SwitchGameModeEventArgs(
+                        GameModeTag.ExamineMode, GameModeTag.NormalMode));
             }
         }
 

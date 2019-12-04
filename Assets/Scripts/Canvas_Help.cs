@@ -32,19 +32,7 @@ namespace AxeMan.GameSystem.UserInterface
             PrintAimModeText();
         }
 
-        private void Canvas_Help_EnteringExamineMode(object sender, EventArgs e)
-        {
-            ClearText();
-            PrintExamineModeText();
-        }
-
         private void Canvas_Help_LeavingAimMode(object sender, EventArgs e)
-        {
-            ClearText();
-            PrintNormalModeText();
-        }
-
-        private void Canvas_Help_LeavingExamineMode(object sender, EventArgs e)
         {
             ClearText();
             PrintNormalModeText();
@@ -53,13 +41,25 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_Help_SwitchingGameMode(object sender,
             SwitchGameModeEventArgs e)
         {
+            // Log mode.
             if (e.EnterMode == GameModeTag.LogMode)
             {
                 SwitchVisibility(false);
             }
-            else if (e.EnterMode == GameModeTag.NormalMode)
+            else if (e.LeaveMode == GameModeTag.LogMode)
             {
                 SwitchVisibility(true);
+            }
+            // Examine mode.
+            else if (e.EnterMode == GameModeTag.ExamineMode)
+            {
+                ClearText();
+                PrintExamineModeText();
+            }
+            else if (e.LeaveMode == GameModeTag.ExamineMode)
+            {
+                ClearText();
+                PrintNormalModeText();
             }
         }
 
@@ -140,7 +140,6 @@ namespace AxeMan.GameSystem.UserInterface
         {
             GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_Help_CreatedWorld;
-
             GetComponent<GameModeManager>().SwitchingGameMode
                 += Canvas_Help_SwitchingGameMode;
 
@@ -148,11 +147,6 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_Help_EnteringAimMode;
             GetComponent<AimMode>().LeavingAimMode
                 += Canvas_Help_LeavingAimMode;
-
-            GetComponent<ExamineMode>().EnteringExamineMode
-                += Canvas_Help_EnteringExamineMode;
-            GetComponent<ExamineMode>().LeavingExamineMode
-                += Canvas_Help_LeavingExamineMode;
         }
 
         private void SwitchVisibility(bool switchOn)
