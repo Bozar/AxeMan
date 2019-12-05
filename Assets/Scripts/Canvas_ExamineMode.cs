@@ -58,20 +58,6 @@ namespace AxeMan.GameSystem.UserInterface
             SwitchVisibility(false);
         }
 
-        private void Canvas_ExamineMode_EnteredAimMode(object sender,
-            EnterAimModeEventArgs e)
-        {
-            ClearText();
-            PrintExamineText(SubTag.AimMarker);
-            SwitchVisibility(true);
-        }
-
-        private void Canvas_ExamineMode_LeavingAimMode(object sender,
-            EventArgs e)
-        {
-            SwitchVisibility(false);
-        }
-
         private void Canvas_ExamineMode_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
@@ -85,16 +71,19 @@ namespace AxeMan.GameSystem.UserInterface
         {
             if (e.EnterMode == GameModeTag.ExamineMode)
             {
-                ClearText();
-                PrintExamineText(SubTag.ExamineMarker);
-                SwitchVisibility(true);
+                EnterAimOrExamineMode(SubTag.ExamineMarker);
+            }
+            else if (e.EnterMode == GameModeTag.AimMode)
+            {
+                EnterAimOrExamineMode(SubTag.AimMarker);
             }
         }
 
         private void Canvas_ExamineMode_SwitchingGameMode(object sender,
             SwitchGameModeEventArgs e)
         {
-            if (e.LeaveMode == GameModeTag.ExamineMode)
+            if ((e.LeaveMode == GameModeTag.ExamineMode)
+                || (e.LeaveMode == GameModeTag.AimMode))
             {
                 SwitchVisibility(false);
             }
@@ -123,6 +112,13 @@ namespace AxeMan.GameSystem.UserInterface
             {
                 ui.GetComponent<Text>().text = "";
             }
+        }
+
+        private void EnterAimOrExamineMode(SubTag subTag)
+        {
+            ClearText();
+            PrintExamineText(subTag);
+            SwitchVisibility(true);
         }
 
         private string GetAltarEffectName(SubTag subTag)
@@ -380,11 +376,6 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_ExamineMode_SettingReference;
             GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_ExamineMode_CreatedWorld;
-
-            GetComponent<AimMode>().EnteredAimMode
-                += Canvas_ExamineMode_EnteredAimMode;
-            GetComponent<AimMode>().LeavingAimMode
-                += Canvas_ExamineMode_LeavingAimMode;
 
             GetComponent<GameModeManager>().SwitchingGameMode
                 += Canvas_ExamineMode_SwitchingGameMode;

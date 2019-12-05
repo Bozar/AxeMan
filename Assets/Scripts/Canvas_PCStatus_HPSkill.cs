@@ -53,28 +53,29 @@ namespace AxeMan.GameSystem.UserInterface
             SkillType();
         }
 
-        private void Canvas_PCStatus_HPSkill_EnteringAimMode(object sender,
-            EnterAimModeEventArgs e)
-        {
-            if (e.SubTag != SubTag.PC)
-            {
-                return;
-            }
-            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
-        }
-
-        private void Canvas_PCStatus_HPSkill_LeavingAimMode(object sender,
-            EventArgs e)
-        {
-            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, true);
-        }
-
         private void Canvas_PCStatus_HPSkill_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
             GameObject pc = e.PC;
             skillManager = pc.GetComponent<PCSkillManager>();
             hp = pc.GetComponent<HP>();
+        }
+
+        private void Canvas_PCStatus_HPSkill_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.EnterMode == GameModeTag.AimMode)
+            {
+                if (e.SubTag != SubTag.PC)
+                {
+                    return;
+                }
+                GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
+            }
+            else if (e.LeaveMode == GameModeTag.AimMode)
+            {
+                GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, true);
+            }
         }
 
         private void HPData()
@@ -148,10 +149,8 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_PCStatus_HPSkill_ChangedHP;
             GetComponent<PublishSkill>().ChangedSkillCooldown
                 += Canvas_PCStatus_HPSkill_ChangedSkillCooldown;
-            GetComponent<AimMode>().EnteringAimMode
-                += Canvas_PCStatus_HPSkill_EnteringAimMode;
-            GetComponent<AimMode>().LeavingAimMode
-                += Canvas_PCStatus_HPSkill_LeavingAimMode;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_PCStatus_HPSkill_SwitchingGameMode;
         }
     }
 }

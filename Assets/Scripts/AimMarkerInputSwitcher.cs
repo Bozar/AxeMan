@@ -1,22 +1,23 @@
 ﻿using AxeMan.GameSystem;
+using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject.PlayerInput
 {
     public class AimMarkerInputSwitcher : MonoBehaviour
     {
-        private void AimMarkerInputSwitcher_EnteringAimMode(object sender,
-            EventArgs e)
+        private void AimMarkerInputSwitcher_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
         {
-            EnableInput(true);
-        }
-
-        private void AimMarkerInputSwitcher_LeavingAimMode(object sender,
-            EventArgs e)
-        {
-            EnableInput(false);
+            if (e.EnterMode == GameModeTag.AimMode)
+            {
+                EnableInput(true);
+            }
+            else if (e.LeaveMode == GameModeTag.AimMode)
+            {
+                EnableInput(false);
+            }
         }
 
         private void EnableInput(bool enable)
@@ -26,10 +27,8 @@ namespace AxeMan.DungeonObject.PlayerInput
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<AimMode>().EnteringAimMode
-                += AimMarkerInputSwitcher_EnteringAimMode;
-            GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
-                += AimMarkerInputSwitcher_LeavingAimMode;
+            GameCore.AxeManCore.GetComponent<GameModeManager>().SwitchingGameMode
+                += AimMarkerInputSwitcher_SwitchingGameMode;
         }
     }
 }

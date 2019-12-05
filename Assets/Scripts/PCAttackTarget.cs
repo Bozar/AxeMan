@@ -5,7 +5,6 @@ using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
-using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -21,15 +20,19 @@ namespace AxeMan.DungeonObject
             zeroDamage = 0;
         }
 
-        private void PCAttackTarget_LeavingAimMode(object sender, EventArgs e)
-        {
-            targetPosition = aimMarker.GetComponent<MetaInfo>().Position;
-        }
-
         private void PCAttackTarget_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
             aimMarker = e.AimMarker;
+        }
+
+        private void PCAttackTarget_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.LeaveMode == GameModeTag.AimMode)
+            {
+                targetPosition = aimMarker.GetComponent<MetaInfo>().Position;
+            }
         }
 
         private void PCAttackTarget_TakingAction(object sender,
@@ -72,8 +75,8 @@ namespace AxeMan.DungeonObject
                 .SettingReference += PCAttackTarget_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                 += PCAttackTarget_TakingAction;
-            GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
-                += PCAttackTarget_LeavingAimMode;
+            GameCore.AxeManCore.GetComponent<GameModeManager>().SwitchingGameMode
+                += PCAttackTarget_SwitchingGameMode;
         }
 
         private int StatusMod(GameObject target)

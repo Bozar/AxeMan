@@ -4,7 +4,6 @@ using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameEvent;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
-using System;
 using UnityEngine;
 
 namespace AxeMan.DungeonObject
@@ -14,15 +13,19 @@ namespace AxeMan.DungeonObject
         private GameObject aimMarker;
         private int[] targetPosition;
 
-        private void PCTeleportSelf_LeavingAimMode(object sender, EventArgs e)
-        {
-            targetPosition = aimMarker.GetComponent<MetaInfo>().Position;
-        }
-
         private void PCTeleportSelf_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
             aimMarker = e.AimMarker;
+        }
+
+        private void PCTeleportSelf_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.LeaveMode == GameModeTag.AimMode)
+            {
+                targetPosition = aimMarker.GetComponent<MetaInfo>().Position;
+            }
         }
 
         private void PCTeleportSelf_TakingAction(object sender,
@@ -59,8 +62,8 @@ namespace AxeMan.DungeonObject
                 .SettingReference += PCTeleportSelf_SettingReference;
             GameCore.AxeManCore.GetComponent<PublishAction>().TakingAction
                  += PCTeleportSelf_TakingAction;
-            GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
-                += PCTeleportSelf_LeavingAimMode;
+            GameCore.AxeManCore.GetComponent<GameModeManager>().SwitchingGameMode
+                += PCTeleportSelf_SwitchingGameMode;
         }
     }
 }

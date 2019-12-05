@@ -67,36 +67,39 @@ namespace AxeMan.GameSystem.UserInterface
             GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
         }
 
-        private void Canvas_PCStatus_SkillData_EnteringAimMode(object sender,
-            EnterAimModeEventArgs e)
-        {
-            foreach (GameObject go in uiObjects)
-            {
-                go.GetComponent<Text>().text = "";
-            }
-
-            Range(e.CommandTag);
-            Cooldown(e.CommandTag);
-            Damage(e.CommandTag);
-            Effect(e.CommandTag);
-            SkillNameType(e.CommandTag);
-
-            if (e.SubTag == SubTag.PC)
-            {
-                GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, true);
-            }
-        }
-
-        private void Canvas_PCStatus_SkillData_LeavingAimMode(
-            object sender, EventArgs e)
-        {
-            GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
-        }
-
         private void Canvas_PCStatus_SkillData_SettingReference(object sender,
             SettingReferenceEventArgs e)
         {
             skillManager = e.PC.GetComponent<PCSkillManager>();
+        }
+
+        private void Canvas_PCStatus_SkillData_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.EnterMode == GameModeTag.AimMode)
+            {
+                foreach (GameObject go in uiObjects)
+                {
+                    go.GetComponent<Text>().text = "";
+                }
+
+                Range(e.CommandTag);
+                Cooldown(e.CommandTag);
+                Damage(e.CommandTag);
+                Effect(e.CommandTag);
+                SkillNameType(e.CommandTag);
+
+                if (e.SubTag == SubTag.PC)
+                {
+                    GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag,
+                        true);
+                }
+            }
+            else if (e.LeaveMode == GameModeTag.AimMode)
+            {
+                GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag,
+                    false);
+            }
         }
 
         private void Cooldown(CommandTag commandTag)
@@ -220,10 +223,8 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_PCStatus_SkillData_SettingReference;
             GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_PCStatus_SkillData_CreatedWorld;
-            GetComponent<AimMode>().EnteringAimMode
-                += Canvas_PCStatus_SkillData_EnteringAimMode;
-            GetComponent<AimMode>().LeavingAimMode
-                += Canvas_PCStatus_SkillData_LeavingAimMode;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_PCStatus_SkillData_SwitchingGameMode;
         }
     }
 }

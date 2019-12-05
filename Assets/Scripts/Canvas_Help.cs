@@ -25,38 +25,34 @@ namespace AxeMan.GameSystem.UserInterface
             PrintNormalModeText();
         }
 
-        private void Canvas_Help_EnteringAimMode(object sender,
-            EnterAimModeEventArgs e)
-        {
-            ClearText();
-            PrintAimModeText();
-        }
-
-        private void Canvas_Help_LeavingAimMode(object sender, EventArgs e)
-        {
-            ClearText();
-            PrintNormalModeText();
-        }
-
         private void Canvas_Help_SwitchingGameMode(object sender,
             SwitchGameModeEventArgs e)
         {
-            // Log mode.
+            // Enter Log mode.
             if (e.EnterMode == GameModeTag.LogMode)
             {
                 SwitchVisibility(false);
             }
+            // Leave Log mode.
             else if (e.LeaveMode == GameModeTag.LogMode)
             {
                 SwitchVisibility(true);
             }
-            // Examine mode.
+            // Enter Examine mode.
             else if (e.EnterMode == GameModeTag.ExamineMode)
             {
                 ClearText();
                 PrintExamineModeText();
             }
-            else if (e.LeaveMode == GameModeTag.ExamineMode)
+            // Enter Aim mode.
+            else if (e.EnterMode == GameModeTag.AimMode)
+            {
+                ClearText();
+                PrintAimModeText();
+            }
+            // Leave Examine mode or Aim mode.
+            else if ((e.LeaveMode == GameModeTag.ExamineMode)
+                || (e.LeaveMode == GameModeTag.AimMode))
             {
                 ClearText();
                 PrintNormalModeText();
@@ -142,11 +138,6 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_Help_CreatedWorld;
             GetComponent<GameModeManager>().SwitchingGameMode
                 += Canvas_Help_SwitchingGameMode;
-
-            GetComponent<AimMode>().EnteringAimMode
-                += Canvas_Help_EnteringAimMode;
-            GetComponent<AimMode>().LeavingAimMode
-                += Canvas_Help_LeavingAimMode;
         }
 
         private void SwitchVisibility(bool switchOn)

@@ -82,13 +82,6 @@ namespace AxeMan.GameSystem.UserInterface
             NormalModeText();
         }
 
-        private void Canvas_World_EnteredAimMode(object sender,
-            EnterAimModeEventArgs e)
-        {
-            skillNameTag = skillManager.GetSkillNameTag(e.CommandTag);
-            SearchText(UITag.Modeline).text = AimModeText();
-        }
-
         private void Canvas_World_FailedVerifying(object sender,
             FailedVerifyingEventArgs e)
         {
@@ -97,12 +90,6 @@ namespace AxeMan.GameSystem.UserInterface
 
             SearchText(UITag.Modeline).text = GetText(UITextDataTag.UseSkill,
                 skillName);
-        }
-
-        private void Canvas_World_LeavingAimMode(object sender, EventArgs e)
-        {
-            skillNameTag = SkillNameTag.INVALID;
-            ClearModeline();
         }
 
         private void Canvas_World_SettingReference(object sender,
@@ -121,6 +108,11 @@ namespace AxeMan.GameSystem.UserInterface
             {
                 SearchText(UITag.Modeline).text = ExamineModeText();
             }
+            else if (e.EnterMode == GameModeTag.AimMode)
+            {
+                skillNameTag = skillManager.GetSkillNameTag(e.CommandTag);
+                SearchText(UITag.Modeline).text = AimModeText();
+            }
         }
 
         private void Canvas_World_SwitchingGameMode(object sender,
@@ -128,6 +120,11 @@ namespace AxeMan.GameSystem.UserInterface
         {
             if (e.LeaveMode == GameModeTag.ExamineMode)
             {
+                ClearModeline();
+            }
+            else if (e.LeaveMode == GameModeTag.AimMode)
+            {
+                skillNameTag = SkillNameTag.INVALID;
                 ClearModeline();
             }
         }
@@ -265,11 +262,6 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_World_SettingReference;
             GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_World_CreatedWorld;
-
-            GetComponent<AimMode>().EnteredAimMode
-                += Canvas_World_EnteredAimMode;
-            GetComponent<AimMode>().LeavingAimMode
-                += Canvas_World_LeavingAimMode;
             GetComponent<AimMode>().FailedVerifying
                += Canvas_World_FailedVerifying;
 

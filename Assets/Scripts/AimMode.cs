@@ -10,43 +10,15 @@ namespace AxeMan.GameSystem.GameMode
     {
         private CommandTag pcUseSkill;
 
-        public event EventHandler<EnterAimModeEventArgs> EnteredAimMode;
-
-        public event EventHandler<EnterAimModeEventArgs> EnteringAimMode;
-
         public event EventHandler<FailedVerifyingEventArgs> FailedVerifying;
-
-        public event EventHandler<EventArgs> LeavingAimMode;
-
-        public event EventHandler<EventArgs> LeftAimMode;
 
         public event EventHandler<VerifiedSkillEventArgs> VerifiedSkill;
 
         public event EventHandler<VerifyingSkillEventArgs> VerifyingSkill;
 
-        protected virtual void OnEnteredAimMode(EnterAimModeEventArgs e)
-        {
-            EnteredAimMode?.Invoke(this, e);
-        }
-
-        protected virtual void OnEnteringAimMode(EnterAimModeEventArgs e)
-        {
-            EnteringAimMode?.Invoke(this, e);
-        }
-
         protected virtual void OnFailedVerifying(FailedVerifyingEventArgs e)
         {
             FailedVerifying?.Invoke(this, e);
-        }
-
-        protected virtual void OnLeavingAimMode(EventArgs e)
-        {
-            LeavingAimMode?.Invoke(this, e);
-        }
-
-        protected virtual void OnLeftAimMode(EventArgs e)
-        {
-            LeftAimMode?.Invoke(this, e);
         }
 
         protected virtual void OnVerifiedSkill(VerifiedSkillEventArgs e)
@@ -64,13 +36,17 @@ namespace AxeMan.GameSystem.GameMode
         {
             if (EnterMode(e))
             {
-                OnEnteringAimMode(new EnterAimModeEventArgs(e.SubTag, e.Command));
-                OnEnteredAimMode(new EnterAimModeEventArgs(e.SubTag, e.Command));
+                GetComponent<GameModeManager>().SwitchGameMode(
+                    new SwitchGameModeEventArgs(
+                        GameModeTag.NormalMode, GameModeTag.AimMode,
+                        e.SubTag, e.Command));
             }
             else if (LeaveMode(e))
             {
-                OnLeavingAimMode(EventArgs.Empty);
-                OnLeftAimMode(EventArgs.Empty);
+                GetComponent<GameModeManager>().SwitchGameMode(
+                   new SwitchGameModeEventArgs(
+                       GameModeTag.AimMode, GameModeTag.NormalMode,
+                       e.SubTag, e.Command));
 
                 if (pcUseSkill != CommandTag.INVALID)
                 {
@@ -90,7 +66,6 @@ namespace AxeMan.GameSystem.GameMode
             {
                 return false;
             }
-
             switch (e.Command)
             {
                 case CommandTag.SkillQ:
@@ -146,19 +121,6 @@ namespace AxeMan.GameSystem.GameMode
             GetComponent<InputManager>().PlayerCommanding
                 += AimMode_PlayerCommanding;
         }
-    }
-
-    public class EnterAimModeEventArgs : EventArgs
-    {
-        public EnterAimModeEventArgs(SubTag subTag, CommandTag commandTag)
-        {
-            SubTag = subTag;
-            CommandTag = commandTag;
-        }
-
-        public CommandTag CommandTag { get; }
-
-        public SubTag SubTag { get; }
     }
 
     public class FailedVerifyingEventArgs : EventArgs

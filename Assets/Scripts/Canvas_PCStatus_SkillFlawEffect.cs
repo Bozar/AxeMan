@@ -48,28 +48,28 @@ namespace AxeMan.GameSystem.UserInterface
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
         }
 
-        private void Canvas_PCStatus_SkillFlawEffect_EnteringAimMode(
-            object sender, EnterAimModeEventArgs e)
-        {
-            if ((e.SubTag != SubTag.PC) && (e.SubTag != SubTag.AimMarker))
-            {
-                return;
-            }
-
-            ClearUIText();
-            SkillFlawEffect(e);
-        }
-
-        private void Canvas_PCStatus_SkillFlawEffect_LeavingAimMode(
-            object sender, EventArgs e)
-        {
-            ClearUIText();
-        }
-
         private void Canvas_PCStatus_SkillFlawEffect_SettingReference(
             object sender, SettingReferenceEventArgs e)
         {
             skillManager = e.PC.GetComponent<PCSkillManager>();
+        }
+
+        private void Canvas_PCStatus_SkillFlawEffect_SwitchingGameMode(
+            object sender, SwitchGameModeEventArgs e)
+        {
+            if (e.EnterMode == GameModeTag.AimMode)
+            {
+                if ((e.SubTag != SubTag.PC) && (e.SubTag != SubTag.AimMarker))
+                {
+                    return;
+                }
+                ClearUIText();
+                SkillFlawEffect(e);
+            }
+            else if (e.LeaveMode == GameModeTag.AimMode)
+            {
+                ClearUIText();
+            }
         }
 
         private void ClearUIText()
@@ -85,7 +85,7 @@ namespace AxeMan.GameSystem.UserInterface
             return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
         }
 
-        private void SkillFlawEffect(EnterAimModeEventArgs e)
+        private void SkillFlawEffect(SwitchGameModeEventArgs e)
         {
             SkillNameTag skillName = skillManager.GetSkillNameTag(e.CommandTag);
             Dictionary<SkillComponentTag, EffectData> compInt
@@ -122,10 +122,8 @@ namespace AxeMan.GameSystem.UserInterface
                 += Canvas_PCStatus_SkillFlawEffect_SettingReference;
             GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_PCStatus_SkillFlawEffect_CreatedWorld;
-            GetComponent<AimMode>().EnteringAimMode
-                += Canvas_PCStatus_SkillFlawEffect_EnteringAimMode;
-            GetComponent<AimMode>().LeavingAimMode
-                += Canvas_PCStatus_SkillFlawEffect_LeavingAimMode;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_PCStatus_SkillFlawEffect_SwitchingGameMode;
         }
     }
 }

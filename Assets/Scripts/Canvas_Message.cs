@@ -40,17 +40,6 @@ namespace AxeMan.GameSystem.UserInterface
             };
         }
 
-        private void Canvas_Message_EnteredAimMode(object sender,
-            EnterAimModeEventArgs e)
-        {
-            SwitchVisibility(false);
-        }
-
-        private void Canvas_Message_LeavingAimMode(object sender, EventArgs e)
-        {
-            SwitchVisibility(true);
-        }
-
         private void Canvas_Message_SwitchingGameMode(object sender,
             SwitchGameModeEventArgs e)
         {
@@ -81,15 +70,8 @@ namespace AxeMan.GameSystem.UserInterface
         {
             GetComponent<InitializeMainGame>().CreatedWorld
                 += Canvas_Message_CreatedWorld;
-
-            GetComponent<AimMode>().EnteredAimMode
-                += Canvas_Message_EnteredAimMode;
-            GetComponent<AimMode>().LeavingAimMode
-                += Canvas_Message_LeavingAimMode;
-
             GetComponent<GameModeManager>().SwitchingGameMode
                 += Canvas_Message_SwitchingGameMode;
-
             GetComponent<LogManager>().AddingLog += Canvas_Message_AddingLog;
         }
 

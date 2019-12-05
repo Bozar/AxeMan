@@ -29,16 +29,6 @@ namespace AxeMan.DungeonObject.PlayerInput
             EnableInput(false);
         }
 
-        private void PCInputSwitcher_EnteringAimMode(object sender, EventArgs e)
-        {
-            EnableInput(false);
-        }
-
-        private void PCInputSwitcher_LeavingAimMode(object sender, EventArgs e)
-        {
-            EnableInput(true);
-        }
-
         private void PCInputSwitcher_StartingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
@@ -68,15 +58,8 @@ namespace AxeMan.DungeonObject.PlayerInput
                 += PCInputSwitcher_StartingTurn;
             GameCore.AxeManCore.GetComponent<TurnManager>().EndingTurn
                 += PCInputSwitcher_EndingTurn;
-
-            GameCore.AxeManCore.GetComponent<AimMode>().EnteringAimMode
-                += PCInputSwitcher_EnteringAimMode;
-            GameCore.AxeManCore.GetComponent<AimMode>().LeavingAimMode
-                += PCInputSwitcher_LeavingAimMode;
-
             GameCore.AxeManCore.GetComponent<GameModeManager>().SwitchingGameMode
                 += PCInputSwitcher_SwitchingGameMode;
-
             GameCore.AxeManCore.GetComponent<BuryPC>().BuryingPC
                 += PCInputSwitcher_BuryingPC;
         }
