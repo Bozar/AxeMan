@@ -6,6 +6,8 @@ namespace AxeMan.GameSystem.GameMode
 {
     public interface IGameModeManager
     {
+        GameModeTag CurrentGameMode { get; }
+
         void SwitchGameMode(SwitchGameModeEventArgs e);
     }
 
@@ -15,10 +17,14 @@ namespace AxeMan.GameSystem.GameMode
 
         public event EventHandler<SwitchGameModeEventArgs> SwitchingGameMode;
 
+        public GameModeTag CurrentGameMode { get; private set; }
+
         public void SwitchGameMode(SwitchGameModeEventArgs e)
         {
             OnSwitchingGameMode(e);
             OnSwitchedGameMode(e);
+
+            CurrentGameMode = e.EnterMode;
         }
 
         protected virtual void OnSwitchedGameMode(SwitchGameModeEventArgs e)
@@ -29,6 +35,11 @@ namespace AxeMan.GameSystem.GameMode
         protected virtual void OnSwitchingGameMode(SwitchGameModeEventArgs e)
         {
             SwitchingGameMode?.Invoke(this, e);
+        }
+
+        private void Awake()
+        {
+            CurrentGameMode = GameModeTag.NormalMode;
         }
     }
 
