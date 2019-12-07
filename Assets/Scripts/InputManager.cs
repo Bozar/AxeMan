@@ -1,5 +1,7 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameMode;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.PlayerInput
@@ -16,7 +18,11 @@ namespace AxeMan.GameSystem.PlayerInput
 
     public class InputManager : MonoBehaviour
     {
+        private Dictionary<GameModeTag, IInputManager> modeInputDict;
+
         public event EventHandler<PlayerCommandingEventArgs> PlayerCommanding;
+
+        public event EventHandler<PlayerInputEventArgs> PlayerInputting;
 
         public CommandTag ConvertInput(IConvertInput[] input)
         {
@@ -46,6 +52,33 @@ namespace AxeMan.GameSystem.PlayerInput
         {
             PlayerCommanding?.Invoke(this, e);
         }
+
+        protected virtual void OnPlayerInputting(PlayerInputEventArgs e)
+        {
+            PlayerInputting?.Invoke(this, e);
+        }
+
+        private void Start()
+        {
+            modeInputDict = new Dictionary<GameModeTag, IInputManager>();
+        }
+
+        private void Update()
+        {
+            if (!modeInputDict.TryGetValue(
+                GetComponent<GameModeManager>().CurrentGameMode,
+                out IInputManager manager))
+            {
+                return;
+            }
+
+            CommandTag command = ConvertInput(manager.InputComponent);
+            if (command != CommandTag.INVALID)
+            {
+                OnPlayerInputting(new PlayerInputEventArgs(
+                    GetComponent<GameModeManager>().CurrentGameMode, command));
+            }
+        }
     }
 
     public class PlayerCommandingEventArgs : EventArgs
@@ -63,5 +96,18 @@ namespace AxeMan.GameSystem.PlayerInput
         public int ObjectID { get; }
 
         public SubTag SubTag { get; }
+    }
+
+    public class PlayerInputEventArgs : EventArgs
+    {
+        public PlayerInputEventArgs(GameModeTag gameMode, CommandTag command)
+        {
+            GameMode = gameMode;
+            Command = command;
+        }
+
+        public CommandTag Command { get; }
+
+        public GameModeTag GameMode { get; }
     }
 }
