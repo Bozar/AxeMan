@@ -39,7 +39,6 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintExamineMarker>();
 
             gameObject.AddComponent<BlueprintFloor>();
-            gameObject.AddComponent<BlueprintLogMarker>();
             gameObject.AddComponent<BlueprintProgressBar>();
             gameObject.AddComponent<BlueprintStartScreenCursor>();
             gameObject.AddComponent<BlueprintTrap>();
@@ -86,7 +85,6 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<LogData>();
             gameObject.AddComponent<LogInput>();
             gameObject.AddComponent<LogManager>();
-            //gameObject.AddComponent<LogMarkerComponent>();
             gameObject.AddComponent<LogMarkerInputManager>();
             gameObject.AddComponent<LogMode>();
 
