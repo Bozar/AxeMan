@@ -4,11 +4,16 @@ namespace AxeMan.GameSystem.PlayerInput
 {
     public class LogMarkerInputManager : MonoBehaviour, IInputManager
     {
-        public IConvertInput[] InputComponent { get; private set; }
+        private IConvertInput[] inputComponents;
+
+        public IConvertInput[] GetInputComponent()
+        {
+            return inputComponents;
+        }
 
         private void Start()
         {
-            InputComponent = new IConvertInput[]
+            inputComponents = new IConvertInput[]
             {
                 GetComponent<ConfirmCancelInput>(),
 

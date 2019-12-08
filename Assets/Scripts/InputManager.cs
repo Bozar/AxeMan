@@ -13,7 +13,7 @@ namespace AxeMan.GameSystem.PlayerInput
 
     public interface IInputManager
     {
-        IConvertInput[] InputComponent { get; }
+        IConvertInput[] GetInputComponent();
     }
 
     public class InputManager : MonoBehaviour
@@ -78,7 +78,7 @@ namespace AxeMan.GameSystem.PlayerInput
                 return;
             }
 
-            CommandTag command = ConvertInput(manager.InputComponent);
+            CommandTag command = ConvertInput(manager.GetInputComponent());
             if (command != CommandTag.INVALID)
             {
                 OnPlayerInputting(new PlayerInputEventArgs(

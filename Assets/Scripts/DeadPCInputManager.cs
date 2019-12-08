@@ -7,17 +7,22 @@ namespace AxeMan.DungeonObject.PlayerInput
 {
     public class DeadPCInputManager : MonoBehaviour, IConvertInput, IInputManager
     {
-        public IConvertInput[] InputComponent { get; private set; }
+        private IConvertInput[] inputComponents;
 
         public CommandTag ConvertInput()
         {
             return GameCore.AxeManCore.GetComponent<InputManager>()
-                .ConvertInput(InputComponent);
+                .ConvertInput(GetInputComponent());
+        }
+
+        public IConvertInput[] GetInputComponent()
+        {
+            return inputComponents;
         }
 
         private void Start()
         {
-            InputComponent = new IConvertInput[]
+            inputComponents = new IConvertInput[]
             {
                 GameCore.AxeManCore.GetComponent<DeadPCInput>(),
             };
