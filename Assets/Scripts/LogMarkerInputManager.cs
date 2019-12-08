@@ -1,36 +1,20 @@
-﻿using AxeMan.GameSystem;
-using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.PlayerInput;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace AxeMan.DungeonObject.PlayerInput
+namespace AxeMan.GameSystem.PlayerInput
 {
-    public class LogMarkerInputManager : MonoBehaviour, IConvertInput,
-        IInputManager
+    public class LogMarkerInputManager : MonoBehaviour, IInputManager
     {
         public IConvertInput[] InputComponent { get; private set; }
-
-        public CommandTag ConvertInput()
-        {
-            return GameCore.AxeManCore.GetComponent<InputManager>()
-               .ConvertInput(InputComponent);
-        }
 
         private void Start()
         {
             InputComponent = new IConvertInput[]
             {
-                GameCore.AxeManCore.GetComponent<ConfirmCancelInput>(),
+                GetComponent<ConfirmCancelInput>(),
+
+                // TODO: Remove LogInput later.
+                GetComponent<LogInput>(),
             };
-        }
-
-        private void Update()
-        {
-            int id = GetComponent<MetaInfo>().ObjectID;
-            SubTag tag = GetComponent<MetaInfo>().SubTag;
-
-            GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(
-                ConvertInput(), id, tag);
         }
     }
 }

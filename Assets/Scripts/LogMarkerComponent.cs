@@ -1,5 +1,4 @@
 ﻿using AxeMan.DungeonObject;
-using AxeMan.DungeonObject.PlayerInput;
 using AxeMan.GameSystem.GameDataTag;
 using UnityEngine;
 
@@ -14,8 +13,8 @@ namespace AxeMan.GameSystem.ObjectFactory
             {
                 return;
             }
-            e.Data.AddComponent<LogMarkerInputManager>().enabled = false;
-            e.Data.AddComponent<LogMarkerInputSwitcher>();
+            //e.Data.AddComponent<LogMarkerInputManager>().enabled = false;
+            //e.Data.AddComponent<LogMarkerInputSwitcher>();
         }
 
         private void Start()

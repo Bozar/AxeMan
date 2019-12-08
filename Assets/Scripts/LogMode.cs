@@ -6,19 +6,20 @@ namespace AxeMan.GameSystem.GameMode
 {
     public class LogMode : MonoBehaviour
     {
-        private bool EnterLogMode(PlayerCommandingEventArgs e)
+        private bool EnterLogMode(PlayerInputEventArgs e)
         {
-            return (e.SubTag == SubTag.PC) && (e.Command == CommandTag.LogMode);
+            return (e.GameMode == GameModeTag.NormalMode)
+                && (e.Command == CommandTag.LogMode);
         }
 
-        private bool LeaveLogMode(PlayerCommandingEventArgs e)
+        private bool LeaveLogMode(PlayerInputEventArgs e)
         {
-            return (e.SubTag == SubTag.LogMarker)
+            return (e.GameMode == GameModeTag.LogMode)
                 && (e.Command == CommandTag.Cancel);
         }
 
-        private void LogMode_PlayerCommanding(object sender,
-            PlayerCommandingEventArgs e)
+        private void LogMode_PlayerInputting(object sender,
+            PlayerInputEventArgs e)
         {
             SwitchGameModeEventArgs sgme;
 
@@ -38,8 +39,8 @@ namespace AxeMan.GameSystem.GameMode
 
         private void Start()
         {
-            GetComponent<InputManager>().PlayerCommanding
-                += LogMode_PlayerCommanding;
+            GetComponent<InputManager>().PlayerInputting
+                += LogMode_PlayerInputting;
         }
     }
 }
