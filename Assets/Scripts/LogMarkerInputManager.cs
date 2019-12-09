@@ -17,8 +17,9 @@ namespace AxeMan.GameSystem.PlayerInput
             {
                 GetComponent<ConfirmCancelInput>(),
 
-                // TODO: Remove LogInput later.
+                // TODO: Remove these lines later.
                 GetComponent<LogInput>(),
+                GetComponent<SkillInput>(),
             };
         }
     }

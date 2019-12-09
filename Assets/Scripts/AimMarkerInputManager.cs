@@ -1,20 +1,10 @@
-﻿using AxeMan.GameSystem;
-using AxeMan.GameSystem.GameDataTag;
-using AxeMan.GameSystem.PlayerInput;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace AxeMan.DungeonObject.PlayerInput
+namespace AxeMan.GameSystem.PlayerInput
 {
-    public class AimMarkerInputManager : MonoBehaviour, IConvertInput,
-        IInputManager
+    public class AimMarkerInputManager : MonoBehaviour, IInputManager
     {
         private IConvertInput[] inputComponents;
-
-        public CommandTag ConvertInput()
-        {
-            return GameCore.AxeManCore.GetComponent<InputManager>()
-                .ConvertInput(GetInputComponent());
-        }
 
         public IConvertInput[] GetInputComponent()
         {
@@ -25,19 +15,10 @@ namespace AxeMan.DungeonObject.PlayerInput
         {
             inputComponents = new IConvertInput[]
             {
-                GameCore.AxeManCore.GetComponent<MovementInput>(),
-                GameCore.AxeManCore.GetComponent<SkillInput>(),
-                GameCore.AxeManCore.GetComponent<ConfirmCancelInput>(),
+                GetComponent<MovementInput>(),
+                GetComponent<SkillInput>(),
+                GetComponent<ConfirmCancelInput>(),
             };
-        }
-
-        private void Update()
-        {
-            int id = GetComponent<MetaInfo>().ObjectID;
-            SubTag tag = GetComponent<MetaInfo>().SubTag;
-
-            GameCore.AxeManCore.GetComponent<InputManager>().PublishCommand(
-                ConvertInput(), id, tag);
         }
     }
 }

@@ -45,21 +45,17 @@ namespace AxeMan.GameSystem.GameMode
 
     public class SwitchGameModeEventArgs : EventArgs
     {
-        public SwitchGameModeEventArgs(
-            GameModeTag leaveMode,
+        public SwitchGameModeEventArgs(GameModeTag leaveMode,
             GameModeTag enterMode)
         {
             EnterMode = enterMode;
             LeaveMode = leaveMode;
         }
 
-        public SwitchGameModeEventArgs(
-            GameModeTag leaveMode,
-            GameModeTag enterMode,
-            SubTag subTag,
-            CommandTag commandTag) : this(leaveMode, enterMode)
+        public SwitchGameModeEventArgs(GameModeTag leaveMode,
+            GameModeTag enterMode, CommandTag commandTag)
+            : this(leaveMode, enterMode)
         {
-            SubTag = subTag;
             CommandTag = commandTag;
         }
 
@@ -68,7 +64,5 @@ namespace AxeMan.GameSystem.GameMode
         public GameModeTag EnterMode { get; }
 
         public GameModeTag LeaveMode { get; }
-
-        public SubTag SubTag { get; }
     }
 }

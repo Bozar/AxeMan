@@ -31,22 +31,22 @@ namespace AxeMan.GameSystem.GameMode
             VerifyingSkill?.Invoke(this, e);
         }
 
-        private void AimMode_PlayerCommanding(object sender,
-            PlayerCommandingEventArgs e)
+        private void AimMode_PlayerInputting(object sender,
+            PlayerInputEventArgs e)
         {
             if (EnterMode(e))
             {
                 GetComponent<GameModeManager>().SwitchGameMode(
                     new SwitchGameModeEventArgs(
-                        GameModeTag.NormalMode, GameModeTag.AimMode,
-                        e.SubTag, e.Command));
+                        GetComponent<GameModeManager>().CurrentGameMode,
+                        GameModeTag.AimMode,
+                        e.Command));
             }
             else if (LeaveMode(e))
             {
                 GetComponent<GameModeManager>().SwitchGameMode(
                    new SwitchGameModeEventArgs(
-                       GameModeTag.AimMode, GameModeTag.NormalMode,
-                       e.SubTag, e.Command));
+                       GameModeTag.AimMode, GameModeTag.NormalMode));
 
                 if (pcUseSkill != CommandTag.INVALID)
                 {
@@ -60,9 +60,10 @@ namespace AxeMan.GameSystem.GameMode
             pcUseSkill = CommandTag.INVALID;
         }
 
-        private bool EnterMode(PlayerCommandingEventArgs e)
+        private bool EnterMode(PlayerInputEventArgs e)
         {
-            if ((e.SubTag != SubTag.PC) && (e.SubTag != SubTag.AimMarker))
+            if ((e.GameMode != GameModeTag.NormalMode)
+                && (e.GameMode != GameModeTag.AimMode))
             {
                 return false;
             }
@@ -96,9 +97,9 @@ namespace AxeMan.GameSystem.GameMode
             return true;
         }
 
-        private bool LeaveMode(PlayerCommandingEventArgs e)
+        private bool LeaveMode(PlayerInputEventArgs e)
         {
-            if (e.SubTag != SubTag.AimMarker)
+            if (e.GameMode != GameModeTag.AimMode)
             {
                 return false;
             }
@@ -118,8 +119,8 @@ namespace AxeMan.GameSystem.GameMode
 
         private void Start()
         {
-            GetComponent<InputManager>().PlayerCommanding
-                += AimMode_PlayerCommanding;
+            GetComponent<InputManager>().PlayerInputting
+                += AimMode_PlayerInputting;
         }
     }
 

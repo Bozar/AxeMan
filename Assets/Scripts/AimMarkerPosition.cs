@@ -10,7 +10,7 @@ namespace AxeMan.DungeonObject
         private void AimMarkerPosition_SwitchedGameMode(object sender,
             SwitchGameModeEventArgs e)
         {
-            if (e.LeaveMode == GameModeTag.AimMode)
+            if (e.EnterMode == GameModeTag.NormalMode)
             {
                 GameCore.AxeManCore.GetComponent<MarkerPosition>()
                     .ResetMarkerPosition(gameObject);
@@ -27,7 +27,7 @@ namespace AxeMan.DungeonObject
             // position in the FIRST case.
             if (e.EnterMode == GameModeTag.AimMode)
             {
-                if (e.SubTag == SubTag.AimMarker)
+                if (e.LeaveMode == GameModeTag.AimMode)
                 {
                     return;
                 }

@@ -89,7 +89,7 @@ namespace AxeMan.GameSystem.UserInterface
                 Effect(e.CommandTag);
                 SkillNameType(e.CommandTag);
 
-                if (e.SubTag == SubTag.PC)
+                if (e.LeaveMode == GameModeTag.NormalMode)
                 {
                     GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag,
                         true);

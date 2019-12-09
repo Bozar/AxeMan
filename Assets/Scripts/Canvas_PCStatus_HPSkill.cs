@@ -66,10 +66,6 @@ namespace AxeMan.GameSystem.UserInterface
         {
             if (e.EnterMode == GameModeTag.AimMode)
             {
-                if (e.SubTag != SubTag.PC)
-                {
-                    return;
-                }
                 GetComponent<UIManager>().SwitchCanvasVisibility(canvasTag, false);
             }
             else if (e.LeaveMode == GameModeTag.AimMode)

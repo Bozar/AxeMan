@@ -25,6 +25,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ActorComponent>();
             gameObject.AddComponent<ActorData>();
             gameObject.AddComponent<AimMarkerComponent>();
+            gameObject.AddComponent<AimMarkerInputManager>();
             gameObject.AddComponent<AimMode>();
 
             gameObject.AddComponent<AltarColor>();

@@ -59,10 +59,6 @@ namespace AxeMan.GameSystem.UserInterface
         {
             if (e.EnterMode == GameModeTag.AimMode)
             {
-                if ((e.SubTag != SubTag.PC) && (e.SubTag != SubTag.AimMarker))
-                {
-                    return;
-                }
                 ClearUIText();
                 SkillFlawEffect(e);
             }
