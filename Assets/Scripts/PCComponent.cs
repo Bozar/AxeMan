@@ -17,10 +17,8 @@ namespace AxeMan.GameSystem.ObjectFactory
             }
 
             e.Data.AddComponent<PCInputManager>().enabled = false;
-            e.Data.AddComponent<DeadPCInputManager>().enabled = false;
 
             e.Data.AddComponent<ApplySkillFlawEffect>();
-            e.Data.AddComponent<DeadPCInputSwitcher>();
             e.Data.AddComponent<PCActiveAltar>();
             e.Data.AddComponent<PCAttackTarget>();
             e.Data.AddComponent<PCBuffSelf>();

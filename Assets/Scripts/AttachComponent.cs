@@ -68,7 +68,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<ConvertSkillMetaInfo>();
             gameObject.AddComponent<CreateObject>();
 
+            gameObject.AddComponent<DeadMode>();
             gameObject.AddComponent<DeadPCInput>();
+            gameObject.AddComponent<DeadPCInputManager>();
             gameObject.AddComponent<Distance>();
             gameObject.AddComponent<DungeonBoard>();
             gameObject.AddComponent<DungeonObjectComponent>();

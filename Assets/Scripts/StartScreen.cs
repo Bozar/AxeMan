@@ -24,6 +24,15 @@ namespace AxeMan.GameSystem.GameMode
             return e.Command == CommandTag.Confirm;
         }
 
+        private bool LeaveStartScreen(PlayerInputEventArgs e)
+        {
+            if (e.GameMode != GameModeTag.StartMode)
+            {
+                return false;
+            }
+            return e.Command == CommandTag.Confirm;
+        }
+
         private bool ReloadGame(PlayerCommandingEventArgs e)
         {
             if (e.SubTag != SubTag.PC)
@@ -37,6 +46,8 @@ namespace AxeMan.GameSystem.GameMode
         {
             GetComponent<InputManager>().PlayerCommanding
                 += StartScreen_PlayerCommanding;
+            GetComponent<InputManager>().PlayerInputting
+                += StartScreen_PlayerInputting;
         }
 
         private void StartScreen_PlayerCommanding(object sender,
@@ -49,6 +60,15 @@ namespace AxeMan.GameSystem.GameMode
             else if (ReloadGame(e))
             {
                 SceneManager.LoadSceneAsync(0);
+            }
+        }
+
+        private void StartScreen_PlayerInputting(object sender,
+            PlayerInputEventArgs e)
+        {
+            if (LeaveStartScreen(e))
+            {
+                OnLeavingStartScreen(EventArgs.Empty);
             }
         }
     }
