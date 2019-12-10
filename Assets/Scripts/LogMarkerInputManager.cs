@@ -20,6 +20,7 @@ namespace AxeMan.GameSystem.PlayerInput
                 // TODO: Remove these lines later.
                 GetComponent<LogInput>(),
                 GetComponent<SkillInput>(),
+                GetComponent<ExamineInput>(),
             };
         }
     }

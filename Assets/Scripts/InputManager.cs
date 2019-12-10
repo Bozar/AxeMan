@@ -67,6 +67,8 @@ namespace AxeMan.GameSystem.PlayerInput
 
                 { GameModeTag.LogMode, GetComponent<LogMarkerInputManager>() },
                 { GameModeTag.AimMode, GetComponent<AimMarkerInputManager>() },
+                { GameModeTag.ExamineMode,
+                    GetComponent<ExamineMarkerInputManager>() },
             };
         }
 

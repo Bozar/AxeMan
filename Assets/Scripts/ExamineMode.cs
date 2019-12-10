@@ -6,17 +6,14 @@ namespace AxeMan.GameSystem.GameMode
 {
     public class ExamineMode : MonoBehaviour
     {
-        private bool EnterMode(PlayerCommandingEventArgs e)
+        private bool EnterMode(PlayerInputEventArgs e)
         {
-            if (e.SubTag != SubTag.PC)
-            {
-                return false;
-            }
-            return e.Command == CommandTag.ExamineMode;
+            return (e.GameMode == GameModeTag.NormalMode)
+                && (e.Command == CommandTag.ExamineMode);
         }
 
-        private void ExamineMode_PlayerCommanding(object sender,
-            PlayerCommandingEventArgs e)
+        private void ExamineMode_PlayerInputting(object sender,
+            PlayerInputEventArgs e)
         {
             if (EnterMode(e))
             {
@@ -32,19 +29,16 @@ namespace AxeMan.GameSystem.GameMode
             }
         }
 
-        private bool LeaveMode(PlayerCommandingEventArgs e)
+        private bool LeaveMode(PlayerInputEventArgs e)
         {
-            if (e.SubTag != SubTag.ExamineMarker)
-            {
-                return false;
-            }
-            return e.Command == CommandTag.Cancel;
+            return (e.GameMode == GameModeTag.ExamineMode)
+                && (e.Command == CommandTag.Cancel);
         }
 
         private void Start()
         {
-            GetComponent<InputManager>().PlayerCommanding
-                += ExamineMode_PlayerCommanding;
+            GetComponent<InputManager>().PlayerInputting
+                += ExamineMode_PlayerInputting;
         }
     }
 }
