@@ -21,6 +21,7 @@ namespace AxeMan.GameSystem.PlayerInput
                 GetComponent<LogInput>(),
                 GetComponent<SkillInput>(),
                 GetComponent<ExamineInput>(),
+                GetComponent<WizardInput>(),
             };
         }
     }

@@ -20,9 +20,9 @@ namespace AxeMan.GameSystem
             actorStatus.AddStatus(SkillComponentTag.AirFlaw, new EffectData(2, 5));
         }
 
-        private void ListenPCInput(PlayerCommandingEventArgs e)
+        private void ListenPCInput(PlayerInputEventArgs e)
         {
-            if (e.SubTag != SubTag.PC)
+            if (e.GameMode != GameModeTag.NormalMode)
             {
                 return;
             }
@@ -71,8 +71,8 @@ namespace AxeMan.GameSystem
 
         private void Start()
         {
-            GetComponent<InputManager>().PlayerCommanding
-                += Wizard_PlayerCommanding;
+            GetComponent<InputManager>().PlayerInputting
+                += Wizard_PlayerInputting;
         }
 
         private void TestHP()
@@ -83,8 +83,8 @@ namespace AxeMan.GameSystem
             //pc.GetComponent<HP>().Add(2);
         }
 
-        private void Wizard_PlayerCommanding(object sender,
-            PlayerCommandingEventArgs e)
+        private void Wizard_PlayerInputting(object sender,
+            PlayerInputEventArgs e)
         {
             ListenPCInput(e);
         }
