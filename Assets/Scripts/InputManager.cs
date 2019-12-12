@@ -62,9 +62,7 @@ namespace AxeMan.GameSystem.PlayerInput
         {
             modeInputDict = new Dictionary<GameModeTag, IInputManager>()
             {
-                // TODO: Change NormalMode value later.
-                { GameModeTag.NormalMode, GetComponent<LogMarkerInputManager>() },
-
+                { GameModeTag.NormalMode, GetComponent<PCInputManager>() },
                 { GameModeTag.LogMode, GetComponent<LogMarkerInputManager>() },
                 { GameModeTag.AimMode, GetComponent<AimMarkerInputManager>() },
                 { GameModeTag.DeadMode, GetComponent<DeadPCInputManager>() },

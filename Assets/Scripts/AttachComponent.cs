@@ -94,11 +94,13 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<MarkerPosition>();
             gameObject.AddComponent<MovementInput>();
+            gameObject.AddComponent<NormalMode>();
             gameObject.AddComponent<NPCComponent>();
-            gameObject.AddComponent<ObjectPool>();
 
+            gameObject.AddComponent<ObjectPool>();
             gameObject.AddComponent<PathFinding>();
             gameObject.AddComponent<PCComponent>();
+            gameObject.AddComponent<PCInputManager>();
             gameObject.AddComponent<ProgressBar>();
 
             gameObject.AddComponent<PublishAction>();

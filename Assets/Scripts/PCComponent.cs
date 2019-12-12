@@ -1,6 +1,5 @@
 ﻿using AxeMan.DungeonObject;
 using AxeMan.DungeonObject.ActorSkill;
-using AxeMan.DungeonObject.PlayerInput;
 using AxeMan.GameSystem.GameDataTag;
 using UnityEngine;
 
@@ -15,9 +14,6 @@ namespace AxeMan.GameSystem.ObjectFactory
             {
                 return;
             }
-
-            e.Data.AddComponent<PCInputManager>().enabled = false;
-
             e.Data.AddComponent<ApplySkillFlawEffect>();
             e.Data.AddComponent<PCActiveAltar>();
             e.Data.AddComponent<PCAttackTarget>();
@@ -26,7 +22,6 @@ namespace AxeMan.GameSystem.ObjectFactory
             e.Data.AddComponent<PCBumpAttack>();
             e.Data.AddComponent<PCCheckTerrain>();
             e.Data.AddComponent<PCCurseTarget>();
-            e.Data.AddComponent<PCInputSwitcher>();
             e.Data.AddComponent<PCMove>();
 
             e.Data.AddComponent<PCSkillManager>();

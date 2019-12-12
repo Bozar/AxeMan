@@ -67,39 +67,6 @@ namespace AxeMan.DungeonObject
             return false;
         }
 
-        private void PCMove_PlayerCommanding(object sender,
-            PlayerCommandingEventArgs e)
-        {
-            if (!GetComponent<LocalManager>().MatchID(e.ObjectID))
-            {
-                return;
-            }
-            if (!IsValidCommand(e.Command))
-            {
-                return;
-            }
-
-            int[] source = GetComponent<MetaInfo>().Position;
-            int[] target = GetNewPosition(source, e.Command);
-
-            if (!GetComponent<LocalManager>().IsPassable(target))
-            {
-                GameCore.AxeManCore.GetComponent<PublishPosition>()
-                    .BlockPCMovement(new BlockPCMovementEventArgs(target));
-                return;
-            }
-
-            ActionTag action = ActionTag.Move;
-
-            GetComponent<LocalManager>().SetPosition(target);
-            GetComponent<LocalManager>().TakenAction(action);
-
-            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(source);
-            GameCore.AxeManCore.GetComponent<TileOverlay>().TryHideTile(target);
-
-            GetComponent<LocalManager>().CheckingSchedule(action);
-        }
-
         private void PCMove_PlayerInputting(object sender,
             PlayerInputEventArgs e)
         {
@@ -132,8 +99,6 @@ namespace AxeMan.DungeonObject
 
         private void Start()
         {
-            GameCore.AxeManCore.GetComponent<InputManager>().PlayerCommanding
-                += PCMove_PlayerCommanding;
             GameCore.AxeManCore.GetComponent<InputManager>().PlayerInputting
                 += PCMove_PlayerInputting;
         }
