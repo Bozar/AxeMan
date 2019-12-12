@@ -31,8 +31,8 @@ namespace AxeMan.GameSystem.GameMode
 
         private void Start()
         {
-            GetComponent<TurnManager>().StartingTurn += NormalMode_StartingTurn;
-            GetComponent<TurnManager>().EndingTurn += NormalMode_EndingTurn;
+            //GetComponent<TurnManager>().StartingTurn += NormalMode_StartingTurn;
+            //GetComponent<TurnManager>().EndingTurn += NormalMode_EndingTurn;
         }
     }
 }
