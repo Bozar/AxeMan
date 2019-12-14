@@ -44,6 +44,17 @@ namespace AxeMan.GameSystem
 
         public void TryHideTile(int x, int y)
         {
+            // Do not try to hide a sprite which is outside the dungeon board.
+            // + The `PCMove` class will call this method when moving
+            // `AimMarker` and `ExamineMarker` out of the dungeon.
+            // + Dead NPCs will also be moved out of the dungeon and they will
+            // be recycled when necessary.
+            // + Markers and NPCs are moved to the exact same position.
+            // + It turns out that NPCs will be hidden unexpectedly.
+            if (GetComponent<DungeonBoard>().IndexOutOfRange(x, y))
+            {
+                return;
+            }
             if (TrySearchObjects(x, y, out GameObject[] search))
             {
                 TryHideTile(search);
