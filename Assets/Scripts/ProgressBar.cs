@@ -1,36 +1,25 @@
-﻿using AxeMan.DungeonObject;
-using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.ObjectFactory;
 using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SchedulingSystem;
-using AxeMan.GameSystem.SearchGameObject;
+using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem
 {
     public class ProgressBar : MonoBehaviour
     {
+        private GameObject[] bars;
+        private int currentX;
         private int maxX;
         private int minX;
 
-        public int XCoordinate { get; private set; }
-
-        public int YCoordinate { get; private set; }
-
         private void Awake()
         {
-            minX = 0;
+            minX = 1;
             maxX = 5;
-
-            XCoordinate = minX;
-            YCoordinate = 9;
-        }
-
-        private void CreateBar()
-        {
-            IPrototype[] protoBar = GetComponent<Blueprint>().GetBlueprint(
-                BlueprintTag.ProgressBar);
-            GetComponent<CreateObject>().Create(protoBar);
+            currentX = maxX;
         }
 
         private int GetXCoordinate(int current, int min, int max)
@@ -43,33 +32,41 @@ namespace AxeMan.GameSystem
             return result;
         }
 
+        private void ProgressBar_CreatedWorld(object sender, EventArgs e)
+        {
+            IPrototype[] protoBar = GetComponent<Blueprint>().GetBlueprint(
+                BlueprintTag.ProgressBar);
+            bars = GetComponent<CreateObject>().Create(protoBar);
+        }
+
         private void ProgressBar_EndingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
-            GameObject pc = GetComponent<SearchObject>().Search(SubTag.PC)[0];
-            LocalManager manager = pc.GetComponent<LocalManager>();
-            if (!manager.MatchID(e.ObjectID))
+            if (e.SubTag != SubTag.PC)
             {
                 return;
             }
 
-            RemoveBar();
-            XCoordinate = GetXCoordinate(XCoordinate, minX, maxX);
-            CreateBar();
-        }
-
-        private void RemoveBar()
-        {
-            GameObject[] bar = GetComponent<SearchObject>().Search(
-                SubTag.ProgressBar);
-            foreach (GameObject b in bar)
+            SpriteRenderer sr;
+            currentX = GetXCoordinate(currentX, minX, maxX);
+            for (int i = 0; i < bars.Length; i++)
             {
-                b.GetComponent<LocalManager>().Remove();
+                sr = bars[i].GetComponent<SpriteRenderer>();
+                if (i < currentX)
+                {
+                    GetComponent<ColorManager>().SetColor(sr, ColorTag.Grey);
+                }
+                else
+                {
+                    GetComponent<ColorManager>().SetColor(sr, ColorTag.Black);
+                }
             }
         }
 
         private void Start()
         {
+            GetComponent<InitializeMainGame>().CreatedWorld
+                += ProgressBar_CreatedWorld;
             GetComponent<TurnManager>().EndingTurn
                 += ProgressBar_EndingTurn;
         }

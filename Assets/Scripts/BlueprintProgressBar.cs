@@ -6,6 +6,15 @@ namespace AxeMan.GameSystem.PrototypeFactory
 {
     public class BlueprintProgressBar : MonoBehaviour
     {
+        private int barX;
+        private int barY;
+
+        private void Awake()
+        {
+            barX = 5;
+            barY = 9;
+        }
+
         private void BlueprintProgressBar_DrawingBlueprint(object sender,
             DrawingBlueprintEventArgs e)
         {
@@ -19,13 +28,11 @@ namespace AxeMan.GameSystem.PrototypeFactory
         private IPrototype[] GetProgressBar()
         {
             Stack<IPrototype> bar = new Stack<IPrototype>();
-            int maxX = GetComponent<ProgressBar>().XCoordinate;
-            int y = GetComponent<ProgressBar>().YCoordinate;
 
-            for (int x = 0; x < maxX; x++)
+            for (int x = 0; x < barX; x++)
             {
                 bar.Push(new ProtoObject(MainTag.Marker, SubTag.ProgressBar,
-                    new int[] { x, y }));
+                    new int[] { x, barY }));
             }
             return bar.ToArray();
         }
