@@ -39,7 +39,7 @@ namespace AxeMan.GameSystem.GameMode
 
         private void Awake()
         {
-            CurrentGameMode = GameModeTag.NormalMode;
+            CurrentGameMode = GameModeTag.StartMode;
         }
     }
 

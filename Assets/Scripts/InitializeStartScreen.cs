@@ -1,8 +1,6 @@
 ﻿using AxeMan.GameSystem.GameDataHub;
 using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using AxeMan.GameSystem.ObjectFactory;
-using AxeMan.GameSystem.PrototypeFactory;
 using AxeMan.GameSystem.SearchGameObject;
 using AxeMan.GameSystem.UserInterface;
 using System;
@@ -57,24 +55,24 @@ namespace AxeMan.GameSystem.InitializeGameWorld
             ui.GetComponent<Text>().text
                 = "Start screen: Press Space to continue.";
 
-            IPrototype[] proto = GetComponent<Blueprint>().GetBlueprint(
-                BlueprintTag.StartScreenCursor);
-            GetComponent<CreateObject>().Create(proto);
-
             hideCanvas = true;
             enabled = false;
         }
 
-        private void InitializeStartScreen_LeavingStartScreen(object sender,
-            EventArgs e)
+        private void InitializeStartScreen_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
         {
-            EnterMainScreen();
+            if ((e.LeaveMode == GameModeTag.StartMode)
+                && (e.EnterMode == GameModeTag.NormalMode))
+            {
+                EnterMainScreen();
+            }
         }
 
         private void Start()
         {
-            GetComponent<StartScreen>().LeavingStartScreen
-                += InitializeStartScreen_LeavingStartScreen;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += InitializeStartScreen_SwitchingGameMode;
         }
 
         private void Update()

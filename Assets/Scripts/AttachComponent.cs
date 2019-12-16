@@ -41,7 +41,6 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<BlueprintFloor>();
             gameObject.AddComponent<BlueprintProgressBar>();
-            gameObject.AddComponent<BlueprintStartScreenCursor>();
             gameObject.AddComponent<BlueprintTrap>();
 
             gameObject.AddComponent<BuildingEffect>();
@@ -121,7 +120,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<SkillInput>();
             gameObject.AddComponent<SkillTemplateData>();
             gameObject.AddComponent<StartScreen>();
-            gameObject.AddComponent<StartScreenCursorComponent>();
+            gameObject.AddComponent<StartScreenInputManager>();
 
             gameObject.AddComponent<TileOverlay>();
             gameObject.AddComponent<TurnManager>();

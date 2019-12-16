@@ -20,8 +20,6 @@ namespace AxeMan.GameSystem.PlayerInput
     {
         private Dictionary<GameModeTag, IInputManager> modeInputDict;
 
-        public event EventHandler<PlayerCommandingEventArgs> PlayerCommanding;
-
         public event EventHandler<PlayerInputEventArgs> PlayerInputting;
 
         public CommandTag ConvertInput(IConvertInput[] input)
@@ -39,20 +37,6 @@ namespace AxeMan.GameSystem.PlayerInput
             return CommandTag.INVALID;
         }
 
-        public void PublishCommand(CommandTag command, int id, SubTag tag)
-        {
-            if (command == CommandTag.INVALID)
-            {
-                return;
-            }
-            OnPlayerCommanding(new PlayerCommandingEventArgs(command, id, tag));
-        }
-
-        protected virtual void OnPlayerCommanding(PlayerCommandingEventArgs e)
-        {
-            PlayerCommanding?.Invoke(this, e);
-        }
-
         protected virtual void OnPlayerInputting(PlayerInputEventArgs e)
         {
             PlayerInputting?.Invoke(this, e);
@@ -62,6 +46,7 @@ namespace AxeMan.GameSystem.PlayerInput
         {
             modeInputDict = new Dictionary<GameModeTag, IInputManager>()
             {
+                { GameModeTag.StartMode, GetComponent<StartScreenInputManager>() },
                 { GameModeTag.NormalMode, GetComponent<PCInputManager>() },
                 { GameModeTag.LogMode, GetComponent<LogMarkerInputManager>() },
                 { GameModeTag.AimMode, GetComponent<AimMarkerInputManager>() },
@@ -88,23 +73,6 @@ namespace AxeMan.GameSystem.PlayerInput
                     GetComponent<GameModeManager>().CurrentGameMode, command));
             }
         }
-    }
-
-    public class PlayerCommandingEventArgs : EventArgs
-    {
-        public PlayerCommandingEventArgs(CommandTag command,
-            int objectID, SubTag subTag)
-        {
-            Command = command;
-            ObjectID = objectID;
-            SubTag = subTag;
-        }
-
-        public CommandTag Command { get; }
-
-        public int ObjectID { get; }
-
-        public SubTag SubTag { get; }
     }
 
     public class PlayerInputEventArgs : EventArgs

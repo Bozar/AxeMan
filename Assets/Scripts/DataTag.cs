@@ -93,7 +93,7 @@ namespace AxeMan.GameSystem.GameDataTag
         INVALID, DEFAULT, Dummy, Floor, ProgressBar,
         FireTrap, WaterTrap, AirTrap, EarthTrap,
         FireAltar, WaterAltar, AirAltar, EarthAltar, LifeAltar,
-        PC, AimMarker, ExamineMarker, StartScreenCursor, LogMarker,
+        PC, AimMarker, ExamineMarker, LogMarker,
     }
 
     public enum UITag
