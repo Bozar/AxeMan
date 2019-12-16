@@ -20,13 +20,19 @@ namespace AxeMan.GameSystem.GameMode
         private void NormalMode_EndingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
-            GetComponent<GameModeManager>().SwitchGameMode(endTurn);
+            if (e.SubTag == SubTag.PC)
+            {
+                GetComponent<GameModeManager>().SwitchGameMode(endTurn);
+            }
         }
 
         private void NormalMode_StartingTurn(object sender,
             StartOrEndTurnEventArgs e)
         {
-            GetComponent<GameModeManager>().SwitchGameMode(startTurn);
+            if (e.SubTag == SubTag.PC)
+            {
+                GetComponent<GameModeManager>().SwitchGameMode(startTurn);
+            }
         }
 
         private void Start()

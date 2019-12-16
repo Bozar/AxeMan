@@ -10,9 +10,9 @@ namespace AxeMan.GameSystem.GameMode
     {
         private void DeadMode_BuryingPC(object sender, EventArgs e)
         {
+            GameModeTag leave = GetComponent<GameModeManager>().CurrentGameMode;
             GetComponent<GameModeManager>().SwitchGameMode(
-                new SwitchGameModeEventArgs(
-                    GameModeTag.NormalMode, GameModeTag.DeadMode));
+                new SwitchGameModeEventArgs(leave, GameModeTag.DeadMode));
         }
 
         private void DeadMode_PlayerInputting(object sender,
