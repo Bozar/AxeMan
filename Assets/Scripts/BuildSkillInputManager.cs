@@ -2,7 +2,7 @@
 
 namespace AxeMan.GameSystem.PlayerInput
 {
-    public class StartScreenInputManager : MonoBehaviour, IInputManager
+    public class BuildSkillInputManager : MonoBehaviour, IInputManager
     {
         private IConvertInput[] inputComponents;
 
@@ -16,9 +16,6 @@ namespace AxeMan.GameSystem.PlayerInput
             inputComponents = new IConvertInput[]
             {
                 GetComponent<ConfirmCancelInput>(),
-
-                // TODO: Delete this component later.
-                GetComponent<WizardInput>(),
             };
         }
     }

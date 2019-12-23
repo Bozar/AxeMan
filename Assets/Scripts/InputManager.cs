@@ -47,11 +47,14 @@ namespace AxeMan.GameSystem.PlayerInput
             modeInputDict = new Dictionary<GameModeTag, IInputManager>()
             {
                 { GameModeTag.StartMode, GetComponent<StartScreenInputManager>() },
+
                 { GameModeTag.NormalMode, GetComponent<PCInputManager>() },
                 { GameModeTag.LogMode, GetComponent<LogMarkerInputManager>() },
                 { GameModeTag.AimMode, GetComponent<AimMarkerInputManager>() },
                 { GameModeTag.DeadMode, GetComponent<DeadPCInputManager>() },
 
+                { GameModeTag.BuildSkillMode,
+                    GetComponent<BuildSkillInputManager>() },
                 { GameModeTag.ExamineMode,
                     GetComponent<ExamineMarkerInputManager>() },
             };

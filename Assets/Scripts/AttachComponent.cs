@@ -44,6 +44,8 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintTrap>();
 
             gameObject.AddComponent<BuildingEffect>();
+            gameObject.AddComponent<BuildSkillInputManager>();
+            gameObject.AddComponent<BuildSkillMode>();
             gameObject.AddComponent<BuryNPC>();
             gameObject.AddComponent<BuryPC>();
 

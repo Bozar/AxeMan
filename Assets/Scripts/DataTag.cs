@@ -47,6 +47,7 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum GameModeTag
     {
         INVALID, NormalMode, ExamineMode, AimMode, LogMode, DeadMode, StartMode,
+        BuildSkillMode,
     }
 
     public enum LanguageTag { English, Chinese, }
