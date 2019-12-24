@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.PlayerInput;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ namespace AxeMan.GameSystem.GameMode
             return e.Command == CommandTag.PrintSkill;
         }
 
+        // TODO: Rewrite condition check.
         private bool LeaveStartScreen(PlayerInputEventArgs e)
         {
             return e.Command == CommandTag.Confirm;
@@ -42,6 +44,7 @@ namespace AxeMan.GameSystem.GameMode
             }
             if (LeaveStartScreen(e))
             {
+                GetComponent<InitializeMainGame>().enabled = true;
                 GetComponent<GameModeManager>().SwitchGameMode(enterNormal);
             }
             else if (EnterBuildSkill(e))

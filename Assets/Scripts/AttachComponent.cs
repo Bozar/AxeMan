@@ -52,6 +52,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Canvas_ExamineMode>();
             gameObject.AddComponent<Canvas_Help>();
             gameObject.AddComponent<Canvas_Log>();
+            gameObject.AddComponent<Canvas_Main>();
             gameObject.AddComponent<Canvas_Message>();
 
             gameObject.AddComponent<Canvas_PCStatus>();
@@ -60,6 +61,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<Canvas_PCStatus_SkillData>();
             gameObject.AddComponent<Canvas_PCStatus_SkillFlawEffect>();
 
+            gameObject.AddComponent<Canvas_Start>();
             gameObject.AddComponent<Canvas_World>();
             gameObject.AddComponent<ColorData>();
             gameObject.AddComponent<ColorManager>();
