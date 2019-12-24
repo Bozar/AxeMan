@@ -1,5 +1,7 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
+using AxeMan.GameSystem.InitializeGameWorld;
+using System;
 using UnityEngine;
 
 namespace AxeMan.GameSystem.UserInterface
@@ -11,6 +13,11 @@ namespace AxeMan.GameSystem.UserInterface
         private void Awake()
         {
             canvasTag = CanvasTag.Canvas_Main;
+        }
+
+        private void Canvas_Main_LoadingGameData(object sender, EventArgs e)
+        {
+            SwitchVisibility(false);
         }
 
         private void Canvas_Main_SwitchingGameMode(object sender,
@@ -25,6 +32,8 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void Start()
         {
+            GetComponent<InitializeStartScreen>().LoadingGameData
+                += Canvas_Main_LoadingGameData;
             GetComponent<GameModeManager>().SwitchingGameMode
                 += Canvas_Main_SwitchingGameMode;
         }

@@ -1,6 +1,5 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
-using AxeMan.GameSystem.UserInterface;
 using System;
 using UnityEngine;
 
@@ -40,9 +39,6 @@ namespace AxeMan.GameSystem.InitializeGameWorld
             }
             OnLoadingSettingData(EventArgs.Empty);
             OnLoadingGameData(EventArgs.Empty);
-
-            GetComponent<UIManager>().SwitchCanvasVisibility(
-                CanvasTag.Canvas_Main, false);
             GetComponent<GameModeManager>().SwitchGameMode(enterStart);
 
             dataLoaded = true;
