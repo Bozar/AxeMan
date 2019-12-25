@@ -23,7 +23,8 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum CanvasTag
     {
-        Canvas_Main, Canvas_Start, Canvas_BuildSkill, Canvas_World, Canvas_Log,
+        Canvas_Main, Canvas_Start, Canvas_World, Canvas_Log,
+        Canvas_BuildSkill, Canvas_BuildSkill_Header,
         Canvas_Message, Canvas_ExamineMode, Canvas_Help, Canvas_PCStatus,
         Canvas_PCStatus_HPSkill, Canvas_PCStatus_CurrentStatus,
         Canvas_PCStatus_SkillData, Canvas_PCStatus_SkillFlawEffect,

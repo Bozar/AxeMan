@@ -18,7 +18,8 @@ namespace AxeMan.GameSystem.UserInterface
             canvasTag = CanvasTag.Canvas_BuildSkill;
         }
 
-        private void Canvas_Start_LoadingGameData(object sender, EventArgs e)
+        private void Canvas_BuildSkill_LoadingGameData(object sender,
+            EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
             SwitchVisibility(false);
@@ -27,7 +28,7 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.UIText).GetComponent<Text>().text = "Build skill";
         }
 
-        private void Canvas_Start_SwitchingGameMode(object sender,
+        private void Canvas_BuildSkill_SwitchingGameMode(object sender,
             SwitchGameModeEventArgs e)
         {
             if (e.LeaveMode == GameModeTag.BuildSkillMode)
@@ -48,9 +49,9 @@ namespace AxeMan.GameSystem.UserInterface
         private void Start()
         {
             GetComponent<InitializeStartScreen>().LoadingGameData
-                += Canvas_Start_LoadingGameData;
+                += Canvas_BuildSkill_LoadingGameData;
             GetComponent<GameModeManager>().SwitchingGameMode
-                += Canvas_Start_SwitchingGameMode;
+                += Canvas_BuildSkill_SwitchingGameMode;
         }
 
         private void SwitchVisibility(bool switchOn)
