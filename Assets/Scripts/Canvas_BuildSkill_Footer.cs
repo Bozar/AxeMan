@@ -7,23 +7,29 @@ using UnityEngine.UI;
 
 namespace AxeMan.GameSystem.UserInterface
 {
-    public class Canvas_BuildSkill_Header : MonoBehaviour
+    public class Canvas_BuildSkill_Footer : MonoBehaviour
     {
         private CanvasTag canvasTag;
         private GameObject[] uiObjects;
 
         private void Awake()
         {
-            canvasTag = CanvasTag.Canvas_BuildSkill_Header;
+            canvasTag = CanvasTag.Canvas_BuildSkill_Footer;
         }
 
-        private void Canvas_BuildSkill_Header_LoadingGameData(object sender,
+        private void Canvas_BuildSkill_Footer_LoadingGameData(object sender,
             EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
 
-            // TODO: Remove this later.
-            SearchText(UITag.Modeline).GetComponent<Text>().text = "Build skill";
+            PrintText();
+        }
+
+        private void PrintText()
+        {
+            SearchText(UITag.Modeline).GetComponent<Text>().text
+                = "[ QWER - Switch skill ] [ V - View all ] [ "
+                + "Ctrl+D - Load default ] [ Esc - Back to main ]";
         }
 
         private Text SearchText(UITag uiTag)
@@ -34,7 +40,7 @@ namespace AxeMan.GameSystem.UserInterface
         private void Start()
         {
             GetComponent<InitializeStartScreen>().LoadingGameData
-                += Canvas_BuildSkill_Header_LoadingGameData;
+                += Canvas_BuildSkill_Footer_LoadingGameData;
         }
     }
 }
