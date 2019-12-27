@@ -50,6 +50,7 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BuryPC>();
 
             gameObject.AddComponent<Canvas_BuildSkill>();
+            gameObject.AddComponent<Canvas_BuildSkill_Left>();
             gameObject.AddComponent<Canvas_BuildSkill_Footer>();
             gameObject.AddComponent<Canvas_ExamineMode>();
             gameObject.AddComponent<Canvas_Help>();

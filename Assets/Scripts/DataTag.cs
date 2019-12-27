@@ -23,8 +23,9 @@ namespace AxeMan.GameSystem.GameDataTag
 
     public enum CanvasTag
     {
-        Canvas_Main, Canvas_Start, Canvas_World, Canvas_Log,
-        Canvas_BuildSkill, Canvas_BuildSkill_Footer,
+        Canvas_Main, Canvas_Start, Canvas_World, Canvas_Log, Canvas_BuildSkill,
+        Canvas_BuildSkill_Footer, Canvas_BuildSkill_Left,
+        Canvas_BuildSkill_Middle, Canvas_BuildSkill_Right,
         Canvas_Message, Canvas_ExamineMode, Canvas_Help, Canvas_PCStatus,
         Canvas_PCStatus_HPSkill, Canvas_PCStatus_CurrentStatus,
         Canvas_PCStatus_SkillData, Canvas_PCStatus_SkillFlawEffect,
@@ -109,8 +110,11 @@ namespace AxeMan.GameSystem.GameDataTag
         QData, WData, EData, RData,
         QType, WType, EType, RType,
 
-        Status1Text, Status2Text, Status3Text, Status4Text,
-        Status1Data, Status2Data, Status3Data, Status4Data,
+        Status1Text, Status2Text, Status3Text, Status4Text, Status5Text,
+        Status1Data, Status2Data, Status3Data, Status4Data, Status5Data,
+
+        Status6Text, Status7Text, Status8Text, Status9Text,
+        Status6Data, Status7Data, Status8Data, Status9Data,
 
         MoveText, AttackText, DamageText, CurseText,
         MoveData, AttackData, DamageData, CurseData,
