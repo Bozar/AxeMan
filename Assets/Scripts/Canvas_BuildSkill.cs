@@ -1,17 +1,14 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
 using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
-using AxeMan.GameSystem.SearchGameObject;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace AxeMan.GameSystem.UserInterface
 {
     public class Canvas_BuildSkill : MonoBehaviour
     {
         private CanvasTag canvasTag;
-        private GameObject[] uiObjects;
 
         private void Awake()
         {
@@ -21,11 +18,7 @@ namespace AxeMan.GameSystem.UserInterface
         private void Canvas_BuildSkill_LoadingGameData(object sender,
             EventArgs e)
         {
-            uiObjects = GetComponent<SearchUI>().Search(canvasTag);
             SwitchVisibility(false);
-
-            // TODO: Remove this later.
-            SearchText(UITag.UIText).GetComponent<Text>().text = "Build skill";
         }
 
         private void Canvas_BuildSkill_SwitchingGameMode(object sender,
@@ -39,11 +32,6 @@ namespace AxeMan.GameSystem.UserInterface
             {
                 SwitchVisibility(true);
             }
-        }
-
-        private Text SearchText(UITag uiTag)
-        {
-            return GetComponent<SearchUI>().SearchText(uiObjects, uiTag);
         }
 
         private void Start()
