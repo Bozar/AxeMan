@@ -51,11 +51,13 @@ namespace AxeMan.GameSystem
 
             gameObject.AddComponent<Canvas_BuildSkill>();
             gameObject.AddComponent<Canvas_BuildSkill_Left>();
+            gameObject.AddComponent<Canvas_BuildSkill_Middle>();
+            gameObject.AddComponent<Canvas_BuildSkill_Right>();
             gameObject.AddComponent<Canvas_BuildSkill_Footer>();
+
             gameObject.AddComponent<Canvas_ExamineMode>();
             gameObject.AddComponent<Canvas_Help>();
             gameObject.AddComponent<Canvas_Log>();
-
             gameObject.AddComponent<Canvas_Main>();
             gameObject.AddComponent<Canvas_Message>();
 
