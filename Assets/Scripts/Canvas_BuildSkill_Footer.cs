@@ -27,9 +27,14 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintText()
         {
-            SearchText(UITag.Modeline).GetComponent<Text>().text
-                = "[ QWER - Switch skill ] [ V - View all ] [ "
-                + "Ctrl+D - Load default ] [ Esc - Back to main ]";
+            SearchText(UITag.Text1).GetComponent<Text>().text
+                = "QWER / V - Switch skill. / View all skills.";
+            SearchText(UITag.Text2).GetComponent<Text>().text
+                = "Arrow keys - Select/Add/Remove a component.";
+            SearchText(UITag.Text3).GetComponent<Text>().text
+               = "Ctrl+D - Load default template.";
+            SearchText(UITag.Text4).GetComponent<Text>().text
+               = "Esc - Save and return to Start Menu.";
         }
 
         private Text SearchText(UITag uiTag)
