@@ -27,12 +27,16 @@ namespace AxeMan.GameSystem.UserInterface
 
         private void PrintText()
         {
-            SearchText(UITag.Text1).GetComponent<Text>().text = "Fire Merit";
+            SearchText(UITag.Text1).GetComponent<Text>().text = ">";
             SearchText(UITag.Text2).GetComponent<Text>().text = "Earth Curse";
-            SearchText(UITag.Text3).GetComponent<Text>().text = "Water Flaw";
-            SearchText(UITag.Text4).GetComponent<Text>().text = "Air Merit";
 
-            SearchText(UITag.Text5).GetComponent<Text>().text = "Description";
+            SearchText(UITag.Text4).GetComponent<Text>().text = "Water Merit";
+            SearchText(UITag.Text6).GetComponent<Text>().text = "Air Flaw";
+            SearchText(UITag.Text8).GetComponent<Text>().text = "Water Curse";
+
+            SearchText(UITag.Text9).GetComponent<Text>().text
+                = "All flaws' duration (except Fire Flaw itself) "
+                + "dose not count down for 2 turns.";
         }
 
         private Text SearchText(UITag uiTag)
