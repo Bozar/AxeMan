@@ -29,32 +29,32 @@ namespace AxeMan.GameSystem.UserInterface
         {
             SearchText(UITag.Modeline).GetComponent<Text>().text = "Skill Q";
 
-            SearchText(UITag.Status1Text).GetComponent<Text>().text = "Type";
-            SearchText(UITag.Status1Data).GetComponent<Text>().text = "Attack";
+            SearchText(UITag.Text1).GetComponent<Text>().text = "Type";
+            SearchText(UITag.Text2).GetComponent<Text>().text = "Attack";
 
-            SearchText(UITag.Status2Text).GetComponent<Text>().text = "Range";
-            SearchText(UITag.Status2Data).GetComponent<Text>().text = "4";
+            SearchText(UITag.Text3).GetComponent<Text>().text = "Range";
+            SearchText(UITag.Text4).GetComponent<Text>().text = "4";
 
-            SearchText(UITag.Status3Text).GetComponent<Text>().text = "CD";
-            SearchText(UITag.Status3Data).GetComponent<Text>().text = "5";
+            SearchText(UITag.Text5).GetComponent<Text>().text = "CD";
+            SearchText(UITag.Text6).GetComponent<Text>().text = "5";
 
-            SearchText(UITag.Status4Text).GetComponent<Text>().text = "Dmg";
-            SearchText(UITag.Status4Data).GetComponent<Text>().text = "1";
+            SearchText(UITag.Text7).GetComponent<Text>().text = "Dmg";
+            SearchText(UITag.Text8).GetComponent<Text>().text = "1";
 
-            SearchText(UITag.Status5Text).GetComponent<Text>().text = "Fire?";
-            SearchText(UITag.Status5Data).GetComponent<Text>().text = "4 x 4";
+            SearchText(UITag.Text9).GetComponent<Text>().text = "Fire?";
+            SearchText(UITag.Text10).GetComponent<Text>().text = "4 x 4";
 
-            SearchText(UITag.Status6Text).GetComponent<Text>().text = "Water?";
-            SearchText(UITag.Status6Data).GetComponent<Text>().text = "8 x 8";
+            SearchText(UITag.Text11).GetComponent<Text>().text = "Water?";
+            SearchText(UITag.Text12).GetComponent<Text>().text = "8 x 8";
 
-            SearchText(UITag.Status7Text).GetComponent<Text>().text = "Air-";
-            SearchText(UITag.Status7Data).GetComponent<Text>().text = "2 x 2";
+            SearchText(UITag.Text13).GetComponent<Text>().text = "Air-";
+            SearchText(UITag.Text14).GetComponent<Text>().text = "2 x 2";
 
-            SearchText(UITag.Status8Text).GetComponent<Text>().text = "Earth-";
-            SearchText(UITag.Status8Data).GetComponent<Text>().text = "3 x 3";
+            SearchText(UITag.Text15).GetComponent<Text>().text = "Earth-";
+            SearchText(UITag.Text16).GetComponent<Text>().text = "3 x 3";
 
-            SearchText(UITag.Status9Text).GetComponent<Text>().text = "Fire-";
-            SearchText(UITag.Status9Data).GetComponent<Text>().text = "1 x 1";
+            SearchText(UITag.Text17).GetComponent<Text>().text = "Fire-";
+            SearchText(UITag.Text18).GetComponent<Text>().text = "1 x 1";
         }
 
         private Text SearchText(UITag uiTag)
