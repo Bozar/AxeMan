@@ -83,5 +83,84 @@
       <English>Earth?</English>
     </EarthCurse>
   </Component>
+  <LongComponent>
+    <Life>
+      <English>Hit Point</English>
+    </Life>
+    <FireMerit>
+      <English>Fire Merit</English>
+    </FireMerit>
+    <FireFlaw>
+      <English>Fire Flaw</English>
+    </FireFlaw>
+    <FireCurse>
+      <English>Fire Curse</English>
+    </FireCurse>
+    <WaterMerit>
+      <English>Water Merit</English>
+    </WaterMerit>
+    <WaterFlaw>
+      <English>Water Flaw</English>
+    </WaterFlaw>
+    <WaterCurse>
+      <English>Water Curse</English>
+    </WaterCurse>
+    <AirMerit>
+      <English>Air Merit</English>
+    </AirMerit>
+    <AirFlaw>
+      <English>Air Flaw</English>
+    </AirFlaw>
+    <AirCurse>
+      <English>Air Curse</English>
+    </AirCurse>
+    <EarthMerit>
+      <English>Earth Merit</English>
+    </EarthMerit>
+    <EarthFlaw>
+      <English>Earth Flaw</English>
+    </EarthFlaw>
+    <EarthCurse>
+      <English>Earth Curse</English>
+    </EarthCurse>
+  </LongComponent>
+  <Description>
+    <FireMerit>
+      <English>Skill cooldown reduces by 2 instead of 1 for 2 turns.</English>
+    </FireMerit>
+    <FireFlaw>
+      <English>All flaws' duration (except Fire Flaw itself) dose not count down for 2 turns.</English>
+    </FireFlaw>
+    <FireCurse>
+      <English>All flaws' duration (except Fire Flaw itself) dose not count down for 2 turns.</English>
+    </FireCurse>
+    <WaterMerit>
+      <English>All merits' duration (excpet Water Merit itself) doses not count down for 2 turns.</English>
+    </WaterMerit>
+    <WaterFlaw>
+      <English>PC's skill cooldown remains unchanged for 2 turns. NPC's restoration cooldown remains unchanged for 2 turns.</English>
+    </WaterFlaw>
+    <WaterCurse>
+      <English>PC's skill cooldown remains unchanged for 2 turns. NPC's restoration cooldown remains unchanged for 2 turns.</English>
+    </WaterCurse>
+    <AirMerit>
+      <English>Both move distance and attack range are increased by 1 for 2 turns.</English>
+    </AirMerit>
+    <AirFlaw>
+      <English>Take 1 more damage when being attacked for 2 turns.</English>
+    </AirFlaw>
+    <AirCurse>
+      <English>Take 1 more damage when being attacked for 2 turns.</English>
+    </AirCurse>
+    <EarthMerit>
+      <English>Reduce 1 damage when being attacked for 2 turns.</English>
+    </EarthMerit>
+    <EarthFlaw>
+      <English>Both move distance and attack range are decreased by 1 for 2 turns.</English>
+    </EarthFlaw>
+    <EarthCurse>
+      <English>Both move distance and attack range are decreased by 1 for 2 turns.</English>
+    </EarthCurse>
+  </Description>
   <!--- vim: set lbr sts=2 sw=2: -->
 </SkillData>
