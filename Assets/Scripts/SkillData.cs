@@ -13,9 +13,13 @@ namespace AxeMan.GameSystem.GameDataHub
         bool ConvertCurse2Flaw(SkillComponentTag curse,
             out SkillComponentTag flaw);
 
+        string GetLongSkillComponentName(SkillComponentTag skillComponentTag);
+
         string GetLongSkillTypeName(SkillTypeTag skillTypeTag);
 
         string GetShortSkillTypeName(SkillTypeTag skillTypeTag);
+
+        string GetSkillComponentDescription(SkillComponentTag skillComponentTag);
 
         string GetSkillComponentName(SkillComponentTag skillComponentTag);
 
@@ -26,12 +30,14 @@ namespace AxeMan.GameSystem.GameDataHub
     {
         private string component;
         private Dictionary<SkillComponentTag, SkillComponentTag> curse2flaw;
-        private LanguageTag defaultLanguage;
+        private string defaultLanguage;
+        private string description;
         private string error;
+        private string longComponent;
         private string longType;
         private string shortType;
         private string skillName;
-        private LanguageTag userLanguage;
+        private string userLanguage;
         private XElement xmlFile;
 
         public bool ConvertCurse2Flaw(SkillComponentTag curse,
@@ -46,63 +52,49 @@ namespace AxeMan.GameSystem.GameDataHub
             return false;
         }
 
+        public string GetLongSkillComponentName(
+            SkillComponentTag skillComponentTag)
+        {
+            return GetStringData(longComponent, skillComponentTag.ToString());
+        }
+
         public string GetLongSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            if (TryGetData(longType, skillTypeTag.ToString(),
-                userLanguage.ToString(), out XElement data)
-                || TryGetData(longType, skillTypeTag.ToString(),
-                defaultLanguage.ToString(), out data))
-            {
-                return (string)data;
-            }
-            return error;
+            return GetStringData(longType, skillTypeTag.ToString());
         }
 
         public string GetShortSkillTypeName(SkillTypeTag skillTypeTag)
         {
-            if (TryGetData(shortType, skillTypeTag.ToString(),
-                userLanguage.ToString(), out XElement data)
-                || TryGetData(shortType, skillTypeTag.ToString(),
-                defaultLanguage.ToString(), out data))
-            {
-                return (string)data;
-            }
-            return error;
+            return GetStringData(shortType, skillTypeTag.ToString());
+        }
+
+        public string GetSkillComponentDescription(
+            SkillComponentTag skillComponentTag)
+        {
+            return GetStringData(description, skillComponentTag.ToString());
         }
 
         public string GetSkillComponentName(SkillComponentTag skillComponentTag)
         {
-            if (TryGetData(component, skillComponentTag.ToString(),
-               userLanguage.ToString(), out XElement data)
-               || TryGetData(component, skillComponentTag.ToString(),
-               defaultLanguage.ToString(), out data))
-            {
-                return (string)data;
-            }
-            return error;
+            return GetStringData(component, skillComponentTag.ToString());
         }
 
         public string GetSkillName(SkillNameTag skillNameTag)
         {
-            if (TryGetData(skillName, skillNameTag.ToString(),
-              userLanguage.ToString(), out XElement data)
-              || TryGetData(skillName, skillNameTag.ToString(),
-              defaultLanguage.ToString(), out data))
-            {
-                return (string)data;
-            }
-            return error;
+            return GetStringData(skillName, skillNameTag.ToString());
         }
 
         private void Awake()
         {
             error = "INVALID_NAME";
             skillName = "Name";
+            description = "Description";
             component = "Component";
+            longComponent = "LongComponent";
             shortType = "ShortType";
             longType = "LongType";
 
-            defaultLanguage = LanguageTag.English;
+            defaultLanguage = LanguageTag.English.ToString();
 
             curse2flaw = new Dictionary<SkillComponentTag, SkillComponentTag>()
             {
@@ -111,6 +103,16 @@ namespace AxeMan.GameSystem.GameDataHub
                 { SkillComponentTag.AirCurse, SkillComponentTag.AirFlaw },
                 { SkillComponentTag.EarthCurse, SkillComponentTag.EarthFlaw },
             };
+        }
+
+        private string GetStringData(string dataType, string dataTag)
+        {
+            if (TryGetData(dataType, dataTag, userLanguage, out XElement data)
+                || TryGetData(dataType, dataTag, defaultLanguage, out data))
+            {
+                return (string)data;
+            }
+            return error;
         }
 
         private void LoadSkillData()
@@ -123,9 +125,8 @@ namespace AxeMan.GameSystem.GameDataHub
 
         private void LoadUserLanguage()
         {
-            string language = GetComponent<SettingData>().GetStringData(
-               SettingDataTag.Language);
-            Enum.TryParse(language, out userLanguage);
+            userLanguage = GetComponent<SettingData>().GetStringData(
+                SettingDataTag.Language);
         }
 
         private void SkillData_LoadingGameData(object sender, EventArgs e)
