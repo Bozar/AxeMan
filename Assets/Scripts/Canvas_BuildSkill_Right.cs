@@ -1,4 +1,6 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
@@ -21,8 +23,15 @@ namespace AxeMan.GameSystem.UserInterface
             EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
+        }
 
-            PrintText();
+        private void Canvas_BuildSkill_Right_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.EnterMode == GameModeTag.BuildSkillMode)
+            {
+                PrintText();
+            }
         }
 
         private void PrintText()
@@ -35,8 +44,8 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Text8).GetComponent<Text>().text = "Water Curse";
 
             SearchText(UITag.Text9).GetComponent<Text>().text
-                = "All flaws' duration (except Fire Flaw itself) "
-                + "dose not count down for 2 turns.";
+                = GetComponent<SkillData>().GetSkillComponentDescription(
+                    SkillComponentTag.WaterFlaw);
         }
 
         private Text SearchText(UITag uiTag)
@@ -48,6 +57,8 @@ namespace AxeMan.GameSystem.UserInterface
         {
             GetComponent<InitializeStartScreen>().LoadingGameData
                 += Canvas_BuildSkill_Right_LoadingGameData;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_BuildSkill_Right_SwitchingGameMode;
         }
     }
 }

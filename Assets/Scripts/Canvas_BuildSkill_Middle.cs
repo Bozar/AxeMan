@@ -1,4 +1,6 @@
-﻿using AxeMan.GameSystem.GameDataTag;
+﻿using AxeMan.GameSystem.GameDataHub;
+using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SearchGameObject;
 using System;
@@ -21,8 +23,15 @@ namespace AxeMan.GameSystem.UserInterface
             EventArgs e)
         {
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
+        }
 
-            PrintText();
+        private void Canvas_BuildSkill_Middle_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if (e.EnterMode == GameModeTag.BuildSkillMode)
+            {
+                PrintText();
+            }
         }
 
         private void PrintText()
@@ -30,7 +39,9 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Text1).GetComponent<Text>().text = ">";
             SearchText(UITag.Text2).GetComponent<Text>().text = "Attack";
 
-            SearchText(UITag.Text4).GetComponent<Text>().text = "Fire Merit";
+            SearchText(UITag.Text4).GetComponent<Text>().text
+                = GetComponent<SkillData>().GetLongSkillComponentName(
+                    SkillComponentTag.WaterCurse);
             SearchText(UITag.Text6).GetComponent<Text>().text = "Water Merit";
             SearchText(UITag.Text8).GetComponent<Text>().text = "Merit Slot 3";
             SearchText(UITag.Text10).GetComponent<Text>().text = "Merit Slot 4";
@@ -50,6 +61,8 @@ namespace AxeMan.GameSystem.UserInterface
         {
             GetComponent<InitializeStartScreen>().LoadingGameData
                 += Canvas_BuildSkill_Middle_LoadingGameData;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += Canvas_BuildSkill_Middle_SwitchingGameMode;
         }
     }
 }
