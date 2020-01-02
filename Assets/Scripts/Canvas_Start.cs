@@ -23,7 +23,8 @@ namespace AxeMan.GameSystem.UserInterface
             uiObjects = GetComponent<SearchUI>().Search(canvasTag);
 
             // TODO: Remove this later.
-            SearchText(UITag.UIText).GetComponent<Text>().text = "Hello";
+            SearchText(UITag.UIText).GetComponent<Text>().text
+                = "Space: Continue; S: Build Skill";
         }
 
         private void Canvas_Start_SwitchingGameMode(object sender,
