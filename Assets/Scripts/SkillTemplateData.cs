@@ -1,4 +1,5 @@
 ﻿using AxeMan.GameSystem.GameDataTag;
+using AxeMan.GameSystem.GameMode;
 using AxeMan.GameSystem.InitializeGameWorld;
 using AxeMan.GameSystem.SaveLoadGameFile;
 using System;
@@ -18,13 +19,16 @@ namespace AxeMan.GameSystem.GameDataHub
 
     public class SkillTemplateData : MonoBehaviour, ISkillTemplateData
     {
-        private Dictionary<SkillNameTag,
-            Dictionary<SkillSlotTag, SkillComponentTag>> nameSlotCompDict;
+        private string currentTemplate;
+        private string directory;
+
+        private Dictionary<SkillNameTag, Dictionary<SkillSlotTag,
+            SkillComponentTag>> nameSlotCompDict;
 
         private Dictionary<SkillNameTag, SkillTypeTag> nameTypeDict;
         private SkillNameTag[] skillNames;
         private SkillSlotTag[] skillSlots;
-        private XElement templateFile;
+        private XElement xmlFile;
 
         public Dictionary<SkillSlotTag, SkillComponentTag> GetSkillSlot(
             SkillNameTag skillNameTag)
@@ -47,6 +51,9 @@ namespace AxeMan.GameSystem.GameDataHub
 
         private void Awake()
         {
+            currentTemplate = "skillTemplate.xml";
+            directory = "Data";
+
             skillNames = new SkillNameTag[]
             {
                 SkillNameTag.SkillQ,
@@ -78,10 +85,8 @@ namespace AxeMan.GameSystem.GameDataHub
 
         private void LoadFile()
         {
-            string file = "skillTemplate.xml";
-            string directory = "Data";
-
-            templateFile = GetComponent<SaveLoadXML>().Load(file, directory);
+            xmlFile = GetComponent<SaveLoadXML>().Load(currentTemplate,
+                directory);
         }
 
         private void SetSkillSlot()
@@ -122,16 +127,29 @@ namespace AxeMan.GameSystem.GameDataHub
             SetSkillSlot();
         }
 
+        private void SkillTemplateData_SwitchingGameMode(object sender,
+            SwitchGameModeEventArgs e)
+        {
+            if ((e.LeaveMode == GameModeTag.BuildSkillMode)
+               && (e.EnterMode == GameModeTag.StartMode))
+            {
+                GetComponent<SaveLoadXML>().Save(xmlFile, currentTemplate,
+                    directory);
+            }
+        }
+
         private void Start()
         {
             GetComponent<InitializeStartScreen>().LoadingGameData
                 += SkillTemplateData_LoadingGameData;
+            GetComponent<GameModeManager>().SwitchingGameMode
+                += SkillTemplateData_SwitchingGameMode;
         }
 
         private bool TryGetData(SkillNameTag skillName, SkillSlotTag skillSlot,
             out XElement xElement)
         {
-            xElement = templateFile
+            xElement = xmlFile
                 .Element(skillName.ToString())
                 .Element(skillSlot.ToString());
 
