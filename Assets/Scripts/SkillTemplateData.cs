@@ -83,13 +83,7 @@ namespace AxeMan.GameSystem.GameDataHub
             }
         }
 
-        private void LoadFile()
-        {
-            xmlFile = GetComponent<SaveLoadXML>().Load(currentTemplate,
-                directory);
-        }
-
-        private void SetSkillSlot()
+        private void InitializeSkillSlot()
         {
             foreach (SkillNameTag name in skillNames)
             {
@@ -106,7 +100,7 @@ namespace AxeMan.GameSystem.GameDataHub
             }
         }
 
-        private void SetSkillType()
+        private void InitializeSkillType()
         {
             foreach (SkillNameTag snt in skillNames)
             {
@@ -119,12 +113,42 @@ namespace AxeMan.GameSystem.GameDataHub
             }
         }
 
+        private void LoadFile()
+        {
+            xmlFile = GetComponent<SaveLoadXML>().Load(currentTemplate,
+                directory);
+        }
+
+        private void SetTemplateData(SkillNameTag skillName,
+            SkillSlotTag skillSlot, SkillComponentTag skillComponent)
+        {
+            nameSlotCompDict[skillName][skillSlot] = skillComponent;
+            xmlFile
+                .Element(skillName.ToString())
+                .Element(skillSlot.ToString())
+                .Value
+                = skillComponent.ToString();
+        }
+
+        private void SetTemplateData(SkillNameTag skillName,
+            SkillTypeTag skillType)
+        {
+            SkillSlotTag skillSlot = SkillSlotTag.SkillType;
+
+            nameTypeDict[skillName] = skillType;
+            xmlFile
+                .Element(skillName.ToString())
+                .Element(skillSlot.ToString())
+                .Value
+                = skillType.ToString();
+        }
+
         private void SkillTemplateData_LoadingGameData(object sender,
             EventArgs e)
         {
             LoadFile();
-            SetSkillType();
-            SetSkillSlot();
+            InitializeSkillType();
+            InitializeSkillSlot();
         }
 
         private void SkillTemplateData_SwitchingGameMode(object sender,
