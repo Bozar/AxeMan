@@ -42,8 +42,9 @@ namespace AxeMan.GameSystem
             gameObject.AddComponent<BlueprintFloor>();
             gameObject.AddComponent<BlueprintProgressBar>();
             gameObject.AddComponent<BlueprintTrap>();
-
             gameObject.AddComponent<BuildingEffect>();
+
+            gameObject.AddComponent<BuildSkillDataBind>();
             gameObject.AddComponent<BuildSkillInputManager>();
             gameObject.AddComponent<BuildSkillMode>();
             gameObject.AddComponent<BuryNPC>();

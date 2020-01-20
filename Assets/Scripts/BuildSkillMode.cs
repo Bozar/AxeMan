@@ -25,6 +25,10 @@ namespace AxeMan.GameSystem.GameMode
             {
                 GetComponent<GameModeManager>().SwitchGameMode(leaveBuild);
             }
+            else
+            {
+                GetComponent<BuildSkillDataBind>().TryMoveUIFocus(e.Command);
+            }
         }
 
         private void Start()

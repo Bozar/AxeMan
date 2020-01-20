@@ -16,6 +16,8 @@ namespace AxeMan.GameSystem.PlayerInput
             inputComponents = new IConvertInput[]
             {
                 GetComponent<ConfirmCancelInput>(),
+                GetComponent<MovementInput>(),
+                GetComponent<SkillInput>(),
             };
         }
     }
