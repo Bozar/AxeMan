@@ -42,8 +42,9 @@ namespace AxeMan.GameSystem.UserInterface
             SearchText(UITag.Text4).GetComponent<Text>().text = "Water Merit";
             SearchText(UITag.Text6).GetComponent<Text>().text = "Air Flaw";
             SearchText(UITag.Text8).GetComponent<Text>().text = "Water Curse";
+            SearchText(UITag.Text10).GetComponent<Text>().text = "[ REMOVE ]";
 
-            SearchText(UITag.Text9).GetComponent<Text>().text
+            SearchText(UITag.Text11).GetComponent<Text>().text
                 = GetComponent<SkillData>().GetSkillComponentDescription(
                     SkillComponentTag.WaterFlaw);
         }
