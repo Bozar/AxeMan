@@ -44,12 +44,10 @@ namespace AxeMan.GameSystem.UserInterface
                     SkillComponentTag.WaterCurse);
             SearchText(UITag.Text6).GetComponent<Text>().text = "Water Merit";
             SearchText(UITag.Text8).GetComponent<Text>().text = "Merit Slot 3";
-            SearchText(UITag.Text10).GetComponent<Text>().text = "Merit Slot 4";
 
-            SearchText(UITag.Text12).GetComponent<Text>().text = "Earth Flaw";
-            SearchText(UITag.Text14).GetComponent<Text>().text = "Flaw Slot 2";
-            SearchText(UITag.Text16).GetComponent<Text>().text = "Water Flaw";
-            SearchText(UITag.Text18).GetComponent<Text>().text = "Flaw Slot 4";
+            SearchText(UITag.Text10).GetComponent<Text>().text = "Earth Flaw";
+            SearchText(UITag.Text12).GetComponent<Text>().text = "Flaw Slot 2";
+            SearchText(UITag.Text14).GetComponent<Text>().text = "Water Flaw";
         }
 
         private Text SearchText(UITag uiTag)

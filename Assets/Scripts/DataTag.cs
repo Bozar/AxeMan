@@ -87,6 +87,7 @@ namespace AxeMan.GameSystem.GameDataTag
     public enum SkillSlotTag
     {
         SkillType, Merit1, Merit2, Merit3, Flaw1, Flaw2, Flaw3,
+        Component1, Component2, Component3, Component4, Component5
     }
 
     public enum SkillTypeTag { INVALID, Move, Attack, Buff, Curse, }
